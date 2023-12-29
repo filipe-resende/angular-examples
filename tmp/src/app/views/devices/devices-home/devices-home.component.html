@@ -1,0 +1,155 @@
+<p class="breadCrumbs">
+  {{ 'BREADCRUMB.HOME' | translate }} > {{ 'BREADCRUMB.DEVICES' | translate }} >
+  <span>{{ 'BREADCRUMB.SEARCH' | translate }}</span>
+</p>
+<div class="container">
+  <div class="dh-container" *ngIf="applications.length; else loadingOrError">
+    <app-alert
+      *ngIf="this.showDeviceGroupRestrictionDisclaimer"
+      [text]="'DISCLAIMERS.FEATURE_MANAGEMENT' | translate"
+    ></app-alert>
+    <div class="dh-search-menu" *ngIf="applications.length > 0">
+      <div class="dh-search-menu-select">
+        <app-application-dropdown
+          [ngClass]="'mr-2'"
+          [applicationList]="applications"
+          (select)="handleApplicationSelection($event)"
+          [selectedDropdown]="selectedApplicationId"
+        >
+        </app-application-dropdown>
+        <div class="dh-action-search-field" *ngIf="selectedApplicationId">
+          <input [(ngModel)]="searchinput" class="dh-search-input-device" />
+          <button
+            class="search-button"
+            (click)="
+              searchinput
+                ? getBySourceInfo(selectedApplicationId, searchinput)
+                : null
+            "
+          >
+            <i aria-hidden="true">
+              <img src="../../../../assets/icons/searchIcon.svg" alt="" />
+            </i>
+          </button>
+        </div>
+        <ng-template *ngIf="searchinput == null || searchinput == undefined">
+          <div class="dh-content-list">
+            <span class="search-device" translate
+              >DEVICE_LIST.NO_DEVICES_INFO</span
+            >
+          </div>
+        </ng-template>
+      </div>
+
+      <div class="dh-header">
+        <app-devices-association-summary
+          *ngIf="selectedApplicationId"
+          [applicationId]="selectedApplicationId"
+        >
+        </app-devices-association-summary>
+      </div>
+
+      <div class="header-buttons-container">
+        <app-action-button
+          *ngIf="showAddDeviceButton"
+          [ngClass]="['blue', 'normal']"
+          [labelClass]="'label-flex'"
+          [routerLink]="['./create']"
+        >
+          <i style="margin-right: 9px" aria-hidden="true">
+            <img src="../../../../assets/add_24px.svg" alt="" />
+          </i>
+          <span translate>DEVICE_LIST.CREATE_BUTTON</span>
+        </app-action-button>
+        <app-button-outline
+          [ngClass]="['blue', 'normal']"
+          [labelClass]="'active-outline-label'"
+          [ngClassDisabled]="['grey', 'normal']"
+          [labelClassDisabled]="'outline-label'"
+          [isDisabled]="isExportationButtonDisabled"
+          (ngClick)="exportButtonHandle()"
+        >
+          <i
+            style="margin-right: 9px"
+            aria-hidden="true"
+            class="mdi mdi-upload button-icon"
+          ></i>
+          <span translate>DEVICE_LIST.EXPORT</span>
+        </app-button-outline>
+      </div>
+    </div>
+    <div class="dh-content-list" *ngIf="selectedApplicationId">
+      <div
+        class="dh-content-list"
+        *ngIf="devices$ | async; else searching ? loadingOrError : null"
+      >
+        <div class="dh-box" *ngIf="deviceResume">
+          <app-device-resume
+            [device]="deviceResume.device"
+            [associatedThing]="associatedThing"
+            [application]="currentlySelectedApplication"
+            [doesApplicationAllowAssociation]="doesApplicationAllowAssociation"
+            [isDeviceAssociated]="isDeviceAssociated"
+            (emitRefresh)="associationHandler($event)"
+          >
+          </app-device-resume>
+          <hr class="" dh-box-divider />
+          <app-device-form
+            [deviceData]="deviceResume.device"
+            [application]="currentlySelectedApplication"
+            (onSubmit)="updateDevice($event)"
+            [canUserEditDevice]="canUserEditDevice"
+          ></app-device-form>
+          <app-device-battery [deviceData]="deviceResume"></app-device-battery>
+
+          <div class="device-history">
+            <mat-tab-group
+              (selectedTabChange)="getMovementHistoryInformation($event)"
+            >
+              <mat-tab
+                label="{{ 'DEVICE_UPDATE.DEVICE_HISTORY.TITLE' | translate }}"
+              >
+                <app-device-history
+                  [device]="deviceResume.device"
+                  [application]="currentlySelectedApplication"
+                  (emitRefresh)="associationHandler(true)"
+                  [doesApplicationAllowAssociation]="
+                    doesApplicationAllowAssociation
+                  "
+                ></app-device-history>
+              </mat-tab>
+              <mat-tab
+                label="{{
+                  'DEVICE_UPDATE.DEVICE_HISTORY_MOVEMENT.TITLE' | translate
+                }}"
+              >
+                <div class="device-movement-history">
+                  <app-device-movement-history
+                    [isLoadingList]="isLoadingMovementList"
+                    [movementList]="movementHistoryList"
+                  ></app-device-movement-history>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loadingOrError>
+    <div *ngIf="searching">
+      <div class="dh-spinner-content">
+        <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+      </div>
+    </div>
+    <ng-template class="blank-state">
+      <h6 class="title-details" translate>DEVICE_LIST.NO_APPLICATION_INFO</h6>
+      <app-button-outline
+        [routerLink]="['../app.applications/create']"
+        [ngClass]="['blue', 'text-inline', 'f-small']"
+      >
+        DEVICE_LIST.newApplicationButton
+      </app-button-outline>
+    </ng-template>
+  </ng-template>
+</div>

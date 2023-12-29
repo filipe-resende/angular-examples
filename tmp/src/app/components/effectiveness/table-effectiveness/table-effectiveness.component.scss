@@ -1,0 +1,86 @@
+@import '../../../../app/scss/vale.variables';
+
+.container {
+  font-family: $font-body1;
+  font-weight: 400;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-top: 24px;
+
+  .title {
+    font-family: $font-body1-bold;
+    font-size: 21px;
+    line-height: 28px;
+    color: #252727;
+  }
+
+  .subTitle {
+    font-size: 14px;
+    line-height: 22px;
+    color: #acadae;
+    margin-bottom: 20px;
+  }
+
+  .display_flex {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    flex-direction: row;
+
+    div {
+      margin: 5px;
+    }
+
+    .column_first {
+      width: 59%;
+    }
+
+    .column {
+      width: auto;
+      min-width: 14%;
+      @media (min-width: 1367px) {
+        min-width: 10%;
+      }
+    }
+  }
+
+  .border_bottom {
+    border-bottom: ridge;
+  }
+
+  button {
+    width: 30px !important;
+    height: 30px !important;
+    border-radius: 2px;
+    gap: 10px;
+    background: #3d7edb;
+    border: none;
+  }
+
+  .table {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    color: #909193;
+
+    .data_table {
+      font-weight: 400;
+      line-height: 28px;
+      color: #909193;
+    }
+
+    .total {
+      font-weight: 400;
+      color: black;
+      border: none;
+
+      .total_title {
+        color: #909193;
+        line-height: 28px;
+      }
+    }
+  }
+}

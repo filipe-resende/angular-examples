@@ -1,0 +1,91 @@
+@import '../../../../scss/_vale.variables.scss';
+
+.application-item-list {
+  height: 109px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid $greyVale20;
+  margin-bottom: 8px;
+
+  .init-application-item,
+  .end-item {
+    height: 100%;
+    display: flex;
+  }
+
+  .init-application-item {
+    padding-top: 25px;
+    width: 52%;
+  }
+
+  .end-item {
+    padding-right: 41px;
+    align-items: center;
+    margin-right: 15px;
+    justify-content: flex-end;
+    margin-right: 0px;
+  }
+
+  .image-application {
+    width: 60px;
+    height: 60px;
+    border: 1px solid gray;
+  }
+
+  .checkbox {
+    margin-top: 46px;
+    margin-right: 24px;
+    margin-left: 16px;
+    vertical-align: middle;
+  }
+
+  .application-info {
+    display: flex;
+    padding-top: 0px;
+
+    .application-details {
+      height: 16px;
+      font-family: $font-body1;
+      color: $greyVale80;
+      font-size: 14px;
+      letter-spacing: 0.53px;
+      line-height: 16px;
+
+      .name {
+        height: 16px;
+        color: $dark;
+        font-size: 14px;
+        letter-spacing: 0.6px;
+        line-height: 19px;
+        padding-bottom: 28px;
+      }
+    }
+  }
+
+  .application-status {
+    padding-right: 0;
+    height: 16px;
+    margin-right: 15px;
+    color: $greyVale80;
+    font-family: $font-body1;
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: 0.53px;
+  }
+
+  .update-application {
+    margin-right: 26px;
+  }
+}
+
+.centralizado {
+  height: 100%;
+  width: 4% !important;
+}
+
+.active-application {
+  color: $lightGreenVale;
+  font-family: $font-body1-medium;
+}

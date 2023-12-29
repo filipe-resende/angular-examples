@@ -1,0 +1,46 @@
+<div class="container-bypass-login">
+  <div class="header">Bypass IAM</div>
+  <form [formGroup]="userForm" class="container-form">
+    <div class="container-info-user">
+      <div>
+        <span>Informações do usuário</span>
+      </div>
+      <div class="two-columns">
+        <input class="input" formControlName="code" placeholder="Iam id" />
+        <input class="name" formControlName="name" placeholder="Nome" />
+      </div>
+      <div>
+        <input class="email" formControlName="email" placeholder="Email" />
+      </div>
+      <div class="two-columns">
+        <select class="input" formControlName="country" placeholder="País">
+          <option *ngFor="let country of countries" [value]="country.code">
+            {{ country.name }}
+          </option>
+        </select>
+        <select
+          multiple
+          class="input"
+          formControlName="roles"
+          placeholder="Permissão"
+        >
+          <option *ngFor="let role of roles" [value]="role.code">
+            {{ role.name }}
+          </option>
+        </select>
+        <div>
+          <button class="addAllButtom" (click)="selectAll()">Todos</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="footer">
+    <button
+      class="send-button"
+      [disabled]="userForm.invalid"
+      (click)="doLogin()"
+    >
+      Enviar
+    </button>
+  </div>
+</div>

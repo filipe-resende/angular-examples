@@ -1,0 +1,103 @@
+<section class="displacement-people-overlay-container">
+  <header class="displacement-people-overlay-header">
+    <div class="displacement-people-overlay-header-title">
+      {{ 'DISPLACEMENT.PEOPLE_OVERLAY.TITLE' | translate }}:
+      {{ dateData?.trip?.line }}
+    </div>
+    <button
+      class="displacement-people-overlay-close-btn"
+      mat-icon-button
+      (click)="close()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <table
+    class="displacement-people-overlay-table"
+    mat-table
+    matSort
+    [dataSource]="(isFetchingTripThings$ | async) ? skeletonArray : dataSource"
+  >
+    <ng-container matColumnDef="cardId">
+      <th mat-header-cell mat-sort-header="cardId" *matHeaderCellDef>
+        Card {{ 'DISPLACEMENT.CARD_ID' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let tripThing">
+        <div class="skeleton table" *ngIf="!tripThing"></div>
+        {{ !tripThing ? '' : tripThing?.cardId || '-' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="document" *ngIf="canViewSensitiveData">
+      <th mat-header-cell mat-sort-header="document" *matHeaderCellDef>
+        {{ 'DISPLACEMENT.DOCUMENT' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let tripThing">
+        <div class="skeleton table" *ngIf="!tripThing"></div>
+        {{ !tripThing ? '' : tripThing?.document || '-' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header="name" *matHeaderCellDef>
+        {{ 'DISPLACEMENT.NAME' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let tripThing">
+        <div class="skeleton table" *ngIf="!tripThing"></div>
+        <div class="table-cell-elipsis-bigger">
+          {{ !tripThing ? '' : tripThing?.name || '-' }}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="eventDateTime">
+      <th mat-header-cell mat-sort-header="eventDateTime" *matHeaderCellDef>
+        {{ 'DISPLACEMENT.REPORT' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let tripThing">
+        <div class="skeleton table" *ngIf="!tripThing"></div>
+        {{
+          tripThing && !tripThing?.eventDateTime
+            ? '-'
+            : tripThing && tripThing?.eventDateTime
+            ? (tripThing?.eventDateTime | date: 'dd/MM/yyyy HH:mm:ss')
+            : ''
+        }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th
+        mat-header-cell
+        mat-sort-header="location && location.lat"
+        *matHeaderCellDef
+      >
+        {{ 'DISPLACEMENT.LOCATION' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let tripThing">
+        <div class="skeleton table" *ngIf="!tripThing"></div>
+        <div *ngIf="tripThing && !tripThing?.location">-</div>
+
+        <app-mini-map
+          [latitude]="tripThing?.location?.lat"
+          [longitude]="tripThing?.location?.lng"
+          [middleware]="'DEVICES_SELECTOR.BUS' | translate"
+        ></app-mini-map>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <th mat-header-cell mat-sort-header="company" *matHeaderCellDef>
+        {{ 'DISPLACEMENT.COMPANY' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let tripThing">
+        <div class="skeleton table" *ngIf="!tripThing"></div>
+        {{ !tripThing ? '' : tripThing?.company || '-' }}
+      </td>
+    </ng-container>
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns; sticky: true"
+      class="table-header"
+    ></tr>
+    <tr mat-row *matRowDef="let tripThing; columns: displayedColumns"></tr>
+  </table>
+</section>

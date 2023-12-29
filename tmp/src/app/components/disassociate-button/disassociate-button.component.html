@@ -1,0 +1,10 @@
+<app-action-button
+  [ngClass]="['blue', 'small']"
+  [labelClass]="'blue-label'"
+  [ngClassDisabled]="['grey', 'small']"
+  [labelClassDisabled]="'grey-label'"
+  [disabled]="isAllAssociated === null || isDisabled"
+  (action)="disassociateDevice(isAllAssociated)"
+>
+  <span translate>DEVICE_LIST.DISASSOCIATE_BUTTON</span>
+</app-action-button>

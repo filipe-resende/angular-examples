@@ -1,0 +1,55 @@
+<div class="export-log-container">
+  <div class="parent">
+    <div class="icon">
+      <img src="assets\WarningTriangle.svg" alt="" />
+    </div>
+    <div class="parent-close">
+      <div class="title">
+        {{ 'BATCH_LOAD_EXPORT_LOAD_LOG.TITLE' | translate }}
+      </div>
+      <div class="close">
+        <img
+          src="../../../../../../assets/Close.svg"
+          alt=""
+          (click)="closeModal()"
+        />
+      </div>
+      <div class="second-title">
+        {{ 'BATCH_LOAD_EXPORT_LOAD_LOG.PORTAL_NAME' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="background-red">
+    <img class="redclose" src="assets\redclose.svg" alt="" />
+    <div class="second-text">
+      {{ 'BATCH_LOAD_EXPORT_LOAD_LOG.ERROR_LOAD' | translate }}
+    </div>
+  </div>
+  <div class="third-text">
+    {{ 'BATCH_LOAD_EXPORT_LOAD_LOG.PLEASE' | translate }}
+    <span>{{
+      'BATCH_LOAD_EXPORT_LOAD_LOG.FOLLOW_RECOMMENDATIONS' | translate
+    }}</span>
+  </div>
+  <div class="forth-text">
+    <p>{{ 'BATCH_LOAD_EXPORT_LOAD_LOG.REVIEW_INFO' | translate }}</p>
+    <p>{{ 'BATCH_LOAD_EXPORT_LOAD_LOG.UPDATE_EXCEL' | translate }}</p>
+    <p>{{ 'BATCH_LOAD_EXPORT_LOAD_LOG.EXECUTE_LOAD' | translate }}</p>
+  </div>
+  <div class="line-div"></div>
+  <div>
+    <img class="grayinfo" src="assets\GrayInfo.svg" alt="" />
+    <div class="info-text">
+      {{ 'BATCH_LOAD_EXPORT_LOAD_LOG.LOG_FILE_LOST' | translate }}
+    </div>
+    <div class="line-div-info"></div>
+  </div>
+  <div class="export-button">
+    <button class="buttonEmail" (click)="clickEmail()">
+      {{ 'BATCH_LOAD_EXPORT_LOAD_LOG.BUTTON_EMAIL' | translate }}
+    </button>
+    <button class="buttonDownload" (click)="clickDownload()">
+      {{ 'BATCH_LOAD_EXPORT_LOAD_LOG.BUTTON_DOWNLOAD' | translate }}
+    </button>
+  </div>
+</div>

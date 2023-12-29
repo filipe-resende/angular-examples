@@ -1,0 +1,11 @@
+<button
+  class="action-button"
+  [ngClass]="disabled ? ngClassDisabled : ngClass"
+  [disabled]="disabled"
+  (click)="clickAction()"
+  [type]="type ? type : 'submit'"
+>
+  <span [ngClass]="disabled ? labelClassDisabled : labelClass">
+    <ng-content></ng-content>
+  </span>
+</button>

@@ -1,0 +1,61 @@
+<div class="section-component">
+  <section class="section" *ngIf="dataSection">
+    <div class="content">
+      <div class="label">
+        <span>{{ dataSection.charts.label }}</span>
+      </div>
+      <div class="values">
+        <div
+          [ngStyle]="
+            dataSection.disableVariation
+              ? { display: 'none' }
+              : { display: 'block' }
+          "
+        >
+          <div
+            class="variation"
+            [ngClass]="isOverallChart ? 'overall-variation' : 'variation'"
+            *ngIf="dataSection.isNegativeVariation; else isPositiveVariation"
+          >
+            <span class="negative-variation-text">
+              {{ dataSection.variation }}
+            </span>
+            <img
+              class="variation-icon"
+              src="../../../../assets/iconsDashboard/negative_variation.svg"
+            />
+          </div>
+          <ng-template #isPositiveVariation>
+            <div
+              class="variation"
+              [ngClass]="isOverallChart ? 'overall-variation' : 'variation'"
+            >
+              <span class="positive-variation-text">
+                {{ dataSection.variation }}
+              </span>
+              <img
+                class="variation-icon"
+                src="../../../../assets/iconsDashboard/positive_variation.svg"
+              />
+            </div>
+          </ng-template>
+        </div>
+        <div
+          class="overage"
+          [ngClass]="isOverallChart ? 'overall-overage' : 'overage'"
+        >
+          <div class="percentage-field">
+            <span class="percentage" *ngIf="!isOverallChart">
+              {{ dataSection.charts.percentage }}
+            </span>
+            <div class="values-divisor" *ngIf="!isOverallChart"></div>
+            <span class="overage-text">
+              {{ dataSection.charts.count | number }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+  </section>
+</div>

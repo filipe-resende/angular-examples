@@ -1,0 +1,77 @@
+trigger: none
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  sonarqubeServiceConnection: 'diglab-sonar-connection'
+  workingDir: $(Build.SourcesDirectory)/src
+  projectKey: 'things:management:frontend'
+
+jobs:
+  - job: ThingsManagementPortal
+    displayName: 'ThingsManagement Portal - sonar'
+    steps:
+      - task: SetVariable@0
+        inputs:
+          variableName: 'SOURCE_BRANCH'
+          value: '$(System.PullRequest.SourceBranch)'
+          transform: 'replace'
+          searchValue: 'refs\/heads\/'
+
+      - task: SetVariable@0
+        inputs:
+          variableName: 'TARGET_BRANCH'
+          value: '$(System.PullRequest.TargetBranch)'
+          transform: 'replace'
+          searchValue: 'refs\/heads\/'
+
+      - task: NodeTool@0
+        displayName: 'Use Node 16.14.x'
+        inputs:
+          versionSpec: 16.14.x
+
+      - task: SonarQubePrepare@5
+        inputs:
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliprojectKey: $(projectKey)
+          cliprojectName: 'Things Management Portal'
+          cliSources: $(workingDir)
+          SonarQube: $(sonarqubeServiceConnection)
+          extraProperties: | 
+            sonar.typescript.lcov.reportPaths=coverage/lcov.info
+            sonar.scanner.metadataFilePath=$(system.defaultworkingdirectory)\report-task.txt
+            sonar.pullrequest.key=$(System.PullRequest.PullRequestId)
+            sonar.pullrequest.branch=$(source_branch)
+            sonar.pullrequest.base=$(target_branch)
+            sonar.qualitygate.wait=true
+            sonar.qualitygate.timeout=30000
+
+      - task: Npm@1
+        displayName: 'npm install'
+        inputs:
+          verbose: false
+
+      - task: Npm@1
+        displayName: 'npm run build'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run build-prod'
+
+      - task: Npm@1
+        displayName: 'run tests'
+        inputs:
+          command: 'custom'
+          customCommand: 'run test-no-watch'
+
+      - task: SonarQubeAnalyze@5
+
+      - task: SonarQubePublish@5
+        inputs:
+          pollingTimeoutSec: '300'
+
+      - task: sonar-buildbreaker@8
+        inputs:
+          SonarQube: $(sonarqubeServiceConnection)

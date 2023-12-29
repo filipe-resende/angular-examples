@@ -1,0 +1,9 @@
+<select
+  class="dh-select-input"
+  id="typeThingDropDown"
+  (change)="getByThingType(selectedType)"
+>
+  <option *ngFor="let type of typeOptions" value="type.value">
+    {{ type.name }}
+  </option>
+</select>

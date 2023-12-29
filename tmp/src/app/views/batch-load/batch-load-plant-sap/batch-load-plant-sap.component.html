@@ -1,0 +1,55 @@
+<div class="plant-sap-container">
+  <div class="plant-title">
+    <p>{{ 'BATCH_LOAD_PLANT_SAP.TITLE' | translate }}</p>
+    <img src="../../../../../assets/Close.svg" alt="" (click)="closeModal()" />
+  </div>
+
+  <div class="plant-content">
+    <div class="plant-relative">
+      <p [class.infoCode]="checkDatacode()">
+        {{ 'BATCH_LOAD_PLANT_SAP.CODE' | translate }}
+      </p>
+      <input
+        class="inputcode"
+        [class.inputcodecolor]="checkDatacode()"
+        matInput
+        [(ngModel)]="codSap"
+        type="int"
+        maxlength="4"
+      /><span *ngIf="checkDatacode()" class="inputCodeInfo info">{{
+        'BATCH_LOAD_PLANT_SAP.EXISTING_CODE' | translate
+      }}</span>
+    </div>
+
+    <div class="plant-relative">
+      <p [class.infoDescription]="checkDataDescription()">
+        {{ 'BATCH_LOAD_PLANT_SAP.DESCRIPTION' | translate }}
+      </p>
+      <input
+        class="inputDescription"
+        [class.inputDescriptioncolor]="checkDataDescription()"
+        matInput
+        [(ngModel)]="descriptionSap"
+        type="text"
+      /><span
+        *ngIf="checkDataDescription()"
+        class="inputDescriptionInfo info"
+        >{{ 'BATCH_LOAD_PLANT_SAP.EXISTING_DESCRIPTION' | translate }}</span
+      >
+    </div>
+  </div>
+
+  <div class="sap-button">
+    <button class="buttonCancel" mat-button (click)="closeModal()">
+      {{ 'BATCH_LOAD_PLANT_SAP.BUTTON_CANCEL' | translate }}
+    </button>
+    <button
+      class="buttonAdd"
+      mat-button
+      (click)="addSapPlant()"
+      [disabled]="enabledButton() || disabledButton"
+    >
+      {{ 'BATCH_LOAD_PLANT_SAP.BUTTON_ADD' | translate }}
+    </button>
+  </div>
+</div>

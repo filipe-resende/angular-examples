@@ -1,0 +1,83 @@
+@import '../../../scss/vale.variables';
+
+::ng-deep .mat-tooltip {
+  min-width: 25vw;
+  font-size: 18px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent {
+  .mat-checkbox-ripple .mat-ripple-element {
+    background-color: '#3d7edb' !important;
+  }
+
+  .mat-checkbox-background,
+  .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: '#3d7edb';
+  }
+}
+
+::ng-deep .mat-checkbox.mat-accent {
+  .mat-checkbox-ripple .mat-ripple-element {
+    background-color: '#3d7edb' !important;
+  }
+}
+::ng-deep
+  .mat-checkbox-checked
+  .mat-checkbox-layout
+  .mat-checkbox-inner-container
+  .mat-checkbox-background {
+  background-color: #3d7edb !important;
+}
+.application-update-container {
+  font-family: $font-body1;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.application-update-form {
+  &-label {
+    color: #252727;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    line-height: 24px;
+
+    &--grey {
+      color: $greyVale80;
+    }
+  }
+  &-flags {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &-input {
+    width: 360px;
+    height: 40px;
+    margin-bottom: 16px;
+    border: 1px solid $greyVale20;
+    color: $greyVale;
+    padding: 0 8px;
+  }
+
+  &-secondary-btn {
+    margin-right: 32px;
+  }
+
+  &-checkbox {
+    margin-right: 16px;
+  }
+
+  &-buttons-container {
+    margin-top: 16px;
+    display: flex;
+  }
+}
+
+.spinner-content {
+  position: absolute;
+  left: 50%;
+  top: 50vh;
+}

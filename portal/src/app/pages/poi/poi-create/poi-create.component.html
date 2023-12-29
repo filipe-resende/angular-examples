@@ -1,0 +1,99 @@
+<form class="poi-create-container" [formGroup]="ngForm">
+  <section class="poi-create-form-fields-container">
+    <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0;">
+      <app-site-selector [displayAsInput]="true"></app-site-selector>
+    </div>
+
+    <div style="padding: 16px 0 8px 0;">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "POIS.NAME" | translate }}</mat-label>
+        <input matInput [placeholder]="'POIS.NAME' | translate" formControlName="name" />
+      </mat-form-field>
+    </div>
+
+    <div style="padding: 8px 0;">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ "POIS.DESCRIPTION" | translate }}</mat-label>
+        <input matInput [placeholder]="'POIS.DESCRIPTION' | translate" formControlName="desc" />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field
+      appearance="outline"
+      style="border-bottom: 1px solid #c7c8c9; padding: 8px 0 16px;"
+    >
+      <mat-label>{{ "POIS.CATEGORIES" | translate }}</mat-label>
+      <mat-select disableRipple formControlName="category" disableOptionCentering>
+        <mat-option *ngFor="let category of poiCategorys" [value]="category.id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="poi-create-new-poi-info-container">
+      <mat-icon *ngIf="!selectedIcon" mat-list-icon class="poi-create-new-poi-icon">place</mat-icon>
+      <mat-icon *ngIf="selectedIcon" mat-list-icon class="poi-create-new-poi-icon">
+        <img src="{{ selectedIcon.iconPath }}" alt="new" />
+      </mat-icon>
+
+      <div class="poi-create-lat-lng-container">
+        <div class="poi-create-lat-lng">
+          <label>Latitude:</label>
+          <label>{{ googleMapRef.poiMarkerData.lat }}</label>
+        </div>
+        <div class="poi-create-lat-lng">
+          <label>Longitude:</label>
+          <label>{{ googleMapRef.poiMarkerData.lng }}</label>
+        </div>
+      </div>
+
+      <button
+        class="poi-create-new-poi-menu-button"
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Opções"
+      >
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="selectIcon()" mat-menu-item>
+          <mat-icon>edit</mat-icon>
+          <span>Editar icone</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>delete</mat-icon>
+          <span>Cancelar</span>
+        </button>
+      </mat-menu>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="poi-create-form-buttons-container">
+    <app-button
+      [primary]="false"
+      [large]="true"
+      [strech]="true"
+      (onClick)="onCancelButtonClick()"
+      type="reset"
+    >
+      {{ "POIS.CANCEL" | translate }}
+    </app-button>
+    <app-button
+      type="submit"
+      [large]="true"
+      [strech]="true"
+      (onClick)="submitPoi()"
+      [disabled]="
+        !this.googleMapRef ||
+        !this.googleMapRef.poiMarkerData ||
+        !this.googleMapRef.poiMarkerData.lat ||
+        !this.ngForm ||
+        this.ngForm.status !== 'VALID'
+      "
+      [loading]="isFetchingNewPoi"
+    >
+      {{ "POIS.CREATE" | translate }}
+    </app-button>
+  </section>
+</form>

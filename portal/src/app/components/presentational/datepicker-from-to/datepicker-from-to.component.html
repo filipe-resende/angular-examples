@@ -1,0 +1,58 @@
+<div class="datepicker-from-to-container">
+  <label
+    class="datepicker-from-to-label"
+    *ngIf="!!label"
+    [ngClass]="{ error: error }"
+  >
+    {{ label | translate }} {{ error ? '*' : '' }}
+  </label>
+
+  <div
+    class="datepicker-from-to-pickers-container"
+    [ngClass]="{ error: error }"
+  >
+    <div class="datepicker-from-to-picker">
+      <mat-form-field>
+        <mat-datepicker-toggle matPrefix [for]="picker1">
+          <mat-icon matDatepickerToggleIcon [ngClass]="{ error: error }"
+            >event_note</mat-icon
+          >
+        </mat-datepicker-toggle>
+        <input
+          matInput
+          (dateInput)="setDate($event)"
+          (dateChange)="setDate($event)"
+          [value]="dateInputValue"
+          [matDatepicker]="picker1"
+          [max]="max"
+          #fromInput
+        />
+        <mat-datepicker #picker1> </mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="datepicker-from-to-to-label" [ngClass]="{ error: error }">
+      {{ 'MAIN.TO' | translate }}
+    </div>
+
+    <div class="datepicker-from-to-picker">
+      <mat-form-field>
+        <mat-datepicker-toggle matPrefix [for]="picker2">
+          <mat-icon matDatepickerToggleIcon [ngClass]="{ error: error }"
+            >event_note</mat-icon
+          >
+        </mat-datepicker-toggle>
+        <input
+          matInput
+          (dateInput)="setDate2($event)"
+          (dateChange)="setDate2($event)"
+          [value]="dateInput2Value"
+          [matDatepicker]="picker2"
+          [max]="max2"
+          #toInput
+        />
+        <mat-datepicker #picker2> </mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+</div>

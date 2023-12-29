@@ -1,0 +1,134 @@
+.devices-page-container {
+  display: flex;
+  flex-direction: column;
+  padding: 42px 56px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header-site {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin-bottom: 30px;
+}
+
+.last-update__display {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #909193;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+}
+
+.list-page-table-container {
+  height: calc(100% - 60px);
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-list {
+  min-width: 1400px;
+  td,
+  mat-cell {
+    padding-right: 15px;
+  }
+  th,
+  mat-header-cell {
+    padding-right: 15px;
+  }
+}
+
+.card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.card__filters {
+  display: flex;
+
+  app-input {
+    width: 320px;
+  }
+
+  *:not(:last-child) {
+    margin-right: 16px;
+  }
+
+  .card__device-selector {
+    width: 320px;
+  }
+}
+
+.card__icon {
+  font-size: 20px;
+  cursor: default;
+  color: #58595b;
+}
+
+.excel-button {
+  margin-right: 4px;
+
+  &__icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+}
+
+.thing-name__label {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.battery {
+  display: flex;
+  align-items: center;
+
+  .battery__number {
+    width: 36px;
+    margin-right: 2px;
+  }
+
+  .battery__image {
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 18px;
+  }
+}
+
+.good-battery {
+  color: #69be28;
+}
+
+.event-date-time-container {
+  display: flex;
+
+  .event-date-time {
+    margin-right: 4px;
+  }
+}
+
+.export_info_button {
+  display: flex;
+  align-items: center;
+}
+
+.item-table {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}

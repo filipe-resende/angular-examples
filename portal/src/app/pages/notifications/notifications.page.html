@@ -1,0 +1,56 @@
+<section class="notifications-page-container">
+  <div class="notifications-page-toggle-container">
+    <div class="notifications-page-toggle-toggle">
+      <mat-button-toggle-group
+        class="button-group"
+        value="panic_button"
+        name="fontStyle"
+        aria-label="Font Style"
+        #group="matButtonToggleGroup"
+      >
+        <mat-button-toggle id="mat-button-toggle-left" value="panic_button">
+          {{ "NOTIFICATION.FILTER_BY_PANIC_BUTTON" | translate }}
+        </mat-button-toggle>
+        <mat-button-toggle value="low_battery">
+          {{ "NOTIFICATION.FILTER_BY_LOW_BATTERY" | translate }}
+          <mat-icon
+            class="buttons__info"
+            [matTooltip]="'DEVICES.BATTERY_DISCLAIMER' | translate"
+            [matTooltipShowDelay]="300"
+            [matTooltipHideDelay]="500"
+          >
+            info_outline
+          </mat-icon>
+        </mat-button-toggle>
+
+        <mat-button-toggle id="mat-button-toggle-right" value="expiration_time">
+          {{ "NOTIFICATION.FILTER_BY_EXPIRATION_TIME" | translate }}
+        </mat-button-toggle>
+        <div class="header-notification-panel-header">
+          <span class="header-notification-panel-header-arrow"></span>
+          <mat-icon
+            matTooltip="Configuração para recebimento de alerta"
+            class="header-notification-panel-header-settings"
+            (click)="openNotificationSettings()"
+            >settings</mat-icon
+          >
+        </div>
+      </mat-button-toggle-group>
+    </div>
+    <div class="notifications-page-toggle-alert">
+      <app-alert
+        *ngIf="this.showDeviceGroupDisclaimer"
+        [text]="'DISCLAIMERS.DEVICE_GROUP' | translate"
+      ></app-alert>
+    </div>
+  </div>
+  <div *ngIf="group.value === 'panic_button'">
+    <app-panic-button-notifications></app-panic-button-notifications>
+  </div>
+  <div *ngIf="group.value === 'low_battery'">
+    <app-low-battery-notifications></app-low-battery-notifications>
+  </div>
+  <div *ngIf="group.value === 'expiration_time'">
+    <app-expiration-notifications></app-expiration-notifications>
+  </div>
+</section>

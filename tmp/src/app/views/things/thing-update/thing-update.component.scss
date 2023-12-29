@@ -1,0 +1,160 @@
+@import '../../../scss/styles.scss';
+
+.tu-container {
+  background-color: #f8f8f6;
+  padding-top: 57px;
+  padding-right: 59px;
+  padding-left: 59px;
+  padding-bottom: 120px;
+  overflow: auto;
+  height: 100%;
+}
+
+.tu-form-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+
+  &.tu-inline-group {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+    color: $dark;
+  }
+}
+
+.tu-documents-group {
+  width: 500px;
+  padding: 8px;
+  padding-top: 16px;
+  background-color: #f8f8f8;
+
+  .tu-documents-title {
+    margin-bottom: 16px;
+  }
+}
+
+.tu-dropdown {
+  height: 35.56px;
+  width: 360px;
+  border: 1px solid $greyVale20;
+}
+
+.tu-input {
+  height: 40px;
+  width: 360px;
+  font-family: $font-body1;
+  color: $dark;
+  border: 1px solid $greyVale20;
+  border-radius: 2px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  padding-left: 8px;
+
+  &:focus {
+    outline: 1px solid $greyVale20;
+  }
+}
+
+.tu-label {
+  color: $dark;
+  font-family: $font-body1;
+  letter-spacing: 0.25px;
+  line-height: 24px;
+  width: 100px;
+
+  &.tu-inline {
+    margin-right: 8px;
+  }
+
+  &.tu-block {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+}
+
+.tu-margin-top-medium {
+  margin-top: 16px;
+}
+
+.tu-button-group {
+  width: 150px;
+  margin-top: 24px;
+}
+
+.tu-spinner-content {
+  position: absolute;
+  left: 50%;
+  top: 50vh;
+}
+
+.table-devices {
+  box-sizing: border-box;
+  height: 176px;
+  width: 562px;
+  border: 1px solid #e3e4e4;
+  background-color: #ffffff;
+  margin-top: 20px;
+  display: flex;
+
+  .table-details,
+  .table-values {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .table-values {
+    padding-top: 40px;
+    justify-content: start;
+  }
+
+  .table-details {
+    width: 65%;
+    padding-left: 40px;
+  }
+
+  .table-header {
+    height: 24px;
+    color: #747678;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+    font-family: $font-body1;
+    margin-bottom: 8px;
+  }
+
+  .table-value {
+    :last-child {
+      color: #252727;
+    }
+    height: 24px;
+    font-family: $font-body1;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+  }
+
+  .device-link {
+    color: $violetVale;
+    cursor: pointer;
+    border-bottom: 1px solid $violetVale;
+  }
+
+  .latitude,
+  .device-link {
+    margin-top: 8px;
+  }
+}
+
+.wrong {
+  border-color: $redVale60;
+}
+
+.first-picker {
+  display: flex;
+}

@@ -1,0 +1,24 @@
+<ul *ngIf="total || onlyBeforeAndNext" class="pagination">
+  <li *ngIf="currentPage > 1 || onlyBeforeAndNext" class="page-item first-item">
+    <a (click)="onGetPreviousPageClick()" class="page-link">{{
+      'MAIN.PREVIOUS_PAGE' | translate
+    }}</a>
+  </li>
+  <ng-container *ngIf="!onlyBeforeAndNext">
+    <li
+      *ngFor="let page of virtualPages"
+      [ngClass]="{ active: currentPage === page }"
+      class="page-item number-item"
+    >
+      <a (click)="setPage(page)" class="page-link" *ngIf="page">{{ page }}</a>
+    </li>
+  </ng-container>
+  <li
+    *ngIf="currentPage != totalPages || onlyBeforeAndNext"
+    class="page-item last-item"
+  >
+    <a (click)="onGetNextPageClick()" class="page-link">{{
+      'MAIN.NEXT_PAGE' | translate
+    }}</a>
+  </li>
+</ul>

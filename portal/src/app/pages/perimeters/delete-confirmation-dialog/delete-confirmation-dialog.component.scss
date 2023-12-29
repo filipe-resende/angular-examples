@@ -1,0 +1,20 @@
+.perimeters-delete-confirmation-dialog {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  width: 440px;
+  color: #000000;
+}
+
+.perimeters-delete-confirmation-dialog-button-container {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+
+  & > app-button:first-child {
+    margin-right: 16px;
+  }
+}

@@ -1,0 +1,77 @@
+<section style="padding: 24px; height: 384px">
+  <h1 mat-dialog-title>
+    {{ 'MAIN.PROFILE' | translate }}
+    <ng-container *ngIf="configuration != 'prod'"
+      >({{ configuration }})</ng-container
+    >
+    <button
+      *ngIf="!loading"
+      style="float: right"
+      mat-icon-button
+      (click)="cancel()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </h1>
+  <div mat-dialog-content class="font-14">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.USER' | translate }}"
+        disabled
+        [value]="user"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.EMAIL' | translate }}"
+        disabled
+        [value]="userEmail"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.PROFILE' | translate }}"
+        disabled
+        [value]="userPermissions"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.VERSION' | translate }}"
+        disabled
+        [value]="version"
+      />
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <mat-select
+        placeholder="{{ 'MAIN.LANGUAGE' | translate }}"
+        [(ngModel)]="language"
+      >
+        <mat-option title="{{ 'LANGUAGE.EN' | translate }}" value="en-US">
+          {{ 'LANGUAGE.EN' | translate }}
+        </mat-option>
+        <mat-option title="{{ 'LANGUAGE.PT' | translate }}" value="pt-BR">
+          {{ 'LANGUAGE.PT' | translate }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions style="float: right">
+    <button *ngIf="!loading" color="primary" mat-button (click)="cancel()">
+      {{ 'MAIN.BACK' | translate }}
+    </button>
+    <button
+      *ngIf="!loading"
+      [disabled]="language == translateService.currentLang"
+      mat-button
+      color="primary"
+      (click)="submit()"
+    >
+      {{ 'MAIN.SAVE_CLOSE' | translate }}
+    </button>
+  </div>
+</section>

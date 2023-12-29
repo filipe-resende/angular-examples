@@ -1,0 +1,59 @@
+<ng-container *ngIf="modalUserAgreementData$ | async as modalUserAgreementData">
+  <header class="header">
+    <mat-icon class="header__icon">warning</mat-icon>
+    <div>
+      <h3 class="header__title">
+        {{ 'USER_AGREEMENT.PERSONAL_DATA' | translate }}
+      </h3>
+      <h6 class="header__subtitle">Things Management Portal</h6>
+    </div>
+    <button
+      mat-icon-button
+      class="header__close-icon"
+      (click)="onClose()"
+      *ngIf="modalUserAgreementData.userAgreement"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <hr class="user-agreement-container__line" />
+  <p
+    class="user-agreement-container__content"
+    [innerHTML]="modalUserAgreementData.document?.text"
+  ></p>
+  <hr class="user-agreement-container__line" />
+
+  <footer
+    class="footer"
+    *ngIf="modalUserAgreementData.userAgreement; else actions"
+  >
+    <mat-icon>check_circle_outline</mat-icon>
+    <div class="footer__info">
+      {{ 'USER_AGREEMENT.ACCEPTED_AT' | translate }}
+      <strong>{{
+        modalUserAgreementData.userAgreement?.createdAt
+          | date: ('USER_AGREEMENT.AGREED_TIME_FORMAT' | translate)
+      }}</strong>
+    </div>
+  </footer>
+
+  <ng-template #actions>
+    <section class="actions">
+      <mat-checkbox class="actions__checkbox" [(ngModel)]="readAndAgreed">
+        {{ 'USER_AGREEMENT.READ_AND_AGREE' | translate }}
+      </mat-checkbox>
+      <button
+        [ngClass]="{ disabled: !readAndAgreed }"
+        mat-flat-button
+        class="actions__button"
+        (click)="
+          handleAcceptAgreementClick(modalUserAgreementData.document?.id)
+        "
+        [disabled]="!readAndAgreed || sendingData"
+      >
+        {{ 'USER_AGREEMENT.ACCEPT' | translate }}
+      </button>
+    </section>
+  </ng-template>
+</ng-container>

@@ -1,0 +1,64 @@
+@import '../../../../scss/vale.variables';
+
+.item-detector {
+  font-family: $font-body1;
+  display: flex;
+  justify-content: space-between;
+  height: 109px;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid $greyVale20;
+  margin-bottom: 8px;
+  padding: 20px 20px;
+
+  .detectors-details {
+    font-family: $font-body1;
+    color: $greyVale80;
+    font-size: 14px;
+    letter-spacing: 0.53px;
+    line-height: 16px;
+
+    .name {
+      height: 16px;
+      color: $dark;
+      font-size: 14px;
+      letter-spacing: 0.6px;
+      line-height: 19px;
+      padding-bottom: 28px;
+    }
+
+    .coordinates {
+      width: 109%;
+    }
+  }
+
+  .init-detector {
+    width: 500px;
+    display: flex;
+    justify-content: flex-start;
+
+    .detectors-checkbox {
+      margin-left: 20px;
+      margin-right: 20px;
+      margin-top: 35px;
+    }
+  }
+
+  .application-name {
+    margin-left: 0px;
+    padding-left: 0px;
+  }
+
+  .end-item {
+    margin-right: 0px;
+    justify-content: flex-end;
+    padding-right: 41px;
+    display: flex;
+    margin-top: 11px;
+
+    .icon {
+      cursor: pointer;
+      margin-left: 10px;
+    }
+  }
+}

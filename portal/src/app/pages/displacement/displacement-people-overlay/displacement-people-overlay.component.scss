@@ -1,0 +1,88 @@
+@import '../../../../scss/mixins';
+
+.displacement-people-overlay-container {
+  width: 800px;
+  height: 624px;
+}
+
+.displacement-people-overlay-header {
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #edeef0;
+}
+
+.displacement-people-overlay-header-title {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #697489;
+  margin-left: 69px;
+}
+
+.displacement-people-overlay-close-btn {
+  margin-right: 24px;
+  color: #959dac;
+}
+
+.displacement-people-overlay-table {
+  border-bottom: none;
+  padding: 0 72px;
+  margin-top: 24px;
+
+  button {
+    font-style: normal;
+    font-weight: normal;
+    line-height: 24px;
+    color: #252727;
+  }
+
+  th.mat-header-cell {
+    border: none;
+    margin-bottom: 24px;
+    padding: 0;
+  }
+
+  td.mat-cell:first-of-type {
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .displacement-people-overlay {
+    &-container {
+      width: 1100px;
+      height: 624px;
+      overflow-x: auto;
+    }
+
+    &-table {
+      padding: 0 40px;
+    }
+
+    &-header-title {
+      margin-left: 36px;
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .displacement-people-overlay-container {
+    width: 1396px;
+    height: 724px;
+  }
+}
+
+.table-cell-elipsis {
+  max-width: 120px;
+  @include elipsis;
+}
+
+.table-cell-elipsis-bigger {
+  max-width: 200px;
+  @include elipsis;
+}

@@ -1,0 +1,24 @@
+<div class="list-chart-container">
+  <div class="content" *ngIf="listData.length">
+    <div class="label-date">
+      <span class="label-text"
+        >{{ periodMessage | translate }} - {{selectedApplication}}
+        {{message}}</span
+      >
+    </div>
+    <div class="list-items">
+      <div class="item" *ngFor="let item of listData; let lastItem = last">
+        <div class="item-info">
+          <span class="title">{{item.label}}</span>
+          <div class="data-count-percentage">
+            <span class="data-text">{{item.count}} | {{item.percentage}}</span>
+          </div>
+        </div>
+        <hr *ngIf="!lastItem" class="line" />
+      </div>
+    </div>
+  </div>
+  <div class="no-content" *ngIf="!listData.length">
+    <span>{{ 'DASHBOARD.CHARTS.MESSAGES.NOT_FOUND' | translate }}</span>
+  </div>
+</div>

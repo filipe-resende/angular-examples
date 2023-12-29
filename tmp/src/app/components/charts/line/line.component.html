@@ -1,0 +1,32 @@
+<div class="bar-chart-container">
+  <div class="label-date">
+    <span class="label-text">{{
+      'DASHBOARD.EVOLUTION_PERIOD' | translate
+    }}</span>
+  </div>
+  <div *ngIf="evolutionData; else evolution">
+    <div class="chart" [ngStyle]="{ display: chartName ? 'block' : 'none' }">
+      <div class="chart-container" style="margin: 0 15px">
+        <canvas class="canvas" width="300" [id]="chartName">
+          {{ chart }}
+        </canvas>
+      </div>
+    </div>
+    <div class="chart-legend">
+      <div class="item-legend" *ngFor="let item of legend">
+        <div class="circle-item">
+          <span
+            class="circle"
+            [ngStyle]="{ 'background-color': item.color }"
+          ></span>
+        </div>
+        <div class="item-label">
+          <span>{{ item.label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #evolution class="no-content">
+    <span>{{ 'DASHBOARD.CHARTS.MESSAGES.NOT_FOUND' | translate }}</span>
+  </ng-template>
+</div>

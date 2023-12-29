@@ -1,0 +1,21 @@
+<div class="overlay-info-container">
+  <section>
+    <ng-content></ng-content>
+  </section>
+  <div
+    style="width: 100%; border-bottom: 1px solid #c7c8c9"
+    *ngIf="!hideButtonSection"
+  ></div>
+  <section *ngIf="!hideButtonSection">
+    <app-button
+      class="container__button"
+      [large]="true"
+      [loading]="buttonLoading"
+      [strech]="true"
+      [upperCased]="true"
+      (onClick)="buttonClick.emit()"
+    >
+      {{ buttonLabel | translate }}
+    </app-button>
+  </section>
+</div>

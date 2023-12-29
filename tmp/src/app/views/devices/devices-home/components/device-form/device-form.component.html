@@ -1,0 +1,143 @@
+<div class="device-form-container">
+  <form class="form" #updateDevice="ngForm">
+    <div class="row">
+      <div class="col-6 form-column">
+        <div
+          class="device-form-group"
+          *ngIf="application.allowInclusionDeviceGroup"
+        >
+          <label>{{ 'DEVICE_UPDATE.CALLED_VSC' | translate }}</label>
+          <input
+            class="input"
+            name="calledVSC"
+            [(ngModel)]="formData.calledCode"
+            required
+            disabled
+          />
+        </div>
+
+        <div
+          class="device-form-group"
+          *ngIf="application.allowInclusionDeviceGroup"
+        >
+          <label>{{ 'DEVICE_UPDATE.INVOICE_PROVIDER' | translate }}</label>
+          <input
+            class="input"
+            name="invoiceProvider"
+            [(ngModel)]="formData.invoiceProvider"
+            autocomplete="off"
+            disabled
+          />
+        </div>
+
+        <div
+          class="device-form-group"
+          *ngIf="application.allowInclusionDeviceGroup"
+        >
+          <label>{{ 'DEVICE_UPDATE.INVOICE' | translate }}</label>
+          <input
+            class="input"
+            name="invoice"
+            [(ngModel)]="formData.invoice"
+            autocomplete="off"
+            disabled
+          />
+        </div>
+
+        <div class="device-form-group" [hidden]="isShowRfId">
+          <label class="du-input-label">{{
+            'DEVICE_UPDATE.RFID' | translate
+          }}</label>
+          <div class="rfid-input-group">
+            <input
+              (keydown)="($event.keyCode != 13)"
+              class="device-form-input input"
+              name="sourceValueRfId"
+              autocomplete="off"
+              [(ngModel)]="rfId"
+              disabled
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-6 form-column">
+        <div
+          class="device-form-group"
+          *ngIf="application.allowInclusionDeviceGroup"
+        >
+          <label>{{ 'DEVICE_UPDATE.MANAGEMENT_NAME' | translate }}</label>
+          <span
+            class="input"
+            name="managementName"
+            ngDefaultControl
+            [(ngModel)]="managementName"
+          >
+            {{ managementName }}
+          </span>
+        </div>
+
+        <div
+          class="device-form-group"
+          *ngIf="application.allowInclusionDeviceGroup"
+        >
+          <label>{{ 'DEVICE_UPDATE.SAP_PLANT' | translate }}</label>
+          <input
+            class="input"
+            name="sapPlant"
+            [(ngModel)]="sapPlant"
+            autocomplete="off"
+            disabled
+          />
+        </div>
+
+        <div
+          class="device-form-group"
+          *ngIf="application.allowInclusionDeviceGroup"
+        >
+          <label>{{ 'DEVICE_UPDATE.MANAGER_DEVICE' | translate }}</label>
+          <span
+            class="input"
+            name="deviceManager"
+            ngDefaultControl
+            [(ngModel)]="deviceManager"
+          >
+            {{ deviceManager }}
+          </span>
+        </div>
+
+        <div
+          class="device-form-group"
+          *ngIf="application.allowInclusionDeviceGroup"
+        >
+          <label>{{ 'DEVICE_UPDATE.GROUP' | translate }}</label>
+
+          <span *ngIf="groupName.length < 58; else slicedGroupName">
+            {{ groupName }}
+          </span>
+          <ng-template #slicedGroupName>
+            <span [matTooltip]="groupName">
+              {{ groupName | slice: 0:58 }}...
+            </span>
+          </ng-template>
+        </div>
+
+        <div
+          style="display: none"
+          class="device-form-submit-button"
+          *ngIf="canUserEditDevice && canDeviceBeEdited"
+        >
+          <app-action-button
+            [ngClass]="['blue', 'small']"
+            [labelClass]="'blue-label'"
+            [ngClassDisabled]="['grey', 'small']"
+            [labelClassDisabled]="'grey-label'"
+            [disabled]="disabled"
+            (action)="handleSaveButton()"
+          >
+            {{ 'DEVICE_UPDATE.SAVE_BUTTON' | translate }}
+          </app-action-button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

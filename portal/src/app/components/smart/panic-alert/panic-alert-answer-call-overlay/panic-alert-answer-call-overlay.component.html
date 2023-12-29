@@ -1,0 +1,106 @@
+<section class="panic-alert-answer-call-overlay-container">
+  <h1 class="panic-alert-answer-call-overlay-title">
+    {{ 'PANIC_BUTTON.ANSWER_CALL' | translate }}
+  </h1>
+  <div class="panic-alert-answer-call-overlay-close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <div class="panic-alert-answer-call-overlay-inner-container">
+    <section>
+      <h2 class="panic-alert-answer-call-overlay-subtitle">
+        {{ 'PANIC_BUTTON.ANSWER_CALL_CONFIRMATION' | translate }}
+      </h2>
+      <div *ngIf="alert" style="width: 100%">
+        <div class="panic-alert-answer-call-overlay-info-item">
+          <mat-icon>watch_later</mat-icon>
+          {{
+            alert.eventDateTime
+              ? (alert.eventDateTime | date: 'dd/MM/yyyy HH:mm')
+              : ' - '
+          }}
+        </div>
+        <div class="panic-alert-answer-call-overlay-info-item coordinates">
+          <mat-icon class="icon">location_on</mat-icon>
+          <div class="link">
+            {{
+              alert.eventLocation && alert.eventLocation.lat
+                ? 'Lat: ' +
+                  alert.eventLocation.lat +
+                  ', Lng: ' +
+                  alert.eventLocation.lng
+                : ' - '
+            }}
+            <div *ngIf="alert.areaName">/ {{ alert.areaName }}</div>
+          </div>
+          <app-mini-map
+            class="map-icon"
+            [latitude]="alert?.eventLocation?.lat"
+            [longitude]="alert?.eventLocation?.lng"
+            [middleware]="middlewareName"
+            [openMapExpanded]="true"
+            [panicButtonSite]="alert.areaName"
+          >
+          </app-mini-map>
+        </div>
+        <div class="panic-alert-answer-call-overlay-info-item">
+          <mat-icon>person</mat-icon>
+          {{ alert?.thing ? alert.thing?.name + ' / ' : '' }}
+          <span class="panic-alert-answer-call-overlay-info-item-company">
+            {{ alert?.thing?.company }}
+          </span>
+        </div>
+        <div class="panic-alert-answer-call-overlay-info-item">
+          <mat-icon>credit_card</mat-icon>
+          <div class="line-wrapper">
+            <span *ngIf="alert?.thing?.document"
+              >{{ 'NOTIFICATION.PANIC_BUTTON_TABLE.CPF' | translate }}:
+              {{ alert.thing.document }}
+            </span>
+            <span *ngIf="alert?.thing?.iamId">
+              / {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.IAM' | translate }}:
+              {{ alert.thing.iamId }}
+            </span>
+            <span *ngIf="alert?.thing?.passport">
+              / {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.PASSPORT' | translate }}:
+              {{ alert.thing.passport }}
+            </span>
+          </div>
+        </div>
+        <div class="panic-alert-answer-call-overlay-info-item">
+          <mat-icon>smartphone</mat-icon>
+          <div class="line-wrapper">
+            <span *ngIf="alert?.sourceApplicationName"
+              >{{ 'NOTIFICATION.DEVICE_TYPE' | translate }}:
+              {{ alert.sourceApplicationName }}
+            </span>
+            <span *ngIf="alert?.deviceSourceInfoId">
+              {{ 'NOTIFICATION.DEVICE_ID' | translate }}:
+              {{ alert.deviceSourceInfoId }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+<div class="panic-alert-answer-call-overlay-buttons-container">
+  <app-button
+    [large]="true"
+    [strech]="true"
+    [primary]="false"
+    [customClass]="'panic-alert-answer-call-overlay-cancel-button'"
+    (onClick)="close()"
+  >
+    {{ 'MAIN.CANCEL' | translate }}
+  </app-button>
+  <app-button
+    [large]="true"
+    [strech]="true"
+    [loading]="isSettingAlertAsAttended"
+    [customClass]="'panic-alert-answer-call-overlay-answer-call-button'"
+    (onClick)="confirm()"
+  >
+    {{ 'PANIC_BUTTON.ANSWER_CALL' | translate }}
+  </app-button>
+</div>

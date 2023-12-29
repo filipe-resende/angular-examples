@@ -1,0 +1,199 @@
+.dashboard-page-container {
+  height: Calc(100% - 35px);
+  min-height: 500px;
+  padding: 36px 56px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-page-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.dashboard-page-header-site {
+  margin-bottom: 30px;
+  height: 48px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-page-root-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding-top: 2.3rem;
+  flex-direction: column;
+}
+
+.dashboard-page-grid-container {
+  display: flex;
+  height: Calc(100% - 60px);
+  width: 100%;
+}
+
+.dashboard-page-grid-left {
+  flex: 1;
+  margin-right: 24px;
+
+  .dashboard-page-grid-left-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .header__subtitle {
+      margin: 0;
+      padding: 0;
+      font-weight: normal;
+      color: #acadae;
+      font-size: 14px;
+      line-height: 16px;
+    }
+
+    .header__icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.dashboard-page-grid-right {
+  flex: 2;
+}
+
+.select-site-message {
+  text-align: left;
+  color: #909193;
+  padding: 0.5rem;
+  padding-left: 2rem;
+}
+
+.things-qtt {
+  font-size: 48px;
+  color: #69be28;
+}
+
+.things-name {
+  font-size: 16px;
+  line-height: 28px;
+  color: #778699;
+  text-align: center;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+}
+
+.things-qtt-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.site-mat-select {
+  .mat-select-value-text {
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+}
+
+.heat-map {
+  flex: 1;
+
+  .map-wrapper {
+    position: relative;
+    height: 100% !important;
+  }
+}
+
+.mat-spinner {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.dashboard-page-update-container {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 16px;
+  color: #909193;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  display: inline-flex;
+
+  .header__icon {
+    line-height: inherit;
+    padding-left: 9px;
+    font-size: 14px;
+    height: 12px;
+    width: 12px;
+    cursor: pointer;
+  }
+}
+
+@media (max-height: 768px) {
+  .total-of-people-card {
+    height: 35%;
+    font-size: 12px;
+  }
+  .total-for-type-location {
+    height: 60%;
+    .total-for-type-location-content {
+      font-size: 11px;
+    }
+    .total-for-type-location-no-value-message {
+      font-size: 12px;
+    }
+  }
+
+  .things-qtt {
+    font-size: 36px;
+  }
+  .things-name {
+    font-size: 12px;
+  }
+}
+
+@media (min-height: 769px) {
+  .total-of-people-card {
+    height: 49%;
+  }
+  .total-for-type-location {
+    height: 49%;
+  }
+}
+
+.total-of-people-card {
+  margin-bottom: 15px;
+}
+
+.total-for-type-location {
+  .total-for-type-location-no-value-message {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    transform: translate(-30%, -50%);
+  }
+  .total-for-type-location-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .total-for-type-location-content {
+    margin-top: 20px;
+    color: #909193;
+    ul {
+      list-style: none;
+      padding-left: 0;
+      li {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ccc;
+        padding: 5px 0;
+      }
+    }
+  }
+}

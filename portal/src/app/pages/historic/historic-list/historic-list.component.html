@@ -1,0 +1,583 @@
+<div
+  class="historic-page-users-list-container"
+  [ngStyle]="{ display: filteredSingleThing ? 'none' : 'block' }"
+>
+  <ng-template mat-tab-label>
+    {{ 'HISTORIC.LIST' | translate }}
+  </ng-template>
+
+  <cdk-virtual-scroll-viewport
+    itemSize="137"
+    [ngClass]="
+      canViewSensitiveData
+        ? 'historic-page-users-list-viewport'
+        : 'historic-page-users-list-viewport-noAcess'
+    "
+    minBufferPx="3000"
+    maxBufferPx="3000"
+  >
+    <div
+      *cdkVirtualFor="
+        let thing of things
+          | search
+            : 'name,document,deviceType,deviceId'
+            : (searchbar$ | async).text
+      "
+    >
+      <div class="historic-page-users-list-item-container">
+        <div
+          class="historic-page-users-list-item-texts-container"
+          (click)="onSelectThing(thing)"
+          [ngClass]="{
+            selected: thing.isThingSelected
+          }"
+        >
+          <div class="historic-page-users-list-item-location">
+            <div class="icon-box">
+              <span>
+                {{ thing?.batteryPercent && thing.batteryPercent + '%' }}
+              </span>
+
+              <ng-container [ngSwitch]="thing?.batteryState">
+                <img
+                  *ngSwitchCase="'LOW'"
+                  class="battery-low"
+                  alt="Low Battery"
+                  [src]="'assets/icons/Battery_Low.png'"
+                  class="image-battery battery-low"
+                />
+                <mat-icon
+                  *ngSwitchCase="'MEDIUM'"
+                  class="mat-icon material-icons image-battery battery-medium"
+                  role="img"
+                  aria-hidden="true"
+                  svgIcon="battery-medium"
+                >
+                </mat-icon>
+                <mat-icon
+                  *ngSwitchCase="'GOOD'"
+                  class="mat-icon material-icons image-battery good-battery"
+                  role="img"
+                  aria-hidden="true"
+                >
+                  battery_full
+                </mat-icon>
+              </ng-container>
+            </div>
+
+            <ng-container
+              *ngIf="
+                thing?.middleware === 'Smart Badge' ||
+                thing?.middleware === 'Maxtrack - people location'
+              "
+            >
+              <mat-icon
+                *ngIf="thing?.isMoving; else notMoving"
+                class="moving-row"
+                svgIcon="person-moving-green"
+                [matTooltip]="'HISTORIC.MOVING' | translate"
+              ></mat-icon>
+
+              <ng-template #notMoving>
+                <mat-icon
+                  class="moving-row"
+                  svgIcon="person-moving-grey"
+                  [matTooltip]="'HISTORIC.STOPPED' | translate"
+                ></mat-icon>
+              </ng-template>
+            </ng-container>
+          </div>
+
+          <h4
+            class="historic-page-users-list-item-title"
+            title="{{ thing.name }}"
+          >
+            {{ thing?.name }}
+          </h4>
+
+          <p
+            class="historic-page-users-list-item-info"
+            *ngIf="canViewSensitiveData"
+          >
+            {{ 'HISTORIC.REGISTRATION_DOCUMENT' | translate }}:
+            {{ thing?.document }}
+          </p>
+
+          <div class="historic-page-users-list-item-info">
+            <p *ngIf="isFacialRecognitionMiddleware(thing?.middleware)">
+              {{ 'HISTORIC.DEVICE_TYPE' | translate }}:
+              {{ thing?.middleware }}
+            </p>
+
+            <p
+              *ngIf="
+                !isBusMiddleware(thing?.middleware) &&
+                !isFacialRecognitionMiddleware(thing?.middleware)
+              "
+            >
+              {{ 'HISTORIC.DEVICE_TYPE' | translate }}:
+              {{ thing?.middleware }} - {{ thing?.deviceId }}
+            </p>
+
+            <p *ngIf="isBusMiddleware(thing?.middleware)">
+              {{ 'HISTORIC.BUS_DEVICE_TYPE' | translate }}:
+              {{ thing?.busTripCompanyName }} - {{ thing?.deviceId }}
+            </p>
+          </div>
+
+          <p
+            class="historic-page-users-list-item-info"
+            *ngIf="isBusMiddleware(thing?.middleware)"
+          >
+            {{ 'HISTORIC.LICENSE_PLATE' | translate }}:
+            {{ thing?.licensePlate }}
+          </p>
+
+          <p
+            class="historic-page-users-list-item-info"
+            *ngIf="isBusMiddleware(thing?.middleware)"
+          >
+            {{ 'HISTORIC.LINE_NAME' | translate }}:
+            {{ thing?.line }}
+          </p>
+
+          <p
+            *ngIf="isFacialRecognitionMiddleware(thing?.middleware)"
+            [matTooltip]="thing?.cameraName"
+            class="historic-page-users-list-item-info cameraName"
+          >
+            {{ 'HISTORIC.CAMERA' | translate }}:
+            {{ thing?.cameraName | slice: 0:35 }}...
+          </p>
+
+          <p
+            *ngIf="isReaderMiddleware(thing?.middleware)"
+            [matTooltip]="thing?.cameraName"
+            class="historic-page-users-list-item-info cameraName"
+          >
+            {{ 'HISTORIC.READER' | translate }}:
+            {{ thing?.cameraName | slice: 0:35 }}...
+          </p>
+          <div class="historic-page-users-list-item-info-container">
+            <p class="historic-page-users-list-item-info">
+              {{ 'HISTORIC.LAST_EVENT' | translate }}:
+              {{ thing?.eventDateTime | date: 'dd/MM/yyyy HH:mm:ss' }}
+              <mat-icon
+                *ngIf="thing.showAlert"
+                [matTooltip]="'HISTORIC.DEVICE_IS_NOT_REPORTING' | translate"
+              >
+                report
+              </mat-icon>
+            </p>
+            <div
+              class="event-direction-container"
+              *ngIf="thing?.typeAccess !== null"
+            >
+              <img
+                alt="exit"
+                *ngIf="
+                  thing?.typeAccess === EventTypeLabels.BusExit ||
+                  thing?.typeAccess === EventTypeLabels.AuthorizedExit
+                "
+                src="../../../assets/icons/exit_icon.svg"
+                [matTooltip]="
+                  thing?.typeAccess === EventTypeLabels.BusExit
+                    ? ('ICONS.BUS_EVENT_EXIT' | translate)
+                    : ('ICONS.AUTHORIZED_EXIT' | translate)
+                "
+              />
+              <img
+                *ngIf="
+                  thing?.typeAccess === EventTypeLabels.BusEntrance ||
+                  thing?.typeAccess === EventTypeLabels.AuthorizedEntrance
+                "
+                alt="entrance"
+                src="../../../assets/icons/entrance_icon.svg"
+                [matTooltip]="
+                  thing.typeAccess === EventTypeLabels.BusEntrance
+                    ? ('ICONS.BUS_EVENT_ENTRANCE' | translate)
+                    : ('ICONS.AUTHORIZED_ENTRANCE' | translate)
+                "
+              />
+              <img
+                *ngIf="thing?.typeAccess === EventTypeLabels.DeniedEntrance"
+                alt="denied entrance"
+                src="../../../assets/icons/denied_entrance.svg"
+                [matTooltip]="'ICONS.DENIED_ENTRANCE' | translate"
+              />
+              <img
+                *ngIf="thing?.typeAccess === EventTypeLabels.DeniedExit"
+                alt="denied exit"
+                src="../../../assets/icons/denied_exit.svg"
+                [matTooltip]="'ICONS.DENIED_EXIT' | translate"
+              />
+            </div>
+          </div>
+
+          <p
+            class="historic-page-users-list-item-info"
+            *ngIf="isSmartBadgeMiddleware(thing?.middleware)"
+          >
+            {{ 'HISTORIC.NETWORK_TYPE' | translate }}:
+            {{ thing?.networkType }}
+          </p>
+
+          <div
+            class="historic-page-users-list-item-info"
+            *ngIf="thing?.valeLocations.length >= 2"
+          >
+            {{ 'LIST.FENCE' | translate }}:&nbsp;
+            {{ 'LIST.MULTIPLE_FENCES' | translate }}
+            <mat-icon
+              class="header__icon icon-tooltip"
+              matTooltipClass="multiline-tooltip"
+              [matTooltip]="showValeLocations(thing?.valeLocations, false)"
+            >
+              info_outline
+            </mat-icon>
+          </div>
+          <div
+            *ngIf="thing?.valeLocations.length < 2"
+            class="historic-page-users-list-item-info"
+          >
+            {{ 'LIST.FENCE' | translate }}:&nbsp;
+            {{ showValeLocations(thing?.valeLocations, false) }}
+          </div>
+        </div>
+        <div class="historic-page-users-list-item-trace-button-row">
+          <div *ngIf="thing.isThingSelected; else no_thing_selected">
+            <button
+              *ngIf="!isFetchingAllThings"
+              (click)="onDrawThingTraceButtonClick(thing)"
+              mat-icon-button
+            >
+              <mat-icon class="trace-icon"> play_circle_outline </mat-icon>
+            </button>
+
+            <div
+              *ngIf="isFetchingAllThings"
+              style="margin-right: 10px; margin-bottom: 5px"
+            >
+              <mat-spinner diameter="20"></mat-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="historic-page-users-list-item-border-bottom"></div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+</div>
+<div *ngIf="filteredSingleThing">
+  <ng-template mat-tab-label>
+    {{ 'HISTORIC.LIST' | translate }}
+  </ng-template>
+
+  <mat-list class="mat-list-max-height">
+    <div class="historic-page-users-list-item-container">
+      <div
+        class="historic-page-users-list-item-texts-container"
+        (click)="onSelectThing(filteredSingleThing)"
+        [ngClass]="{
+          selected: filteredSingleThing.isThingSelected
+        }"
+      >
+        <div class="historic-page-users-list-item-location">
+          <div fxLayout="row" class="battery-row">
+            <div
+              class="battery-percent"
+              *ngIf="filteredSingleThing.lastDeviceLocation?.batteryPercent"
+            >
+              {{ filteredSingleThing.lastDeviceLocation?.batteryPercent }}%
+            </div>
+            <ng-container
+              [ngSwitch]="filteredSingleThing.lastDeviceLocation?.batteryState"
+            >
+              <img
+                *ngSwitchCase="'LOW'"
+                class="battery-low"
+                alt="Low Battery"
+                [src]="'assets/icons/Battery_Low.png'"
+                class="image-battery battery-low"
+              />
+              <mat-icon
+                *ngSwitchCase="'MEDIUM'"
+                class="mat-icon material-icons image-battery battery-medium"
+                role="img"
+                aria-hidden="true"
+                svgIcon="battery-medium"
+              >
+              </mat-icon>
+              <mat-icon
+                *ngSwitchCase="'GOOD'"
+                class="mat-icon material-icons image-battery good-battery"
+                role="img"
+                aria-hidden="true"
+              >
+                battery_full
+              </mat-icon>
+            </ng-container>
+          </div>
+          <ng-container
+            *ngIf="filteredSingleThing?.lastDeviceLocation?.batteryPercent"
+          >
+            <mat-icon
+              *ngIf="
+                filteredSingleThing?.lastDeviceLocation?.isMoving;
+                else notMoving
+              "
+              class="moving-row"
+              svgIcon="person-moving-green"
+              [matTooltip]="'HISTORIC.MOVING' | translate"
+            ></mat-icon>
+
+            <ng-template #notMoving>
+              <mat-icon
+                class="moving-row"
+                svgIcon="person-moving-grey"
+                [matTooltip]="'HISTORIC.STOPPED' | translate"
+              ></mat-icon>
+            </ng-template>
+          </ng-container>
+        </div>
+
+        <h4
+          class="historic-page-users-list-item-title"
+          title="{{ filteredSingleThing.name }}"
+        >
+          {{ filteredSingleThing.name }}
+        </h4>
+
+        <p
+          class="historic-page-users-list-item-info"
+          *ngIf="canViewSensitiveData"
+        >
+          {{ 'HISTORIC.REGISTRATION_DOCUMENT' | translate }}:
+          {{ filteredSingleThing.document }}
+        </p>
+
+        <p
+          class="historic-page-users-list-item-info"
+          *ngIf="!verifyLastDeviceLocationFacialMiddleware(filteredSingleThing)"
+        >
+          {{ 'HISTORIC.DEVICE_TYPE' | translate }}:
+          {{ enricherfilteredSingleThing().lastDeviceLocation?.middleware }}
+          -
+          {{
+            filteredSingleThing.lastDeviceLocation &&
+              filteredSingleThing.lastDeviceLocation?.deviceId
+          }}
+        </p>
+
+        <p
+          class="historic-page-users-list-item-info"
+          *ngIf="verifyLastDeviceLocationFacialMiddleware(filteredSingleThing)"
+        >
+          {{ 'HISTORIC.DEVICE_TYPE' | translate }}:
+          {{ enricherfilteredSingleThing().lastDeviceLocation?.middleware }}
+        </p>
+
+        <p
+          [matTooltip]="filteredSingleThing.lastDeviceLocation?.cameraName"
+          class="historic-page-users-list-item-info"
+          *ngIf="verifyLastDeviceLocationFacialMiddleware(filteredSingleThing)"
+        >
+          {{ 'HISTORIC.CAMERA' | translate }}:
+          {{
+            filteredSingleThing.lastDeviceLocation?.cameraName | slice: 0:35
+          }}...
+        </p>
+
+        <p
+          [matTooltip]="filteredSingleThing.lastDeviceLocation?.cameraName"
+          class="historic-page-users-list-item-info"
+          *ngIf="verifyLastDeviceLocationReaderMiddleware(filteredSingleThing)"
+        >
+          {{ 'HISTORIC.READER' | translate }}:
+          {{
+            filteredSingleThing.lastDeviceLocation?.cameraName | slice: 0:35
+          }}...
+        </p>
+
+        <div class="historic-page-users-list-item-info-container">
+          <p class="historic-page-users-list-item-info">
+            {{ 'HISTORIC.LAST_EVENT' | translate }}:
+            {{
+              filteredSingleThing.lastDeviceLocation &&
+                filteredSingleThing.lastDeviceLocation.eventDateTime
+                | date: 'dd/MM/yyyy HH:mm:ss'
+            }}
+          </p>
+          <div
+            class="event-direction-container"
+            *ngIf="filteredSingleThing?.typeAccess !== null"
+          >
+            <img
+              alt="exit"
+              *ngIf="
+                filteredSingleThing?.typeAccess === EventTypeLabels.BusExit ||
+                filteredSingleThing?.typeAccess ===
+                  EventTypeLabels.AuthorizedExit
+              "
+              src="../../../assets/icons/exit_icon.svg"
+              [matTooltip]="
+                filteredSingleThing?.typeAccess === EventTypeLabels.BusExit
+                  ? ('ICONS.BUS_EVENT_EXIT' | translate)
+                  : ('ICONS.AUTHORIZED_EXIT' | translate)
+              "
+            />
+            <img
+              *ngIf="
+                filteredSingleThing?.typeAccess ===
+                  EventTypeLabels.BusEntrance ||
+                filteredSingleThing?.typeAccess ===
+                  EventTypeLabels.AuthorizedEntrance
+              "
+              alt="entrance"
+              src="../../../assets/icons/entrance_icon.svg"
+              [matTooltip]="
+                filteredSingleThing.typeAccess === EventTypeLabels.BusEntrance
+                  ? ('ICONS.BUS_EVENT_ENTRANCE' | translate)
+                  : ('ICONS.AUTHORIZED_ENTRANCE' | translate)
+              "
+            />
+            <img
+              *ngIf="
+                filteredSingleThing?.typeAccess ===
+                EventTypeLabels.DeniedEntrance
+              "
+              alt="denied entrance"
+              src="../../../assets/icons/denied_entrance.svg"
+              [matTooltip]="'ICONS.DENIED_ENTRANCE' | translate"
+            />
+            <img
+              *ngIf="
+                filteredSingleThing?.typeAccess === EventTypeLabels.DeniedExit
+              "
+              alt="denied exit"
+              src="../../../assets/icons/denied_exit.svg"
+              [matTooltip]="'ICONS.DENIED_EXIT' | translate"
+            />
+          </div>
+        </div>
+
+        <p
+          class="historic-page-users-list-item-info"
+          *ngIf="
+            isSmartBadgeMiddleware(
+              filteredSingleThing?.lastDeviceLocation?.middleware
+            )
+          "
+        >
+          {{ 'HISTORIC.NETWORK_TYPE' | translate }}:
+          {{ filteredSingleThing.lastDeviceLocation?.networkType }}
+        </p>
+
+        <p
+          class="historic-page-users-list-item-info"
+          *ngIf="
+            !isFacialRecognitionMiddleware(thing?.middleware) &&
+            verifyLastDeviceLocationMiddlewareIsBusEvent(filteredSingleThing)
+          "
+        >
+          {{ 'HISTORIC.LICENSE_PLATE' | translate }}:
+          {{ filteredSingleThing.lastDeviceLocation?.licensePlate }}
+        </p>
+
+        <p
+          class="historic-page-users-list-item-info"
+          *ngIf="
+            verifyLastDeviceLocationMiddlewareIsBusEvent(filteredSingleThing)
+          "
+        >
+          {{ 'HISTORIC.LINE_NAME' | translate }}:
+          {{ filteredSingleThing.lastDeviceLocation?.line }}
+        </p>
+
+
+        <div class="historic-page-users-list-item-info historic-page-fences">
+          {{ 'LIST.FENCE' | translate }}:
+          <div
+            class="fences"
+            *ngIf="
+              filteredSingleThing?.lastDeviceLocation?.valeLocations?.length >=
+                2;
+              else singleFence
+            "
+          >
+            {{ 'LIST.MULTIPLE_FENCES' | translate }}
+            <mat-icon
+              class="header__icon icon-tooltip"
+              matTooltipClass="multiline-tooltip"
+              [matTooltip]="
+                showValeLocations(
+                  filteredSingleThing?.lastDeviceLocation?.valeLocations,
+                  false
+                )
+              "
+            >
+              info_outline
+            </mat-icon>
+          </div>
+          <ng-template #singleFence class="fences">
+            {{
+              showValeLocations(
+                filteredSingleThing?.lastDeviceLocation?.valeLocations,
+                false
+              )
+            }}
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="historic-page-users-list-item-trace-button-row">
+        <div *ngIf="filteredSingleThing.isThingSelected">
+          <button
+            *ngIf="!isFetchingAllThings"
+            (click)="onDrawThingTraceButtonClick(filteredSingleThing)"
+            mat-icon-button
+          >
+            <mat-icon class="trace-icon"> play_circle_outline </mat-icon>
+          </button>
+
+          <div
+            *ngIf="isFetchingAllThings"
+            style="margin-right: 10px; margin-bottom: 5px"
+          >
+            <mat-spinner diameter="20"></mat-spinner>
+          </div>
+        </div>
+      </div>
+    </div>
+    <app-historic-events-list
+      [devicesLocationHistory]="filteredSingleThing?.devicesLocation"
+      (selectedDeviceLocation)="sendPointToMap($event)"
+    ></app-historic-events-list>
+  </mat-list>
+  <div
+    style="margin: 0 24px 32px"
+    *ngIf="!filteredSingleThing?.devicesLocation?.length"
+  >
+    <app-message>{{ 'HISTORIC.NO_LOCATION_REPORTED' | translate }}</app-message>
+  </div>
+  <div class="buttons">
+    <app-button
+      [strech]="true"
+      [upperCased]="true"
+      (onClick)="onClickExportButton($event)"
+      *ngIf="canViewSensitiveData"
+    >
+      <mat-icon class="button__icon" style="margin-right: 5px"
+        >open_in_new</mat-icon
+      >
+      {{ 'HISTORIC.EXPORT_PATH' | translate }}
+    </app-button>
+
+    <app-button
+      [strech]="true"
+      [upperCased]="true"
+      (onClick)="onReturnToListButtonClick()"
+    >
+      {{ 'HISTORIC.RETURN_TO_LIST' | translate }}
+    </app-button>
+  </div>
+</div>

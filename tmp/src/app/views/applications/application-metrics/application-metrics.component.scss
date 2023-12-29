@@ -1,0 +1,120 @@
+@import '../../../scss/vale.variables';
+
+.breadCrumbs {
+  margin: 0px;
+  padding-top: 10px;
+  padding-left: 59px;
+  font-family: $font-body1;
+  font-size: 12px;
+  color: #909193;
+}
+
+.breadCrumbs > span {
+  color: #252727;
+}
+
+.metrics-container {
+  max-width: 1120px;
+  margin: 60px auto;
+  font-family: $font-body1;
+  font-style: normal;
+
+  .metrics-body {
+    margin-left: 40px;
+    margin-right: 40px;
+
+    .metrics-page-title {
+      font-weight: 500;
+      font-size: 30px;
+      line-height: 38px;
+      letter-spacing: 0.9px;
+      color: #252727;
+      margin-bottom: 30px;
+    }
+
+    .metrics-page-month {
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 24px;
+      letter-spacing: 0.5px;
+      color: #505151;
+    }
+
+    .metrics-body-data {
+      background: #ffffff;
+      border: 1px solid #e3e4e4;
+      margin-top: 55px;
+
+      .metrics-total-data {
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0.25px;
+        color: #4f5151;
+
+        .metrics-total-events {
+          display: flex;
+          padding: 35px 74px 0 35px;
+
+          img {
+            margin-right: 10px;
+          }
+
+          .total-events {
+            color: #4f5151;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .metrics-line {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      .metrics-table-data {
+        margin: 0 40px 40px;
+        max-width: 70%;
+
+        .metrics-table-columns {
+          margin-top: 40px;
+          display: flex;
+          justify-content: space-between;
+          font-size: 14px;
+          line-height: 24px;
+          color: #353b46;
+
+          span {
+            width: 50%;
+          }
+        }
+
+        .column-line {
+          margin: 10px 0;
+          max-width: 80%;
+        }
+
+        .metrics-rows {
+          .metrics-info {
+            display: flex;
+            justify-content: space-between;
+
+            .middeware-info {
+              margin-right: 5px;
+            }
+
+            span {
+              font-size: 14px;
+              line-height: 30px;
+              color: #909193;
+              width: 50%;
+            }
+            .metrics-info-total {
+              width: 50%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

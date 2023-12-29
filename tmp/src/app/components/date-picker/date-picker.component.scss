@@ -1,0 +1,147 @@
+@import '../../scss/vale.variables';
+
+body .bs-datepicker-container {
+  padding: 0;
+}
+body .bs-datepicker-container .bs-datepicker-head {
+  border-bottom: 1px solid #c7c8c9;
+  background-color: #fff;
+}
+body .bs-datepicker-container .bs-datepicker-head * {
+  color: #2c3f58;
+}
+
+body .bs-datepicker-container .bs-datepicker-head .ng-star-inserted {
+  display: inline;
+  color: #2c3f58;
+  font-family: $font-body1;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 22px;
+  text-align: center;
+
+  &:hover {
+    background-color: none;
+  }
+}
+body .bs-datepicker-container .bs-datepicker-head .ng-star-inserted:hover {
+  background-color: none;
+}
+
+body .bs-datepicker-container .bs-datepicker-body {
+  border: none;
+  padding: none;
+}
+
+body .bs-datepicker-container .bs-datepicker-body table tr td {
+  .selected {
+    background-color: $violetVale;
+    border-radius: 3px;
+  }
+
+  :hover {
+    border-radius: 3px;
+  }
+}
+
+.date-picker {
+  display: flex;
+
+  input {
+    border: none;
+    color: #919195;
+    font-family: $font-body1;
+    padding-left: 1rem;
+  }
+
+  .default-hour {
+    height: 24px;
+    width: 30px;
+    color: #919195;
+    font-family: $font-body1;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+  }
+}
+
+.dropdown-content {
+  height: 9.2rem;
+  width: 3.5rem;
+  background-color: #ffffff;
+  box-shadow: -1px 1px 2px 0 rgba(67, 70, 74, 0),
+    -2px 2px 5px 0 rgba(67, 86, 100, 0.12);
+  transition: all ease-in-out 0.2s;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdown-option {
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+
+  &--hour {
+    height: 16px;
+    width: 40px;
+    color: #909193;
+    font-family: Arial;
+    font-size: 14px;
+    letter-spacing: 0;
+    line-height: 16px;
+  }
+
+  &:hover {
+    background-color: $violetVale;
+    transition: background-color 0.2s;
+  }
+}
+
+.dropdown-option:hover .dropdown-option--hour {
+  color: white;
+  transition: color 0.2s;
+}
+
+.time-dropdown {
+  z-index: 2;
+  width: 4.125rem;
+  height: 2.5rem;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.dropdown-container {
+  z-index: 2;
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.date-picker-container {
+  border: 1px solid #e3e4e4;
+  position: relative;
+}
+
+.hour-button-controller {
+  display: flex;
+  flex-direction: column;
+}
+
+.mdi-chevron-up {
+  height: 12px;
+}
+
+.mdi-chevron-up,
+.mdi-chevron-down {
+  color: #909193;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

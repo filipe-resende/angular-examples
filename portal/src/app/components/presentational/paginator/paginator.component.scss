@@ -1,0 +1,57 @@
+::ng-deep .pagination {
+  height: 35px;
+  width: max-content;
+  display: flex;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: -1px 1px 2px 0 rgba(67, 70, 74, 0),
+    -2px 2px 5px 0 rgba(67, 86, 100, 0.12);
+}
+
+::ng-deep .page-link {
+  transition: 0.1s;
+  position: relative;
+  display: block;
+  padding: 10px 12px;
+  margin-left: -1px;
+  color: #909193;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+::ng-deep .pagination li.active {
+  background-color: #ffffff;
+  border-bottom: 3px solid #3d7edb;
+
+  &:hover > a {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background-color: #ffffff;
+  }
+}
+
+::ng-deep .pagination li :hover {
+  color: #76a7ec;
+  border-bottom: 3px solid #76a7ec;
+  padding-bottom: 7px;
+  background-color: #ffffff;
+}
+
+::ng-deep .pagination li.active > a {
+  color: #3d7edb;
+  padding-bottom: 7px;
+}
+
+::ng-deep .page-item .next-item,
+::ng-deep .page-item .previous-item {
+  display: none;
+}

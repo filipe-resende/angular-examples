@@ -1,0 +1,21 @@
+<div class="map-container">
+  <div class="map" [id]="name"></div>
+  <div *ngIf="legend" id="legend"><app-legend></app-legend></div>
+  <div
+    *ngIf="perimeters.length > 0 && name === 'historicMap'"
+    class="map-perimeters-toggle"
+  >
+    <app-checkbox
+      [tooltip]="
+        (geofences.length === 0
+          ? 'HISTORIC.CHOOSE_A_SITE_WITH_VIRTUAL_FENCES'
+          : 'MAP.SHOW_FENCES_TOOLTIP'
+        ) | translate
+      "
+      [label]="'MAP.FENCES'"
+      [checked]="showAllGeofencesToggle"
+      [disabled]="geofences.length === 0"
+      (onSelect)="toggleAllGeofences($event)"
+    ></app-checkbox>
+  </div>
+</div>

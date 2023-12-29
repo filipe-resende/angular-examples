@@ -1,0 +1,30 @@
+<header class="modal-header">
+  <mat-icon class="modal-header__trash-icon" svgIcon="trash-grey"></mat-icon>
+  <div class="modal-header__text">
+    <p class="modal-header__text-title">
+      {{ 'FENCES.DELETE_MODAL.TITLE' | translate }}
+    </p>
+    <p class="modal-header__text-subtitle">
+      {{ 'FENCES.DELETE_MODAL.SUBTITLE' | translate }} {{ data?.fenceName }}
+    </p>
+  </div>
+  <button mat-icon-button mat-dialog-close class="modal-header__close-icon">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+
+<main class="modal-main">
+  <p class="modal-main__content">
+    {{ 'FENCES.DELETE_MODAL.MAIN_TEXT_ONE' | translate }} {{ data?.fenceName }}.
+    {{ 'FENCES.DELETE_MODAL.MAIN_TEXT_TWO' | translate }}
+  </p>
+</main>
+
+<footer class="modal__footer">
+  <button mat-button mat-dialog-close class="modal__footer__cancel-button">
+    {{ 'FENCES.DELETE_MODAL.CANCEL' | translate }}
+  </button>
+  <button mat-button (click)="onDelete()" class="modal__footer__submit-button">
+    {{ 'FENCES.DELETE_MODAL.CONTINUE' | translate }}
+  </button>
+</footer>

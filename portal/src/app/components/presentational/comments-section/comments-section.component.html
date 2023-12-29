@@ -1,0 +1,49 @@
+<section *ngIf="comments">
+  <div
+    class="comments-section-item"
+    *ngFor="let comment of comments; let i = index"
+  >
+    <span
+      class="dot"
+      [matTooltip]="comment.isNew ? ('MAIN.NEW_COMMENT' | translate) : null"
+      [ngStyle]="{
+        'background-color': comment.isNew ? 'var(--color-v-blue)' : '#697489'
+      }"
+    ></span>
+    <span class="line" *ngIf="i < comments.length - 1"></span>
+    <p
+      class="date"
+      [ngStyle]="{
+        color: comment.isNew ? '#28292b' : '#909193'
+      }"
+    >
+      {{ comment.date | date: 'dd/MM/yyyy HH:mm' }}
+    </p>
+    <p
+      class="author"
+      [matTooltip]="comment.author"
+      [ngStyle]="{
+        color: comment.isNew ? '#28292b' : '#909193'
+      }"
+    >
+      {{ comment.author }}
+    </p>
+    <p
+      #commentReference
+      class="text"
+      [matTooltip]="comment.text"
+      [ngStyle]="{
+        color: comment.isNew ? '#28292b' : '#909193'
+      }"
+    >
+      {{ comment.text }}
+    </p>
+    <p
+      *ngIf="iconName"
+      (click)="commentReferenceEmmiter(commentReference)"
+      [matTooltip]="iconTolltipDescription"
+    >
+      <mat-icon class="icon">{{ iconName }}</mat-icon>
+    </p>
+  </div>
+</section>

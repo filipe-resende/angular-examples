@@ -1,0 +1,61 @@
+<section
+  *ngIf="displayAsInput; else displayBigSelect"
+  #inputSiteSelector
+  class="input-site-selector-container"
+  [ngClass]="{
+    disabled: disabled
+  }"
+  (click)="!disabled && openSiteSelectorOverlay(inputSiteSelector)"
+>
+  <app-select
+    label="SITE_SELECTOR.SITE"
+    [items]="[]"
+    [disabled]="disabled"
+    [selected]="inputText"
+    [placeholder]="placeholder"
+  ></app-select>
+</section>
+
+<ng-template #displayBigSelect>
+  <section
+    class="big-site-selector-container"
+    [ngClass]="{
+      disabled: disabled
+    }"
+  >
+    <div style="display: flex; align-items: center">
+      <div class="big-site-selector-breadcrumb">
+        {{ breadcrumbLeftItemText }}
+      </div>
+      <div
+        *ngIf="breadcrumbRightItemText"
+        class="big-site-selector-breadcrumb-chevron"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </div>
+      <div *ngIf="breadcrumbRightItemText" class="big-site-selector-breadcrumb">
+        {{ breadcrumbRightItemText }}
+      </div>
+    </div>
+    <div *ngIf="!!selectText; else displayPlaceholder">
+      <div
+        class="big-site-selector-name"
+        #siteSelector
+        (click)="openSiteSelectorOverlay(siteSelector)"
+      >
+        {{ selectText }}
+        <mat-icon>expand_more</mat-icon>
+      </div>
+    </div>
+    <ng-template #displayPlaceholder>
+      <div
+        #bigSiteSelector
+        class="big-site-selector-name-placeholder"
+        (click)="openSiteSelectorOverlay(bigSiteSelector)"
+      >
+        {{ placeholder | translate }}
+        <mat-icon>expand_more</mat-icon>
+      </div>
+    </ng-template>
+  </section>
+</ng-template>

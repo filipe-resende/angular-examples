@@ -1,0 +1,91 @@
+<div class="fences-page-container">
+  <div
+    class="fences-page-left-column-container"
+    [ngStyle]="{
+      width: isLeftMenuOpened ? '450px' : '0px'
+    }"
+  >
+    <mat-icon (click)="onCloseLeftMenuButtonClick()" class="close-icon"
+      >close</mat-icon
+    >
+    <mat-tab-group
+      [selectedIndex]="selectedIndex"
+      (selectedTabChange)="onTabClick($event)"
+    >
+      <mat-tab
+        label="SiteFences"
+        (click)="enablePolylineCreation((enablePolyline = false))"
+      >
+        <ng-template mat-tab-label>
+          {{ "FENCES.VIRTUAL_FENCES" | translate }}
+        </ng-template>
+
+        <section class="fences-page-virtual-fences-tab-container">
+          <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0">
+            <app-site-selector
+              [displayAsInput]="true"
+              (onSiteSelected)="setSiteOnMap($event)"
+            ></app-site-selector>
+          </div>
+
+          <div style="padding: 16px 0">
+            <app-checkbox
+              [tooltip]="
+                (geofenceList.length === 0
+                  ? 'FENCES.CHOOSE_A_SITE_WITH_VIRTUAL_FENCES'
+                  : ''
+                ) | translate
+              "
+              [label]="'FENCES.DISPLAY_ALL_VIRTUAL_FENCES'"
+              [checked]="isFetchingGeofences ? false : showAllGeofencesToggle"
+              [disabled]="isFetchingGeofences || geofenceList.length === 0"
+              (onSelect)="onSelectAllGeofences($event)"
+            ></app-checkbox>
+          </div>
+
+          <div style="padding: 16px 0">
+            <app-fences-accordion
+              [geofenceList]="geofenceList"
+              [loading]="isFetchingGeofences"
+              (setGeofence)="setGeofence($event)"
+              (deleteGeofence)="onOpenDeleteConfirmationModal($event)"
+              (updatePolygonsVisibility)="updatePolygonsVisibility($event)"
+            ></app-fences-accordion>
+          </div>
+        </section>
+      </mat-tab>
+
+      <mat-tab
+        label="NewFence"
+        *ngIf="showSecondTab"
+        (click)="enablePolylineCreation((enablePolyline = true))"
+      >
+        <ng-template mat-tab-label>
+          {{"FENCES.NEW_VIRTUAL_FENCES" | translate}}
+        </ng-template>
+
+        <app-fences-create
+          [googleMap]="googleMapRef"
+          [openSnackBar]="openSnackBar.bind(this)"
+          (panToSelected)="panToSelected()"
+          (resetData)="resetData()"
+        ></app-fences-create>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="fences-page-right-column-container">
+    <app-button
+      (onClick)="onOpenLeftMenuButtonClick()"
+      [upperCased]="true"
+      [bordered]="true"
+      style="position: absolute; left: 16px; top: 16px; z-index: 10"
+      [ngStyle]="{
+        display: isLeftMenuOpened ? 'none' : 'block'
+      }"
+    >
+      {{ "FENCES.VIRTUAL_FENCES" | translate }}
+    </app-button>
+    <app-map #googleMap id="mapFance"></app-map>
+  </div>
+</div>

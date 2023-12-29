@@ -1,0 +1,40 @@
+<mat-expansion-panel (opened)="poi.panelOpenState = true" (closed)="poi.panelOpenState = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <div class="poi-accordion-header-container">
+        <div>
+          <mat-icon *ngIf="poi.icon === 'place'" mat-list-icon class="place-icon">place</mat-icon>
+          <mat-icon *ngIf="poi.icon !== 'place'" mat-list-icon>
+            <img src="/assets/icons/{{ poi.icon }}" alt="poi" />
+          </mat-icon>
+        </div>
+        <div>
+          {{ poi.name }}
+        </div>
+      </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <div style="padding: 8px 0px;">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "POIS.NAME" | translate }}</mat-label>
+      <input matInput [placeholder]="'POIS.NAME' | translate" [(ngModel)]="poi.name" disabled />
+    </mat-form-field>
+  </div>
+
+  <div style="padding: 8px 0px;">
+    <mat-form-field appearance="outline">
+      <mat-label>{{ "POIS.DESCRIPTION" | translate }}</mat-label>
+      <input
+        matInput
+        [placeholder]="'POIS.DESCRIPTION' | translate"
+        [(ngModel)]="poi.description"
+        disabled
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="poi-accordion-trash-icon-wrapper">
+    <img src="assets/icons/trash.svg" (click)="deletePointOfInterest.emit(poi)" alt="trash" />
+  </div>
+</mat-expansion-panel>

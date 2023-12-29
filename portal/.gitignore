@@ -1,0 +1,7 @@
+node_modules
+coverage
+.fake
+.ionide
+.scannerwork
+dist/
+environment.local.ts

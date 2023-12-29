@@ -1,0 +1,85 @@
+@import '../../scss/vale.variables';
+
+:host {
+  outline: none;
+}
+
+.bottom-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-pagination .pagination-content {
+  margin: 0 8px 0 8px;
+  color: #747678;
+  font-family: Roboto-Regular;
+  font-size: 14px;
+}
+
+.bottom-pagination .pagination-content .input-page {
+  height: 24px;
+  width: 26px;
+  color: #252727;
+  font-family: Roboto-Regular;
+  font-size: 14px;
+}
+
+.fas {
+  background-color: #c7c8c9;
+  color: #acadae;
+  height: 32px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow {
+  cursor: pointer;
+  bottom: 0;
+  right: 0;
+  padding: 8px 18px;
+  height: 30px;
+  width: 30px;
+  border-radius: 4px;
+}
+
+.arrow.gray {
+  background-color: #e3e4e4;
+  color: #acadae;
+}
+
+.arrow.blue {
+  background-color: #3d7edb;
+  color: #fff;
+}
+
+.page,
+.page-active {
+  padding: 4px 18px;
+  background-color: #ecf1ff;
+  color: #3d7edb;
+  border-radius: 4px;
+  font-family: $font-family-bold;
+  font-weight: 600;
+  margin: 0 4px;
+  cursor: pointer;
+}
+
+.page-current {
+  background-color: #3d7edb;
+  color: #fff;
+}
+
+.elipsis {
+  font-size: 32px;
+  color: #3d7edb;
+  margin: 0 8px;
+}

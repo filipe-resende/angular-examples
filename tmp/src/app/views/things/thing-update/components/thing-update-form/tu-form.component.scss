@@ -1,0 +1,322 @@
+// @import '../../../../../scss/styles.scss';
+@import '~src/app/scss/styles.scss';
+
+.tu-form-group {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+
+  &.tu-inline-group {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+    color: $dark;
+  }
+  &.tu-imput-description {
+    margin-bottom: 20px;
+  }
+}
+
+.tu-description-group {
+  width: 500px;
+  padding: 8px;
+  padding-top: 16px;
+  background-color: #f8f8f8;
+}
+
+.tu-documents-group {
+  width: 500px;
+  padding: 8px;
+  padding-top: 16px;
+  background-color: #f8f8f8;
+  font-family: $font-body1;
+
+  font-size: 14px;
+  .tu-documents-title {
+    margin-bottom: 15px;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .tu-documents-subInfo {
+    font-size: 12px;
+  }
+}
+
+.tu-information {
+  display: flex;
+}
+
+.tu-input {
+  height: 40px;
+  width: 360px;
+  font-family: $font-body1;
+  color: $dark;
+  border: 1px solid $greyVale20;
+  border-radius: 2px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  padding-left: 8px;
+
+  &:focus {
+    outline: 1px solid $greyVale20;
+  }
+
+  &.dropdown {
+    background-color: white;
+  }
+}
+
+.tu-textArea {
+  width: 360px;
+  font-family: $font-body1;
+  color: $dark;
+  border: 1px solid $greyVale20;
+  border-radius: 2px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  padding-left: 8px;
+  resize: none;
+  &:focus {
+    outline: 1px solid $greyVale20;
+  }
+}
+
+.tu-label {
+  color: $dark;
+  font-family: $font-body1;
+  letter-spacing: 0.25px;
+  line-height: 24px;
+  width: 100px;
+
+  &.tu-inline {
+    margin-right: 8px;
+  }
+
+  &.tu-block {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+}
+
+.tu-form-group-relationType {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.tu-label-relationType {
+  color: $dark;
+  font-family: $font-body1;
+  letter-spacing: 0.25px;
+  line-height: 24px;
+  width: 300px;
+}
+.tu-block-relationType {
+  margin-bottom: 8px;
+}
+
+.tu-block-relation-type-when-active {
+  color: #69be28;
+  width: 175px !important;
+  height: 30px;
+
+  background: rgba(78, 248, 35, 0.1);
+  border-radius: 5px;
+  padding: 0.2em 0.2em 1.8em 0.5em;
+}
+
+.tu-block-relation-type-when-inactive {
+  color: #ff6700;
+  width: 180px !important;
+  height: 33px;
+  top: 200px;
+
+  background: rgba(255, 103, 0, 0.1);
+  border-radius: 5px;
+  padding: 0.5em 0.2em 0.8em 0.5em;
+}
+
+.tu-margin-top-medium {
+  margin-top: 16px;
+}
+
+.tu-button-group {
+  width: 150px;
+  margin-top: 24px;
+}
+
+.tooltip {
+  position: relative;
+  display: initial;
+  opacity: 1;
+  margin-bottom: 13.5px;
+  margin-right: 10px;
+  margin-left: 2.5px;
+  left: 200px;
+  bottom: 70px;
+}
+
+.tu-spinner-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-devices {
+  box-sizing: border-box;
+  height: 176px;
+  width: 562px;
+  border: 1px solid #e3e4e4;
+  background-color: #ffffff;
+  margin-top: 20px;
+  display: flex;
+
+  .table-details,
+  .table-values {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .table-values {
+    padding-top: 40px;
+    justify-content: start;
+  }
+
+  .table-details {
+    width: 65%;
+    padding-left: 40px;
+  }
+
+  .table-header {
+    height: 24px;
+    color: #747678;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+    font-family: $font-body1;
+    margin-bottom: 8px;
+  }
+
+  .table-value {
+    :last-child {
+      color: #252727;
+    }
+    height: 24px;
+    font-family: $font-body1;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    line-height: 24px;
+  }
+
+  .device-link {
+    color: $violetVale;
+    cursor: pointer;
+    border-bottom: 1px solid $violetVale;
+  }
+
+  .latitude,
+  .device-link {
+    margin-top: 8px;
+  }
+}
+
+.wrong {
+  border-color: $redVale60;
+}
+
+.tu-form-date-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tu-form-date-title {
+  color: #5d5f6c;
+  font-family: $font-body1;
+  font-size: 14px;
+  letter-spacing: 0;
+  line-height: 24px;
+}
+
+.tu-form-date-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.tu-form-calendar {
+  margin-right: 4px;
+  color: #acadae;
+  height: 24px;
+  width: 24px;
+}
+
+.tu-form-arrow-right {
+  display: flex;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  margin: 0 0.5rem;
+  color: #acadae;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 50px;
+  border: 8px;
+}
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: $greyVale80; /*inner circle color change*/
+}
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked
+  .mat-radio-outer-circle {
+  border-color: $violetVale; /*outer ring color change*/
+}
+
+.info-icon {
+  color: $greyVale80;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+::ng-deep .mat-tooltip {
+  font-size: 14px !important;
+}
+
+.tu-label-relationType {
+  color: $dark;
+  font-family: $font-body1;
+  letter-spacing: 0.25px;
+  line-height: 24px;
+  width: 300px;
+}
+
+.createdByIntegration {
+  display: flex;
+}
+
+.tu-block-integration {
+  display: block;
+  &.securityCenter {
+    width: 230px;
+  }
+}
+
+.tu-reactivate-subscription {
+  display: flex;
+  align-items: center;
+  margin-top: 45px;
+}
+
+.tu-button-reactivate-subscription {
+  margin-right: 10px;
+}

@@ -1,0 +1,284 @@
+<section class="devices-page-container">
+  <div class="header">
+    <div class="header-site">
+      <app-site-selector></app-site-selector>
+    </div>
+    <div class="header-alert">
+      <app-alert
+        *ngIf="this.showDeviceGroupDisclaimer"
+        [text]="'DISCLAIMERS.DEVICE_GROUP' | translate"
+      ></app-alert>
+    </div>
+  </div>
+
+  <section
+    class="last-update__display"
+    *ngIf="(refreshTimeInfo$ | async) as refreshTimeInfo"
+  >
+    {{ refreshTimeInfo | date: ("DEVICES.REFRESHED" | translate) }}
+  </section>
+
+  <app-card>
+    <section class="card__header">
+      <div class="card__filters">
+        <app-devices-selector
+          class="card__device-selector"
+          placeholder="DEVICES.DEVICE_TYPE"
+          (onSelect)="onApplicationSelect($event)"
+          [selected]="devicesForm.controls.deviceType.value?.name"
+          [isDeviceScreen]="true"
+        ></app-devices-selector>
+
+        <app-input
+          placeholder="DEVICES.DEVICE_NUMBER"
+          [disabled]="!devicesForm.controls.deviceType.value?.id"
+          (inputModelChange)="devicesForm.controls.deviceNumber.patchValue($event)"
+          [inputModel]="devicesForm.controls.deviceNumber.value"
+        ></app-input>
+
+        <app-button
+          [iconOnly]="true"
+          [disabled]="!devicesForm.controls.deviceType.value?.id  || !selectedSite?.id"
+          (onClick)="onClearFilters()"
+        >
+          <mat-icon svgIcon="clear_filter"></mat-icon>
+        </app-button>
+
+        <app-button
+          [iconOnly]="true"
+          [disabled]="!devicesForm.controls.deviceType.value?.id  || !selectedSite?.id"
+          (onClick)="onFetchDevices()"
+        >
+          <mat-icon>search</mat-icon>
+        </app-button>
+      </div>
+
+      <div class="export_info_button">
+        <app-button
+          *ngIf="canViewSensitiveData || hasExportPermission"
+          class="excel-button"
+          (onClick)="onExportExcel($event)"
+          [disabled]="!devicesForm.controls.deviceType.value?.id  || !selectedSite?.id"
+        >
+          <mat-icon class="excel-button__icon">open_in_new</mat-icon>
+          {{ "DEVICES.EXPORT" | translate }}
+        </app-button>
+
+        <mat-icon
+          class="buttons__info"
+          [matTooltip]="'DEVICES.INTERVAL_DISCLAIMER' | translate"
+          [matTooltipShowDelay]="300"
+          [matTooltipHideDelay]="500"
+        >
+          info_outline
+        </mat-icon>
+      </div>
+    </section>
+    <div class="list-page-table-container">
+      <table
+        mat-table
+        matSort
+        [dataSource]="isFetchingFirstDevices ? skeletonArray : tableDataSource"
+        class="table-list"
+      >
+        <ng-container matColumnDef="deviceType">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.LOCATION_TYPE" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <div class="skeleton table" *ngIf="!device"></div>
+            <div *ngIf="!!device && !device?.deviceType">-</div>
+            <div
+              *ngIf="device && device?.deviceType !== 'DEVICES_SELECTOR.BUS'"
+            >
+              {{ device?.deviceType | translate}}
+            </div>
+            <div
+              *ngIf="!!device && device?.deviceType === 'DEVICES_SELECTOR.BUS'"
+            >
+              {{ device?.deviceType | translate}}
+              <span *ngIf="device?.telemetryName as telemetryName">
+                ({{telemetryName}})
+              </span>
+              <span *ngIf="device?.licensePlate as licensePlate">
+                - {{licensePlate}}
+              </span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deviceId">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.DEVICE_ID" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <div class="skeleton table" *ngIf="!device"></div>
+            <div *ngIf="!!device && !device?.deviceId">-</div>
+            {{ device?.deviceId }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="readerName">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.READER_NAME" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <div class="skeleton table" *ngIf="!device"></div>
+            <div
+              class="item-table"
+              [title]="device?.readerName ? device.readerName : ''"
+            >
+              <div *ngIf="!!device && !device?.readerName">-</div>
+              {{ device?.readerName | slice: 0:30}}
+              <span *ngIf="device?.readerName.length > 30">...</span>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastReport">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.LAST_REPORT" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <div class="skeleton table" *ngIf="!device"></div>
+            <ng-container *ngIf="!!device && !device?.lastReport">
+              -
+            </ng-container>
+            <div class="event-date-time-container">
+              <span class="event-date-time"
+                >{{ device?.lastReport | date: "dd/MM/yyyy HH:mm" }}</span
+              >
+              <div class="event-direction" *ngIf="device?.typeAccess !== null">
+                <img
+                  alt="exit"
+                  *ngIf="device?.typeAccess === EventTypeLabels.BusExit || device?.typeAccess === EventTypeLabels.AuthorizedExit"
+                  src="../../../assets/icons/exit_icon.svg"
+                  [matTooltip]="device?.typeAccess === EventTypeLabels.BusExit ? ('ICONS.BUS_EVENT_EXIT' | translate) : ('ICONS.AUTHORIZED_EXIT' | translate)"
+                />
+                <img
+                  *ngIf="device?.typeAccess === EventTypeLabels.BusEntrance || device?.typeAccess === EventTypeLabels.AuthorizedEntrance "
+                  alt="entrance"
+                  src="../../../assets/icons/entrance_icon.svg"
+                  [matTooltip]="device.typeAccess === EventTypeLabels.BusEntrance  ? ('ICONS.BUS_EVENT_ENTRANCE' | translate) : ('ICONS.AUTHORIZED_ENTRANCE' | translate)"
+                />
+                <img
+                  *ngIf="device?.typeAccess === EventTypeLabels.DeniedEntrance"
+                  alt="denied entrance"
+                  src="../../../assets/icons/denied_entrance.svg"
+                  [matTooltip]="'ICONS.DENIED_ENTRANCE' | translate"
+                />
+                <img
+                  *ngIf="device?.typeAccess === EventTypeLabels.DeniedExit"
+                  alt="denied exit"
+                  src="../../../assets/icons/denied_exit.svg"
+                  [matTooltip]="'ICONS.DENIED_EXIT' | translate"
+                />
+              </div>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="lastLocation">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.LAST_LOCATION" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <div class="skeleton table" *ngIf="!device"></div>
+            <div *ngIf="!!device && !device?.lastLocation">-</div>
+            <div
+              *ngIf="device && device.lastLocation && device.lastLocation.lat && device.lastLocation.lng"
+            >
+              <app-mini-map
+                [latitude]="device?.lastLocation?.lat"
+                [longitude]="device?.lastLocation?.lng"
+                [middleware]="device?.deviceType"
+                [eventDirection]="device?.eventDirection"
+                [eventType]="device?.eventType"
+              >
+              </app-mini-map>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="thingName">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.THING_NAME" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <div class="skeleton table" *ngIf="!device"></div>
+            <div *ngIf="!!device && !device?.thingName">-</div>
+            <div class="thing-name__label" [title]="device?.thingName">
+              {{ device?.thingName }}
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="thingDoc" *ngIf="canViewSensitiveData">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.THING_DOC" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <div class="skeleton table" *ngIf="!device"></div>
+            <div *ngIf="!!device && !device?.thingDoc">-</div>
+            {{ device?.thingDoc }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="batteryState">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ "DEVICES.BATTERY_STATUS" | translate }}
+          </th>
+          <td mat-cell *matCellDef="let device">
+            <ng-container *ngIf="device; else batterySkeleton">
+              <div
+                class="battery"
+                *ngIf="device.batteryState; else emptyBatteryPercent"
+              >
+                <span class="battery__number" *ngIf="device?.batteryPercent">
+                  {{ device.batteryPercent }}%
+                </span>
+                <ng-container [ngSwitch]="device.batteryState">
+                  <mat-icon
+                    *ngSwitchCase="'GOOD'"
+                    class="good-battery"
+                    matTooltip="100% - 50%"
+                  >
+                    battery_full
+                  </mat-icon>
+
+                  <mat-icon
+                    *ngSwitchCase="'MEDIUM'"
+                    svgIcon="battery-medium"
+                    matTooltip="50% - 25%"
+                  ></mat-icon>
+                  <mat-icon
+                    *ngSwitchCase="'LOW'"
+                    svgIcon="battery-low"
+                    matTooltip="25% - 0%"
+                  ></mat-icon>
+                </ng-container>
+              </div>
+              <ng-template #emptyBatteryPercent>-</ng-template>
+            </ng-container>
+            <ng-template #batterySkeleton>
+              <div class="skeleton table"></div>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="tableColumns; sticky: true"
+          class="table-header"
+        ></tr>
+        <tr mat-row *matRowDef="let device; columns: tableColumns"></tr>
+      </table>
+
+      <div style="display: flex; justify-content: center">
+        <ng-container *ngIf="paginator.total">
+          <app-paginator
+            [total]="paginator.total"
+            [currentPage]="paginator.page"
+            (onChangePage)="onChangePage($event)"
+          ></app-paginator>
+        </ng-container>
+      </div>
+    </div>
+  </app-card>
+</section>

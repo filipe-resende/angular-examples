@@ -1,0 +1,117 @@
+<div class="select-container">
+  <label class="select-label" *ngIf="!!label" [ngClass]="{ error: error }">
+    {{ label | translate }}
+  </label>
+  <ng-container [ngSwitch]="dropdownType">
+    <ng-select
+      *ngSwitchCase="'translatedOptions'"
+      [bindLabel]="bindLabel"
+      [bindValue]="bindValue"
+      [multiple]="multiple"
+      [(ngModel)]="selected"
+      [searchable]="searchable"
+      (ngModelChange)="selectedChange.emit(selected)"
+      [clearable]="clearable"
+      [ngModelOptions]="{ standalone: true }"
+      [notFoundText]="'MESSAGES.NO_RECORDS_FOUND' | translate"
+      (change)="onChange($event)"
+      [disabled]="loading || disabled"
+      [ngClass]="{ error: error }"
+      [placeholder]="placeholder | translate"
+    >
+      <ng-option
+        *ngFor="let item of isItemsAsync ? (items | async) : items"
+        [value]="item"
+        >{{ item | translate }}</ng-option
+      >
+    </ng-select>
+
+    <ng-select
+      *ngSwitchCase="'itemsCustomized'"
+      [items]="itemsCustomized"
+      [multiple]="multiple"
+      [(ngModel)]="selected"
+      [searchable]="searchable"
+      (ngModelChange)="selectedChange.emit(selected)"
+      [clearable]="clearable"
+      [ngModelOptions]="{ standalone: true }"
+      [notFoundText]="'MESSAGES.NO_RECORDS_FOUND' | translate"
+      (change)="onChange($event)"
+      [disabled]="loading || disabled"
+      [ngClass]="{ error: error }"
+      [placeholder]="placeholder | translate"
+    >
+      <ng-template ng-label-tmp let-item="item">
+        <div class="select-option-container">
+          <img
+            *ngIf="item.imgSrc"
+            [src]="item.imgSrc"
+            [alt]="item.imgSrc"
+            [width]="item.imgOrColorBoxWidth + 'px'"
+            [height]="item.imgOrColorBoxHeight + 'px'"
+            style="margin-right: 8px"
+          />
+          <div
+            *ngIf="item.colorBox"
+            [ngStyle]="{
+              width: item.imgOrColorBoxWidth + 'px',
+              height: item.imgOrColorBoxHeight + 'px',
+              backgroundColor: item.colorBox
+            }"
+            style="margin-right: 8px"
+          ></div>
+          <div>
+            {{ item.label | translate }}
+          </div>
+        </div>
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item">
+        <div class="select-option-container">
+          <img
+            *ngIf="item.imgSrc"
+            [src]="item.imgSrc"
+            [alt]="item.imgSrc"
+            [width]="item.imgOrColorBoxWidth + 'px'"
+            [height]="item.imgOrColorBoxHeight + 'px'"
+            style="margin-right: 8px"
+          />
+          <div
+            *ngIf="item.colorBox"
+            [ngStyle]="{
+              width: item.imgOrColorBoxWidth + 'px',
+              height: item.imgOrColorBoxHeight + 'px',
+              backgroundColor: item.colorBox
+            }"
+            style="margin-right: 8px"
+          ></div>
+          <div>
+            {{ item.label | translate }}
+          </div>
+        </div>
+      </ng-template>
+    </ng-select>
+
+    <ng-select
+      *ngSwitchDefault
+      [items]="isItemsAsync ? (items | async) : items"
+      [bindLabel]="bindLabel"
+      [bindValue]="bindValue"
+      [multiple]="multiple"
+      [(ngModel)]="selected"
+      [searchable]="searchable"
+      (ngModelChange)="selectedChange.emit(selected)"
+      [clearable]="clearable"
+      [ngModelOptions]="{ standalone: true }"
+      [notFoundText]="'MESSAGES.NO_RECORDS_FOUND' | translate"
+      (change)="onChange($event)"
+      [disabled]="loading || disabled"
+      [ngClass]="{ error: error }"
+      [placeholder]="placeholder | translate"
+    >
+    </ng-select>
+  </ng-container>
+
+  <div *ngIf="loading" class="select-loader-spinner">
+    <mat-spinner diameter="20"></mat-spinner>
+  </div>
+</div>

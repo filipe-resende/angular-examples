@@ -1,0 +1,44 @@
+<div>
+  <p
+    [ngClass]="
+      managementNameValidatorView ? 'input-title-invalid' : 'input-title'
+    "
+  >
+    {{ 'MANAGEMENT_COMPONENT.TITLE' | translate }}
+  </p>
+  <div>
+    <input
+      [ngClass]="
+        managementNameValidatorView
+          ? 'input-invalid input-size'
+          : 'input input-size'
+      "
+      #focusManagamentName
+      matInput
+      [(ngModel)]="management"
+      [readonly]="managementNameLoading"
+      (click)="filterManagementName()"
+      (keyup.enter)="clearEnterManagementName()"
+      (input)="filterManagementName()"
+      type="text"
+      [matAutocomplete]="MANAGEMENT_NAME"
+      (ngModelChange)="validatorManagementName($event)"
+      maxlength="13"
+    />
+    <mat-autocomplete autoActiveFirstOption #MANAGEMENT_NAME="matAutocomplete">
+      <mat-option
+        *ngFor="let item of filterDataManagementName"
+        (click)="valueManagementName(item); focusManagamentName.blur()"
+      >
+        {{ item.code }} - {{ item.description }}
+      </mat-option>
+      <mat-option
+        *ngIf="filterDataManagementName?.length == 0 && management?.length >= 1"
+        >{{ 'MANAGEMENT_COMPONENT.RESULT_NOT_FOUND' | translate }}
+      </mat-option>
+      <mat-option *ngIf="managementNameLoading">
+        <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+</div>

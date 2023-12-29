@@ -1,0 +1,31 @@
+.breadcrumb {
+  position: absolute;
+  display: flex;
+  top: 12px;
+  left: 56px;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+
+  & > a {
+    color: #909193;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    cursor: pointer;
+  }
+
+  &:last-child {
+    & > a {
+      color: #252727;
+    }
+  }
+
+  & > mat-icon {
+    color: #909193;
+    height: 12px;
+    width: 12px;
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,55 @@
+<div class="history-content">
+  <div *ngIf="!isLoadingList; else isLoading">
+    <div
+      class="history-table"
+      *ngIf="movementList && movementList.length > 0; else noContent"
+    >
+      <div class="history-label-row">
+        <div class="history-content-row">
+          <span class="history-content-label">{{
+            'DEVICE_UPDATE.DEVICE_HISTORY_MOVEMENT.MOVE_DATE' | translate
+          }}</span>
+        </div>
+        <div class="history-content-row">
+          <span class="history-content-label">{{
+            'DEVICE_UPDATE.DEVICE_HISTORY_MOVEMENT.STATUS_LOAD' | translate
+          }}</span>
+        </div>
+        <div class="history-content-row">
+          <span class="history-content-label">{{
+            'DEVICE_UPDATE.DEVICE_HISTORY_MOVEMENT.CALLED_CODE' | translate
+          }}</span>
+        </div>
+      </div>
+      <div class="history-data" *ngFor="let item of movementList">
+        <div class="history-content-row">
+          <div class="history-content-value">
+            {{ item.moveDate | date: 'dd/MM/yyyy':'UTC' }}
+          </div>
+        </div>
+        <div class="history-content-row">
+          <div class="history-content-value">
+            {{ item.statusLoad }}
+          </div>
+        </div>
+        <div class="history-content-row">
+          <div class="history-content-value">
+            {{ item.calledCode }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #noContent>
+      <div class="history-no-content">
+        <span>{{
+          'DEVICE_UPDATE.DEVICE_HISTORY_MOVEMENT.NO_CONTENT' | translate
+        }}</span>
+      </div>
+    </ng-template>
+  </div>
+  <ng-template #isLoading>
+    <div class="movement-history-spinner-content">
+      <em class="mdi mdi-loading mdi-36px mdi-spin"></em>
+    </div>
+  </ng-template>
+</div>

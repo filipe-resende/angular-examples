@@ -1,0 +1,9 @@
+<select
+  [(ngModel)]="selectedValue"
+  class="dh-select-input"
+  (change)="getByTypeEquipments(selectedValue)"
+>
+  <option *ngFor="let type of typeEquipmentsOptions" [value]="type.value">
+    {{ type.name }}
+  </option>
+</select>

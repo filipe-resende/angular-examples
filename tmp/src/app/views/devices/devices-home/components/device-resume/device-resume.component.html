@@ -1,0 +1,82 @@
+<div class="device-resume-container">
+  <div class="device-resume-identifier">
+    <label>{{ application?.name || ' - ' }}</label>
+    <span class="resume-number">{{ device.sourceInfos[0].value }}</span>
+    <p [ngClass]="{ ativo: statusName == activeStatus }" class="device-status">
+      {{ 'DEVICE_UPDATE.DEVICE_STATUS.NAME' | translate }}:
+      <span>{{ statusName }}</span>
+    </p>
+  </div>
+
+  <div class="device-resume-thing">
+    <div class="device-resume-thing-container">
+      <label>{{ associatedThing?.thing?.name || ' - ' }}</label>
+      <div class="device-resume-sourceinfo-container">
+        <ng-container
+          [ngTemplateOutlet]="sourceInfoList"
+          [ngTemplateOutletContext]="{ sourceInfos: thingResumeSourceInfos }"
+        ></ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="device-resume-actions">
+    <app-associate-button
+      [style]="'margin-right: 8px'"
+      [deviceInfo]="{
+        device: device,
+        applicationName: application?.name,
+        associatedThings: [associatedThing],
+        screen: screen
+      }"
+      (emitAssociation)="refreshEventHandler($event)"
+      [isDisabled]="
+        isDeviceAssociated ||
+        !doesApplicationAllowAssociation ||
+        (device.deviceStatusId != deviceStatusIdEnum.Ativo &&
+          device.deviceStatusId != deviceStatusIdEnum.AtivoTesteTi)
+      "
+      [matTooltip]="'DEVICE_LIST.NOT_POSSIBLE_ASSOCIATE_INFO' | translate"
+      [matTooltipDisabled]="
+        device.deviceStatusId === deviceStatusIdEnum.Ativo ||
+        device.deviceStatusId === deviceStatusIdEnum.AtivoTesteTi
+      "
+    ></app-associate-button>
+
+    <app-disassociate-button
+      [isAllAssociated]="{
+        device: device,
+        associatedThings: [associatedThing],
+        screen: screen
+      }"
+      (emitDisassociation)="refreshEventHandler($event)"
+      [isDisabled]="!isDeviceAssociated || !doesApplicationAllowAssociation"
+    ></app-disassociate-button>
+  </div>
+
+  <ng-template #sourceInfoList let-sourceInfos="sourceInfos">
+    <div class="device-resume-sourceinfo-column" *ngIf="sourceInfos">
+      <ul>
+        <div *ngIf="isSensitiveDocumentsVisible">
+          <li>
+            <label>CPF:</label>
+            <span>
+              {{ sourceInfos.cpf }}
+            </span>
+          </li>
+          <li>
+            <label>Passaporte:</label>
+            <span>
+              {{ sourceInfos.passport }}
+            </span>
+          </li>
+        </div>
+        <li>
+          <label>IAM:</label>
+          <span>
+            {{ sourceInfos.iam }}
+          </span>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+</div>

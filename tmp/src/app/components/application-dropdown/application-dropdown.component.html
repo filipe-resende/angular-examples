@@ -1,0 +1,18 @@
+<select
+  [ngClass]="[wider ? 'wider' : 'applications-home-search-field']"
+  (change)="onSelect($event)"
+>
+  <option [disabled]="true" *ngIf="!selectedDropdown" [value]="allApplications">
+    {{ 'APPLICATIONS_LIST.FILTERED_DROPDOWN' | translate }}
+  </option>
+  <option [hidden]="selectedDropdown" [value]="" *ngIf="selectedDropdown">
+    {{ selectedDropdown }}
+  </option>
+  <option
+    *ngFor="let application of applicationList"
+    [value]="application.id"
+    [selected]="selectedDropdown === application.id"
+  >
+    {{ application.name }}
+  </option>
+</select>

@@ -1,0 +1,48 @@
+@import '../../../scss/styles.scss';
+@import '../../../scss/vale.variables';
+
+.breadCrumbs {
+  margin: 0px;
+  padding-top: 10px;
+  padding-left: 59px;
+  font-family: $font-body1;
+  font-size: 12px;
+  color: #909193;
+}
+.breadCrumbs > span {
+  color: #252727;
+}
+
+.applications-home-container {
+  min-height: 100%;
+  background-color: #f8f8f6;
+  padding: 38px 59px 78px 59px;
+}
+
+.applications-home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.applications-home-search {
+  margin: 39px 0;
+}
+
+.applications-home-content-list {
+  height: 100%;
+}
+
+.applications-home-spinner-content {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-none {
+  display: none;
+}

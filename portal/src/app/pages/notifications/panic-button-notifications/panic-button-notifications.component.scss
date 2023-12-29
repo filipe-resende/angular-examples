@@ -1,0 +1,66 @@
+.panic-button-notifications-table {
+  .mat-cell {
+    text-align: center;
+  }
+
+  .mat-cell:first-of-type {
+    text-align: left;
+  }
+
+  .mat-sort-header-container {
+    justify-content: center;
+  }
+}
+
+.panic-button-notifications-in-attendance-dot {
+  border: 2px solid #fcb400;
+  background-color: #fcb400;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+
+  & > .material-icons {
+    font-size: 18px !important;
+    color: white;
+    margin: -1px;
+  }
+}
+
+.panic-button-notifications-waiting-service-dot {
+  border: 2px solid #cc003a;
+  background-color: #cc003a;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+}
+
+.panic-button-notifications-attended-dot {
+  border: 2px solid #008f83;
+  background-color: #008f83;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  cursor: pointer;
+
+  & > .material-icons {
+    font-size: 18px !important;
+    color: white;
+    margin: -1px;
+  }
+}
+
+.panic-button-notifications-status-filter {
+  display: flex;
+  margin-bottom: 16px;
+
+  app-select {
+    width: 240px;
+    margin-right: 4px;
+  }
+
+  app-button {
+    margin-right: 4px;
+  }
+}

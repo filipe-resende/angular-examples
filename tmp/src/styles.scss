@@ -1,0 +1,57 @@
+@import '@mdi/font/css/materialdesignicons.min.css';
+@import '../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css';
+@import './app/components/date-picker/date-picker.component.scss';
+@import './app/scss/styles.scss';
+@import './app/scss/vale.variables';
+
+html {
+  overflow: hidden !important;
+}
+
+html,
+body {
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.cdk-global-scrollblock {
+  overflow-y: auto !important;
+}
+
+.switch {
+  background-color: #959dac !important;
+
+  small {
+    background-image: url('./assets/icons/cross.svg') !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+  }
+
+  &.checked {
+    background-color: $violetVale !important;
+
+    small {
+      background-image: none !important;
+    }
+  }
+}
+
+.custom-modal-dialog {
+  .mat-dialog-container {
+    position: relative;
+    padding: 0 !important;
+    width: 595px;
+  }
+
+  .cdk-overlay-container {
+    z-index: 2000 !important;
+  }
+}
+
+.custom-modal-without-padding {
+  .mat-dialog-container {
+    padding: 0px;
+  }
+}

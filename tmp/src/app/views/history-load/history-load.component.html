@@ -1,0 +1,620 @@
+<ng-container class="container-page">
+  <div class="path_traveled">
+    {{ 'BREADCRUMB.HOME' | translate }} >
+    {{ 'BREADCRUMB.DEVICES' | translate }} >
+    {{ 'BREADCRUMB.BATCH_LOAD' | translate }} >
+    <span>
+      {{ 'BREADCRUMB.HISTORY_LOAD' | translate }}
+    </span>
+  </div>
+
+  <div *ngIf="notFound" class="notFound">
+    <div class="parent">
+      <div class="icon">
+        <mat-icon>cancel</mat-icon>
+      </div>
+      <div class="label">{{ 'HISTORY_LOAD.TABLE.NOT_FOUND' | translate }}</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="firstLineSearch">
+      <span>
+        <mat-form-field class="data">
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="{{ 'HISTORY_LOAD.FIRST_DATE' | translate }}"
+            [(ngModel)]="deviceHistoryRequest.uploadEndDate"
+            name="firstDate"
+            ngDefaultControl
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker
+            [(ngModel)]="deviceHistoryRequest.uploadEndDate"
+            name="firstDate"
+            ngDefaultControl
+          ></mat-datepicker>
+        </mat-form-field>
+      </span>
+      -
+      <span>
+        <mat-form-field class="data">
+          <input
+            matInput
+            [matDatepicker]="picker1"
+            placeholder="{{ 'HISTORY_LOAD.END_DATE' | translate }}"
+            [(ngModel)]="deviceHistoryRequest.uploadFirstDate"
+            name="endDate"
+            ngDefaultControl
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker1"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker1
+            [(ngModel)]="deviceHistoryRequest.uploadFirstDate"
+            name="endDate"
+            ngDefaultControl
+          ></mat-datepicker>
+        </mat-form-field>
+      </span>
+
+      <span>
+        <select (change)="selectApplicationId($event)" id="applicationIdSelect">
+          <option value="" disabled selected>
+            {{ 'HISTORY_LOAD.DEVICE_TYPE' | translate }}
+          </option>
+          <option [value]="applicationId.SPOT">SPOT</option>
+          <option [value]="applicationId.SMARTBADGE">SMARTBADGE</option>
+        </select>
+      </span>
+      <span>
+        <select (change)="selectLoadType($event)" id="loadTypeSelect">
+          <option value="" disabled selected>
+            {{ 'HISTORY_LOAD.LOAD_TYPE' | translate }}
+          </option>
+          <option [value]="deviceStatus.Aquisicao">
+            {{ 'HISTORY_LOAD.DEVICE_STATUS.ACQUISITION' | translate }}
+          </option>
+          <option [value]="deviceStatus.Devolucao">
+            {{ 'HISTORY_LOAD.DEVICE_STATUS.RETURN' | translate }}
+          </option>
+          <option [value]="deviceStatus.Perda">
+            {{ 'HISTORY_LOAD.DEVICE_STATUS.LOSS' | translate }}
+          </option>
+          <option [value]="deviceStatus.AtivacaoDeLicenca">
+            {{ 'HISTORY_LOAD.DEVICE_STATUS.LICENSE_ACTIVATION' | translate }}
+          </option>
+          <option [value]="deviceStatus.TransferenciaDeLocal">
+            {{ 'HISTORY_LOAD.DEVICE_STATUS.LOCAL_TRANSFER' | translate }}
+          </option>
+          <option [value]="deviceStatus.TransferenciaDePropriedade">
+            {{ 'HISTORY_LOAD.DEVICE_STATUS.OWNERSHIP_TRANSFER' | translate }}
+          </option>
+          <option [value]="deviceStatus.EnvioAssistenciaTecnica">
+            {{
+              'HISTORY_LOAD.DEVICE_STATUS.SHIPPING_TECHNICAL_ASSISTANCE'
+                | translate
+            }}
+          </option>
+          <option [value]="deviceStatus.RetornoAssistenciaTecnica">
+            {{
+              'HISTORY_LOAD.DEVICE_STATUS.TECHNICAL_ASSISTANCE_RETURN'
+                | translate
+            }}
+          </option>
+          <option [value]="deviceStatus.RetornoAssistenciaTecnicaSubstituido">
+            {{
+              'HISTORY_LOAD.DEVICE_STATUS.RETURN_TECHNICAL_ASSISTANCE_REPLACED'
+                | translate
+            }}
+          </option>
+          <option [value]="deviceStatus.RetornoAssistenciaTecnicaNovo">
+            {{
+              'HISTORY_LOAD.DEVICE_STATUS.RETURN_TECHNICAL_ASSISTANCE_NEW'
+                | translate
+            }}
+          </option>
+          <option [value]="deviceStatus.Descarte">
+            {{ 'HISTORY_LOAD.DEVICE_STATUS.DISCARD' | translate }}
+          </option>
+        </select>
+      </span>
+      <span>
+        <mat-form-field class="data" style="width: 190px">
+          <input
+            matInput
+            [matDatepicker]="picker2"
+            placeholder="{{ 'HISTORY_LOAD.MOVE_DATE' | translate }}"
+            [(ngModel)]="deviceHistoryRequest.moveDate"
+            name="moveDate"
+            ngDefaultControl
+            [max]="maxDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker2"
+          ></mat-datepicker-toggle>
+          <mat-datepicker
+            #picker2
+            [(ngModel)]="deviceHistoryRequest.moveDate"
+            name="moveDate"
+            ngDefaultControl
+          ></mat-datepicker>
+        </mat-form-field>
+      </span>
+    </div>
+    <div class="secondLineSearch">
+      <span>
+        <input
+          mat-input
+          type="text"
+          [(ngModel)]="deviceHistoryRequest.sapPlant"
+          placeholder="{{ 'HISTORY_LOAD.SAP_PLANT' | translate }}"
+        />
+      </span>
+      <span>
+        <input
+          mat-input
+          type="text"
+          [(ngModel)]="deviceHistoryRequest.calledCode"
+          placeholder="{{ 'HISTORY_LOAD.VSC_CALL' | translate }}"
+        />
+      </span>
+      <span>
+        <input
+          mat-input
+          type="text"
+          [(ngModel)]="deviceHistoryRequest.invoiceVale"
+          placeholder="{{ 'HISTORY_LOAD.INVOICE_VALE' | translate }}"
+        />
+      </span>
+      <span>
+        <input
+          mat-input
+          type="text"
+          [(ngModel)]="deviceHistoryRequest.invoiceProvider"
+          placeholder="{{ 'HISTORY_LOAD.INVOICE_PROVIDER' | translate }}"
+        />
+      </span>
+      <span class="position-button">
+        <button mat-button (click)="search()">
+          <mat-icon>search</mat-icon>
+        </button>
+        <button mat-button (click)="clearFilter()">
+          <mat-icon>filter_alt_off</mat-icon>
+        </button>
+        <img
+          class="tooltip"
+          src="../../../../assets/info.svg"
+          alt=""
+          matTooltip="{{ 'HISTORY_LOAD.TOOLTIP' | translate }}"
+          matTooltipPosition="above"
+        />
+        <button
+          mat-button
+          (click)="export()"
+          [disabled]="data.data.length == 0 || !validatorRole()"
+        >
+          <mat-icon>exit_to_app</mat-icon>
+          <label class="history-export" style="vertical-align: top">{{
+            'HISTORY_LOAD.EXPORT' | translate
+          }}</label>
+        </button>
+      </span>
+    </div>
+
+    <div>
+      <table
+        mat-table
+        [dataSource]="data"
+        matSort
+        (matSortChange)="announceSortChange($event)"
+        class="mat-elevation-z8"
+        aria-label="Device History"
+        *ngIf="!spinner"
+      >
+        <ng-container matColumnDef="loadType">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by loadType"
+            id="loadType"
+          >
+            <span class="loadType">
+              {{ 'HISTORY_LOAD.TABLE.LOAD_TYPE' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.loadType === deviceStatus.Aquisicao">
+              {{ 'HISTORY_LOAD.DEVICE_STATUS.ACQUISITION' | translate }}
+            </div>
+            <div *ngIf="element.loadType === deviceStatus.Devolucao">
+              {{ 'HISTORY_LOAD.DEVICE_STATUS.RETURN' | translate }}
+            </div>
+            <div *ngIf="element.loadType === deviceStatus.Perda">
+              {{ 'HISTORY_LOAD.DEVICE_STATUS.LOSS' | translate }}
+            </div>
+            <div *ngIf="element.loadType === deviceStatus.AtivacaoDeLicenca">
+              {{ 'HISTORY_LOAD.DEVICE_STATUS.LICENSE_ACTIVATION' | translate }}
+            </div>
+            <div *ngIf="element.loadType === deviceStatus.TransferenciaDeLocal">
+              {{ 'HISTORY_LOAD.DEVICE_STATUS.LOCAL_TRANSFER' | translate }}
+            </div>
+            <div
+              *ngIf="
+                element.loadType === deviceStatus.TransferenciaDePropriedade
+              "
+            >
+              {{ 'HISTORY_LOAD.DEVICE_STATUS.OWNERSHIP_TRANSFER' | translate }}
+            </div>
+            <div
+              *ngIf="element.loadType === deviceStatus.EnvioAssistenciaTecnica"
+            >
+              {{
+                'HISTORY_LOAD.DEVICE_STATUS.SHIPPING_TECHNICAL_ASSISTANCE'
+                  | translate
+              }}
+            </div>
+            <div
+              *ngIf="
+                element.loadType === deviceStatus.RetornoAssistenciaTecnica
+              "
+            >
+              {{
+                'HISTORY_LOAD.DEVICE_STATUS.TECHNICAL_ASSISTANCE_RETURN'
+                  | translate
+              }}
+            </div>
+            <div
+              *ngIf="
+                element.loadType ===
+                deviceStatus.RetornoAssistenciaTecnicaSubstituido
+              "
+            >
+              {{
+                'HISTORY_LOAD.DEVICE_STATUS.RETURN_TECHNICAL_ASSISTANCE_REPLACED'
+                  | translate
+              }}
+            </div>
+            <div
+              *ngIf="
+                element.loadType === deviceStatus.RetornoAssistenciaTecnicaNovo
+              "
+            >
+              {{
+                'HISTORY_LOAD.DEVICE_STATUS.RETURN_TECHNICAL_ASSISTANCE_NEW'
+                  | translate
+              }}
+            </div>
+            <div *ngIf="element.loadType === deviceStatus.Descarte">
+              {{ 'HISTORY_LOAD.DEVICE_STATUS.DISCARD' | translate }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="applicationId">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by applicationId"
+            id="applicationId"
+          >
+            <span class="applicationId">
+              {{ 'HISTORY_LOAD.TABLE.DEVICE_TYPE' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.applicationId == applicationId.SPOT">SPOT</div>
+            <div *ngIf="element.applicationId == applicationId.SMARTBADGE">
+              SMARTBAGDE
+            </div>
+          </td></ng-container
+        >
+
+        <ng-container matColumnDef="management">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by management"
+            id="management"
+          >
+            <span class="management">
+              {{ 'HISTORY_LOAD.TABLE.MANAGEMENT' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.managementId }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="sapPlant">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by sapPlant"
+            id="sapPlant"
+          >
+            <span class="sapPlant">
+              {{ 'HISTORY_LOAD.TABLE.SAP_PLANT' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.sapPlant }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="managerGroup">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by managerGroup"
+            id="managerGroup"
+          >
+            <span class="managerGroup">
+              {{ 'HISTORY_LOAD.TABLE.GROUP_MANAGER' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.managerGroup }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="groupName">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by groupName"
+            id="groupName"
+          >
+            <span class="groupName">
+              {{ 'HISTORY_LOAD.TABLE.GROUP_NAME' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.groupName }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="invoiceVale">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by invoiceVale"
+            id="invoiceVale"
+          >
+            <span class="invoiceVale">
+              {{ 'HISTORY_LOAD.TABLE.INVOICE_VALE' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.invoiceVale }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="invoiceProvider">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by invoiceProvider"
+            id="invoiceProvider"
+          >
+            <span class="invoiceProvider">
+              {{ 'HISTORY_LOAD.TABLE.INVOICE_PROVIDER' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.invoiceProvider }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="calledCode">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by calledCode"
+            id="calledCode"
+          >
+            <span class="calledCode">
+              {{ 'HISTORY_LOAD.TABLE.VSC_CALL' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.calledCode }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="moveDate">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by moveDate"
+            id="moveDate"
+          >
+            <span class="moveDate">
+              {{ 'HISTORY_LOAD.TABLE.MOVE_DATE' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>{{ element.moveDate | date: 'dd/MM/yyyy':'UTC' }}</div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="numberOfLoadedDevices">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by numberOfLoadedDevices"
+            id="numberOfLoadedDevices"
+          >
+            <span class="numberOfLoadedDevices">
+              {{ 'HISTORY_LOAD.TABLE.AMOUT_DEVICE' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>
+              {{
+                element.numberOfLoadedDevices + element.numberOfDevicesWithError
+              }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="chargeStatus">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by chargeStatus"
+            id="chargeStatus"
+          >
+            <span class="chargeStatus">
+              {{ 'HISTORY_LOAD.TABLE.STATUS' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div *ngIf="element.chargeStatus" class="parent">
+              <div class="icon">
+                <mat-icon style="color: #69be28">check_circle</mat-icon>
+              </div>
+              <div class="label">Completa</div>
+            </div>
+            <div *ngIf="!element.chargeStatus" class="parent">
+              <div class="icon">
+                <mat-icon style="color: red">cancel</mat-icon>
+              </div>
+              <div class="label">
+                {{ element.numberOfDevicesWithError }} Error
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="uploadFileName">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by uploadFileName"
+            id="uploadFileName"
+          >
+            <span class="uploadFileName">
+              {{ 'HISTORY_LOAD.TABLE.ARCHIVE' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>
+              {{ element.uploadFileName }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="uploadDate">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by uploadDate"
+            id="uploadDate"
+          >
+            <span class="uploadDate">
+              {{ 'HISTORY_LOAD.TABLE.UPLOAD_DATE' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div>
+              {{ changeDateToUTCLocal(element.uploadDate) }}
+            </div>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="logFile">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by logFile"
+            id="logFile"
+          >
+            <span class="logFile">
+              {{ 'HISTORY_LOAD.TABLE.LOG' | translate }}
+            </span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <div
+              *ngIf="
+                validatorDateLog(element.uploadDate) &&
+                element.numberOfDevicesWithError > 0
+              "
+              (click)="
+                downloadFileLog(
+                  element.emailUserUploadedFile,
+                  element.uploadDate,
+                  element.calledCode
+                )
+              "
+              style="color: blue"
+              class="parent"
+            >
+              <div class="label">
+                {{ 'HISTORY_LOAD.TABLE.LOG' | translate }}
+              </div>
+              <div class="icon">
+                <mat-icon>file_download</mat-icon>
+              </div>
+            </div>
+
+            <div
+              *ngIf="
+                !validatorDateLog(element.uploadDate) ||
+                element.numberOfDevicesWithError == 0
+              "
+              matTooltip="{{ 'HISTORY_LOAD.TABLE.TOOLTIP' | translate }}"
+              class="parent"
+            >
+              <div class="label">
+                {{ 'HISTORY_LOAD.TABLE.LOG' | translate }}
+              </div>
+              <div class="icon">
+                <mat-icon>file_download</mat-icon>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <div *ngIf="spinner" class="spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <span [hidden]="!paginatorShow">
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+        >
+        </mat-paginator>
+      </span>
+    </div>
+  </div>
+</ng-container>

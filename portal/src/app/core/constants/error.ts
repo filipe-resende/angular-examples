@@ -1,0 +1,1 @@
+export const UserNotIncludedInDeviceGroup = 'UserNotIncludedInDeviceGroup';

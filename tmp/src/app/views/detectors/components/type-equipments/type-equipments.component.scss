@@ -1,0 +1,17 @@
+@import '../../../../scss/vale.variables';
+
+.dh-select-input {
+  height: 41.25px;
+  width: 247px;
+  background-color: white;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid $greyVale20;
+  color: $greyVale80;
+  margin-right: 16px;
+  font-family: $font-body1;
+  font-size: 16px;
+}

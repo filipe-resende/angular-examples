@@ -1,0 +1,35 @@
+<div class="real-time-events-selector-container">
+  <mat-button-toggle-group
+    class="button-group"
+    [value]="selectSearchType"
+    name="fontStyle"
+    aria-label="Font Style"
+    #group="matButtonToggleGroup"
+    [disabled]="(isFetchingThings$ | async) || !(selectedSite$ | async)"
+  >
+    <mat-button-toggle
+      id="mat-button-toggle-1"
+      value="realTime"
+      (change)="onToggleSelectSearchType($event.value)"
+    >
+      <span>
+        {{ 'REAL_TIME_EVENTS_SELECTOR.REAL_TIME_BUTTON' | translate }}
+      </span>
+      <mat-icon
+        class="realTime__disclaimer"
+        [matTooltip]="
+          'REAL_TIME_EVENTS_SELECTOR.REAL_TIME_BUTTON_DISCLAIMER' | translate
+        "
+      >
+        info_outline
+      </mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle
+      id="mat-button-toggle-2"
+      value="12hoursRange"
+      (change)="onToggleSelectSearchType($event.value)"
+    >
+      {{ 'DASHBOARD.HISTORIC_DATA_BUTTON' | translate }}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

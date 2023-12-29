@@ -1,0 +1,57 @@
+<div class="dashboard-breadcrumb">
+  <p>
+    {{ 'DASHBOARD.HOME' | translate }} >
+    <span>{{ 'DASHBOARD.BREADCRUMB' | translate }}</span>
+  </p>
+  <p>
+    {{ 'DASHBOARD.UPDATED' | translate }} {{ date.toLocaleDateString() }}
+    {{
+      date.toLocaleTimeString('pt-br', { hour: '2-digit', minute: '2-digit' })
+    }}
+  </p>
+</div>
+
+<div class="dashboard-header">
+  <div class="dashboard-container-title">
+    <select
+      #mySelect
+      class="select-title title"
+      [(ngModel)]="selectedOption"
+      (change)="adjustSelectSize($event.target)"
+      disabled
+    >
+      <option
+        class="option title"
+        *ngFor="let option of options"
+        [value]="option.value"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+    <img class="gear" src="../../../assets/gear.svg" alt="" />
+  </div>
+
+  <div class="filter-title-export">
+    <button class="filter-glossary" disabled>
+      {{ 'DASHBOARD.FILTER.GLOSSARY' | translate }}
+    </button>
+    <button
+      class="filter-export"
+      (click)="performSpecificActionButtonExport()"
+      [disabled]="
+        !buttonIsEnabled ||
+        selectedOption == typeDashboard.UseEffectivenessDashboard
+      "
+    >
+      {{ 'DASHBOARD.FILTER.EXPORT' | translate }}
+    </button>
+  </div>
+</div>
+
+<ng-container *ngIf="selectedOption == typeDashboard.ManagementDashboard">
+  <app-management-dashboard></app-management-dashboard>
+</ng-container>
+
+<ng-container *ngIf="selectedOption == typeDashboard.UseEffectivenessDashboard">
+  <app-use-effectiveness-dashboard></app-use-effectiveness-dashboard>
+</ng-container>

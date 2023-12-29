@@ -1,0 +1,66 @@
+@import "../../../../../../scss/variables";
+
+.sidenav-anchor {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.1s;
+  height: 40px !important;
+
+  // &.active {
+  //     border-left: 5px solid $orange;
+  // }
+}
+
+mat-nav-list a.sidenav-anchor {
+  .sidenav-item-name {
+    font-size: 14px;
+    margin-left: 24px;
+  }
+}
+
+.sidenav-list {
+  transition: height 0.4s cubic-bezier(0.35, 0, 0.25, 1);
+  overflow: hidden;
+}
+
+sidenav-item:not(.open) {
+  border-left: 5px solid #333c44;
+  margin: 5px 5px 5px 0px;
+}
+
+sidenav-item a.open:parent {
+  border-left: 5px solid $orange;
+}
+
+sidenav-item {
+  &.open {
+    border-left: 5px solid $orange;
+
+    > .sidenav-anchor {
+      &:before {
+        content: " ";
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        z-index: 3;
+      }
+
+      .sidenav-item-dropdown-indicator {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .sidenav-item-dropdown-indicator {
+    transition: transform 0.25s;
+  }
+}
+
+.badge {
+  padding: 4px 8px;
+  font-size: 12px;
+  background: #2196f3;
+  border-radius: 5px;
+  color: #fff;
+}

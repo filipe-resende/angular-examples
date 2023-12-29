@@ -1,0 +1,39 @@
+@import '../../scss/vale.variables';
+
+:host {
+  color: #697489;
+  height: 100%;
+  max-height: inherit;
+  display: flex;
+  flex-direction: column;
+
+  .header-container {
+    display: flex;
+    .title {
+      font-weight: bold;
+    }
+
+    .content-div {
+      font-family: $font-body1;
+      align-items: flex-start;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .icon {
+    font-size: 72px;
+    margin: 0 20px;
+    display: flex;
+  }
+  .line_separation {
+    display: block;
+    height: 1px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #697489;
+    opacity: 0.35;
+    margin: 20px 0;
+  }
+}

@@ -1,0 +1,16 @@
+<div class="toggle-loader-container toggle-container" *ngIf="loading; else loaded">
+  <label>{{ label | translate }}</label>
+  <mat-spinner diameter="17"></mat-spinner>
+</div>
+<ng-template #loaded>
+  <div class="toggle-container" [ngClass]="{ disabled: disabled }">
+    {{ label | translate }}
+    <mat-slide-toggle
+      [matTooltip]="tooltip"
+      [checked]="checked"
+      [disabled]="disabled"
+      (change)="onToggleClick($event)"
+    >
+    </mat-slide-toggle>
+  </div>
+</ng-template>

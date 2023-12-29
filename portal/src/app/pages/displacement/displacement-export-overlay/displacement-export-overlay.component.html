@@ -1,0 +1,37 @@
+<app-animated-overlay>
+  <app-overlay-info
+    [buttonLabel]="hasExported ? 'MAIN.CLOSE' : 'MAIN.SEND'"
+    [buttonLoading]="isLoadingExport"
+    (buttonClick)="!hasExported ? export() : close()"
+  >
+    <div
+      class="displacement-export-overlay-header"
+      [ngStyle]="{ 'text-align': hasExported ? 'center' : 'left' }"
+    >
+      {{
+        (hasExported
+          ? 'DISPLACEMENT.SOLICITATION_DONE'
+          : 'DISPLACEMENT.RECIPIENTS'
+        ) | translate
+      }}
+    </div>
+    <div
+      class="displacement-export-overlay-subheader"
+      [ngStyle]="{ 'text-align': hasExported ? 'center' : 'left' }"
+    >
+      {{
+        (hasExported
+          ? 'DISPLACEMENT.EXPORT_DONE_MESSAGE'
+          : 'DISPLACEMENT.AFTER_EXPORT_PROCESS'
+        ) | translate
+      }}
+    </div>
+    <app-input
+      *ngIf="!hasExported"
+      [icon]="'mail_outline'"
+      [iconOnLeft]="true"
+      [(inputModel)]="userEmail"
+      [disabled]="true"
+    ></app-input>
+  </app-overlay-info>
+</app-animated-overlay>

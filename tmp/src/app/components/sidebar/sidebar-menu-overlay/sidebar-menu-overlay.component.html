@@ -1,0 +1,23 @@
+<app-animated-overlay>
+  <section class="sidebar-menu-overlay-container">
+    <div
+      [ngStyle]="{ display: item?.show ? 'block' : 'none' }"
+      *ngFor="let item of items"
+      class="sidebar-menu-overlay-item"
+      (click)="onClick(item.route)"
+      (mouseenter)="generateSubmenu(item)"
+    >
+      <span class="title">{{ item.name | translate }}</span>
+      <mat-icon *ngIf="genereteIcon(item)" class="icon">chevron_right</mat-icon>
+    </div>
+  </section>
+  <section *ngIf="showSubmenu" class="sidebar-submenu-overlay-container">
+    <div
+      *ngFor="let subMenu of itemMenu"
+      class="sidebar-menu-overlay-item"
+      (click)="onClick(subMenu.route)"
+    >
+      <span class="title">{{ subMenu.name | translate }}</span>
+    </div>
+  </section>
+</app-animated-overlay>

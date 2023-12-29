@@ -1,0 +1,74 @@
+// #region [INPUT SELECT]
+
+.input-site-selector-container {
+  & > app-select > div > ng-select {
+    pointer-events: none;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+// #endregion
+
+// #region [BIG SELECT]
+
+.big-site-selector-container {
+  display: inline-block;
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+  }
+}
+
+.big-site-selector-breadcrumb {
+  color: #3d7edb;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 14px;
+}
+
+.big-site-selector-breadcrumb-chevron {
+  color: #acadae;
+  display: flex;
+  align-items: center;
+  height: 12px;
+
+  & > mat-icon {
+    height: 12px;
+    width: 12px;
+    font-size: 12px;
+  }
+}
+
+.big-site-selector-name {
+  opacity: 0.8;
+  color: #252727;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.big-site-selector-name-placeholder {
+  opacity: 0.8;
+  color: #909193;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+// #endregion

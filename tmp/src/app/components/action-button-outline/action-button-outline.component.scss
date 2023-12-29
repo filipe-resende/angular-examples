@@ -1,0 +1,97 @@
+@import '../../scss/vale.variables';
+
+:host {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: none;
+}
+
+.action-button-outline {
+  height: 32px;
+  width: 118px;
+  background-color: $white;
+  text-transform: uppercase;
+  box-shadow: inset 1px 0 0 0 #ffffff;
+  font-family: $font-body1;
+
+  &.blue {
+    border: 1px solid $violetVale;
+
+    .blue-outline-label {
+      color: $violetVale;
+      height: 16px;
+      width: 51px;
+      font-size: 14px;
+      letter-spacing: 1.42px;
+      line-height: 24px;
+    }
+
+    .association {
+      font-weight: bold;
+    }
+
+    &.normal {
+      width: 116px;
+      height: 39px;
+    }
+
+    &.large {
+      width: 216px;
+      height: 40px;
+    }
+
+    &.small {
+      width: 84px;
+    }
+
+    &.tall {
+      height: 40px;
+    }
+  }
+
+  &.grey {
+    border: none;
+    background-color: $greyVale40;
+    color: $greyVale80;
+
+    .grey-label {
+      height: 16px;
+      width: 51px;
+      font-size: 14px;
+      letter-spacing: 1.42px;
+      line-height: 24px;
+    }
+
+    &.large {
+      width: 216px;
+      height: 40px;
+    }
+
+    &.normal {
+      width: 116px;
+      height: 39px;
+    }
+  }
+}
+
+.outline-label {
+  display: flex;
+  text-transform: capitalize;
+  font-family: $font-body1-medium;
+  font-size: 14px;
+  padding: 8px 10px 10px 10px;
+}
+
+.active-outline-label {
+  color: #3d7edb;
+  display: flex;
+  text-transform: capitalize;
+  font-family: $font-body1-medium;
+  font-size: 14px;
+  padding: 8px 10px 10px 10px;
+}

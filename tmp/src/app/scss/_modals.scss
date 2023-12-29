@@ -1,0 +1,20 @@
+.modal-user-agreement {
+  mat-dialog-container {
+    overflow: visible;
+    width: 480px;
+    max-height: 80vh;
+    padding: 0;
+    border-radius: 4px;
+  }
+}
+
+.modal-user-agreement-backdrop {
+  background: rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(8px);
+}
+
+.modal-user-agreement-accepted {
+  mat-dialog-container {
+    width: 480px;
+  }
+}

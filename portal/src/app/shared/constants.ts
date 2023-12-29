@@ -1,0 +1,1 @@
+export const TWELVE_HOURS_IN_MINUTES = 720;

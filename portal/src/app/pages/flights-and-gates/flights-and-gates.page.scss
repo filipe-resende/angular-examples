@@ -1,0 +1,63 @@
+.flights-page-container {
+  display: flex;
+  flex-direction: column;
+  padding: 42px 56px;
+}
+
+.flights-page-header {
+  box-sizing: border-box;
+  display: flex;
+  height: 48px;
+  margin-bottom: 30px;
+
+  & > div {
+    display: flex;
+    align-items: center;
+    margin-left: 32px;
+  }
+}
+
+.flights-page-search-form {
+  display: flex;
+  margin-left: auto;
+}
+
+.flights-page-card-container {
+  margin-bottom: 42px;
+}
+
+.flights-page-card-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+
+  & > div {
+    display: flex;
+
+    & > app-select {
+      width: 180px;
+      margin-right: 16px;
+    }
+  }
+}
+
+.flights-page-table-container {
+  height: calc(100% - 60px);
+  width: 100%;
+  z-index: 10;
+  background-color: #ffffff;
+}
+
+.flights-page-selector-name {
+  opacity: 0.8;
+  color: #252727;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 38px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,28 @@
+<app-animated-overlay
+  [animationTime]="80"
+  [delay]="index * 60"
+  *ngIf="alert$ | async as alert"
+>
+  <section
+    class="panic-alert-subitem-container"
+    [ngClass]="{ 'first-sub-item': index === 1 }"
+  >
+    <mat-icon>watch_later</mat-icon>
+
+    <div class="panic-alert-subitem-alert">
+      <div class="panic-alert-subitem-alert-event-info">
+        {{
+          alert.eventDateTime
+            ? (alert.eventDateTime | date: 'dd/MM/yyyy HH:mm')
+            : ''
+        }}
+      </div>
+      <div class="panic-alert-subitem-alert-user-info">
+        <mat-icon>person</mat-icon>
+        {{ alert.thing?.name ? alert.thing.name : '' }}
+      </div>
+    </div>
+
+    <img src="assets/icons/expand.svg" (click)="setAlertAsMain()" />
+  </section>
+</app-animated-overlay>

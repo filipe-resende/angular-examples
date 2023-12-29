@@ -1,0 +1,8 @@
+<section class="displacement-map-container">
+  <div class="displacement-map-back-button">
+    <app-button [upperCased]="true" (onClick)="onNavigateToDisplacements()">{{
+      'DISPLACEMENT.MAP.BACK_TO_LIST' | translate
+    }}</app-button>
+  </div>
+  <app-map #googleMap></app-map>
+</section>

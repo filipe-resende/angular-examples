@@ -1,0 +1,138 @@
+.mat-tab-body.mat-tab-body-active {
+  max-height: calc(100vh - 117px) !important;
+  height: 100%;
+}
+.main-margin {
+  margin: 20px;
+}
+.mat-checkbox-ripple .mat-ripple-element,
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #007e7a;
+}
+.mat-tab-group {
+  height: auto;
+}
+mat-slide-toggle {
+  float: right;
+  height: auto;
+}
+
+mat-icon {
+  font-size: 20px !important;
+}
+
+.focal-page-container {
+  height: 100%;
+  display: flex;
+}
+
+.focal-page-left-column-container {
+  width: 450px;
+}
+
+.focal-page-right-column-container {
+  flex: 1;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-form-field-outline {
+  color: #d6d7d7;
+}
+
+.mat-checkbox-selected {
+  padding-top: 15px;
+  float: left;
+  padding-right: 10px;
+}
+
+.mat-icon-check {
+  float: left;
+  padding-right: 5px;
+  color: #007e7a;
+}
+
+.action-buttons {
+  float: right;
+  text-align: right;
+}
+
+.button-loader-spinner {
+  position: absolute;
+  right: 100px;
+  bottom: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #007e7a !important;
+}
+
+.list-phone {
+  padding-top: 40px;
+
+  mat-label {
+    float: left;
+    padding-top: 15px;
+    width: 83% !important;
+  }
+}
+
+.input-phone {
+  float: left !important;
+  padding-top: 15px !important;
+  width: 83% !important;
+}
+
+.button-phone {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  height: 30px !important;
+}
+
+mat-form-field {
+  width: 100%;
+  height: 100%;
+}
+
+mat-line {
+  width: 100%;
+}
+
+.mat-list-base .mat-subheader {
+  font-weight: bold;
+}
+
+.mat-list-base .mat-list-item .mat-line {
+  padding: 5px;
+  font-size: 15px;
+}
+
+.mat-list-base .mat-list-item .mat-line:nth-child(n + 2) {
+  font-size: 15px;
+}
+
+.form-field-size {
+  width: 100%;
+}
+
+.submit-buttons {
+  text-align: right;
+  width: 100%;
+}
+
+.header-size {
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.new-icon {
+  width: inherit;
+}

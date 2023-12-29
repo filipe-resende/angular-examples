@@ -1,0 +1,200 @@
+<app-card>
+  <div
+    class="panic-button-notifications-status-filter"
+    *ngIf="panicAlertOptions"
+  >
+    <app-select
+      [items]="[
+        'NOTIFICATION.FILTER_BY_STATUS.TODO' | translate,
+        'NOTIFICATION.FILTER_BY_STATUS.DOING' | translate,
+        'NOTIFICATION.FILTER_BY_STATUS.DONE' | translate
+      ]"
+      [selected]="ngForm.value.statusSelected"
+      [placeholder]="'NOTIFICATION.FILTER_BY_STATUS.HINT' | translate"
+      (onSelect)="ngForm.controls['statusSelected'].setValue($event)"
+      (onSelect)="onFilterByStatus()"
+    ></app-select>
+  </div>
+  <table
+    mat-table
+    matSort
+    [dataSource]="
+      isFetchingNotifications
+        ? skeletonArray
+        : panicButtonNotificationsTableDataSource
+    "
+    class="panic-button-notifications-table"
+  >
+    <ng-container matColumnDef="status">
+      <th mat-header-cell mat-sort-header="status" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.STATUS' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification" style="padding: 0 12px">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        <span *ngIf="notification?.status">
+          <div
+            [matTooltip]="'PANIC_BUTTON.ATTENDANCE_IN_PROGRESS' | translate"
+            *ngIf="notification?.status === 'InAttendance'"
+            class="panic-button-notifications-in-attendance-dot"
+            (click)="onInAttendanceIconClick(notification)"
+          ></div>
+          <div
+            [matTooltip]="'PANIC_BUTTON.NO_ONE_IS_ATTENDING' | translate"
+            *ngIf="notification?.status === 'WaitingService'"
+            class="panic-button-notifications-waiting-service-dot"
+            (click)="onWaitingServiceIconClick(notification)"
+          ></div>
+          <div
+            [matTooltip]="'PANIC_BUTTON.ATTENDANCE_COMPLETED' | translate"
+            *ngIf="notification?.status === 'Attended'"
+            class="panic-button-notifications-attended-dot"
+            (click)="onAttendanceCompletedIconClick(notification)"
+          >
+            <mat-icon>done</mat-icon>
+          </div>
+        </span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header="name" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.NAME' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        <div
+          style="
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+          "
+          [matTooltip]="notification?.thing?.name"
+        >
+          {{ !notification ? null : notification?.thing?.name || '-' }}
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <th mat-header-cell mat-sort-header="company" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.COMPANY' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        <div
+          style="
+            max-width: 160px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+          "
+          [matTooltip]="
+            notification?.thing?.company ? notification.thing.company : ''
+          "
+        >
+          {{ !notification ? null : notification?.thing?.company || '-' }}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="documentId" *ngIf="canViewSensitiveData">
+      <th mat-header-cell mat-sort-header="document" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.CPF' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        {{ !notification ? null : notification?.thing?.document || '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="iamId">
+      <th mat-header-cell mat-sort-header="iamId" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.IAM' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        {{ !notification ? null : notification?.thing?.iamId || '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="passport" *ngIf="canViewSensitiveData">
+      <th mat-header-cell mat-sort-header="passport" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.PASSPORT' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        {{ !notification ? null : notification?.thing?.passport || '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sourceApplicationName">
+      <th
+        mat-header-cell
+        mat-sort-header="sourceApplicationName"
+        *matHeaderCellDef
+      >
+        {{ 'NOTIFICATION.DEVICE_TYPE' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        {{ !notification ? null : notification?.sourceApplicationName || '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deviceId">
+      <th mat-header-cell mat-sort-header="deviceId" *matHeaderCellDef>
+        {{ 'NOTIFICATION.DEVICE_ID' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        {{ !notification ? null : notification?.device || '-' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastLocation">
+      <th mat-header-cell mat-sort-header="location.lat" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.LAST_LOCATION' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        <app-mini-map
+          [latitude]="notification?.location?.lat"
+          [longitude]="notification?.location?.lng"
+          [middleware]="getMiddlewareName(notification?.sourceApplicationId)"
+        >
+        </app-mini-map>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="lastReport">
+      <th mat-header-cell mat-sort-header="eventDate" *matHeaderCellDef>
+        {{ 'NOTIFICATION.PANIC_BUTTON_TABLE.LAST_REPORT' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let notification">
+        <div class="skeleton table" *ngIf="!notification"></div>
+        {{
+          !notification
+            ? null
+            : notification?.eventDate
+            ? (notification?.eventDate | date : 'dd/MM/yyyy HH:mm')
+            : '-'
+        }}
+      </td>
+    </ng-container>
+
+    <tr
+      mat-header-row
+      *matHeaderRowDef="tableColumns; sticky: true"
+      class="table-header"
+    ></tr>
+    <tr mat-row *matRowDef="let thing; columns: tableColumns"></tr>
+  </table>
+</app-card>
+<div style="display: flex; justify-content: center" *ngIf="total > pageSize">
+  <app-paginator
+    [total]="total"
+    [pageSize]="pageSize"
+    [currentPage]="actualPage"
+    (onChangePage)="onChangePage($event)"
+  ></app-paginator>
+</div>

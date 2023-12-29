@@ -1,0 +1,110 @@
+.sidenav-usage-metrics {
+  position: fixed;
+  top: 56px;
+  right: 0;
+  width: 400px;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.closeButton {
+  right: 0;
+  margin: 5px;
+  position: fixed;
+}
+
+.sidenav-header {
+  .title {
+    margin-top: 66px;
+    margin-bottom: 20px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 26px;
+    font-style: bold;
+    font-weight: 700;
+  }
+}
+.mat-form-field-appearance-fill .mat-form-field-infix {
+  padding-bottom: 0 !important;
+}
+.date-picker {
+  height: 60px;
+  width: 240px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fbfbfb;
+  margin-bottom: 20px;
+
+  .date-picker-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    vertical-align: baseline;
+    .month-year-span {
+      width: 100%;
+    }
+    .closeButtonDatePicker {
+      margin: 5px;
+      position: relative;
+    }
+  }
+}
+.usage-metrics-content {
+  position: relative;
+  padding-right: 5px;
+}
+
+@media (max-height: 768px) {
+  .usage-metrics-content {
+    overflow-y: auto;
+    height: 300px;
+  }
+}
+
+@media (min-height: 769px) {
+  .usage-metrics-content {
+    min-height: 300px;
+  }
+}
+
+.item {
+  position: relative;
+  background: #fbfbfb;
+  height: 150px;
+  margin-bottom: 10px;
+  .item-title {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 20px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-style: bold;
+    font-weight: 400;
+    font-size: 21px;
+  }
+  .list {
+    height: 100%;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 80;
+    font-size: 12px;
+    .list-item {
+      height: 27px;
+      width: 100%;
+      .item-label {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+  }
+  .icone {
+    margin-right: 10px;
+    margin-left: 5px;
+  }
+}

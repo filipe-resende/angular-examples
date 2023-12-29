@@ -1,0 +1,241 @@
+<p class="breadCrumbs">
+  {{ 'BREADCRUMB.HOME' | translate }} > {{ 'BREADCRUMB.DEVICES' | translate }} >
+  <span>{{ 'BREADCRUMB.GROUPS' | translate }}</span>
+</p>
+
+<div class="devices-groups-container">
+  <div class="devices-groups-body">
+    <div class="devices-groups-filter">
+      <div class="filter-fields">
+        <div class="filter-by-manager">
+          <div class="manager-option">
+            <div class="manager-filter-options">
+              <label> {{ 'DEVICES_GROUP.MANAGER' | translate }}</label>
+              <select
+                class="filter-options"
+                [(ngModel)]="selectedType"
+                (ngModelChange)="getByType($event)"
+              >
+                <option *ngFor="let type of typeOptions" [value]="type.name">
+                  {{ type.value }}
+                </option>
+              </select>
+            </div>
+            <div class="input-search">
+              <input
+                [readonly]="searchGroup"
+                class="search-input"
+                [ngClass]="{ 'disabled-input': searchGroup }"
+                *ngIf="selectedType != 'CPF'"
+                [(ngModel)]="searchManager"
+                type="text"
+                [placeholder]="managerPlaceholder"
+              />
+
+              <input
+                [readonly]="searchGroup"
+                class="search-input"
+                [ngClass]="{ 'disabled-input': searchGroup }"
+                *ngIf="selectedType === 'CPF'"
+                [mask]="'000.000.000-00'"
+                [(ngModel)]="searchManager"
+                type="text"
+                [placeholder]="managerPlaceholder"
+              />
+            </div>
+          </div>
+        </div>
+        ou
+        <div style="margin-left: 15px">
+          <div class="group-option">
+            <div class="input-search">
+              <input
+                [readonly]="searchManager"
+                [ngClass]="{ 'disabled-input': searchManager }"
+                [(ngModel)]="searchGroup"
+                class="group-input"
+                type="text"
+                [placeholder]="groupPlaceholder"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <button class="search-button" (click)="onSubmit()">
+            <img
+              style="mix-blend-mode: plus-lighter"
+              src="../../../../assets/icons/searchIcon.svg"
+              alt=""
+            />
+          </button>
+        </div>
+      </div>
+      <div class="filter-buttons">
+        <button class="clear-filters" (click)="clearFields()">
+          <i aria-hidden="true"
+            ><img
+              class="img-clear-filters"
+              src="../../../../assets/icons/blueClearFilter.svg"
+              alt=""
+          /></i>
+          {{ 'DEVICES_GROUP.CLEAN_FILTERS' | translate }}
+        </button>
+      </div>
+    </div>
+    <br />
+    <div *ngIf="spinner" class="spinner">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    <div class="devices-groups-table">
+      <table
+        mat-table
+        [dataSource]="data"
+        matSort
+        (matSortChange)="announceSortChange($event)"
+        class="mat-elevation-z8"
+        aria-label="Group Manager"
+      >
+        <ng-container matColumnDef="edition">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            id="edition"
+            class="edition"
+          ></th>
+          <td mat-cell class="edit-group-row" *matCellDef="let element">
+            <span
+              class="edit-group"
+              *ngIf="
+                hasSecurityAnalistOrAdministratorProfile || element.canEdit
+              "
+            >
+              <img
+                [routerLink]="[
+                  'edit-group',
+                  element.groupId,
+                  element.groupName
+                ]"
+                src="../../../../assets/edit 1.svg"
+                alt=""
+              />
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="groupName">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by groupName"
+            id="groupName"
+          >
+            <span class="groupName">{{
+              'DEVICES_GROUP.TABLE.GROUP_NAME' | translate
+            }}</span>
+          </th>
+          <td mat-cell class="groupNameCell" *matCellDef="let element">
+            <span *ngIf="element.groupName.length < 50; else slicedGroupName">
+              {{ element.groupName }}
+            </span>
+            <ng-template #slicedGroupName>
+              <span [matTooltip]="element.groupName">
+                {{ element.groupName | slice: 0:50 }}...
+              </span>
+            </ng-template>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by createdAt"
+            id="createdAt"
+          >
+            <span class="createAt">{{
+              'DEVICES_GROUP.TABLE.CREATION_AT' | translate
+            }}</span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>
+              {{ changeDateToGMT(element.createdAt) }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="groupManagerEmail">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by groupManagerEmail"
+            id="groupManagerEmail"
+          >
+            <span class="manager">{{
+              'DEVICES_GROUP.TABLE.GROUP_MANAGER' | translate
+            }}</span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>
+              {{ element.groupManagerEmail }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="memberCount">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by memberCount"
+            id="memberCount"
+          >
+            <span>{{ 'DEVICES_GROUP.TABLE.ALL_MEMBERS' | translate }}</span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>
+              <img src="../../../../assets/people_24px.svg" alt="" />
+            </span>
+            <span class="margin_span">
+              {{ element.memberCount }}
+            </span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deviceCount">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by deviceCount"
+            id="deviceCount"
+          >
+            <span>{{ 'DEVICES_GROUP.TABLE.ALL_DEVICES' | translate }}</span>
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <span>
+              <img src="../../../../assets/device-icon.svg" alt="" />
+            </span>
+            <span class="margin_span">
+              {{ element.deviceCount }}
+            </span>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <span [hidden]="!paginatorShow">
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20]"
+          showFirstLastButtons
+          aria-label="Select page of periodic elements"
+        >
+        </mat-paginator>
+      </span>
+    </div>
+  </div>
+</div>

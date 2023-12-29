@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+  <tr *ngFor="let row of allIcons; let idx = index">
+    <td *ngFor="let icon of row">
+      <img
+        src="{{ icon.iconPath }}"
+        title="{{ icon.filename }}"
+        style="cursor: pointer;"
+        (click)="selectImage(icon)"
+        alt="{{ icon.filename }}"
+      />
+    </td>
+  </tr>
+</div>

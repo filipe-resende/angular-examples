@@ -1,0 +1,12 @@
+<ng-select
+  #ngSelectComponent
+  [items]="geofences$ | async"
+  bindLabel="name"
+  [searchable]="true"
+  [clearable]="true"
+  [placeholder]="placeholder | translate"
+  [closeOnSelect]="true"
+  [loading]="loading"
+  (change)="onChange($event)"
+>
+</ng-select>

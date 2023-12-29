@@ -1,0 +1,62 @@
+@import '../../../scss/vale.variables';
+
+div,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.replace-file-container {
+  display: grid;
+  height: 250px;
+  grid-template-rows: auto 1fr auto;
+  color: #697489;
+  background-color: #fbfbfb;
+  font-family: $font-body1;
+}
+
+.replace-title {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+  padding: 20px 20px;
+  padding-right: 0px;
+  border-bottom: 1px solid #edeef0;
+  align-items: center;
+}
+
+.replace-title-question {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.replace-description {
+  width: 390px;
+  word-break: break-word;
+  margin: 25px 77px;
+  font-size: 18px;
+  line-height: 26px;
+}
+.replace-button {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: stretch;
+  height: 48px;
+}
+
+.replace-button button {
+  font-size: 14px;
+}
+
+.button-cancel {
+  color: #3d7edb;
+  background: #fbfbfb;
+  border: 1px solid #edeef0;
+  font-family: $font-body1;
+}
+.button-replace {
+  color: #fff;
+  background: #3d7edb;
+  border: none;
+  font-family: $font-body1;
+}

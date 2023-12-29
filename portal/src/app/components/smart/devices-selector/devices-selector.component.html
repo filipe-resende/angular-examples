@@ -1,0 +1,12 @@
+<app-select
+  [label]="label"
+  [placeholder]="placeholder | translate"
+  bindLabel="name"
+  bindValue="name"
+  [items]="applications$ | async"
+  [loading]="!(applications$ | async)"
+  (onSelect)="onApplicationSelect($any($event))"
+  [selected]="selected"
+  [clearable]="true"
+>
+</app-select>

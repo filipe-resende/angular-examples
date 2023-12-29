@@ -1,0 +1,57 @@
+@import 'src/app/scss/styles.scss';
+
+.applications-home-search-field {
+  width: 200px;
+  height: 41.25px;
+  border: 1px solid #e3e4e4;
+  color: $greyVale80;
+  background-color: #fff;
+  padding: 4px 8px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: $font-body1;
+  border-radius: 0px;
+
+  &:focus,
+  &:active {
+    border-color: #e3e4e4;
+    outline: none;
+    background-color: #fff;
+    color: #000000;
+  }
+}
+
+.dh-select-input {
+  height: 41.25px;
+  width: 247px;
+  background-color: white;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 1px solid $greyVale20;
+  color: $greyVale80;
+  margin-right: 16px;
+  font-family: $font-body1;
+  font-size: 16px;
+}
+
+.wider {
+  border: none;
+  color: #909193;
+  width: 80%;
+  border: 1px solid $greyVale20;
+  height: 35px;
+  padding-right: 0px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 24px;
+  font-family: $font-body1;
+  border: 1px solid $greyVale20;
+  border-radius: 2px;
+
+  &:focus {
+    outline: 1px solid $greyVale20;
+  }
+}

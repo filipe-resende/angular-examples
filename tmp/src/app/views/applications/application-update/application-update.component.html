@@ -1,0 +1,123 @@
+<section
+  class="application-update-container"
+  *ngIf="application$ | async; else loading"
+>
+  <app-main-title>
+    <app-arrow-button
+      [routerLink]="['/applications']"
+      label="voltar"
+    ></app-arrow-button>
+    <header>{{ 'APPLICATION_UPDATE.TITLE' | translate }}</header>
+  </app-main-title>
+
+  <form [formGroup]="ngForm">
+    <label class="application-update-form-label--grey"
+      ><span>ID: </span>{{ applicationId }}</label
+    >
+
+    <div>
+      <div class="application-update-form-label">Nome</div>
+      <input
+        type="text"
+        class="application-update-form-input"
+        formControlName="name"
+      />
+    </div>
+
+    <div>
+      <div class="application-update-form-label">Descrição</div>
+      <input
+        type="text"
+        class="application-update-form-input"
+        formControlName="description"
+      />
+    </div>
+
+    <div>
+      <mat-checkbox
+        type="checkbox"
+        id="showInDeviceTypesListCheckbox"
+        formControlName="showInDeviceTypesList"
+        class="application-update-form-checkbox"
+        [disabled]="!isEditingAllowed"
+        [matTooltip]="
+          'APPLICATION_UPDATE.SHOW_IN_DEVICE_TYPES_LIST_TOOLTIP' | translate
+        "
+      >
+      </mat-checkbox>
+
+      <label for="showInDeviceTypesListCheckbox">
+        {{ 'APPLICATION_UPDATE.SHOW_IN_DEVICE_TYPES_LIST' | translate }}</label
+      >
+    </div>
+
+    <div class="application-update-form-flags">
+      <mat-checkbox
+        type="checkbox"
+        id="allowDeviceAssociationCheckbox"
+        formControlName="allowDeviceAssociation"
+        class="application-update-form-checkbox"
+        [disabled]="!isEditingAllowed"
+      >
+      </mat-checkbox>
+
+      <label for="allowDeviceAssociationCheckbox">
+        {{ 'APPLICATION_UPDATE.ALLOW_DEVICE_ASSOCIATION' | translate }}</label
+      >
+    </div>
+
+    <div class="application-update-form-flags">
+      <mat-checkbox
+        type="checkbox"
+        id="allowInclusionDeviceGroupCheckbox"
+        formControlName="allowInclusionDeviceGroup"
+        class="application-update-form-checkbox"
+        [disabled]="!isEditingAllowed"
+      >
+      </mat-checkbox>
+
+      <label for="allowInclusionDeviceGroupCheckbox">
+        {{
+          'APPLICATION_UPDATE.ALLOW_INCLUSION_IN_DEVICE_GROUP' | translate
+        }}</label
+      >
+    </div>
+
+    <div class="application-update-form-buttons-container">
+      <div class="application-update-form-secondary-btn">
+        <app-button-outline
+          type="button"
+          [ngClass]="['blue', 'large']"
+          [labelClass]="'blue-outline-label'"
+          (ngClick)="onRouteUserToDevices()"
+        >
+          {{ 'APPLICATION_UPDATE.DEVICES_BTN' | translate }}
+        </app-button-outline>
+      </div>
+
+      <div class="application-update-form-action-btn">
+        <div
+          matTooltip="Ação desabilitada pois seu perfil não tem permissão de alterar informações de Aplicação"
+          [matTooltipDisabled]="isEditingAllowed"
+        >
+          <app-action-button
+            [disabled]="!isEditingAllowed"
+            [ngClass]="['blue', 'large']"
+            [labelClass]="'blue-label'"
+            [ngClassDisabled]="['grey', 'large']"
+            [labelClassDisabled]="'grey-label'"
+            (action)="update()"
+          >
+            {{ 'APPLICATION_UPDATE.SAVE_BTN' | translate }}
+          </app-action-button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+<ng-template #loading>
+  <div class="spinner-content">
+    <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+  </div>
+</ng-template>

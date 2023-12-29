@@ -1,0 +1,47 @@
+<div>
+  <p [ngClass]="sapPlantValidatorView ? 'input-title-invalid' : 'input-title'">
+    {{ 'SAP_PLANT_COMPONENT.TITLE' | translate }}
+  </p>
+  <div>
+    <input
+      #focusSapplant
+      [ngClass]="
+        sapPlantValidatorView
+          ? 'input-invalid input-size-small'
+          : 'input input-size-small'
+      "
+      matInput
+      [(ngModel)]="sapPlant"
+      [readonly]="sapPlantLoading"
+      (click)="filterSapPlant()"
+      (keyup.enter)="clearEnter()"
+      (input)="filterSapPlant()"
+      type="text"
+      [matAutocomplete]="SAP"
+      (ngModelChange)="eventSapPlant($event)"
+      maxlength="4"
+    />
+    <mat-autocomplete autoActiveFirstOption #SAP="matAutocomplete">
+      <mat-option
+        *ngFor="let item of filterDataSapPlants"
+        (click)="valueSapPlant(item); focusSapplant.blur()"
+      >
+        {{ item.code }} - {{ item.description }}
+      </mat-option>
+      <mat-option
+        *ngIf="
+          filterDataSapPlants.length == 0 &&
+          sapPlant.toString().length >= 3 &&
+          createSapPlantValidator
+        "
+        (click)="openCreateSapModal()"
+        value=""
+        >{{ 'SAP_PLANT_COMPONENT.ADD' | translate }}
+        <mat-icon class="mat-18">add</mat-icon></mat-option
+      >
+      <mat-option *ngIf="sapPlantLoading">
+        <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+</div>

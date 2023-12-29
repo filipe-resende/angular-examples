@@ -1,0 +1,15 @@
+<app-animated-overlay>
+  <section
+    class="header-user-menu-overlay-container"
+    [ngStyle]="{ width: menuWidth + 'px' }"
+  >
+    <div
+      *ngFor="let item of items"
+      class="header-user-menu-overlay-item"
+      (click)="onClick(item)"
+    >
+      <mat-icon class="icon" *ngIf="item.icon">{{ item.icon }}</mat-icon>
+      <span class="title">{{ item.label | translate }}</span>
+    </div>
+  </section>
+</app-animated-overlay>

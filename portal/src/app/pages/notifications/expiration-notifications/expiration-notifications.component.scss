@@ -1,0 +1,16 @@
+.device-type__content,
+.device-id__content {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.device-id-content {
+  text-align: center;
+}
+
+.paginator__wrapper {
+  display: flex;
+  justify-content: center;
+}

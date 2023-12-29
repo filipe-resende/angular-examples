@@ -1,0 +1,58 @@
+@import '../../../scss/vale.variables';
+
+div,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.load-error-icon {
+  height: 40px;
+}
+
+.load-execution-error-container {
+  display: grid;
+  width: 481px;
+  height: 278px;
+  grid-template-rows: auto 1fr auto;
+  color: #697489;
+  font-family: $font-body1;
+}
+
+.error-title {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto 1fr;
+  padding: 40px 20px 20px 35px;
+  border-bottom: 1px solid #fbfbfb;
+  align-items: center;
+}
+
+.error-description {
+  padding: 15px 50px;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.error-description span {
+  font-weight: 700;
+}
+
+.error-button {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  justify-items: stretch;
+  height: 48px;
+}
+
+.error-button button {
+  font-size: 14px;
+}
+
+.button-close {
+  color: #fff;
+  background: #3d7edb;
+  border: none;
+  border-radius: 4px;
+  font-family: $font-body1;
+}

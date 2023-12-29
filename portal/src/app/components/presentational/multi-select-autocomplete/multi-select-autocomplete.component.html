@@ -1,0 +1,74 @@
+<ng-container *ngIf="isFormField">
+  <section class="containter__form-field" (click)="openDropdown()">
+    <div *ngFor="let option of selectedOptions">
+      <span>{{ option.name }}</span>
+      <button
+        class="form-field__button"
+        (click)="onRemoveOptionClick($event, option)"
+      >
+        <mat-icon class="form-field__button-icon">close</mat-icon>
+      </button>
+    </div>
+    <mat-spinner
+      class="form-field__spinner"
+      diameter="20"
+      *ngIf="isLoading"
+    ></mat-spinner>
+  </section>
+
+  <ng-template #isEmpty>
+    <section class="warning">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ label | translate }}</mat-label>
+        <input
+          class="warning__input"
+          matInput
+          (click)="openDropdown()"
+          autoComplete="off"
+          [formControl]="selectedOptionsText"
+        />
+        <mat-icon
+          class="warning__icon"
+          svgIcon="warning-exclamation"
+        ></mat-icon>
+      </mat-form-field>
+    </section>
+  </ng-template>
+</ng-container>
+
+<section
+  *ngIf="!isFormField || isDropdownOpened"
+  [ngClass]="{
+    dropdown: true,
+    'dropdown--shadow': isFormField
+  }"
+  (clickElsewhere)="closeDropdown()"
+  #dropdown
+>
+  <section class="filter">
+    <mat-icon class="filter__icon">search</mat-icon>
+    <input
+      [formControl]="searchText"
+      class="filter__input"
+      placeholder="Buscar"
+      [ngStyle]="{ warning: warning }"
+    />
+  </section>
+  <div class="list-height">
+    <section class="options">
+      <div class="option" *ngFor="let option of filteredOptions | async">
+        <mat-checkbox
+          class="option__checkbox"
+          (change)="
+            !isFenceEdit
+              ? onCheckboxChange($event, option)
+              : onCheckboxChangeFenceEdit($event, option)
+          "
+          [checked]="selectedOptions.includes(option) || option.isChecked"
+        >
+          {{ option.name }}
+        </mat-checkbox>
+      </div>
+    </section>
+  </div>
+</section>

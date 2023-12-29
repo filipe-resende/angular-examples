@@ -1,0 +1,74 @@
+@import '../../../scss/vale.variables';
+
+.label-date {
+  padding-left: 15.5px;
+
+  .label-text {
+    font-family: $font-body1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #acadae;
+  }
+}
+
+.list-items {
+  max-width: 95%;
+  margin: 10px auto 0;
+
+  .item {
+    padding: 0 5px;
+    margin-bottom: 5px;
+
+    .item-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 2px;
+
+      .title,
+      .data-text {
+        font-family: $font-body1;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 30px;
+        letter-spacing: 0px;
+        text-align: left;
+        color: #909193;
+      }
+    }
+
+    .line {
+      margin: 0;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3d7edb;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3d7edb;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.no-content {
+  text-align: center;
+  padding: 90px 0;
+  span {
+    font-family: $font-body1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}

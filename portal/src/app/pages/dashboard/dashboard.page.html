@@ -1,0 +1,144 @@
+<div class="dashboard-page-container">
+  <div class="dashboard-page-header">
+    <div class="dashboard-page-header-site">
+      <app-site-selector></app-site-selector>
+      <app-real-time-events-selector></app-real-time-events-selector>
+    </div>
+    <div class="dashboard-page-header-alert">
+      <app-alert
+        *ngIf="this.showDeviceGroupDisclaimer"
+        [text]="'DISCLAIMERS.DEVICE_GROUP' | translate"
+      ></app-alert>
+    </div>
+  </div>
+  <div class="dashboard-page-root-container">
+    <div
+      class="dashboard-page-update-container"
+      *ngIf="(refreshTimeInfo$ | async) as refreshTimeInfo"
+    >
+      <section class="dashboard-page-update-content">
+        {{ refreshTimeInfo | date: ("LIST.REFRESHED" | translate) }}
+      </section>
+      <mat-icon
+        class="header__icon"
+        [matTooltip]="'DASHBOARD.INTERVAL_DISCLAIMER' | translate"
+      >
+        info_outline
+      </mat-icon>
+    </div>
+
+    <div class="dashboard-page-grid-container">
+      <div class="dashboard-page-grid-left">
+        <div class="total-of-people-card">
+          <app-card
+            [title]="deviceGroupFiltering ? 'DASHBOARD.TOTAL_PEOPLE_DEVICE_GROUP' : 'DASHBOARD.TOTAL_PEOPLE' | translate"
+          >
+            <section class="things-qtt-section">
+              <div *ngIf="(isFetchingThings$ | async); else fetched">
+                <mat-spinner [diameter]="48" *ngIf="selectedSite"></mat-spinner>
+              </div>
+              <ng-template #fetched>
+                <div class="things-qtt">{{ thingsCount$ | async }}</div>
+                <div
+                  class="things-name"
+                  *ngIf="(isRealTimeSearchSelected$ | async); else historicData"
+                >
+                  <div *ngIf="(deviceGroupFiltering); else inactiveFeatureFlag">
+                    <span>
+                      {{
+                      "DASHBOARD.HISTORIC_DATA_EVENTS_DISCLAIMER_REAL_TIME_DEVICE_GROUP"
+                      | translate }}
+                    </span>
+                  </div>
+                  <ng-template #inactiveFeatureFlag>
+                    <span>
+                      {{ "DASHBOARD.HISTORIC_DATA_EVENTS_DISCLAIMER_REAL_TIME" |
+                      translate }}
+                    </span>
+                  </ng-template>
+                </div>
+                <ng-template #historicData>
+                  <div
+                    class="things-name"
+                    *ngIf="(deviceGroupFiltering); else inactiveFeatureFlag"
+                  >
+                    {{ "DASHBOARD.HISTORIC_DATA_EVENTS_DISCLAIMER_DEVICE_GROUP"
+                    | translate }}
+                  </div>
+                  <ng-template #inactiveFeatureFlag>
+                    <div class="things-name">
+                      {{ "DASHBOARD.HISTORIC_DATA_EVENTS_DISCLAIMER" | translate
+                      }}
+                    </div>
+                  </ng-template>
+                </ng-template>
+              </ng-template>
+            </section>
+          </app-card>
+        </div>
+        <div class="total-for-type-location">
+          <app-card [title]=" 'DASHBOARD.TOTAL_BY_TYPE_LOCATION' | translate">
+            <div
+              class="total-for-type-location-loading"
+              *ngIf="(isFetchingThings$ | async); else typeLocationsFetched"
+            >
+              <mat-spinner [diameter]="48" *ngIf="selectedSite"></mat-spinner>
+            </div>
+            <ng-template #typeLocationsFetched>
+              <div *ngIf="typeLocationCount$ | async as typeLocation">
+                <div *ngIf="typeLocation.hasValue; else noPersonLocated">
+                  <div class="total-for-type-location-content">
+                    <ul>
+                      <li *ngIf="typeLocation.bus !== 0">
+                        {{ "DASHBOARD.TYPE_LOCATION.BUS" | translate}}<span
+                          >{{ typeLocation.bus }}</span
+                        >
+                      </li>
+                      <li *ngIf="typeLocation.facialRecognition !== 0">
+                        {{ "DASHBOARD.TYPE_LOCATION.FACIAL_RECOGNITION" |
+                        translate}}<span
+                          >{{ typeLocation.facialRecognition }}</span
+                        >
+                      </li>
+                      <li *ngIf="typeLocation.SmartBadge !== 0">
+                        {{ "DASHBOARD.TYPE_LOCATION.SMART_BADGE" |
+                        translate}}<span>{{ typeLocation.SmartBadge }}</span>
+                      </li>
+                      <li *ngIf="typeLocation.Spot !== 0">
+                        {{ "DASHBOARD.TYPE_LOCATION.SPOT" | translate}}<span
+                          >{{ typeLocation.Spot }}</span
+                        >
+                      </li>
+                      <li *ngIf="typeLocation.securityCenter !== 0">
+                        {{ "DASHBOARD.TYPE_LOCATION.SECURITY_CENTER" |
+                        translate}}<span
+                          >{{ typeLocation.securityCenter }}</span
+                        >
+                      </li>
+                      <li *ngIf="typeLocation.portable !== 0">
+                        {{ "DASHBOARD.TYPE_LOCATION.PORTABLE" | translate}}<span
+                          >{{ typeLocation.portable }}</span
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <ng-template #noPersonLocated>
+                <div class="total-for-type-location-no-value-message">
+                  {{ "DASHBOARD.NO_PERSON_LOCATED" | translate}}
+                </div>
+              </ng-template>
+            </ng-template>
+          </app-card>
+        </div>
+      </div>
+
+      <div class="dashboard-page-grid-right">
+        <app-card>
+          <app-map-two class="heat-map" name="dashboardMap"></app-map-two>
+        </app-card>
+      </div>
+    </div>
+  </div>
+</div>

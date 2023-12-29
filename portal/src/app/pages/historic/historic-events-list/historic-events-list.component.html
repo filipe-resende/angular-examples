@@ -1,0 +1,337 @@
+<section class="historic-events-list-container">
+  <div class="events-list">
+    <div class="events-list-content">
+      <div class="bar">
+        <div
+          class="event"
+          *ngFor="let deviceLocation of devicesLocations; let lastItem = last"
+          (click)="onSelectedEvent(deviceLocation)"
+          id="location-{{ deviceLocation.index }}"
+        >
+          <div class="timeline-properties">
+            <div class="timeline-circle">
+              <span
+                class="rounded-circle"
+                [ngClass]="{ selected: deviceLocation.isLocationSelected }"
+              ></span>
+            </div>
+            <div
+              class="line"
+              *ngIf="!lastItem"
+              [ngClass]="{ selected: deviceLocation.isLocationSelected }"
+            ></div>
+          </div>
+          <div class="date-event">
+            <p>
+              {{ deviceLocation.eventDateTime | date: 'dd/MM/yyyy HH:mm:ss' }}
+            </p>
+            <div
+              *ngIf="
+                deviceLocation.areaName != '' && deviceLocation.areaName;
+                else elseBlock
+              "
+            ></div>
+            <ng-template #elseBlock>
+              {{ 'HISTORIC.OUTSIDE_VALE' | translate }}
+            </ng-template>
+          </div>
+          <div class="device-event-properties">
+            <div
+              [ngClass]="
+                isSmartBadgeOrMaxTrackMiddleware(deviceLocation.middleware)
+                  ? 'smart-badge-event'
+                  : 'device-event'
+              "
+            >
+              <div class="device-event-name">
+                <p *ngIf="deviceLocation.deviceCategoryName === ''">
+                  {{ refactoryDeviceName(deviceLocation.deviceType) }}
+                </p>
+                <p *ngIf="deviceLocation.deviceCategoryName != ''">
+                  {{ refactoryDeviceName(deviceLocation.deviceType) }}
+                  {{ getSpotGroupName(deviceLocation.deviceCategoryName) }}
+                </p>
+              </div>
+
+              <div
+                [ngClass]="
+                  isSpotMiddleware(deviceLocation.middleware)
+                    ? 'device-event-identifier-spot'
+                    : 'device-event-identifier'
+                "
+              >
+                <p
+                  *ngIf="!isFacialMiddleware(deviceLocation.middleware)"
+                  class="device-event-identifier-eventId"
+                >
+                  {{ deviceLocation.deviceId }}
+                </p>
+                <div class="event-facial-security-with-direction">
+                  <p
+                    *ngIf="
+                      isFacialMiddleware(deviceLocation.middleware) ||
+                      isReaderMiddleware(deviceLocation.middleware)
+                    "
+                    [matTooltip]="deviceLocation.cameraName"
+                  >
+                    {{ deviceLocation.cameraName | slice: 0:10 }}...
+                  </p>
+                  <div
+                    class="event-direction-container"
+                    *ngIf="
+                      isSecurityCenterMiddleware(deviceLocation.middleware) &&
+                      deviceLocation?.typeAccess !== null
+                    "
+                  >
+                    <img
+                      alt="exit"
+                      *ngIf="
+                        deviceLocation?.typeAccess ===
+                          EventTypeLabels.BusExit ||
+                        deviceLocation?.typeAccess ===
+                          EventTypeLabels.AuthorizedExit
+                      "
+                      src="../../../assets/icons/exit_icon.svg"
+                      [matTooltip]="
+                        deviceLocation?.typeAccess === EventTypeLabels.BusExit
+                          ? ('ICONS.BUS_EVENT_EXIT' | translate)
+                          : ('ICONS.AUTHORIZED_EXIT' | translate)
+                      "
+                    />
+                    <img
+                      *ngIf="
+                        deviceLocation?.typeAccess ===
+                          EventTypeLabels.BusEntrance ||
+                        deviceLocation?.typeAccess ===
+                          EventTypeLabels.AuthorizedEntrance
+                      "
+                      alt="entrance"
+                      src="../../../assets/icons/entrance_icon.svg"
+                      [matTooltip]="
+                        deviceLocation.typeAccess ===
+                        EventTypeLabels.BusEntrance
+                          ? ('ICONS.BUS_EVENT_ENTRANCE' | translate)
+                          : ('ICONS.AUTHORIZED_ENTRANCE' | translate)
+                      "
+                    />
+                    <img
+                      *ngIf="
+                        deviceLocation?.typeAccess ===
+                        EventTypeLabels.DeniedEntrance
+                      "
+                      alt="denied entrance"
+                      src="../../../assets/icons/denied_entrance.svg"
+                      [matTooltip]="'ICONS.DENIED_ENTRANCE' | translate"
+                    />
+                    <img
+                      *ngIf="
+                        deviceLocation?.typeAccess ===
+                        EventTypeLabels.DeniedExit
+                      "
+                      alt="denied exit"
+                      src="../../../assets/icons/denied_exit.svg"
+                      [matTooltip]="'ICONS.DENIED_EXIT' | translate"
+                    />
+                  </div>
+                </div>
+
+                <div
+                  *ngIf="isSpotMiddleware(deviceLocation.middleware)"
+                  fxLayout="row"
+                  class="spot-battery-row"
+                >
+                  <ng-container [ngSwitch]="deviceLocation.batteryState">
+                    <img
+                      *ngSwitchCase="'LOW'"
+                      class="battery-low"
+                      alt="Low Battery"
+                      [src]="'assets/icons/Battery_Low.png'"
+                      class="image-battery battery-low"
+                    />
+                    <mat-icon
+                      *ngSwitchCase="'MEDIUM'"
+                      class="mat-icon material-icons image-battery battery-medium"
+                      role="img"
+                      aria-hidden="true"
+                      svgIcon="battery-medium"
+                    >
+                    </mat-icon>
+                    <mat-icon
+                      *ngSwitchCase="'GOOD'"
+                      class="mat-icon material-icons image-battery good-battery"
+                      role="img"
+                      aria-hidden="true"
+                    >
+                      battery_full
+                    </mat-icon>
+                  </ng-container>
+                </div>
+              </div>
+              <div
+                class="battery-isMoving-row"
+                *ngIf="
+                  isSmartBadgeOrMaxTrackMiddleware(deviceLocation.middleware)
+                "
+              >
+                <div fxLayout="row" class="smart-badge-battery-row">
+                  <div
+                    class="battery-percent"
+                    *ngIf="deviceLocation.batteryPercent"
+                  >
+                    {{ deviceLocation.batteryPercent }}%
+                  </div>
+                  <ng-container [ngSwitch]="deviceLocation.batteryState">
+                    <img
+                      *ngSwitchCase="'LOW'"
+                      class="battery-low"
+                      alt="Low Battery"
+                      [src]="'assets/icons/Battery_Low.png'"
+                      class="image-battery battery-low"
+                    />
+                    <mat-icon
+                      *ngSwitchCase="'MEDIUM'"
+                      class="mat-icon material-icons image-battery battery-medium"
+                      role="img"
+                      aria-hidden="true"
+                      svgIcon="battery-medium"
+                    >
+                    </mat-icon>
+                    <mat-icon
+                      *ngSwitchCase="'GOOD'"
+                      class="mat-icon material-icons image-battery good-battery"
+                      role="img"
+                      aria-hidden="true"
+                    >
+                      battery_full
+                    </mat-icon>
+                  </ng-container>
+                </div>
+                <div class="network-type" *ngIf="deviceLocation.networkType">
+                  <p>
+                    {{ deviceLocation.networkType }}
+                  </p>
+                </div>
+                <ng-container>
+                  <div class="person-moving">
+                    <mat-icon
+                      *ngIf="deviceLocation.isMoving; else notMoving"
+                      class="moving-row"
+                      svgIcon="person-moving-green"
+                      [matTooltip]="'HISTORIC.MOVING' | translate"
+                    ></mat-icon>
+
+                    <ng-template #notMoving>
+                      <mat-icon
+                        class="moving-row"
+                        svgIcon="person-moving-grey"
+                        [matTooltip]="'HISTORIC.STOPPED' | translate"
+                      ></mat-icon>
+                    </ng-template>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div
+              class="bus-events-info"
+              *ngIf="isBusMiddleware(deviceLocation.middleware)"
+            >
+              <div class="BusLine-event">
+                <p
+                  *ngIf="deviceLocation.line.length >= 11"
+                  [matTooltip]="deviceLocation.line"
+                >
+                  {{ deviceLocation.line | slice: 0:11 }}...
+                </p>
+                <p *ngIf="deviceLocation.line.length < 11">
+                  {{ deviceLocation.line }}
+                </p>
+                <div class="licensePlate-event">
+                  <p>{{ deviceLocation.licensePlate }}</p>
+                </div>
+              </div>
+              <div class="bus-event-direction">
+                <div
+                  class="event-direction-container"
+                  *ngIf="
+                    isBusIntegrationEvent(deviceLocation.eventType) &&
+                    deviceLocation.eventDirection
+                  "
+                >
+                  <img
+                    class="event-direction-exit"
+                    alt="exit"
+                    *ngIf="
+                      isExitingEvent(deviceLocation.eventDirection);
+                      else bus_trip_entrance
+                    "
+                    src="../../../assets/icons/exit_icon.svg"
+                    [matTooltip]="'ICONS.BUS_EVENT_EXIT' | translate"
+                  />
+                  <ng-template #bus_trip_entrance>
+                    <img
+                      class="event-direction-entrance"
+                      alt="entrance"
+                      src="../../../assets/icons/entrance_icon.svg"
+                      [matTooltip]="'ICONS.BUS_EVENT_ENTRANCE' | translate"
+                    />
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="site-name"
+            *ngIf="deviceLocation.areaName"
+            [matTooltip]="
+              deviceLocation.areaName.length > 10
+                ? deviceLocation.areaName
+                : ' '
+            "
+          >
+            <p *ngIf="deviceLocation.areaName.length >= 25">
+              {{ deviceLocation.areaName.slice(0, 25) }}...
+            </p>
+            <p *ngIf="deviceLocation.areaName.length < 25">
+              {{ deviceLocation.areaName }}
+            </p>
+            <div *ngIf="deviceLocation.valeLocations.length >= 2">
+              {{ 'LIST.MULTIPLE_FENCES' | translate }}
+              <mat-icon
+                class="header__icon icon-tooltip"
+                matTooltipClass="multiline-tooltip"
+                [matTooltip]="
+                  showValeLocations(deviceLocation.valeLocations, false)
+                "
+              >
+                info_outline
+              </mat-icon>
+            </div>
+            <div
+              *ngIf="deviceLocation.valeLocations.length < 2"
+              [matTooltip]="
+                deviceLocation.valeLocations[0].name.length > 25 &&
+                deviceLocation.valeLocations[0].index != 0
+                  ? deviceLocation.valeLocations[0].name
+                  : ''
+              "
+            >
+              <div
+                *ngIf="
+                  deviceLocation.valeLocations[0].index != 0;
+                  else indexZero
+                "
+              >
+                {{
+                  deviceLocation.valeLocations[0].name.length <= 25
+                    ? deviceLocation.valeLocations[0].name
+                    : deviceLocation.valeLocations[0].name.slice(0, 25) + '...'
+                }}
+              </div>
+              <ng-template #indexZero> - </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,455 @@
+<p class="batch-load-Breadcrumb">
+  {{ 'BREADCRUMB.HOME' | translate }} > {{ 'BREADCRUMB.DEVICES' | translate }} >
+  {{ 'BREADCRUMB.BATCH_LOAD' | translate }} >
+  <span> {{ 'BREADCRUMB.RUN_LOAD' | translate }}</span>
+</p>
+
+<div class="batch-load-container">
+  <div class="batch-load-content">
+    <div class="content-grid grid-one">
+      <div>
+        <p class="input-title">
+          {{
+            'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.DEVICE_TYPE.TITLE' | translate
+          }}
+        </p>
+        <div>
+          <select
+            class="batch-load-input input-size"
+            (ngModelChange)="changeDeviceTypeSetNullProperties()"
+            [(ngModel)]="selectedTypeDevice"
+          >
+            <option
+              *ngFor="let application of applications"
+              [value]="application.id"
+            >
+              {{ application.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <p class="input-title">
+          {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.LOAD_TYPE.TITLE' | translate }}
+        </p>
+        <div>
+          <select
+            class="batch-load-input input-size"
+            [(ngModel)]="selectLoadType"
+            (ngModelChange)="changeBatchLoadTypeSetNullProperties()"
+            placeholder="selecione"
+            [disabled]="selectedTypeDevice == null"
+            *ngIf="
+              selectedTypeDevice == this.application.SPOT ||
+              selectedTypeDevice == null
+            "
+          >
+            <option
+              *ngFor="let typeBatchLoad of LIST_TYPE_BATCH_LOAD_SPOT"
+              [value]="typeBatchLoad.id"
+            >
+              {{ typeBatchLoad.name }}
+            </option>
+          </select>
+          <select
+            class="batch-load-input input-size"
+            [(ngModel)]="selectLoadType"
+            (ngModelChange)="changeBatchLoadTypeSetNullProperties()"
+            placeholder="selecione"
+            [disabled]="selectedTypeDevice == null"
+            *ngIf="selectedTypeDevice == this.application.SMARTBADGE"
+          >
+            <option
+              *ngFor="let typeBatchLoad of LIST_TYPE_BATCH_LOAD_SMART"
+              [value]="typeBatchLoad.id"
+            >
+              {{ typeBatchLoad.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <p class="input-title">
+          {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.MOVE_DATE.TITLE' | translate }}
+        </p>
+        <div>
+          <input
+            class="batch-load-input input-size moveDate"
+            matInput
+            [matDatepicker]="picker"
+            [(ngModel)]="moveDate"
+            (ngModelChange)="checkField()"
+            ngDefaultControl
+            [max]="maxDate"
+            readonly
+            (click)="picker.open()"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+          </mat-datepicker-toggle>
+          <mat-datepicker
+            #picker
+            [(ngModel)]="moveDate"
+            (ngModelChange)="checkField()"
+            ngDefaultControl
+          ></mat-datepicker>
+        </div>
+      </div>
+
+      <div>
+        <div class="batch-layer">
+          <p class="input-title">
+            {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.FALLING.TITLE' | translate }}
+          </p>
+          <span
+            matTooltip="{{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.FALLING.TOOLTIP_DESCRIPTION'
+                | translate
+            }}"
+            matTooltipPosition="above"
+          >
+            <img src="../../../../assets/info.svg" alt="" />
+          </span>
+        </div>
+        <div>
+          <input
+            class="batch-load-input input-size"
+            matInput
+            [(ngModel)]="calledCode"
+            type="text"
+            maxlength="13"
+            (ngModelChange)="checkField()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="content-grid grid-two">
+      <div>
+        <p
+          [ngClass]="
+            managementNameValidatorView ? 'input-title-invalid' : 'input-title'
+          "
+        >
+          {{
+            'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.MANAGEMENT_NAME.TITLE'
+              | translate
+          }}
+        </p>
+        <div>
+          <input
+            [ngClass]="
+              managementNameValidatorView
+                ? 'batch-load-input-invalid input-size'
+                : 'batch-load-input input-size'
+            "
+            #focusManagamentName
+            matInput
+            (blur)="validateGroup()"
+            [(ngModel)]="management"
+            [readonly]="managementNameLoading"
+            (click)="filterManagementName()"
+            (keyup.enter)="clearEnterManagementName()"
+            (input)="filterManagementName()"
+            type="text"
+            [matAutocomplete]="MANAGEMENT_NAME"
+            [disabled]="managerDisabled()"
+            (ngModelChange)="validatorManagementName($event)"
+            maxlength="13"
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #MANAGEMENT_NAME="matAutocomplete"
+          >
+            <mat-option
+              *ngFor="let item of filterDataManagementName"
+              (click)="valueManagementName(item); focusManagamentName.blur()"
+            >
+              {{ item.code }} - {{ item.description }}
+            </mat-option>
+            <mat-option
+              *ngIf="
+                filterDataManagementName?.length == 0 && management?.length >= 1
+              "
+              >{{
+                'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.MANAGEMENT_NAME.RESULT_NOT_FOUND'
+                  | translate
+              }}
+            </mat-option>
+            <mat-option *ngIf="managementNameLoading">
+              <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+
+      <div>
+        <p
+          [ngClass]="
+            sapPlantValidatorView ? 'input-title-invalid' : 'input-title'
+          "
+        >
+          {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.SAP_PLANT.TITLE' | translate }}
+        </p>
+        <div>
+          <input
+            #focusSapplant
+            [ngClass]="
+              sapPlantValidatorView
+                ? 'batch-load-input-invalid input-size-small'
+                : 'batch-load-input input-size-small'
+            "
+            matInput
+            (blur)="validateGroup()"
+            [(ngModel)]="sapPlant"
+            [readonly]="sapPlantLoading"
+            (click)="filterSapPlant()"
+            (keyup.enter)="clearEnter()"
+            (input)="filterSapPlant()"
+            type="text"
+            [matAutocomplete]="SAP"
+            [disabled]="selectLoadType == null"
+            (ngModelChange)="checkField(); eventSapPlant($event)"
+            maxlength="4"
+          />
+          <mat-autocomplete autoActiveFirstOption #SAP="matAutocomplete">
+            <mat-option
+              *ngFor="let item of filterDataSapPlants"
+              (click)="valueSapPlant(item); focusSapplant.blur()"
+            >
+              {{ item.code }} - {{ item.description }}
+            </mat-option>
+            <mat-option
+              *ngIf="
+                filterDataSapPlants.length == 0 &&
+                sapPlant.toString().length >= 3
+              "
+              (click)="openCreateSapModal()"
+              value=""
+              >{{
+                'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.SAP_PLANT.ADD' | translate
+              }}
+              <mat-icon class="mat-18">add</mat-icon></mat-option
+            >
+            <mat-option *ngIf="sapPlantLoading">
+              <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
+            </mat-option>
+          </mat-autocomplete>
+        </div>
+      </div>
+
+      <div class="manager-email">
+        <p
+          [ngClass]="
+            managerEmailValidatorView ? 'input-title-invalid' : 'input-title'
+          "
+        >
+          {{
+            'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.GROUP_MANAGER.TITLE' | translate
+          }}
+        </p>
+        <div class="input-title-flex">
+          <input
+            class="input-size-med-small"
+            [ngClass]="
+              managerEmailValidatorView
+                ? 'batch-load-input-invalid'
+                : 'batch-load-input'
+            "
+            matInput
+            (blur)="validateGroup()"
+            [(ngModel)]="managerEmail"
+            type="text"
+            [disabled]="selectLoadType == null"
+            (ngModelChange)="checkField(); validatorManagerEmail()"
+          />
+          <span class="input-title-flex-email">{{
+            'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.GROUP_MANAGER.MANAGER_EMAIL'
+              | translate
+          }}</span>
+        </div>
+        <div
+          *ngIf="checkFirsCharacterOfManagerEmail()"
+          class="Manager-email-regex"
+        >
+          {{
+            'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.GROUP_MANAGER.MANAGER_EMAIL_DESCRIPTION'
+              | translate
+          }}
+        </div>
+      </div>
+
+      <div class="group-name">
+        <p
+          [ngClass]="
+            groupNameShowAlertView ? 'input-title-invalid' : 'input-title'
+          "
+        >
+          {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.GROUP_NAME.TITLE' | translate }}
+        </p>
+        <div>
+          <input
+            [ngClass]="
+              groupNameShowAlertView
+                ? 'batch-load-input-invalid input-size-big'
+                : 'batch-load-input input-size-big'
+            "
+            width="2px"
+            matInput
+            [(ngModel)]="groupName"
+            type="text"
+            disabled
+          />
+        </div>
+        <p *ngIf="groupNameShowAlertView" class="group-name-description">
+          {{
+            'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.GROUP_NAME.DESCRIPTION_ALERT'
+              | translate
+          }}
+        </p>
+      </div>
+    </div>
+    <div class="content-grid grid-three">
+      <div>
+        <p class="input-title">
+          {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.INVOICE.TITLE' | translate }}
+        </p>
+        <div>
+          <input
+            class="batch-load-input input-size-med"
+            matInput
+            [(ngModel)]="invoice"
+            type="text"
+            [disabled]="invoiceDisabled()"
+            (ngModelChange)="checkField()"
+          />
+        </div>
+      </div>
+
+      <div>
+        <p class="input-title">
+          {{
+            'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.INVOICE_PROVIDER.TITLE'
+              | translate
+          }}
+        </p>
+        <div>
+          <input
+            class="batch-load-input input-size-med"
+            matInput
+            [(ngModel)]="invoiceProvider"
+            type="text"
+            [disabled]="invoiceProviderDisabled()"
+            (ngModelChange)="checkField()"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <span>
+      <input
+        type="file"
+        style="display: none"
+        accept=".xls, .xlsx"
+        (change)="uploadFile($event.target)"
+        #file
+      />
+      <button
+        class="batch-load-button button-add"
+        mat-raised-button
+        (click)="addFile()"
+      >
+        {{ 'BATCH_LOAD_HOME.BUTTON.ADD_FILE' | translate }}
+      </button>
+
+      <button
+        class="batch-load-button button-run"
+        mat-raised-button
+        (click)="buildImportDeviceObject()"
+        [disabled]="
+          !(enableButton && this.fileData) ||
+          loadingPage ||
+          sapPlantValidatorView ||
+          managerEmailValidatorView ||
+          mandatoryManager()
+        "
+      >
+        {{ 'BATCH_LOAD_HOME.BUTTON.RUN_LOAD' | translate }}
+      </button>
+      <span *ngIf="loadingPage">
+        <i aria-hidden="true" class="mdi mdi-loading mdi-36px mdi-spin"></i>
+      </span>
+    </span>
+  </div>
+  <div *ngIf="fileData != null">
+    <a class="trash-excel" (click)="clearFile()">
+      <img src="../../../../assets/fa-trash-o.svg" alt="" />
+    </a>
+    <span class="name-excel">
+      {{ fileData.name }}
+    </span>
+  </div>
+  <div *ngIf="fileData != null && batchSuccess == true">
+    <span class="load-success-message">
+      <a class="icon-padding">
+        <mat-icon class="load-success-message">check_circle</mat-icon>
+      </a>
+      {{ 'BATCH_LOAD_HOME.LOAD_SUCCESS.ONE' | translate }}
+      "{{ fileData.name }}"
+      {{ 'BATCH_LOAD_HOME.LOAD_SUCCESS.TWO' | translate }}
+    </span>
+  </div>
+  <div class="load-failed-message" *ngIf="batchSuccess == false">
+    <a class="icon-padding">
+      <img src="../../../../assets/redclose.svg" alt="" />
+    </a>
+    <span>{{ 'BATCH_LOAD_HOME.LOAD_FAILED' | translate }}</span>
+  </div>
+  <div class="load-failed-message" *ngIf="errorMessage != ''">
+    <a class="icon-padding">
+      <img src="../../../../assets/redclose.svg" alt="" />
+    </a>
+    <span>{{ errorMessage }}</span>
+  </div>
+  <div class="load-instructions">
+    <span *ngIf="enableExport">
+      <button
+        class="export-load-log-button button-export"
+        mat-raised-button
+        (click)="openExportLoadLogModal()"
+      >
+        <em class="mdi mdi-upload button-icon"></em>
+        {{ 'BATCH_LOAD_HOME.BUTTON.EXPORT_LOAD_LOG' | translate }}
+      </button>
+    </span>
+
+    <p class="load-instructions-p">
+      {{ 'BATCH_LOAD_HOME.INSTRUCTIONS.TITLE' | translate }}
+    </p>
+
+    <div class="name-excel">
+      <p>{{ 'BATCH_LOAD_HOME.INSTRUCTIONS.DESCRIPTION_ONE' | translate }}</p>
+      {{ 'BATCH_LOAD_HOME.INSTRUCTIONS.DESCRIPTION_TWO' | translate }}
+    </div>
+    <div>
+      <img
+        class="image-example"
+        src="../../../../assets/exemplo-import-devices.jpg"
+        alt=""
+      />
+      <img
+        class="image-example"
+        src="../../../../assets/exemplo-aba-import-devices.png"
+        alt=""
+      />
+    </div>
+  </div>
+</div>
+<div *ngIf="isLoadingGroup" class="spinner-container"></div>
+<div *ngIf="isLoadingGroup" class="card">
+  <div class="spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</div>

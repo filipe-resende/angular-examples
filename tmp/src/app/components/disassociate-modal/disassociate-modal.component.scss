@@ -1,0 +1,14 @@
+@import '../../scss/vale.variables';
+
+app-button-outline {
+  margin-right: 10px;
+}
+
+.noMargin {
+  margin-bottom: 0 !important;
+}
+
+.modal-header,
+.modal-body {
+  font-family: $font-body1;
+}

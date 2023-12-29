@@ -1,0 +1,32 @@
+<div class="container-div">
+  <div class="header-container">
+    <h3 class="title">
+      {{ 'EXPORTATION_MODAL.TITLE' | translate }}
+      <button
+        type="button"
+        class="close pull-right"
+        aria-label="Close"
+        (click)="onClose()"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </h3>
+  </div>
+  {{ 'EXPORTATION_MODAL.SUBTITLE' | translate }} <br />
+  <div class="flex-align-center line-style">
+    <span class="mdi mdi-email-outline icon"></span>
+    {{ data.recipientEmailAddress }}<br />
+  </div>
+  <div class="flex-align-center">
+    <span class="mdi mdi-information icon"></span>
+    {{ 'EXPORTATION_MODAL.ATTENTION' | translate }}
+  </div>
+  <hr class="line_separation" />
+  <app-action-button
+    [ngClass]="['blue', 'full-width']"
+    [labelClass]="'blue-label'"
+    (action)="onClickHandle()"
+  >
+    <span>{{ 'EXPORTATION_MODAL.SEND' | translate }}</span>
+  </app-action-button>
+</div>

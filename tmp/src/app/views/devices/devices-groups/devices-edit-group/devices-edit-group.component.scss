@@ -1,0 +1,467 @@
+@import '../../../../scss/vale.variables';
+
+div,
+p,
+h1,
+h3 {
+  margin: 0px;
+  padding: 0px;
+}
+
+.breadCrumbs {
+  padding-top: 10px;
+  padding-left: 59px;
+  font-family: $font-body1;
+  font-size: 12px;
+  color: $greyVale80;
+
+  span {
+    color: #252727;
+  }
+}
+
+.main-device-edit {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.editGroup-info {
+  font-family: $font-body1;
+  padding: 18px 56px 12px 56px;
+  display: grid;
+  grid-template-columns: 3.5fr 1fr;
+  gap: 30px;
+
+  .info-name-count {
+    .name-group {
+      font-family: $font-body1-bold;
+      font-size: 22px;
+      color: #252727;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .count-info {
+      display: flex;
+      margin: 10px 0 15px;
+
+      .member-count {
+        margin-right: 35px;
+      }
+    }
+  }
+
+  .info-devices-export {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    align-items: center;
+  }
+}
+
+.count {
+  font-size: 14px;
+  color: #697489;
+
+  span {
+    font-family: $font-body1-bold;
+  }
+}
+
+.button {
+  font-family: $font-body1-medium;
+  font-size: 14px;
+  line-height: 24px;
+  color: $white;
+  padding: 7px 10px;
+  background-color: $violetVale;
+  border-radius: 2px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &:disabled {
+    background-color: $greyVale40;
+    color: $greyVale80;
+  }
+}
+
+.container-edit {
+  display: grid;
+  grid-template-columns: 3.5fr 1fr;
+  gap: 12px 30px;
+  font-family: $font-body1;
+  padding: 0px 56px 5px 56px;
+
+  .container-add-members,
+  .container-device-search,
+  .container-info-members {
+    background-color: $white;
+    box-shadow: -1px 1px 2px rgba(67, 70, 74, 0.0001),
+      -2px 2px 5px rgba(67, 86, 100, 0.123689);
+    border-radius: 8px;
+  }
+
+  .container-add-members {
+    padding: 18px 0px 30px 22px;
+
+    h3 {
+      font-family: $font-body1-bold;
+      color: #697489;
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 18px;
+    }
+
+    .button {
+      padding: 6px 14px;
+    }
+  }
+
+  .container-device-search {
+    grid-row: span 2;
+    padding: 18px 20px;
+
+    .search-title {
+      font-family: $font-body1-bold;
+      color: #697489;
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 18px;
+    }
+
+    .number-device-input,
+    .type-device-select {
+      height: 36px;
+      border-radius: 2px;
+      border: 1px solid #e7e8e8;
+      color: $greyVale80;
+      background-color: $white;
+      padding: 4px 8px;
+      font-size: 14px;
+      font-family: $font-body1;
+      letter-spacing: 1px;
+
+      &:focus,
+      &:active {
+        border-color: $greyVale20;
+        outline: none;
+        background-color: $white;
+        color: #000000;
+      }
+    }
+
+    .type-device {
+      margin-bottom: 16px;
+
+      .type-device-title {
+        font-size: 14px;
+        line-height: 22px;
+        color: #959dac;
+      }
+
+      .type-device-select {
+        width: 100%;
+      }
+    }
+
+    .search-number-device {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      width: 100%;
+      gap: 14px;
+    }
+  }
+
+  .container-info-members {
+    min-height: 600px;
+    padding: 15px 20px;
+
+    .container-info-members-title {
+      font-family: $font-body1-bold;
+      color: #697489;
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+
+  .device-no-result-spinner {
+    margin-top: 30px;
+
+    mat-spinner {
+      margin: 0 auto;
+    }
+  }
+
+  .device-result {
+    margin-top: 20px;
+
+    .device-result-title {
+      font-family: $font-body1;
+      font-size: 14px;
+      line-height: 22px;
+      color: #959dac;
+
+      .title-line {
+        margin-top: 10px;
+      }
+    }
+
+    .device-association-result {
+      margin-top: 20px;
+
+      .device-association-notFound {
+        font-family: $font-body1-bold;
+        font-size: 12px;
+        line-height: 14px;
+        color: $greyVale80;
+      }
+
+      .device-associated-thing {
+        .associated-thing-data {
+          font-family: $font-body1-bold;
+          font-size: 12px;
+          line-height: 14px;
+          color: $greyVale80;
+
+          .associated-thing-source-infos {
+            display: flex;
+            margin-top: 10px;
+            letter-spacing: 0.45px;
+
+            .source-info-value {
+              margin-left: 5px;
+              font-family: $font-body1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+table {
+  margin-top: 19px;
+  box-shadow: none;
+  table-layout: auto;
+  width: 100%;
+  overflow-y: auto;
+
+  .Name,
+  .Email,
+  .MemberType {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: left;
+    color: #252727;
+  }
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+td {
+  text-align: center;
+
+  span {
+    color: $greyVale80;
+    font-size: 14px;
+    line-height: 30px;
+  }
+}
+
+::ng-deep .mat-column-name .mat-sort-header-container {
+  justify-content: left !important;
+}
+
+.td-thing-name {
+  text-align: left;
+}
+
+tr > th {
+  border-bottom: 1px solid black;
+}
+
+/* width */
+::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $violetVale;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $violetVale;
+  border-radius: 10px;
+}
+
+.member-group-form {
+  .member-form {
+    display: flex;
+    align-items: end;
+
+    .member-name,
+    .member-email {
+      margin-right: 15px;
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-family: $font-body1;
+        font-size: 14px;
+        line-height: 22px;
+        color: $greyVale80;
+        margin-bottom: 0px;
+      }
+
+      input {
+        width: 165px;
+        height: 36px;
+        color: $greyVale40;
+        background: $white;
+        border: 1px solid $greyVale40;
+        border-radius: 2px;
+        padding-left: 10px;
+      }
+
+      .input-disabled {
+        color: #959dac;
+        background-color: $greyVale20;
+      }
+
+      .member-email-field {
+        display: flex;
+        align-items: center;
+
+        .email-complement {
+          margin-left: 10px;
+          font-family: $font-body1;
+          font-size: 14px;
+          line-height: 22px;
+
+          color: $greyVale80;
+        }
+      }
+    }
+
+    .member-type {
+      margin-right: 10px;
+
+      .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+        border-color: $violetVale;
+      }
+
+      .mat-radio-button {
+        margin-right: 10px;
+      }
+    }
+
+    .action-buttons {
+      .clear {
+        background-color: $violetVale;
+        color: $white;
+        border-radius: 2px;
+        border: 1px solid $violetVale;
+        margin-right: 10px;
+        width: 87px;
+        height: 36px;
+      }
+
+      .save {
+        background-color: $white;
+        color: $violetVale;
+        border-radius: 2px;
+        border: 1px solid $violetVale;
+        width: 87px;
+        height: 36px;
+      }
+
+      .disabled-save {
+        background-color: #d1d5db;
+        color: #959dac;
+        border-radius: 2px;
+        border: 1px solid #d1d5db;
+        width: 87px;
+        height: 36px;
+      }
+    }
+  }
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: $greyVale80;
+  /*inner circle color change*/
+}
+
+::ng-deep.mat-radio-button.mat-accent.mat-radio-checked
+  .mat-radio-outer-circle {
+  border-color: $violetVale;
+  /*outer ring color change*/
+}
+
+::ng-deep .mat-radio-label {
+  .mat-radio-label-content {
+    padding-left: 5px;
+  }
+
+  font-family: $font-body1;
+  font-size: 14px;
+  line-height: 22px;
+  color: $greyVale80;
+}
+
+.spinner-container {
+  background-color: #252727;
+  opacity: 0.7;
+  position: absolute;
+  top: 0;
+  height: -webkit-fill-available;
+  width: -webkit-fill-available;
+}
+
+.card {
+  background-color: white;
+  width: 100px;
+  opacity: 1;
+  height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  .spinner {
+    margin: 30px auto;
+  }
+}
+
+.remove-member-button {
+  border: none;
+  background: transparent;
+}
+
+.return-action {
+  display: flex;
+  align-items: end;
+  padding-top: 10px;
+  padding-left: 59px;
+  font-family: $font-body1;
+  font-size: 16px;
+  color: #3d7edb;
+}
+
+.go-back-icon,
+.go-back {
+  cursor: pointer;
+}

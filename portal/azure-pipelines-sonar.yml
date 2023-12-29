@@ -1,0 +1,65 @@
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  sonarqubeServiceConnection: 'Sonarqube'
+  workingDir: $(Build.SourcesDirectory)/
+  projectKey: 'Vale.GAP.Portal'
+jobs:
+  - job: BuildAndSonar
+    displayName: 'Build and Sonar'
+    pool: 
+      vmImage: ubuntu-latest
+    steps:
+      - task: SonarQubePrepare@5
+        inputs:
+          scannerMode: 'CLI'
+          configMode: 'manual'
+          cliprojectKey: $(projectKey)
+          cliprojectName: 'Vale GAP Portal'
+          cliSources: $(workingDir)
+          SonarQube: $(sonarqubeServiceConnection)
+          extraProperties: 'sonar.typescript.lcov.reportPaths=coverage/lcov.info'
+
+      - task: Npm@1
+        displayName: 'npm install'
+        inputs:
+          command: 'custom'
+          customCommand: 'install'
+
+      - task: Npm@1
+        displayName: 'run tests'
+        inputs:
+          command: 'custom'
+          customCommand: 'run test'
+
+      - task: SonarQubeAnalyze@5
+
+      - task: SonarQubePublish@5
+        inputs:
+          pollingTimeoutSec: '300'
+
+      - task: sonar-buildbreaker@8
+        inputs:
+          SonarQube: $(sonarqubeServiceConnection)
+  - job: LeanIXSonarqubeIntegration
+    dependsOn: BuildAndSonar
+    condition: succeeded()
+    continueOnError: true
+    displayName: 'LeanIX Sonarqube Integration'
+    pool: 'AutorizadorBD'
+    
+    steps:
+      - task: LeanIXSonarQube@0
+        continueOnError: true
+        inputs:
+          leanixAuthToken: '$(leanixAuthToken)'
+          sonarAuthToken: '$(sonarAuthToken)'
+          db_username: 'adminvale'
+          db_password: '$(SONARLEAN_DB_PASSWORD)'
+          db_host: 'rdb-lix-prd.database.windows.net'
+          db_name: 'BDLIX_PRD'
+          buildPipelineID: '$(System.DefinitionId)'
+          projectName: '$(System.TeamProject)'  

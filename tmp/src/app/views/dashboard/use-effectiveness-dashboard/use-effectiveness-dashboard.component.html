@@ -1,0 +1,57 @@
+<div class="dashboardUse-main">
+  <div class="info-spot">
+    <div class="box boxOne-Spot">
+      <p class="boxOne-title">
+        {{ 'DASHBOARD_EFFECTIVENESS.SPOT' | translate }}
+      </p>
+    </div>
+  </div>
+  <div class="info-smart">
+    <div class="box boxOne-Smart">
+      <p class="boxOne-title">
+        {{ 'DASHBOARD_EFFECTIVENESS.SMART_BADGE' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="box">
+    <app-table-effectiveness
+      dashName="{{
+        'DASHBOARD_EFFECTIVENESS.AVAILABILITY_LOCATION' | translate
+      }}"
+      applicationName="{{ 'DASHBOARD_EFFECTIVENESS.SPOT' | translate }}"
+      [columnsName]="AvailabilityByLocationColumn"
+      [thingsEmailListData]="autoCompleteThingsEmail"
+      [sapPlantListData]="autoCompleteSapPlants"
+      [managementListData]="autoCompleteManagements"
+      [dataAll]="ActiveNotTransmittingDevicesSpotTable"
+      *ngIf="!activeNotTransmittingLoading; else activeNotTransmitting"
+    >
+    </app-table-effectiveness>
+    <ng-template #activeNotTransmitting>
+      <div class="graph-no-result-spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+
+  <div class="box">
+    <app-table-effectiveness
+      dashName="{{
+        'DASHBOARD_EFFECTIVENESS.AVAILABILITY_LOCATION' | translate
+      }}"
+      applicationName="{{ 'DASHBOARD_EFFECTIVENESS.SMART_BADGE' | translate }}"
+      [columnsName]="AvailabilityByLocationColumn"
+      [dataAll]="ActiveNotTransmittingDevicesSmartBadgeTable"
+      [thingsEmailListData]="autoCompleteThingsEmail"
+      [sapPlantListData]="autoCompleteSapPlants"
+      [managementListData]="autoCompleteManagements"
+      *ngIf="!activeNotTransmittingLoading; else activeNotTransmitting"
+    ></app-table-effectiveness>
+    <ng-template #activeNotTransmitting>
+      <div class="graph-no-result-spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="header-notification-container">
+  <img
+    src="assets/icons/Notification2.png"
+    alt="not"
+    *ngIf="!isActiveTab() && (hasNotifications$ | async)"
+  />
+  <img
+    src="assets/icons/Notification1.png"
+    alt="not"
+    *ngIf="!isActiveTab() && !(hasNotifications$ | async)"
+    class="rotate"
+  />
+  <img
+    src="assets/icons/BoldNotification.png"
+    alt="not"
+    *ngIf="isActiveTab()"
+  />
+</div>

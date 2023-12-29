@@ -1,0 +1,11 @@
+<div
+  class="message-container"
+  [ngStyle]="{
+    'background-color': type == 'alert' ? '#bb133e' : '#3D7EDB'
+  }"
+>
+  <div *ngIf="!hideIcon" class="material-icons" style="color: white; font-size: 20px; height: 20px">
+    {{ type == "alert" ? "report" : "info" }}
+  </div>
+  <ng-content></ng-content>
+</div>

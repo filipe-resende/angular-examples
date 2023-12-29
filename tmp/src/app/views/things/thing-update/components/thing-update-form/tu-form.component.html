@@ -1,0 +1,240 @@
+<form class="form" #updateThings="ngForm">
+  <div class="tu-information">
+    <div class="tu-description-group">
+      <div class="tu-form-group">
+        <label class="tu-label tu-block">{{
+          'THING_UPDATE.NAME' | translate
+        }}</label>
+        <input
+          class="tu-input"
+          name="name"
+          [(ngModel)]="name"
+          required
+          autocomplete="off"
+          [disabled]="!isEditingAllowed || this.isEditable"
+        />
+      </div>
+
+      <div class="tu-form-group-relationType">
+        <label class="tu-label-relationType tu-block-relationType"
+          >{{ 'THING_UPDATE.RELATION_TYPE' | translate }}
+        </label>
+        <select
+          name="type"
+          [(ngModel)]="selectedRelationType"
+          class="tu-input dropdown"
+          [disabled]="!isEditingAllowed || this.isEditable"
+          required
+        >
+          <option
+            *ngFor="let type of relationTypeKeys"
+            [value]="type"
+            [disabled]="!isEditingAllowed || this.isEditable"
+          >
+            {{
+              type === dropDownRelationType['NaoIdentificado']
+                ? notIdentifiedUser
+                : dropDownRelationType[type]
+            }}
+          </option>
+        </select>
+      </div>
+
+      <div class="tu-form-group">
+        <label class="tu-label tu-block"
+          >{{ 'THING_UPDATE.COMPANY_NAME' | translate }}
+        </label>
+        <input
+          class="tu-input"
+          name="companyName"
+          [(ngModel)]="companyName"
+          autocomplete="off"
+          [disabled]="!isEditingAllowed || this.isEditable"
+        />
+      </div>
+
+      <div class="tu-form-group tu-imput-description">
+        <label class="tu-label tu-block">{{
+          'THING_UPDATE.DESCRIPTION' | translate
+        }}</label>
+        <textarea
+          class="tu-textArea"
+          name="description"
+          [(ngModel)]="description"
+          autocomplete="off"
+          [disabled]="!isEditingAllowed || this.isEditable"
+          [rows]="3"
+        ></textarea>
+      </div>
+
+      <div *ngIf="!this.isEditable" class="createdByIntegration">
+        <label
+          [innerHtml]="originInformation"
+          class="tu-form-group tu-block-relationType tu-block-integration"
+        >
+        </label>
+      </div>
+      <div *ngIf="this.isEditable" class="createdByIntegration">
+        <label
+          [innerHtml]="originInformation"
+          class="tu-form-group tu-block-relationType tu-block-integration securityCenter"
+        >
+        </label>
+        <mat-icon
+          class="info-icon"
+          [matTooltip]="'THING_UPDATE.TOOLTIP_TEXT' | translate"
+        >
+          info
+        </mat-icon>
+      </div>
+    </div>
+
+    <div class="tu-documents-group tu-margin-top-medium">
+      <div class="Editing-group" *ngIf="isEditingAllowed">
+        <div class="tu-documents-title">
+          {{ 'THING_UPDATE.TYPE' | translate }}
+        </div>
+        <mat-radio-group
+          name="this.primaryKey"
+          [(ngModel)]="this.primaryKey"
+          [disabled]="this.originalThingHasDocument"
+        >
+          <mat-radio-button value="{{ document.CPF }}">
+            {{ 'THING_UPDATE.SOURCE_TYPE_CPF' | translate }}
+            <div class="tu-documents-subInfo">
+              {{ 'THING_UPDATE.COMPLEMENTARY_SOURCE_TYPE_CPF' | translate }}
+            </div>
+          </mat-radio-button>
+          <mat-radio-button value="{{ document.PASSPORT }}">
+            {{ 'THING_UPDATE.SOURCE_TYPE_PASSPORT' | translate }}
+            <div class="tu-documents-subInfo">
+              {{
+                'THING_UPDATE.COMPLEMENTARY_SOURCE_TYPE_PASSPORT' | translate
+              }}
+            </div>
+          </mat-radio-button>
+        </mat-radio-group>
+
+        <div
+          class="tu-form-group tu-inline-group"
+          *ngIf="this.primaryKey == document.CPF"
+        >
+          <input
+            mask="000.000.000-00"
+            name="CPF"
+            #cpf
+            [ngModel]="sourceValueCPF"
+            (ngModelChange)="updateSourceInfos(cpf.value, cpf.name)"
+            class="tu-input"
+            autocomplete="off"
+            [disabled]="this.isEditable"
+          />
+        </div>
+        <div
+          class="tu-form-group tu-inline-group"
+          *ngIf="this.primaryKey == document.PASSPORT"
+        >
+          <input
+            class="tu-input"
+            name="PASSPORT"
+            #PASSPORT
+            [ngModel]="sourceValuePASSPORT"
+            (ngModelChange)="updateSourceInfos(PASSPORT.value, PASSPORT.name)"
+            maxlength="40"
+            autocomplete="off"
+            [disabled]="this.isEditable"
+          />
+        </div>
+      </div>
+      <div class="tu-documents-title" style="margin-top: 35px">
+        {{ 'THING_UPDATE.COMPLEMENTARY_TYPE' | translate }}
+      </div>
+      <div class="tu-form-group tu-inline-group">
+        <label class="tu-label tu-inline">{{
+          'THING_UPDATE.SOURCE_TYPE_IAM' | translate
+        }}</label>
+        <input
+          class="tu-input"
+          name="IAMID"
+          #IAM
+          [ngModel]="sourceValueIAM"
+          (ngModelChange)="updateSourceInfos(IAM.value, IAM.name)"
+          maxlength="40"
+          autocomplete="off"
+          [disabled]="!isEditingAllowed || this.isEditable"
+        />
+      </div>
+      <div>
+        <div *ngIf="this.activeUser">
+          <label
+            [innerHtml]="'THING_UPDATE.ACTIVE_STATUS' | translate"
+            class="tu-block-relation-type-when-active"
+          >
+          </label>
+        </div>
+        <div *ngIf="!this.activeUser">
+          <label
+            [innerHtml]="'THING_UPDATE.DISABLED_STATUS' | translate"
+            class="tu-form-group tu-block-relation-type-when-inactive tu-block-integration"
+          >
+          </label>
+        </div>
+      </div>
+      <div>
+        <div
+          class="tu-button-save"
+          *ngIf="isEditingAllowed && !this.isEditable"
+        >
+          <div class="tu-reactivate-subscription" *ngIf="activeUser">
+            <app-action-button
+              (action)="handleOnSubmit()"
+              [ngClass]="['blue', 'small']"
+              [labelClass]="'blue-label'"
+            >
+              {{ 'THING_UPDATE.SAVE_BUTTON' | translate }}
+            </app-action-button>
+          </div>
+        </div>
+        <div class="tu-reactivate-subscription" *ngIf="activeUser == false">
+          <div class="tu-button-reactivate-subscription">
+            <app-action-button
+              [disabled]="!isEditingAllowed"
+              (action)="openReactivationSubscriptionDialog()"
+              [ngClass]="['blue', 'large']"
+              [ngClassDisabled]="['grey', 'large']"
+              [labelClass]="'blue-label'"
+            >
+              {{ 'THING_UPDATE.REACTIVATE_SUBSCRIPTION' | translate }}
+            </app-action-button>
+          </div>
+          <mat-icon
+            [matTooltip]="
+              'THING_UPDATE.REACTIVATION_BUTTON_TOOLTIP' | translate
+            "
+          >
+            info_outline
+          </mat-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-content select="app-info-cards"></ng-content>
+
+  <div class="tu-form-date-container">
+    <div class="tu-form-date-title">
+      {{ 'THING_UPDATE.HISTORIC_DEVICES_ASSOCIATED.TITLE' | translate }}
+    </div>
+
+    <div class="tu-form-date-menu">
+      <i class="mdi mdi-calendar-text-outline tu-form-calendar"></i>
+
+      <ng-content select="div.first-picker"></ng-content>
+
+      <i class="mdi mdi-arrow-right tu-form-arrow-right"></i>
+
+      <ng-content select="div.last-picker"></ng-content>
+    </div>
+  </div>
+</form>
+<ng-content select="app-thing-history"></ng-content>

@@ -1,0 +1,13 @@
+<div>
+  <div class="perimeters-delete-confirmation-dialog">
+    {{ "PERIMETERS.SURE_TO_DELETE" | translate }}
+  </div>
+  <div class="perimeters-delete-confirmation-dialog-button-container">
+    <app-button [primary]="false" (onClick)="closeDialog()">
+      {{ "MAIN.CANCEL" | translate }}
+    </app-button>
+    <app-button (onClick)="confirmPerimeterDeletion()">
+      {{ "MAIN.DELETE" | translate }}
+    </app-button>
+  </div>
+</div>

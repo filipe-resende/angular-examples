@@ -1,0 +1,20 @@
+<section class="modal-confirmation-container">
+  <div class="modal-confirmation-close-button" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <div class="modal-confirmation-subtitle">
+    <p class="custom-message">{{ message | translate }}</p>
+    <p class="confirmation-message">
+      {{ 'PANIC_BUTTON.CONFIRMATION_MESSAGE' | translate }}
+    </p>
+  </div>
+</section>
+<div class="modal-confirmation-buttons-container">
+  <button class="cancel-button" (click)="onClose()">
+    {{ 'MAIN.CANCEL' | translate }}
+  </button>
+  <button class="confirm-button" (click)="onConfirm()">
+    {{ 'MAIN.CONFIRM' | translate }}
+  </button>
+</div>

@@ -1,0 +1,27 @@
+@import '../../../../scss/vale.variables';
+
+.confirm-sapPlant {
+  padding: 8px;
+  display: grid;
+  grid-template-columns: auto;
+}
+
+.close {
+  justify-self: end;
+}
+
+.confirm-sapPlant img {
+  display: block;
+}
+
+.confirm {
+  margin-bottom: 18px;
+}
+
+.confirm-sapPlant p {
+  font-family: $font-body1;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  color: #697489;
+}

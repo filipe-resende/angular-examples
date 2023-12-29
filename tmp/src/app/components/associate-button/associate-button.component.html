@@ -1,0 +1,10 @@
+<app-action-button
+  [ngClass]="['blue', 'small']"
+  [labelClass]="'blue-label'"
+  [ngClassDisabled]="['grey', 'small']"
+  [labelClassDisabled]="'grey-label'"
+  [disabled]="deviceInfo === null || isDisabled"
+  (action)="associateDevice(deviceInfo)"
+>
+  <span translate>DEVICE_LIST.ASSOCIATE_BUTTON</span>
+</app-action-button>

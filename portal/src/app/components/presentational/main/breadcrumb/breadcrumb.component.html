@@ -1,0 +1,8 @@
+<div class="breadcrumb" *ngIf="isVisible">
+  <div *ngFor="let breadcrumbItem of stack; let i = index" class="breadcrumb-item">
+    <a (click)="onBreadcrumbItemClick(breadcrumbItem)">
+      {{ breadcrumbItem.text | translate }}
+    </a>
+    <mat-icon *ngIf="i < stack.length - 1">chevron_right</mat-icon>
+  </div>
+</div>

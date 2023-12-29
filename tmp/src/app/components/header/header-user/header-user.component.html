@@ -1,0 +1,17 @@
+<section class="app-header-menu" #header>
+  <main class="app-header-menu__user-info">
+    <div class="app-header-menu__user-info__name">
+      {{ userInfo.UserFullName }}
+    </div>
+    <div class="app-header-menu__user-info__last-login">
+      {{ 'HOME.LAST_LOGIN_TIME' | translate }} {{ userInfo.lastLoginTime }}
+    </div>
+    <div class="app-header-menu__user-info__last-login">
+      {{ 'HOME.STANDARD_TIME_BRASILIA' | translate }}
+    </div>
+  </main>
+  <i
+    (click)="openUserMenuOverlay(header)"
+    class="mdi mdi-chevron-down app-header-menu__dropdown"
+  ></i>
+</section>

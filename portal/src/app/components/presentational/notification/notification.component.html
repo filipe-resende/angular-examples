@@ -1,0 +1,26 @@
+<div id="notification-container" [ngClass]="config.positionClass">
+  <div [ngClass]="notificationClasses">
+    <mat-icon
+      style="
+        color: white;
+        font-size: 16px;
+        height: 16px;
+        width: 16px;
+        margin-right: 8px;
+        cursor: pointer;
+      "
+      (click)="remove()"
+    >
+      cancel
+    </mat-icon>
+    <div
+      *ngIf="title"
+      class="notification-title"
+      [attr.aria-label]="title"
+      [ngClass]="config.titleClass"
+    >
+      {{ title }}
+    </div>
+    <div *ngIf="message" [innerHTML]="message" [ngClass]="config.messageClass"></div>
+  </div>
+</div>

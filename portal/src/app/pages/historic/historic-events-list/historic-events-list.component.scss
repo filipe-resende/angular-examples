@@ -1,0 +1,208 @@
+.events-list {
+  border-top: 1px solid #c7c8c9;
+  margin: 0 24px;
+}
+
+.events-list-content {
+  margin-top: 20px;
+}
+
+.device-event-properties {
+  width: 115px;
+}
+
+.event {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 20px;
+  margin-right: 0px;
+  position: relative;
+  font-family: 'Roboto';
+  font-size: 12px;
+  color: #909193;
+  cursor: pointer;
+
+  p {
+    line-height: 19px;
+  }
+
+  .event-field {
+    margin-right: 10px;
+  }
+
+  .date-event {
+    min-width: 50px;
+    max-width: 85px;
+  }
+
+  .network-type {
+    position: relative;
+    top: 3px !important;
+  }
+
+  .person-moving {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    right: -6px !important;
+    bottom: 23px;
+  }
+
+  .device-event {
+    width: 100px;
+  }
+
+  .smart-badge-event {
+    width: 83px;
+  }
+
+  .latLong-event {
+    p {
+      text-decoration-line: underline;
+    }
+  }
+}
+
+.site-name {
+  position: relative;
+}
+
+.bar > li.line:last-of-type {
+  height: 0;
+}
+
+.timeline-properties {
+  flex-basis: 25px;
+
+  .line {
+    flex-basis: 25px;
+    position: absolute;
+    left: 2px;
+    top: 10px;
+    content: '';
+    border-left: 2px solid #697489;
+    margin-left: 8.5px;
+    height: 95%;
+
+    &.selected {
+      top: 14px;
+    }
+  }
+
+  .timeline-circle {
+    height: 20px;
+    width: 19px;
+    text-align: center;
+    padding-left: 2px;
+  }
+}
+
+.rounded-circle {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.selected {
+    background-color: #3d7edb;
+    height: 16px;
+    width: 16px;
+  }
+}
+
+.bar {
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  max-height: calc(40vh - 120px);
+}
+.spot-battery-row {
+  .battery-low {
+    height: 13px;
+    margin-top: 2px;
+    margin-left: 2px;
+  }
+
+  .battery-medium {
+    font-size: 15px;
+    height: 14px;
+    width: 14px;
+  }
+
+  .good-battery {
+    font-size: 15px;
+    height: 19px;
+    width: 12px;
+  }
+}
+
+.smart-badge-battery-row {
+  .battery-percent {
+    font-size: 14px;
+  }
+
+  .battery-low {
+    height: 14px;
+  }
+
+  .battery-medium {
+    height: 14px;
+    font-size: 14px;
+    width: 12px;
+  }
+
+  .good-battery {
+    height: 16px;
+    font-size: 16px;
+  }
+}
+
+.battery-isMoving-row {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+
+  .battery-row,
+  .smart-badge-battery-row {
+    display: flex;
+    align-items: center;
+  }
+
+  .moving-row {
+    margin-top: 0;
+    width: 13px;
+  }
+}
+
+.device-event-identifier-eventId {
+  margin-right: 5px;
+  margin-bottom: 0 !important;
+}
+
+.device-event-identifier-spot {
+  display: flex;
+}
+
+.licensePlate-event {
+  margin-right: 5px;
+}
+
+.event-facial-security-with-direction {
+  display: flex;
+  p {
+    margin-right: 5px;
+  }
+}
+
+.bus-events-info {
+  display: flex;
+}
+
+.event-direction-container {
+  margin-left: 5px;
+}
+
+.icon-tooltip {
+  vertical-align: middle;
+}

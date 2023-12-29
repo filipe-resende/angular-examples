@@ -1,0 +1,180 @@
+@import '../../../scss/vale.variables';
+
+p {
+  margin: 0px;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+.parent-close {
+  position: relative;
+}
+
+.parent {
+  display: grid;
+  grid-template-columns: 45px auto;
+  grid-column-gap: 10px;
+  border-bottom: 1px solid #edeef0;
+  .icon {
+    margin-top: 24px;
+    margin-left: 24px;
+    margin-bottom: 14px;
+  }
+  .title {
+    grid-area: 1 / 2;
+    margin-top: 24px;
+    margin-left: 24px;
+    height: 24px;
+    width: 196px;
+    border-radius: nullpx;
+    font-family: $font-body1;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+    display: flex;
+    color: #697489;
+  }
+  .second-title {
+    grid-area: 2 / 1;
+    margin-left: 24px;
+    margin-bottom: 19px;
+    height: 24px;
+    font-family: $font-body1;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    color: #697489;
+  }
+}
+
+.first-text {
+  margin-top: 22px;
+  margin-left: 30px;
+  width: 421px;
+  height: 21px;
+  font-family: $font-body1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #697489;
+}
+
+.background-red {
+  margin-top: 13px;
+  margin-left: 30px;
+  width: 421px;
+  height: 39px;
+  background: rgba(187, 19, 62, 0.16);
+  border-radius: 4px;
+}
+
+.second-text {
+  margin-left: 39px;
+  margin-top: -18px;
+  height: 22px;
+  width: 304px;
+  border-radius: nullpx;
+  font-family: $font-body1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: #bb133e;
+}
+
+.redclose {
+  margin-left: 12px;
+  margin-top: 12px;
+  height: 16px;
+  width: 16px;
+  border-radius: 0px;
+}
+
+.third-text {
+  margin-top: 25px;
+  margin-left: 30px;
+  width: 260px;
+  height: 24px;
+  font-family: $font-body1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #697489;
+}
+
+.third-text span {
+  font-family: $font-body1;
+  font-weight: 700;
+}
+
+.forth-text {
+  margin-top: 9px;
+  margin-left: 30px;
+  width: 421px;
+  height: 70px;
+  font-family: $font-body1;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  color: #697489;
+}
+
+.line-div {
+  margin-top: 25px;
+  border-bottom: 1px solid #edeef0;
+}
+
+.grayinfo {
+  margin-left: 30px;
+  margin-top: 19px;
+}
+
+.info-text {
+  margin-top: -17px;
+  margin-left: 55px;
+  height: 16px;
+  right: 45.32%;
+  font-family: $font-body1;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #acadae;
+}
+
+.line-div-info {
+  margin-top: 20px;
+  border-bottom: 1px solid #edeef0;
+}
+
+.export-button {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: stretch;
+  height: 48px;
+  width: 481px;
+  font-size: 14px;
+}
+
+.buttonEmail {
+  height: 49px;
+  width: 240px;
+  color: #3d7edb;
+  border: none;
+  background: transparent;
+  font-family: $font-body1;
+}
+
+.buttonDownload {
+  height: 49px;
+  width: 241px;
+  color: #fbfbfb;
+  background: #3d7edb;
+  border: none;
+  font-family: $font-body1;
+}

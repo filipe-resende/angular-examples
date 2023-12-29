@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLabel" translate>
+    DEVICE_LIST.MODAL.DISASSOCIATE.TITLE
+  </h5>
+  <button
+    type="button"
+    class="close"
+    title="{{ 'applicationList.modal.deactivate.closeLabel' | translate }}"
+    aria-label="Fechar"
+    (click)="onClose()"
+  >
+    <i class="mdi mdi-close"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <p class="text-modal" translate>DEVICE_LIST.MODAL.DISASSOCIATE.DESCRIPTION</p>
+</div>
+
+<div class="modal-buttons desative-buttons">
+  <app-button-outline
+    translate
+    title="{{ 'applicationList.modal.deactivate.cancelButton' | translate }}"
+    (ngClick)="onClose()"
+    [ngClass]="['blue', 'icon', 'button-clean', 'tall']"
+    [labelClass]="['blue-outline-label association']"
+    data-dismiss="modal"
+  >
+    <p class="noMargin" translate>
+      DEVICE_LIST.MODAL.DISASSOCIATE.CANCEL_BUTTON
+    </p>
+  </app-button-outline>
+
+  <app-action-button
+    translate
+    title="{{
+      'DEVICE_LIST.MODAL.DISASSOCIATE.DISASSOCIATE_BUTTON' | translate
+    }}"
+    (action)="onRequestDisassociation()"
+    [ngClass]="['blue', 'large']"
+    [labelClass]="'blue-label'"
+    data-dismiss="modal"
+  >
+    <p class="noMargin" translate>
+      DEVICE_LIST.MODAL.DISASSOCIATE.DISASSOCIATE_BUTTON
+    </p>
+  </app-action-button>
+</div>

@@ -1,0 +1,127 @@
+@import '../../../../../scss/vale.variables';
+
+.device-resume {
+  &-container {
+    padding: 24px;
+    display: flex;
+    width: 100%;
+  }
+  &-identifier {
+    display: flex;
+    flex-direction: column;
+    margin-right: 16px;
+
+    & label {
+      color: #959dac;
+      font-size: 16px;
+      line-height: 14px;
+      text-transform: capitalize;
+    }
+    & .resume-number {
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: #4f5151;
+    }
+  }
+
+  &-thing {
+    flex: 1;
+    align-self: center;
+    padding-left: 24px;
+    display: flex;
+    align-items: center;
+
+    &-container {
+      margin: auto;
+
+      & label {
+        color: #959dac;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      & ul {
+        columns: 2;
+        list-style: none;
+        padding-left: 0;
+        width: auto;
+
+        & li {
+          display: flex;
+          flex-shrink: 0;
+
+          & label {
+            color: #909193;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 700;
+            margin-right: 8px;
+            text-transform: capitalize;
+            width: 70px;
+          }
+
+          & span {
+            font-size: 14px;
+            line-height: 16px;
+            color: #252727;
+            margin-right: 24px;
+
+            & button {
+              height: 18px;
+              width: 90px;
+              color: #fff;
+              background-color: #3d7edb;
+              font-size: 12px;
+              font-weight: 700;
+              line-height: 14px;
+              border: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-actions {
+    display: flex;
+    align-self: center;
+    margin-left: 16px;
+
+    & app-associate-button,
+    & app-disassociate-button {
+      margin-bottom: 0;
+    }
+
+    & button.device-resume-flat-button {
+      background-color: transparent;
+      padding: 0px;
+      font-size: 28px;
+      font-weight: normal;
+      border: 0;
+      color: #3d7edb;
+      margin-left: 16px;
+    }
+  }
+}
+
+.device-status {
+  font-family: $font-body1-bold;
+  font-size: 16px;
+  padding: 5px 10px;
+  margin-top: 11px;
+  color: #ff6700;
+  background: #ff67001a;
+  border-radius: 4px;
+  flex-shrink: 2;
+}
+
+.ativo {
+  color: #69be28;
+  background: #69be2826;
+}
+
+.device-status span {
+  color: inherit;
+  font-family: $font-body1;
+}

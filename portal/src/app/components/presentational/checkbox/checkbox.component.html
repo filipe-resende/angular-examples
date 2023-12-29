@@ -1,0 +1,15 @@
+<div class="checkbox-loader-container" *ngIf="loading; else loaded">
+  <mat-spinner diameter="17"></mat-spinner>
+  <label>{{ label | translate }}</label>
+</div>
+<ng-template #loaded>
+  <mat-checkbox
+    [matTooltip]="tooltip"
+    [checked]="checked"
+    [disabled]="disabled"
+    (change)="onCheckboxClick($event)"
+    (click)="$event.stopPropagation()"
+  >
+    {{ label | translate }}
+  </mat-checkbox>
+</ng-template>

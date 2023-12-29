@@ -1,0 +1,120 @@
+.perimeters-create-container {
+  height: Calc(100% - 48px);
+}
+
+.perimeters-create-form-container {
+  padding: 24px 24px 0;
+  height: 172px;
+}
+
+.perimeters-create-coordinates-label {
+  padding: 24px 24px 16px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  color: #909193;
+}
+
+.perimeters-create-coordinates-viewport {
+  height: calc(100vh - 400px);
+}
+
+.perimeters-create-coordinates-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > div {
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    min-width: 325px;
+
+    & > label {
+      margin: 0 24px 0 8px;
+      border: 1px solid #3d7edb;
+      border-radius: 50%;
+      height: 24px;
+      width: 24px;
+      background-color: #57a4ff;
+      color: white;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    & > div {
+      display: flex;
+      flex-direction: column;
+
+      & > label {
+        font-family: 'Roboto', Arial, Helvetica, sans-serif;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 20px;
+        color: #909193;
+
+        & > label {
+          width: 35px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  & > button {
+    margin-right: 16px;
+  }
+}
+
+.perimeters-create-buttons-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  height: 48px;
+  padding: 24px 24px;
+  border-top: 1px solid #c7c8c9;
+
+  app-button {
+    width: 189px;
+  }
+}
+
+.perimeters-create-menu-item {
+  display: flex;
+  align-items: center;
+
+  & > img {
+    margin-right: 16px;
+  }
+
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #909193;
+}
+
+.perimeters-create-validation-disclaimer {
+  position: absolute;
+  top: -70px;
+  left: 0px;
+  height: 68px;
+  width: calc(450px - 48px);
+  padding: 0 24px;
+  display: flex;
+  background-color: #f8f8f8;
+  border-top: 1px solid #c7c8c9;
+  align-items: center;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #909193;
+}

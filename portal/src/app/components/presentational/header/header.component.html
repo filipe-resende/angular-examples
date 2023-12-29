@@ -1,0 +1,83 @@
+<section class="header">
+  <div class="header-logo-app-name-container">
+    <img
+      class="header-vale-logo"
+      src="assets/images/vale-logo-1.png"
+      alt="Vale"
+    />
+    <label class="header-app-full-name-label"> Global Access Portal </label>
+    <label class="header-app-name-label">
+      Global Access {{ !searchbar || !searchbar.isVisible ? 'Portal' : '' }}
+    </label>
+  </div>
+  <div class="header-content">
+    <div class="header-routes">
+      <div *ngFor="let item of items">
+        <label
+          *ngIf="isUserAuthorizedToSeeHeaderItem(item.roles)"
+          [ngClass]="{ selected: isActiveTab(item.route) }"
+          (click)="onMenuItemClick(itemRef, item.route, item.subMenus)"
+          #itemRef
+        >
+          {{ item.label | translate }}
+          <img
+            src="assets/icons/Seta.svg"
+            alt=">"
+            *ngIf="item.subMenus && item.subMenus.length > 0"
+            style="margin-left: 4px"
+          />
+        </label>
+      </div>
+    </div>
+    <div
+      [ngStyle]="{
+        width: searchbar.isVisible ? '320px' : '0px'
+      }"
+      [ngClass]="{
+        'header-searchbar-container': searchbar.isVisible,
+        'header-searchbar-container-hidden': !searchbar.isVisible
+      }"
+      style="transition: 100ms"
+    >
+      <app-input
+        [placeholder]="searchbar.placeholder"
+        [(inputModel)]="searchbar.text"
+        [icon]="'search'"
+        [iconCursorPointer]="true"
+        (onIconClick)="onSearchbarIconClick()"
+        (inputModelChange)="updateSearchbarValue($event)"
+      ></app-input>
+    </div>
+
+    <span class="app-header-nav__gap">
+      <a
+        class="app-header-nav__link"
+        [href]="thingsManagementUrl"
+        target="_blank"
+      >
+        TMP
+      </a>
+    </span>
+
+    <app-auth
+      [authorizedRoles]="[
+        Role.BusinessSecurityAnalyst,
+        Role.ControlCenter,
+        Role.Paebm,
+        Role.OperationalAnalyst
+      ]"
+    >
+      <div
+        class="header-notification"
+        #headerNotification
+        (click)="onNotificationBellClick()"
+      >
+        <app-header-notification-bell></app-header-notification-bell>
+      </div>
+    </app-auth>
+
+    <div class="header-user-container">
+      <app-header-user></app-header-user>
+    </div>
+  </div>
+</section>

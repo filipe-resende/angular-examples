@@ -1,0 +1,197 @@
+<form [formGroup]="ngForm" class="fences-create-form">
+  <!-- FORM -->
+  <section class="fences-create-form-fields-container">
+    <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0">
+      <app-site-selector [displayAsInput]="true"></app-site-selector>
+    </div>
+
+    <div style="padding: 16px 0 8px 0">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'FENCES.NAME' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'FENCES.NAME' | translate"
+          formControlName="name"
+        />
+      </mat-form-field>
+    </div>
+
+    <div style="padding: 8px 0">
+      <mat-form-field appearance="outline">
+        <mat-label>{{ 'FENCES.DESCRIPTION' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'FENCES.DESCRIPTION' | translate"
+          formControlName="desc"
+        />
+      </mat-form-field>
+    </div>
+
+    <div style="padding: 8px 0; display: flex; justify-content: space-between">
+      <div class="fence-setup">
+        <mat-form-field appearance="outline">
+          <mat-label>
+            {{ 'FENCES.CATEGORY' | translate }}
+          </mat-label>
+          <mat-select disableOptionCentering formControlName="category">
+            <mat-option
+              *ngFor="let geofencesCategory of geofencesCategories$ | async"
+              [value]="geofencesCategory.id"
+            >
+              {{ 'FENCES.' + geofencesCategory.name | translate }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="fence-setup">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'FENCES.COLOR' | translate }}</mat-label>
+          <mat-select formControlName="color" disableOptionCentering>
+            <mat-select-trigger>
+              <div class="fences-accordion-color-select">
+                <div
+                  class="fence-color"
+                  style="margin-right: 8px"
+                  [ngStyle]="{ 'background-color': ngForm.value.color }"
+                ></div>
+                {{ getColorName(ngForm.value.color) | translate }}
+              </div>
+            </mat-select-trigger>
+            <mat-option *ngFor="let color of colors" [value]="color.value">
+              <div class="fences-accordion-color-select">
+                <div
+                  class="fence-color"
+                  style="margin-right: 8px"
+                  [ngStyle]="{ 'background-color': color.value }"
+                ></div>
+                {{ color.label }}
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <section
+      class="radius-fence"
+      *ngIf="isRadiusGeofenceCreation$ | async; else drawRegularFence"
+    >
+      <section class="dividing-line">
+        <hr />
+      </section>
+      <br />
+      <section class="radius-fence__coordinate">
+        <mat-form-field appearance="outline">
+          <mat-label>Longitude</mat-label>
+          <input matInput formControlName="longitude" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Latitude</mat-label>
+          <input matInput formControlName="latitude" />
+        </mat-form-field>
+      </section>
+
+      <mat-form-field class="radius-fence__field" appearance="outline">
+        <mat-label>{{ 'FENCES.METERS' | translate }}</mat-label>
+        <input matInput formControlName="radius" />
+      </mat-form-field>
+    </section>
+
+    <ng-template #drawRegularFence>
+      <section class="dividing-line">
+        <hr />
+      </section>
+      <ng-container
+        *ngIf="
+          googleMap && (geofenceDrawedMarkers$ | async).length > 0;
+          else displayInstructions
+        "
+      >
+        <div class="perimeters-create-coordinates-label">Coordenadas:</div>
+        <div class="list-height">
+          <div *ngFor="let coord of geofenceDrawedMarkers$ | async">
+            <div class="perimeters-create-coordinates-item">
+              <div>
+                <label>
+                  {{ coord.label }}
+                </label>
+                <div>
+                  <label>
+                    <label class="label-container">Lat:</label>
+                    {{ coord.lat.toString() | slice: 0:9 }}
+                    <label class="label-container">Lng:</label>
+                    {{ coord.lng.toString() | slice: 0:9 }}
+                  </label>
+                </div>
+              </div>
+              <button
+                mat-icon-button
+                (click)="deleteMarker(coord.googleMapsMarkerRef)"
+              >
+                <mat-icon svgIcon="trash"></mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-template>
+
+    <ng-template #displayInstructions>
+      <div class="fences-create-form-instructions-button">
+        <app-button (onClick)="onDisplayInstructionsOverlay()">{{
+          'FENCES.RULES_TO_DRAW' | translate
+        }}</app-button>
+      </div>
+    </ng-template>
+    <div class="detector-list" *ngIf="detectors.length > 0">
+      <section class="radius-fence__line">
+        <hr />
+        <span>{{ 'FENCES.MULTI_SELECT' | translate }}</span>
+      </section>
+
+      <app-multi-select-autocomplete
+        [warning]="showEmptyDetectorsWarning"
+        [options]="detectors"
+        (selectChange)="onDetectorsSelectChange($event)"
+        [isFormField]="false"
+        label="FENCES.MULTI_SELECT"
+      ></app-multi-select-autocomplete>
+
+      <div class="radius-fence__warning" *ngIf="showEmptyDetectorsWarning">
+        <mat-icon class="radius-fence__warning__icon-container">
+          <mat-icon svgIcon="warning-exclamation"></mat-icon>
+        </mat-icon>
+        <p>{{ 'FENCES.NO_DETECTORS_FOUND' | translate }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section class="fences-create-form-buttons-container">
+    <app-button
+      [primary]="false"
+      [large]="true"
+      [strech]="true"
+      (onClick)="onCancelButtonClick()"
+      type="reset"
+    >
+      {{ 'FENCES.CANCEL' | translate }}
+    </app-button>
+    <app-button
+      type="reset"
+      [large]="true"
+      [strech]="true"
+      (onClick)="submitGeoFence()"
+      [loading]="isFetchingFencePost"
+      [disabled]="
+        (perimeters$ | async).length == 0 ||
+        ngForm.invalid ||
+        (geofenceDrawedMarkers.length < 3 && !ngForm.value.latitude)
+      "
+    >
+      {{ 'FENCES.CREATE' | translate }}
+    </app-button>
+  </section>
+</form>

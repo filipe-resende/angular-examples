@@ -1,0 +1,11 @@
+<div class="tc-container">
+  <div class="view-wrapper">
+    <app-main-title [vclass]="true">
+      <app-arrow-button [routerLink]="['../']" label="voltar">
+      </app-arrow-button>
+      <header>{{ 'THING_CREATE.TITLE' | translate }}</header>
+    </app-main-title>
+
+    <app-tc-form (submit)="onSubmit($event)"></app-tc-form>
+  </div>
+</div>

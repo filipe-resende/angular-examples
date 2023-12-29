@@ -1,0 +1,80 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  sonarqubeServiceConnection: 'Sonarqube - Novo'
+
+jobs:
+  - job: PortalGAP
+    displayName: 'Build and publish GAP Portal for production environment'
+    steps:
+      - task: replacetokens@3
+        displayName: 'Replace tokens in **/environment.prod.ts '
+        inputs:
+          targetFiles: '**/environment.prod.ts'
+
+      - task: NodeTool@0
+        displayName: 'Use Node 16.14.x'
+        inputs:
+          versionSpec: 16.14.x
+
+      - task: Npm@1
+        displayName: 'npm install'
+        inputs:
+          verbose: false
+      - task: SonarQubePrepare@5
+        displayName: 'Prepare analysis on SonarQube - GAP Portal'
+        inputs:
+          SonarQube: $(sonarqubeServiceConnection)
+          scannerMode: CLI
+          configMode: manual
+          cliProjectKey: Vale.GAP.Portal
+          cliProjectName: 'Vale GAP Portal'
+          extraProperties: 'sonar.typescript.lcov.reportPaths=coverage/lcov.info'
+      - task: Npm@1
+        displayName: 'npm run build'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run buildprod'
+
+      - task: Npm@1
+        displayName: 'run tests'
+        inputs:
+          command: 'custom'
+          customCommand: 'run test'
+      - task: SonarQubeAnalyze@5
+
+      - task: SonarQubePublish@5
+        inputs:
+          pollingTimeoutSec: '300'
+
+     # - task: sonar-buildbreaker@8
+      #  inputs:
+      #    SonarQube: $(sonarqubeServiceConnection)
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: drop'
+        inputs:
+          PathtoPublish: dist/
+  - job: LeanIXSonarqubeIntegration
+    dependsOn: PortalGAP
+    condition: succeeded()
+    continueOnError: true
+    displayName: 'LeanIX Sonarqube Integration'
+    pool: 'AutorizadorBD'
+
+    steps:
+      - task: LeanIXSonarQube@0
+        continueOnError: true
+        inputs:
+          leanixAuthToken: '$(leanixAuthToken)'
+          sonarAuthToken: '$(sonarAuthToken)'
+          db_username: 'adminvale'
+          db_password: '$(SONARLEAN_DB_PASSWORD)'
+          db_host: 'rdb-lix-prd.database.windows.net'
+          db_name: 'BDLIX_PRD'
+          buildPipelineID: '$(System.DefinitionId)'
+          projectName: '$(System.TeamProject)' 

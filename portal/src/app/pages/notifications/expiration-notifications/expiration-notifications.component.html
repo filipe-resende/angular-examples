@@ -1,0 +1,106 @@
+<app-card>
+  <table
+    mat-table
+    matSort
+    [dataSource]="isFetchingNotifications ? skeletonArray : matTableDataSource"
+  >
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header="name" *matHeaderCellDef>
+        {{ 'LIST.NAME' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let thing">
+        <div class="skeleton table" *ngIf="!thing"></div>
+        <div *ngIf="!!thing && !thing?.name">-</div>
+        {{ thing?.name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="documentId" *ngIf="canViewSensitiveData">
+      <th mat-header-cell mat-sort-header="document" *matHeaderCellDef>
+        {{ 'LIST.REGISTRATION_DOC' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let thing">
+        <div class="skeleton table" *ngIf="!thing"></div>
+        <div *ngIf="!!thing && !thing?.document">-</div>
+        {{ thing?.document }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastReport">
+      <th mat-header-cell mat-sort-header="eventDateTime" *matHeaderCellDef>
+        {{ 'LIST.LAST_REPORT' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let thing">
+        <div class="skeleton table" *ngIf="!thing"></div>
+        <div *ngIf="!!thing && !thing?.eventDateTime">-</div>
+        {{
+          thing?.eventDateTime
+            ? (thing?.eventDateTime | date: 'dd/MM/yyyy HH:mm')
+            : ''
+        }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastLocation">
+      <th mat-header-cell mat-sort-header="latitude" *matHeaderCellDef>
+        {{ 'LIST.LAST_LOCATION' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let thing">
+        <div class="skeleton table" *ngIf="!thing"></div>
+        <div *ngIf="!!thing && !thing?.latitude">-</div>
+        <app-mini-map
+          [latitude]="thing?.latitude"
+          [longitude]="thing?.longitude"
+          [middleware]="thing?.middleware"
+        >
+        </app-mini-map>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="middleware">
+      <th mat-header-cell mat-sort-header="middleware" *matHeaderCellDef>
+        {{ 'LIST.DEVICE_TYPE' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let thing">
+        <div class="skeleton table" *ngIf="!thing"></div>
+        <div *ngIf="!!thing && !thing?.middleware">-</div>
+        <div
+          class="device-type__content"
+          [title]="thing?.middleware ? thing?.middleware : ''"
+        >
+          {{ thing?.middleware ? thing?.middleware : '' }}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="device">
+      <th mat-header-cell mat-sort-header="deviceId" *matHeaderCellDef>
+        {{ 'LIST.DEVICE_NUMBER' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let thing">
+        <div class="skeleton table" *ngIf="!thing"></div>
+        <div *ngIf="!!thing && !thing?.deviceId">-</div>
+        <div
+          class="device-id__content"
+          [title]="thing?.deviceId ? thing.deviceId : ''"
+        >
+          {{ thing?.deviceId ? thing.deviceId : '' }}
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="companyName">
+      <th mat-header-cell mat-sort-header="companyName" *matHeaderCellDef>
+        {{ 'LIST.COMPANY' | translate }}
+      </th>
+      <td mat-cell *matCellDef="let thing">
+        <div class="skeleton table" *ngIf="!thing"></div>
+        <div *ngIf="!!thing && !thing?.companyName">-</div>
+        {{ thing?.companyName }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let notifications; columns: tableColumns"></tr>
+  </table>
+</app-card>

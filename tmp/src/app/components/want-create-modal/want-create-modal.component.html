@@ -1,0 +1,26 @@
+<div class="want-create-container">
+  <div class="want-create-close">
+    <img
+      src="../../../../../../assets/Close.svg"
+      alt=""
+      (click)="closeModal()"
+    />
+  </div>
+
+  <div class="want-create-text">
+    <p class="title">
+      {{ label }}
+    </p>
+    <p class="description">
+      {{ description }}
+    </p>
+  </div>
+  <div class="want-create-button">
+    <button class="buttonCancel" (click)="closeModal()">
+      {{ 'WANT_CREATE_MODAL.CANCEL_BUTTON' | translate }}
+    </button>
+    <button class="buttonCreate" (click)="sendCommand()">
+      {{ 'WANT_CREATE_MODAL.CREATE_BUTTON' | translate }}
+    </button>
+  </div>
+</div>

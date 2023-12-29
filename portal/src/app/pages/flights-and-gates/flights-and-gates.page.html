@@ -1,0 +1,200 @@
+<div class="flights-page-container">
+  <div class="flights-page-header">
+    <h1 class="flights-page-selector-name">
+      {{ "BREADCRUMB.VOISEYS_BAY" | translate }}
+    </h1>
+    <form [formGroup]="ngForm" class="flights-page-search-form">
+      <app-datepicker-from-to
+        label="MAIN.DATE"
+        (dateChange)="onSelectDate($event, 'startDate')"
+        [max]="maxCalendarDate"
+        [dateInputValue]="formatDateAsUTC(startDate)"
+        (dateChange2)="onSelectDate($event, 'endDate')"
+        [dateInput2Value]="formatDateAsUTC(endDate)"
+      ></app-datepicker-from-to>
+
+      <div style="margin: 0px 16px">
+        <app-hourpicker-from-to
+          label="MAIN.HOUR"
+          [disabled]="!startDate && !endDate"
+          [input1Value]="ngForm.value.startHour"
+          [input2Value]="ngForm.value.endHour"
+          (input1Change)="onSelectHour($event, 'startHour')"
+          (input2Change)="onSelectHour($event, 'endHour')"
+        ></app-hourpicker-from-to>
+      </div>
+    </form>
+  </div>
+
+  <div style="display: flex; justify-content: space-between">
+    <app-flights-counter></app-flights-counter>
+  </div>
+
+  <section class="flights-page-card-container">
+    <app-card>
+      <div class="flights-page-card-header">
+        <div>
+          <app-select
+            placeholder="FLIGHTS.TABLE.TYPE"
+            [items]="eventTypesOptions"
+            [selected]="ngForm.value.typeSelected"
+            [disabled]="!areFormDatetimesIntervalValid()"
+            (onSelect)="ngForm.controls['typeSelected'].setValue($event)"
+          ></app-select>
+          <app-input
+            style="width: 180px; margin-right: 16px"
+            [placeholder]="'FLIGHTS.TYPES.FLIGHT' | translate"
+            [(inputModel)]="ngForm.value.flightNumberSelected"
+            [disabled]="!areFormDatetimesIntervalValid()"
+          ></app-input>
+          <app-button
+            [iconOnly]="true"
+            (onClick)="onClearSearchButtonClick()"
+            [disabled]="!areFormDatetimesIntervalValid() || (!ngForm.value.typeSelected && !ngForm.value.flightNumberSelected)"
+          >
+            <mat-icon
+              svgIcon="clear_filter"
+              [matTooltip]="'DISPLACEMENT.CLEAR_SEARCH' | translate"
+            ></mat-icon>
+          </app-button>
+          <div style="margin-left: 16px">
+            <app-button
+              [iconOnly]="true"
+              (onClick)="onApplyFilterButtonClick()"
+              [disabled]="!areFormDatetimesIntervalValid() || (!ngForm.value.typeSelected && !ngForm.value.flightNumberSelected)"
+            >
+              <img
+                src="assets/icons/search.svg"
+                [alt]="'DISPLACEMENT.APPLY_SEARCH' | translate"
+                [title]="'DISPLACEMENT.APPLY_SEARCH' | translate"
+              />
+            </app-button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flights-page-table-container">
+        <table
+          mat-table
+          matSort
+          [dataSource]="isFetching ? skeletonArray : dataSource"
+        >
+          <ng-container matColumnDef="icons">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let tripEvent">
+              <div *ngIf="!tripEvent; else displayPassengerIcon"></div>
+              <ng-template #displayPassengerIcon>
+                <div
+                  class="displacement-page-table-icons"
+                  *ngIf="!!tripEvent.type"
+                >
+                  <img
+                    src="assets/icons/passenger.svg"
+                    alt="PEOPLE"
+                    [title]="'DISPLACEMENT.PASSENGERS' | translate"
+                    (click)="onOpenTripThingsListIconClick(tripEvent)"
+                  />
+                </div>
+              </ng-template>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="type">
+              {{ "FLIGHTS.TABLE.TYPE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let tripEvent">
+              <div class="skeleton table" *ngIf="!tripEvent"></div>
+              {{ (!tripEvent ? null : tripEvent?.type ? (tripEvent?.type ===
+              FlightType.Flight ? 'FLIGHTS.TYPES.FLIGHT': tripEvent?.type ===
+              FlightType.Gate ? 'FLIGHTS.TYPES.GATE' : tripEvent?.type ) : '-')
+              | translate}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="flight">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header="flightNumber"
+            >
+              {{ "FLIGHTS.TABLE.FLIGHT" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let tripEvent">
+              <div class="skeleton table" *ngIf="!tripEvent"></div>
+              {{ !tripEvent ? null : tripEvent?.flight || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="originDestiny">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header="originDestiny"
+            >
+              {{ "FLIGHTS.TABLE.ORIGIN" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let tripEvent">
+              <div class="skeleton table" *ngIf="!tripEvent"></div>
+              {{ !tripEvent ? null : tripEvent?.airport || '-'}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="direction">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="direction">
+              {{ "FLIGHTS.TABLE.DIRECTION" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let tripEvent">
+              <div class="skeleton table" *ngIf="!tripEvent"></div>
+              {{ (!tripEvent ? null : tripEvent?.direction ?
+              (tripEvent?.direction === Direction.Entering ? "FLIGHTS.ENTERING"
+              : tripEvent?.direction === Direction.Leaving ? "FLIGHTS.LEAVING" :
+              tripEvent?.direction === Direction.Arrival ? "FLIGHTS.ARRIVAL" :
+              tripEvent?.direction === Direction.Departure ? "FLIGHTS.DEPARTURE"
+              : tripEvent?.direction) : '-') | translate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="peopleCount">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="peopleCount">
+              {{ "FLIGHTS.TABLE.PEOPLE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let tripEvent">
+              <div class="skeleton table" *ngIf="!tripEvent"></div>
+              {{ !tripEvent ? null : tripEvent?.numberOfPassengers || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastReport">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="lastReport">
+              {{ "FLIGHTS.TABLE.LAST_REGISTRATION" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let tripEvent">
+              <div class="skeleton table" *ngIf="!tripEvent"></div>
+              {{ !tripEvent ? null : (tripEvent?.latestReportTime | date :
+              "dd/MM/yyyy HH:mm")|| '-'}}
+            </td>
+          </ng-container>
+
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+            class="table-header"
+          ></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <div style="display: flex; justify-content: center">
+        <ng-container *ngIf="flights$ | async as flights">
+          <app-paginator
+            *ngIf="flights.totalCount > paginator.perPage"
+            [total]="flights.totalCount"
+            (onChangePage)="onChangePage($event)"
+          >
+          </app-paginator>
+        </ng-container>
+      </div>
+    </app-card>
+  </section>
+</div>

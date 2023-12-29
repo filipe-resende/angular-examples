@@ -1,0 +1,96 @@
+@import '../../../../scss/vale.variables';
+
+.select-device {
+  border: none;
+  color: #909193;
+  width: 80%;
+  border: 1px solid $greyVale20;
+  height: 35px;
+  padding-right: 0px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 24px;
+  font-family: $font-body1;
+  border: 1px solid $greyVale20;
+  border-radius: 2px;
+
+  &:focus {
+    outline: 1px solid $greyVale20;
+  }
+}
+
+.save-device {
+  padding: 20px 20px;
+  background-color: #f8f8f8;
+  width: 420px;
+}
+
+.container-device {
+  width: 400px;
+}
+
+.select-application {
+  padding-bottom: 20px;
+}
+
+.add-button-group {
+  margin-left: 0;
+  margin-top: 24px;
+}
+
+.application {
+  &-container {
+    height: 100vh;
+    padding: 30px 57px;
+    background: $white;
+  }
+
+  &-header {
+    width: 100%;
+  }
+
+  &-form {
+    margin-top: 32px;
+
+    &-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-input {
+      width: 280px;
+      margin-bottom: 24px;
+    }
+
+    &-label {
+      height: 24px;
+      width: 139px;
+      color: #252727;
+      font-family: $font-body1;
+      font-size: 14px;
+      letter-spacing: 0.25px;
+      line-height: 24px;
+      padding-bottom: 10px;
+    }
+  }
+
+  &-button-group {
+    width: 125px;
+    margin-top: 32px;
+    margin-left: 15px;
+
+    .active {
+      cursor: pointer;
+    }
+  }
+}
+
+.rfid-input-group {
+  width: auto;
+  display: flex;
+  align-items: center;
+
+  input {
+    margin-right: 4px;
+  }
+}

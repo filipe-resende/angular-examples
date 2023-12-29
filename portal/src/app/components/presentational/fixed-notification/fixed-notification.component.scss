@@ -1,0 +1,37 @@
+// .fixed-notification-container {
+//   display: flex;
+//   align-items: center;
+//   height: 36px;
+//   padding: 0 16px;
+//   border-radius: 2px;
+//   background: #bb133e;
+//   position: fixed;
+//   top: 60px;
+//   right: 56px;
+//   z-index: 1000;
+//   font-family: 'Roboto', Arial, Helvetica, sans-serif;
+//   font-style: normal;
+//   font-weight: 500;
+//   font-size: 14px;
+//   line-height: 22px;
+//   color: #ffffff;
+// }
+
+.fixed-notification-container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 71px;
+  right: 22px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #cc003a;
+  z-index: 100;
+
+  & > img {
+    height: 24px;
+    width: 24px;
+  }
+}

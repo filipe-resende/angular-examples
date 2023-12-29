@@ -1,0 +1,570 @@
+<div class="dashboard-main">
+  <div class="dashboard-container">
+    <div class="dashboard-container-filter">
+      <div class="filter-title">
+        <div class="filter-title-type">
+          <button
+            class="filter-smart"
+            (click)="alterTypeDevice(applicationId.SMARTBADGE)"
+            [class.buton-selected]="typeDevice === applicationId.SMARTBADGE"
+          >
+            {{ 'DASHBOARD.FILTER.DEVICE_SMART' | translate }}
+          </button>
+          <button
+            class="filter-spot"
+            (click)="alterTypeDevice(applicationId.SPOT)"
+            [class.buton-selected]="typeDevice === applicationId.SPOT"
+          >
+            {{ 'DASHBOARD.FILTER.DEVICE_SPOT' | translate }}
+          </button>
+        </div>
+      </div>
+      <div class="info">
+        {{ 'DASHBOARD.INFO_CHARTS_TOOLTIP' | translate }}
+      </div>
+      <div class="filter-content">
+        <input
+          (keyup.enter)="sapPlant = ''"
+          (click)="filterSapPlant()"
+          (input)="filterSapPlant()"
+          (change)="onFocusLostSapPlant($event.target.value)"
+          type="text"
+          maxlength="4"
+          [(ngModel)]="sapPlant"
+          placeholder="Local SAP"
+          [matAutocomplete]="SAP"
+        />
+        <mat-autocomplete #SAP="matAutocomplete">
+          <mat-option
+            *ngFor="let item of filterDataSapPlants"
+            (click)="valueSapPlant(item)"
+            >{{ item.code }} - {{ item.description }}
+          </mat-option>
+
+          <mat-option
+            (click)="sapPlant = ''"
+            *ngIf="!filterDataSapPlants.length && sapPlant"
+          >
+            {{ 'DASHBOARD.FILTER.RESULT_NOT_FOUND' | translate }}
+          </mat-option>
+
+          <mat-option *ngIf="sapPlantLoading">
+            <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
+          </mat-option>
+        </mat-autocomplete>
+
+        <app-thing-email
+          #thingEmail
+          (selectedThingId)="saveManagerId($event)"
+          (selectedThingEmail)="saveManagerEmail($event)"
+        >
+        </app-thing-email>
+
+        <select [(ngModel)]="datePeriod">
+          <option value="1" selected>
+            {{ 'DASHBOARD.FILTER.CURRENT_MONTH' | translate }}
+          </option>
+          <option value="2">
+            {{ 'DASHBOARD.FILTER.LAST_MONTH' | translate }}
+          </option>
+          <option value="3">
+            {{ 'DASHBOARD.FILTER.LAST_TWO_MONTH' | translate }}
+          </option>
+        </select>
+
+        <select [(ngModel)]="associationStatus">
+          <option value="" selected disabled hidden>
+            {{ 'DASHBOARD.FILTER.ASSOCIATION_STATUS' | translate }}
+          </option>
+          <option value="1">
+            {{ 'DASHBOARD.FILTER.ASSOCIATED' | translate }}
+          </option>
+          <option value="0">
+            {{ 'DASHBOARD.FILTER.DISASSOCIATED' | translate }}
+          </option>
+        </select>
+
+        <select (click)="handleDeviceStatusByType()" [(ngModel)]="deviceStatus">
+          <option value="" selected disabled hidden>
+            {{ 'DASHBOARD.FILTER.DEVICESTATUS' | translate }}
+          </option>
+          <option [value]="item.id" *ngFor="let item of deviceStatusByType">
+            {{ item.name }}
+          </option>
+        </select>
+
+        <app-thing-company
+          #companies
+          (companyInfoName)="saveCompanyName($event)"
+        >
+        </app-thing-company>
+      </div>
+      <div class="filter-save">
+        <div class="search-button">
+          <button id="search-btn" (click)="search()">
+            <img src="../../../assets/Combined Shape.svg" alt="" />
+            {{ 'DASHBOARD.SEARCH' | translate }}
+          </button>
+        </div>
+        <div class="clear-button">
+          <button (click)="resetFields()" id="clear-btn">
+            <img src="../../../assets/icons/blueClearFilter.svg" alt="" />
+            {{ 'DASHBOARD.CLEAN_FILTERS' | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-graphs">
+      <div class="dashboard-card dashboard-card-status">
+        <div class="dashboard-card-header select">
+          <span class="dashboard-card-title">{{
+            'DASHBOARD.DEVICE_STATUS' | translate
+          }}</span>
+        </div>
+        <div
+          class="graphs"
+          *ngIf="!isLoadingDeviceStatus; else loadingDeviceStatus"
+        >
+          <app-device-status-chart
+            [deviceStatusData]="deviceStatusDataGraph"
+            [selectedApplication]="selectedApplication"
+            [typeDevice]="typeDevice"
+          ></app-device-status-chart>
+        </div>
+        <ng-template #loadingDeviceStatus>
+          <div class="graph-no-result-spinner">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+        </ng-template>
+      </div>
+      <div class="box">
+        <div class="dashboard-card">
+          <div class="dashboard-card-header select">
+            <div class="header-title">
+              <span class="dashboard-card-title title-tooltip">{{
+                'DASHBOARD.TOTAL_IN_USE' | translate
+              }}</span>
+              <mat-icon
+                class="month-info-tooltip"
+                [matTooltip]="
+                  'DASHBOARD.TOTAL_IN_USE_CHARTS.DESCRIPTION_TOOLTIP'
+                    | translate
+                "
+              >
+                info_outline
+              </mat-icon>
+            </div>
+
+            <div class="buttons">
+              <button
+                class="button chart-button"
+                (click)="changeTypeTotalInUseGraph('bar')"
+                [ngClass]="{
+                  selected: nameChartTotalInUseSelected === 'bar'
+                }"
+              >
+                {{ 'DASHBOARD.GRAPH_BUTTONS.GRAPH' | translate }}
+              </button>
+              <button
+                class="button list-button"
+                (click)="changeTypeTotalInUseGraph('list')"
+                [ngClass]="{
+                  selected: nameChartTotalInUseSelected === 'list'
+                }"
+              >
+                {{ 'DASHBOARD.GRAPH_BUTTONS.LIST' | translate }}
+              </button>
+            </div>
+          </div>
+
+          <div class="graphs" *ngIf="!isLoadingTotalInUse">
+            <div
+              class="doughnut-graph"
+              *ngIf="nameChartTotalInUseSelected === 'bar'"
+            >
+              <app-bar-chart
+                [chartColors]="colorsToUsageDashboardTotalInUse"
+                [legendLabels]="legendToUsageDashboardTotalInUse"
+                [chartName]="'TotalInUse'"
+                [firstBar]="totalInUseDataGraphTotal"
+                [secondBar]="totalInUseDataGraphInUse"
+                [labels]="labelsDateTotalInUse"
+                [selectedApplication]="selectedApplication"
+              ></app-bar-chart>
+            </div>
+            <div
+              class="list-graph"
+              *ngIf="nameChartTotalInUseSelected === 'list'"
+            >
+              <app-list-two-captions
+                [data]="totalInUseList"
+                [selectedApplication]="selectedApplication"
+                [image]="imageIconGraphTotalInUse"
+              >
+              </app-list-two-captions>
+            </div>
+            <div
+              class="legendsTotalInUse"
+              *ngIf="
+                nameChartTotalInUseSelected === 'list' && totalInUseList.length
+              "
+            >
+              <span class="icon-name">
+                <img
+                  src="../../../assets/iconsDashboard/iconTotal.png"
+                  alt=""
+                />
+                <span>
+                  {{ legendToUsageDashboardTotalInUse[0] }}
+                </span>
+              </span>
+
+              <span class="icon-name">
+                <img
+                  src="../../../assets/iconsDashboard/iconInUse.png"
+                  alt=""
+                />
+                <span>
+                  {{ legendToUsageDashboardTotalInUse[1] }}
+                </span>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="isLoadingTotalInUse" class="graph-no-result-spinner">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="dashboard-card-header select">
+            <div class="header-title">
+              <span class="dashboard-card-title title-tooltip">{{
+                'DASHBOARD.LOCATION_TRANSMISSION' | translate
+              }}</span>
+              <mat-icon
+                class="month-info-tooltip"
+                [matTooltip]="
+                  'DASHBOARD.BROADCAST.DESCRIPTION_TOOLTIP' | translate
+                "
+              >
+                info_outline
+              </mat-icon>
+            </div>
+
+            <div class="buttons">
+              <button
+                class="button chart-button"
+                (click)="changeTypeBroadcastGraph('bar')"
+                [ngClass]="{
+                  selected: nameChartBroadcastSelected === 'bar'
+                }"
+              >
+                {{ 'DASHBOARD.GRAPH_BUTTONS.GRAPH' | translate }}
+              </button>
+              <button
+                class="button list-button"
+                (click)="changeTypeBroadcastGraph('list')"
+                [ngClass]="{
+                  selected: nameChartBroadcastSelected === 'list'
+                }"
+              >
+                {{ 'DASHBOARD.GRAPH_BUTTONS.LIST' | translate }}
+              </button>
+            </div>
+          </div>
+
+          <div class="graphs" *ngIf="!isLoadingBroadcast">
+            <div
+              class="doughnut-graph"
+              *ngIf="nameChartBroadcastSelected === 'bar'"
+            >
+              <app-bar-chart
+                [chartColors]="colorsToUsageDashboardBroadcast"
+                [legendLabels]="legendToUsageDashboardBroadcast"
+                [chartName]="'Broadcast'"
+                [firstBar]="broadcastDataGraphBroadcast"
+                [secondBar]="notBroadcastDataGraphBroadcast"
+                [labels]="labelsDateBroadcast"
+                [selectedApplication]="selectedApplication"
+              ></app-bar-chart>
+            </div>
+            <div
+              class="list-graph"
+              *ngIf="nameChartBroadcastSelected === 'list'"
+            >
+              <app-list-two-captions
+                [data]="broadCastList"
+                [selectedApplication]="selectedApplication"
+                [image]="imageIconGraphBroadCast"
+              >
+              </app-list-two-captions>
+            </div>
+            <div
+              class="legendsBroadcast"
+              *ngIf="
+                nameChartBroadcastSelected === 'list' && broadCastList.length
+              "
+            >
+              <span class="icon-name">
+                <img
+                  src="../../../assets/iconsDashboard/broadcast.png"
+                  alt=""
+                />
+                <span>
+                  {{ legendToUsageDashboardBroadcast[0] }}
+                </span>
+              </span>
+
+              <span class="icon-name">
+                <img
+                  src="../../../assets/iconsDashboard/not_broadcast.png"
+                  alt=""
+                />
+                <span>
+                  {{ legendToUsageDashboardBroadcast[1] }}
+                </span>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="isLoadingBroadcast" class="graph-no-result-spinner">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+        </div>
+
+        <div class="dashboard-card">
+          <div class="dashboard-card-header select">
+            <span class="dashboard-card-title">{{
+              'DASHBOARD.ASSOCIATION' | translate
+            }}</span>
+
+            <div class="buttons">
+              <button
+                class="button chart-button"
+                (click)="changeTypeAssociationGraph('bar')"
+                [ngClass]="{
+                  selected: nameChartAssociationSelected === 'bar'
+                }"
+              >
+                {{ 'DASHBOARD.GRAPH_BUTTONS.GRAPH' | translate }}
+              </button>
+              <button
+                class="button list-button"
+                (click)="changeTypeAssociationGraph('list')"
+                [ngClass]="{
+                  selected: nameChartAssociationSelected === 'list'
+                }"
+              >
+                {{ 'DASHBOARD.GRAPH_BUTTONS.LIST' | translate }}
+              </button>
+            </div>
+          </div>
+
+          <div class="graphs" *ngIf="!isLoadingAssociate">
+            <div
+              class="doughnut-graph"
+              *ngIf="nameChartAssociationSelected === 'bar'"
+            >
+              <app-bar-chart
+                [chartColors]="colorsToUsageDashboardAssociationStatus"
+                [legendLabels]="legendToUsageDashboardAssociationStatus"
+                [chartName]="'AssociationStatus'"
+                [firstBar]="associationStatusDataGraph"
+                [secondBar]="notAssociationStatusDataGraph"
+                [labels]="labelsAssociationStatus"
+                [selectedApplication]="selectedApplication"
+              ></app-bar-chart>
+            </div>
+            <div
+              class="list-graph"
+              *ngIf="nameChartAssociationSelected === 'list'"
+            >
+              <app-list-two-captions
+                [data]="associationStatusList"
+                [selectedApplication]="selectedApplication"
+                [image]="imageIconGraphAssociationStatus"
+              >
+              </app-list-two-captions>
+            </div>
+            <div
+              class="legendsAssociation"
+              *ngIf="
+                nameChartAssociationSelected === 'list' &&
+                associationStatusList.length
+              "
+            >
+              <span class="not_associated">
+                <img
+                  src="../../../assets/iconsDashboard/iconAssociate.png"
+                  alt=""
+                />
+                <span>
+                  {{ legendToUsageDashboardAssociationStatus[0] }}
+                </span>
+              </span>
+
+              <span>
+                <img
+                  src="../../../assets/iconsDashboard/iconNotAssociation.png"
+                  alt=""
+                />
+                <span>
+                  {{ legendToUsageDashboardAssociationStatus[1] }}
+                </span>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="isLoadingAssociate" class="graph-no-result-spinner">
+            <mat-spinner diameter="40"></mat-spinner>
+          </div>
+        </div>
+        <div class="dashboard-card">
+          <div class="sapPlant-content">
+            <div class="dashboard-card-header select">
+              <span class="dashboard-card-title">{{
+                'DASHBOARD.SAP_PLANT_DISTRIBUTION' | translate
+              }}</span>
+              <div class="buttons">
+                <button
+                  class="button chart-button"
+                  (click)="changeTypeGraph('doughnut')"
+                  [ngClass]="{
+                    selected: nameChartSapPlantSelected === 'doughnut'
+                  }"
+                >
+                  {{ 'DASHBOARD.GRAPH_BUTTONS.GRAPH' | translate }}
+                </button>
+                <button
+                  class="button list-button"
+                  (click)="changeTypeGraph('list')"
+                  [ngClass]="{ selected: nameChartSapPlantSelected === 'list' }"
+                >
+                  {{ 'DASHBOARD.GRAPH_BUTTONS.LIST' | translate }}
+                </button>
+              </div>
+            </div>
+            <div class="graphs" *ngIf="!isLoadingSapPlant; else isLoadingSP">
+              <div
+                class="doughnut-graph"
+                *ngIf="nameChartSapPlantSelected === 'doughnut'"
+              >
+                <app-doughnut-chart
+                  [sapPlantData]="sapPlantDataGraph"
+                  [selectedApplication]="selectedApplication"
+                  [yesterday]="yesterday"
+                ></app-doughnut-chart>
+              </div>
+              <div
+                class="list-graph"
+                *ngIf="nameChartSapPlantSelected === 'list'"
+              >
+                <app-list-chart
+                  [listData]="sapPlantDataGraph"
+                  [periodMessage]="yesterday"
+                  [selectedApplication]="selectedApplication"
+                ></app-list-chart>
+              </div>
+            </div>
+            <ng-template #isLoadingSP>
+              <div class="graph-no-result-spinner">
+                <mat-spinner diameter="40"></mat-spinner>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <span class="dashboard-card-title"
+              >{{ 'DASHBOARD.EMPLOYEE_COMPANY' | translate }}
+            </span>
+          </div>
+          <div class="graphs" *ngIf="!isLoadingCompany; else isLoadingEC">
+            <div class="list-graph">
+              <app-list-chart
+                [listData]="employeesCompanyDataGraph"
+                [periodMessage]="yesterday"
+                [message]="
+                  'DASHBOARD.CHARTS.MESSAGES.ACTIVE_DEVICES' | translate
+                "
+                [selectedApplication]="selectedApplication"
+              ></app-list-chart>
+            </div>
+          </div>
+          <ng-template #isLoadingEC>
+            <div class="graph-no-result-spinner">
+              <mat-spinner diameter="40"></mat-spinner>
+            </div>
+          </ng-template>
+        </div>
+        <div class="dashboard-card">
+          <div class="dashboard-card-header">
+            <span class="dashboard-card-title">
+              {{ 'DASHBOARD.DEVICE_MANAGER' | translate }}
+            </span>
+          </div>
+          <div
+            class="graphs"
+            *ngIf="!isLoadingManagers; else isLoadingManagerList"
+          >
+            <div class="list-graph">
+              <app-list-chart
+                [listData]="managersDataGraph"
+                [periodMessage]="yesterday"
+                [selectedApplication]="selectedApplication"
+              ></app-list-chart>
+            </div>
+          </div>
+          <ng-template #isLoadingManagerList>
+            <div class="graph-no-result-spinner">
+              <mat-spinner diameter="40"></mat-spinner>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dashboard-summary">
+    <p class="title-resume">
+      {{ 'DASHBOARD.SUMMARY' | translate }}
+    </p>
+    <div class="summary-title">
+      <span class="title">
+        {{ 'DASHBOARD.SUMMARY_CHART.ALL_SITES' | translate }}
+      </span>
+      <div class="month-info">
+        <span
+          class="month-filter"
+          *ngIf="isYesterdayMessage; else monthMessage"
+        >
+          {{ yesterday }} - {{ selectedApplication }}
+        </span>
+        <ng-template #monthMessage>
+          <span class="month-filter">
+            {{ periodMessage | translate }} - {{ selectedApplication }}
+          </span>
+        </ng-template>
+        <mat-icon
+          class="month-info-tooltip"
+          [matTooltip]="'DASHBOARD.CHARTS.PERIOD.TOOLTIP_MESSAGE' | translate"
+        >
+          info_outline
+        </mat-icon>
+      </div>
+    </div>
+    <hr />
+    <div
+      class="summary"
+      *ngIf="
+        !isLoadingSummary && !isLoadingEvolutionCharts;
+        else loadingSummary
+      "
+    >
+      <app-summary [summaryData]="summaryDataGraph"></app-summary>
+      <app-line [evolutionData]="evolutionDataGraph"></app-line>
+    </div>
+    <ng-template #loadingSummary>
+      <div class="graph-no-result-spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,0 +1,184 @@
+<div class="details-table">
+  <!-- DEVICES UPDATE VIEW -->
+  <div class="device-detail-card" *ngIf="deviceData">
+    <div
+      class="device-details-content"
+      *ngIf="thingLocationData$ | async; else loading"
+    >
+      <div class="row">
+        <div class="col-5 detail-label">
+          {{ 'DEVICE_UPDATE.LAST_DEVICE_INFO.BATERY_LEVEL' | translate }}
+        </div>
+
+        <div class="col-7">
+          <div *ngIf="batteryState" class="device-details-battery">
+            <em class="mdi mdi-battery"></em> {{ batteryState }}%
+          </div>
+
+          <div *ngIf="!batteryState" class="device-details-battery">
+            <em class="mdi mdi-battery"></em> N/A
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-5 detail-label">
+          {{ 'DEVICE_UPDATE.LAST_DEVICE_INFO.NAME' | translate }}
+        </div>
+
+        <div class="col-7" *ngIf="deviceEventDateTime">
+          <span class="grey">
+            {{ deviceEventDateTime | dateFormat }}
+          </span>
+        </div>
+
+        <div class="col-7" *ngIf="!deviceEventDateTime">
+          <span class="grey">N/A</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-5 detail-label">
+          {{ 'DEVICE_UPDATE.LAST_DEVICE_INFO.THING_NAME' | translate }}
+        </div>
+
+        <div class="col-7" *ngIf="thingNameAssociated">
+          <a class="link" (click)="redirectToThing()">{{
+            thingNameAssociated
+          }}</a>
+        </div>
+
+        <div class="col-7" *ngIf="!thingNameAssociated">
+          <a class="">{{
+            'DEVICE_UPDATE.LAST_DEVICE_INFO.NO_ASSOCIATION' | translate
+          }}</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-5 detail-label">
+          {{ 'DEVICE_UPDATE.LAST_DEVICE_INFO.COORDINATES.NAME' | translate }}
+        </div>
+
+        <div class="col-7">
+          <div>
+            {{
+              'DEVICE_UPDATE.LAST_DEVICE_INFO.COORDINATES.LATITUDE' | translate
+            }}
+            <span *ngIf="coordinates.length">{{ coordinates[1] }}</span>
+            <span *ngIf="!coordinates.length">N/A</span>
+          </div>
+
+          <div>
+            {{
+              'DEVICE_UPDATE.LAST_DEVICE_INFO.COORDINATES.LONGITUDE' | translate
+            }}
+            <span *ngIf="coordinates.length">{{ coordinates[0] }}</span>
+            <span *ngIf="!coordinates.length">N/A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <div class="spinner-content" *ngIf="!noLocationData">
+        <em class="mdi mdi-loading mdi-36px mdi-spin"></em>
+      </div>
+
+      <div class="detail-labe" *ngIf="noLocationData" translate>
+        DEVICE_UPDATE.NO_LAST_THING_INFO
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- THING UPDATE VIEW -->
+  <div class="device-detail-card" *ngIf="thingData">
+    <div
+      class="device-details-content"
+      *ngIf="thingLocationData$ | async; else loading"
+    >
+      <div class="detail-label">
+        {{ 'THING_UPDATE.LAST_DEVICE_INFO.DEVICE_NAME_INFO.INFO' | translate }}
+      </div>
+      <div class="row">
+        <div class="col-7">
+          <div *ngIf="thingEventDateTime">
+            {{ thingEventDateTime | dateFormat }}
+          </div>
+          <div class="col-5" *ngIf="!thingEventDateTime">N/A</div>
+
+          <div class="row">
+            <div class="col-6 devices-info" *ngIf="thingEventDevicesInfo">
+              <div *ngIf="!this.isFacialRecognition">
+                <a
+                  class="link"
+                  (click)="redirectToDevice(applicationId, deviceSourceValue)"
+                >
+                  <span class="grey">{{
+                    deviceSourceValue ? thingEventDevicesInfo : 'N/A'
+                  }}</span>
+                </a>
+              </div>
+              <div *ngIf="this.isFacialRecognition">
+                <span>{{
+                  deviceSourceValue ? thingEventDevicesInfo : 'N/A'
+                }}</span>
+              </div>
+              <div
+                *ngIf="thingEventBatteryState"
+                class="device-details-battery"
+                [ngSwitch]="thingEventBatteryState"
+              >
+                <em
+                  *ngSwitchCase="thingBatteryState.GOOD"
+                  class="mdi mdi-battery battery-good"
+                  matTooltip="100% - 50%"
+                ></em>
+                <em
+                  *ngSwitchCase="thingBatteryState.MEDIUM"
+                  class="mdi mdi-battery-50 battery-medium"
+                  matTooltip="50% - 25%"
+                ></em>
+                <em
+                  *ngSwitchCase="thingBatteryState.LOW"
+                  class="mdi mdi-battery-10 battery-low"
+                  matTooltip="25% - 0%"
+                ></em>
+                <span *ngIf="thingEventBatteryPercent"
+                  >{{ thingEventBatteryPercent }}%</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-5">
+          <div>
+            {{
+              'THING_UPDATE.LAST_DEVICE_INFO.COORDINATES.LATITUDE' | translate
+            }}
+            <span *ngIf="thingEventLatitude">{{ thingEventLatitude }}</span>
+            <span *ngIf="!thingEventLatitude">N/A</span>
+          </div>
+
+          <div>
+            {{
+              'THING_UPDATE.LAST_DEVICE_INFO.COORDINATES.LONGITUDE' | translate
+            }}
+            <span *ngIf="thingEventLongitude">{{ thingEventLongitude }}</span>
+            <span *ngIf="!thingEventLongitude">N/A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <div class="spinner-content" *ngIf="!noLocationData">
+        <em class="mdi mdi-loading mdi-36px mdi-spin"></em>
+      </div>
+
+      <div class="detail-labe" *ngIf="noLocationData" translate>
+        DEVICE_UPDATE.NO_LAST_DEVICE_INFO
+      </div>
+    </ng-template>
+  </div>
+</div>

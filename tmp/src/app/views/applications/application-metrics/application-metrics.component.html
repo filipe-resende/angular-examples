@@ -1,0 +1,86 @@
+<p class="breadCrumbs">
+  {{ 'BREADCRUMB.HOME' | translate }} >
+  {{ 'BREADCRUMB.APPLICATIONS' | translate }} >
+  <span>{{ 'BREADCRUMB.MONTHLY_METRICS' | translate }}</span>
+</p>
+<div class="metrics-container">
+  <div class="metrics-body" *ngIf="!isLoading">
+    <div class="metrics-title">
+      <p class="metrics-page-title">
+        {{ 'APPLICATION_METRICS.TITLE' | translate }}
+      </p>
+      <mat-form-field appearance="fill">
+        <mat-label>{{
+          'APPLICATION_METRICS.MONTH_YEAR' | translate
+        }}</mat-label>
+        <input
+          class="input.mat-input-element"
+          hidden="true"
+          matInput
+          [min]="minDate"
+          [max]="maxDate"
+          [matDatepicker]="dp"
+          [(ngModel)]="date"
+          readonly
+        />
+        <div>
+          <span
+            >{{ date.toLocaleString('default', { month: 'long' }) }}
+            {{ date.getFullYear() }}</span
+          >
+        </div>
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker
+          #dp
+          startView="multi-year"
+          (monthSelected)="setMonthAndYear($event, dp)"
+          panelClass="example-month-picker"
+        >
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="metrics-body-data">
+      <div class="metrics-total-data">
+        <div class="metrics-total-events">
+          <img src="assets/icons/map.svg" alt="" />
+          <span
+            >{{ 'APPLICATION_METRICS.TOTAL_EVENTS' | translate }}
+            <span class="total-events">{{ totalCount | number }}</span></span
+          >
+        </div>
+      </div>
+      <hr class="metrics-line" />
+      <div class="metrics-table-data">
+        <div class="metrics-table-columns">
+          <span>{{ 'APPLICATION_METRICS.LOCATION_TYPE' | translate }}</span>
+          <span>{{ 'APPLICATION_METRICS.LOCATION_COUNT' | translate }}</span>
+        </div>
+        <hr class="column-line" />
+        <div class="metrics-table-rows">
+          <div class="metrics-rows" *ngFor="let event of eventsList">
+            <div class="metrics-info">
+              <div class="middleware-info-span">
+                <span class="middeware-info">{{ event.middleware }}</span>
+                <img
+                  *ngIf="isBusEventMiddleware(event.middleware)"
+                  src="../../../../assets/info.svg"
+                  [matTooltip]="'APPLICATION_METRICS.TOOLTIP_TEXT' | translate"
+                  alt=""
+                />
+              </div>
+              <div class="metrics-info-total">
+                <span class="count-info">{{ event.totalCount | number }}</span>
+              </div>
+            </div>
+            <hr class="column-line" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spinner" style="margin-top: 100px" *ngIf="isLoading">
+    <div class="modal-spinner-content">
+      <em class="mdi mdi-loading mdi-36px mdi-spin"></em>
+    </div>
+  </div>
+</div>

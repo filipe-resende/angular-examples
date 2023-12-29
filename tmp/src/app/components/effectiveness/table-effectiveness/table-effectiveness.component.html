@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="title">
+    {{ dashName }}
+  </div>
+  <div class="subTitle">{{ yesterday }} | {{ applicationName }}</div>
+
+  <div class="display_flex">
+    <div>
+      <app-input-autocomplete
+        #management
+        [listData]="managementListData"
+        [placeHolder]="'DASHBOARD.EFFECTIVENESS.FILTER.MANAGEMENT'"
+        (selectedElementId)="saveManagementId($event)"
+      >
+      </app-input-autocomplete>
+    </div>
+    <div>
+      <app-input-autocomplete
+        #sapPlant
+        [listData]="sapPlantListData"
+        [placeHolder]="'DASHBOARD.EFFECTIVENESS.FILTER.SAP_PLANT_PLACE'"
+        (selectedElementId)="saveSapPlantId($event)"
+      >
+      </app-input-autocomplete>
+    </div>
+    <div>
+      <app-input-autocomplete
+        #thingEmail
+        [listData]="thingsEmailListData"
+        [placeHolder]="'DASHBOARD.EFFECTIVENESS.FILTER.DEVICE_MANAGER'"
+        (selectedElementId)="saveManagerId($event)"
+      >
+      </app-input-autocomplete>
+    </div>
+    <div>
+      <button id="search-btn">
+        <img src="../../../../assets/Combined Shape.svg" alt="" />
+      </button>
+    </div>
+    <div>
+      <button id="clear-btn">
+        <img src="../../../../assets/icons/clearFilter.svg" alt="" />
+      </button>
+    </div>
+  </div>
+
+  <div class="table">
+    <div class="display_flex border_bottom">
+      <div class="column_first"></div>
+      <span *ngFor="let column of columnsName">
+        <div class="column">
+          {{ column }}
+        </div>
+      </span>
+    </div>
+
+    <div class="data_table">
+      <span class="display_flex border_bottom" *ngFor="let item of data">
+        <div class="column_first">
+          {{ item.labelReference }}
+        </div>
+        <div class="column" *ngFor="let row of item.columnValue">
+          {{ row }}
+        </div>
+      </span>
+    </div>
+
+    <div class="total display_flex">
+      <div class="total_title column_first">
+        {{ 'TABLE_EFFECTIVENESS_COMPONENT.TOTAL' | translate }}
+      </div>
+      <div class="column">{{ total }}</div>
+      <div class="column">{{ totalPercentage }}</div>
+    </div>
+  </div>
+</div>

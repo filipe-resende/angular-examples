@@ -1,0 +1,6 @@
+<div class="forbidden-page-container">
+  <div class="forbidden-page-button-container">
+    <app-button [primary]="false" (onClick)="disconnect()">{{ "MAIN.DISCONNECT" | translate }}</app-button>
+  </div>
+  <app-message [type]="messageType"> {{ "MAIN.ACCESS_FORBIDDEN" | translate }} </app-message>
+</div>

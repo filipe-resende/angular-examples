@@ -1,0 +1,85 @@
+:host {
+  .datepicker-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .container__placeholder {
+      position: absolute;
+      top: 12px;
+      left: 46px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #999;
+      opacity: 0.5;
+    }
+  }
+}
+
+::ng-deep {
+  .datepicker-label {
+    line-height: 22px;
+    font-size: 14px;
+    color: #909193;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    margin-bottom: 4px;
+    display: inline-block;
+  }
+
+  .datepicker-container .mat-form-field-wrapper {
+    padding-bottom: 0px !important;
+  }
+
+  .datepicker-container
+    .mat-form-field-appearance-legacy
+    .mat-form-field-underline {
+    height: 0px !important;
+  }
+
+  .datepicker-container .mat-form-field.mat-focused .mat-form-field-ripple,
+  .datepicker-container
+    .mat-form-field.mat-form-field-invalid
+    .mat-form-field-ripple {
+    display: none !important;
+  }
+
+  .datepicker-container .mat-form-field {
+    width: 100%;
+    height: 36px;
+    border: 1px solid #e3e4e4;
+    fill: #ffffff;
+    border-radius: 2px;
+    box-sizing: border-box;
+    outline: none;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    padding-left: 12px;
+  }
+
+  .datepicker-container .mat-form-field.mat-focused {
+    border: 1px solid #cccccc;
+  }
+
+  .datepicker-container .mat-form-field-infix {
+    border-top: 0px !important;
+  }
+
+  .datepicker-container
+    .mat-form-field-appearance-legacy
+    .mat-form-field-prefix
+    .mat-icon-button
+    .mat-icon {
+    font-size: 22px;
+    color: #909193;
+  }
+
+  .datepicker-container input.mat-input-element {
+    line-height: 22px;
+    font-size: 14px;
+    color: #909193;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    margin: 0px 12px;
+    width: 80px;
+  }
+}

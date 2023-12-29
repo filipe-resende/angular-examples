@@ -1,0 +1,9 @@
+# Ignore artifacts:
+node_modules
+platforms
+plugins
+www
+build
+coverage
+.vscode
+.scannerwork

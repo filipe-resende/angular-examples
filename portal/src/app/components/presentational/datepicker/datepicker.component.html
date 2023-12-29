@@ -1,0 +1,31 @@
+<div
+  class="datepicker-container"
+  [ngStyle]="{
+    width: stretched ? '100%' : '140px'
+  }"
+>
+  <label class="datepicker-label" *ngIf="!!label">{{
+    label | translate
+  }}</label>
+
+  <span *ngIf="!value && placeholder" class="container__placeholder">
+    {{ placeholder | translate }}
+  </span>
+
+  <mat-form-field [ngStyle]="{ 'background-color': disabled ? '#D1D5DB' : 'none' }">
+    <mat-datepicker-toggle matPrefix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>event_note</mat-icon>
+    </mat-datepicker-toggle>
+    <input
+      matInput
+      [disabled]="disabled"
+      [value]="value"
+      (dateInput)="setDate($event)"
+      (dateChange)="setDate($event)"
+      [matDatepicker]="picker"
+      [max]="max"
+      [min]="min"
+    />
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>

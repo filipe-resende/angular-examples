@@ -1,0 +1,16 @@
+.message-container {
+  display: flex;
+  align-items: center;
+  padding: 2px 12px;
+  margin-top: 12px;
+  border-radius: 2px;
+  min-height: 36px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ffffff;
+
+  & > div:first-child {
+    margin-right: 6px;
+  }
+}

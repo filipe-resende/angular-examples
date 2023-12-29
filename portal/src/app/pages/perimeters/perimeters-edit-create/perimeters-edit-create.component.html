@@ -1,0 +1,113 @@
+<section class="perimeters-create-container">
+  <section class="perimeters-create-form-container">
+    <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0">
+      <app-site-selector
+        [displayAsInput]="true"
+        [disabled]="isEditing"
+      ></app-site-selector>
+    </div>
+    <form [formGroup]="ngForm">
+      <mat-form-field appearance="outline" style="padding: 16px 0 0">
+        <mat-label>{{ 'PERIMETERS.NAME' | translate }}</mat-label>
+        <input
+          matInput
+          [placeholder]="'PERIMETERS.NAME' | translate"
+          formControlName="name"
+        />
+      </mat-form-field>
+    </form>
+    <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0 0"></div>
+  </section>
+  <cdk-virtual-scroll-viewport
+    itemSize="52"
+    minBufferPx="3000"
+    maxBufferPx="3000"
+    class="perimeters-create-coordinates-viewport"
+  >
+    <div class="perimeters-create-coordinates-label">
+      {{ 'PERIMETERS.COORDINATES' | translate }}:
+    </div>
+    <div
+      *cdkVirtualFor="
+        let coord of (perimetersPageModel$ | async)
+          .drawedPerimeterPolygonMarkers;
+        templateCacheSize: 0
+      "
+    >
+      <div class="perimeters-create-coordinates-item">
+        <div>
+          <label>
+            {{ coord.label }}
+          </label>
+          <div>
+            <label> <label>Lat:</label> {{ coord.lat }} </label>
+            <label> <label>Lng:</label> {{ coord.lng }} </label>
+          </div>
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon style="color: #909193">more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button
+            mat-menu-item
+            (click)="deleteMarker(coord.googleMapsMarkerRef)"
+            class="perimeters-create-menu-item"
+          >
+            <img src="assets/icons/trash.svg" alt="trash" />
+            <span>Remover</span>
+          </button>
+        </mat-menu>
+      </div>
+    </div>
+  </cdk-virtual-scroll-viewport>
+
+  <section class="perimeters-create-buttons-container">
+    <div
+      *ngIf="perimeterHasBeenValidatedByService"
+      class="perimeters-create-validation-disclaimer"
+    >
+      {{
+        (isPerimeterValid
+          ? 'PERIMETERS.DO_NOT_HAVE_INTERSECTIONS'
+          : 'PERIMETERS.HAVE_INTERSECTIONS'
+        ) | translate
+      }}
+    </div>
+    <app-button
+      type="submit"
+      [primary]="false"
+      [large]="true"
+      [strech]="true"
+      [disabled]="isUpdatingPerimeter"
+      (onClick)="isEditing ? cancelEdition() : clear()"
+      [disabled]="isValidatingPerimeter"
+    >
+      {{ (isEditing ? 'MAIN.CANCEL' : 'PERIMETERS.CLEAR_FORM') | translate }}
+    </app-button>
+    <app-button
+      [large]="true"
+      [strech]="true"
+      [disabled]="
+        (perimetersPageModel$ | async).drawedPerimeterPolygonMarkers.length <=
+          2 || !ngForm.controls.name
+      "
+      [loading]="isValidatingPerimeter || isUpdatingPerimeter"
+      (onClick)="
+        perimeterHasBeenValidatedByService && isPerimeterValid
+          ? isEditing
+            ? edit()
+            : create()
+          : validatePerimeter()
+      "
+    >
+      {{
+        (perimeterHasBeenValidatedByService && isPerimeterValid
+          ? isEditing
+            ? 'PERIMETERS.EDIT_PERIMETERS'
+            : 'PERIMETERS.CREATE_PERIMETER'
+          : 'PERIMETERS.VALIDATE_PERIMETER'
+        ) | translate
+      }}
+    </app-button>
+  </section>
+</section>

@@ -1,0 +1,22 @@
+<app-message class="limit-message" type="info" [hideIcon]="true">
+  <span class="limit-message__counter"> {{ coordinates.length }} / 40 </span>
+  <p class="limit-message__text">
+    {{ 'FENCES.LAST_COORDINATE_WILL_CLOSE_AUTOMATICALLY' | translate }}
+  </p>
+</app-message>
+
+<p class="title">Coordenadas:</p>
+
+<section
+  *ngFor="let coordinate of coordinates; let i = index"
+  class="coordinate"
+>
+  <div class="coordinate__index">{{ i + 1 }}</div>
+  <div class="details">
+    <p class="details__point">Latitude: {{ coordinate.lat }}</p>
+    <p class="details__point">Longitude: {{ coordinate.lng }}</p>
+  </div>
+  <button class="coordinate__button" mat-icon-button>
+    <mat-icon class="coordinate__icon" svgIcon="trash"></mat-icon>
+  </button>
+</section>

@@ -1,0 +1,24 @@
+<div class="da-container">
+  <div class="da-item">
+    <label>Total de dispositivos ativos:</label>
+    <span *ngIf="!!totalCount; else noData">
+      {{ totalCount }}
+    </span>
+  </div>
+  <div>
+    <label>Associados:</label>
+    <span *ngIf="!!associatedDevicesCount; else noData">
+      {{ associatedDevicesCount }}
+    </span>
+  </div>
+  <div>
+    <label>Desassociados:</label>
+    <span *ngIf="!!disassociatedDevicesCount; else noData">
+      {{ disassociatedDevicesCount }}
+    </span>
+  </div>
+</div>
+
+<ng-template #noData>
+  <span> - </span>
+</ng-template>

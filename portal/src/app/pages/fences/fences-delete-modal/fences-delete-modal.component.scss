@@ -1,0 +1,87 @@
+:host {
+  height: 100%;
+  max-height: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 20px;
+  height: 92px;
+  border-bottom: 1px solid #edeef0;
+
+  &__trash-icon {
+    width: 48px;
+    height: 42px;
+  }
+
+  &__text {
+    width: 100%;
+    padding-left: 28px;
+  }
+
+  &__text-title,
+  &__text-subtitle {
+    display: block;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    color: #697489;
+    line-height: 24px;
+  }
+
+  &__text-title {
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  &__text-subtitle {
+    font-weight: 300;
+    font-size: 14px;
+  }
+
+  &__close-icon {
+    color: #959dac;
+    border-radius: 1px;
+    margin-bottom: 8px;
+  }
+}
+
+.modal-main {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 38px;
+  font-size: 14px;
+
+  &__content {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    line-height: 22px;
+    color: #909193;
+  }
+}
+
+.modal__footer {
+  display: flex;
+  margin-top: auto;
+  width: 100%;
+
+  &__submit-button,
+  &__cancel-button {
+    width: 100%;
+    height: 48px;
+  }
+
+  &__submit-button {
+    background-color: #3d7ed8;
+    color: #ffffff;
+  }
+
+  &__cancel-button {
+    color: #3d7ed8;
+    border-top: 1px solid #edeef0;
+  }
+}

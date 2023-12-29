@@ -1,0 +1,154 @@
+<div class="details-table">
+  <!-- DEVICES UPDATE VIEW -->
+  <div class="device-detail-card" *ngIf="deviceData">
+    <div
+      class="device-details-content"
+      *ngIf="thingLocationData$ | async; else loading"
+    >
+      <div *ngIf="displayLastLocation; else noContent">
+        <div class="col-5 detail-label">
+          {{ 'THING_UPDATE.LAST_DEVICE_INFO.NAME' | translate }}
+        </div>
+        <div class="row row-device-details">
+          <div class="col-4" *ngIf="deviceEventDateTime">
+            <span class="grey">
+              {{ deviceEventDateTime | dateFormat }}
+            </span>
+          </div>
+          <div class="row">
+            <div class="col-4" *ngIf="!deviceEventDateTime">
+              <span class="grey">N/A</span>
+            </div>
+          </div>
+          <div class="col-2 row-battery-detail">
+            <div
+              *ngIf="!!deviceBatteryPercent"
+              class="device-details-battery"
+              [ngSwitch]="deviceBatteryState"
+            >
+              <i
+                *ngSwitchCase="batteryState.GOOD"
+                class="mdi mdi-battery battery-good"
+                matTooltip="100% - 50%"
+              ></i>
+              <i
+                *ngSwitchCase="batteryState.MEDIUM"
+                class="mdi mdi-battery-50 battery-medium"
+                matTooltip="50% - 25%"
+              ></i>
+              <i
+                *ngSwitchCase="batteryState.LOW"
+                class="mdi mdi-battery-10 battery-low"
+                matTooltip="25% - 0%"
+              ></i>
+              <span *ngIf="deviceBatteryPercent >= 0"
+                >{{ deviceBatteryPercent }}%</span
+              >
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="row row-coordinates-details">
+              <div class="latitude-details">
+                {{
+                  'DEVICE_UPDATE.LAST_DEVICE_INFO.COORDINATES.LATITUDE'
+                    | translate
+                }}
+                <span *ngIf="coordinates.length">{{ coordinates[1] }}</span>
+                <span *ngIf="!coordinates.length">N/A</span>
+              </div>
+              <div>
+                {{
+                  'DEVICE_UPDATE.LAST_DEVICE_INFO.COORDINATES.LONGITUDE'
+                    | translate
+                }}
+                <span *ngIf="coordinates.length">{{ coordinates[0] }}</span>
+                <span *ngIf="!coordinates.length">N/A</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noContent>
+        <div class="detail-label" translate>DEVICE_UPDATE.INFO_FAIL</div>
+      </ng-template>
+    </div>
+
+    <ng-template #loading>
+      <div class="spinner-content" *ngIf="!noLocationData">
+        <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- THING UPDATE VIEW -->
+  <div class="device-detail-card" *ngIf="thingData">
+    <div
+      class="device-details-content"
+      *ngIf="thingLocationData$ | async; else loading"
+    >
+      <div class="row">
+        <div class="col-5 detail-label">
+          {{ 'thingUpdate.deviceNameInfo.info' | translate }}
+        </div>
+
+        <div class="col-7" *ngIf="eventDateTime">
+          {{ eventDateTime | dateFormat }}
+        </div>
+        <div class="col-7" *ngIf="!eventDateTime">N/A</div>
+      </div>
+
+      <div class="row">
+        <div class="col-5 detail-label">
+          {{ 'THING_UPDATE.LAST_DEVICE_INFO.DEVICE_NAME' | translate }}
+        </div>
+
+        <div class="col-7" *ngIf="deviceId">
+          <a class="link" (click)="redirectToDevice(applicationId, deviceId)">
+            <span class="grey">{{
+              deviceSourceValue ? deviceSourceValue : 'N/A'
+            }}</span>
+          </a>
+        </div>
+
+        <div class="col-7" *ngIf="!deviceId">
+          <a class="link">N/A</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-5 detail-label">
+          {{ 'THING_UPDATE.LAST_DEVICE_INFO.COORDINATES.NAME' | translate }}
+        </div>
+
+        <div class="col-7">
+          <div>
+            {{
+              'THING_UPDATE.LAST_DEVICE_INFO.COORDINATES.LATITUDE' | translate
+            }}
+            <span *ngIf="coordinates.length">{{ coordinates[1] }}</span>
+            <span *ngIf="!coordinates.length">N/A</span>
+          </div>
+
+          <div>
+            {{
+              'THING_UPDATE.LAST_DEVICE_INFO.COORDINATES.LONGITUDE' | translate
+            }}
+            <span *ngIf="coordinates.length">{{ coordinates[0] }}</span>
+            <span *ngIf="!coordinates.length">N/A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #loading>
+      <div class="spinner-content" *ngIf="!noLocationData">
+        <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+      </div>
+
+      <div class="detail-label" *ngIf="noLocationData" translate>
+        deviceUpdate.infoFail
+      </div>
+    </ng-template>
+  </div>
+</div>

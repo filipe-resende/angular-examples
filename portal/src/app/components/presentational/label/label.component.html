@@ -1,0 +1,21 @@
+<div
+  class="label-container"
+  [ngStyle]="{
+    width: stretched ? 'Calc(100% - 18px)' : 'auto'
+  }"
+>
+  <mat-icon *ngIf="iconName">{{ iconName }}</mat-icon>
+  <div
+    *ngIf="maxWidthLength; else withoutWidthRestriction"
+    class="label-max-width-limitator"
+    [matTooltip]="tooltip"
+    [ngStyle]="{
+      'max-width': maxWidthLength + 'px'
+    }"
+  >
+    {{ text }}
+  </div>
+  <ng-template #withoutWidthRestriction>
+    {{ text }}
+  </ng-template>
+</div>

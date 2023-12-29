@@ -1,0 +1,48 @@
+<div
+  class="application-item-list"
+  [ngClass]="{ 'status-inactive': !applicationInfo?.status }"
+  *ngIf="applicationInfo"
+>
+  <section class="init-device-item centralizado">
+    <input type="checkbox" class="checkbox" />
+  </section>
+  <section class="init-application-item largura">
+    <div class="application-info">
+      <div class="application-details">
+        <div class="name">{{ applicationInfo?.name }}</div>
+        <div class="id">
+          {{ 'APPLICATIONS_LIST.CARD.ID' | translate }}:
+          {{ applicationInfo?.id }}
+        </div>
+        <div class="description">
+          {{ 'APPLICATIONS_LIST.CARD.DESCRIPTION' | translate }}:
+          {{ applicationInfo?.description }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="end-item col-5">
+    <div class="application-status">
+      <span *ngIf="!applicationInfo?.status">
+        Status:
+        {{ 'APPLICATIONS_LIST.CARD.INACTIVE' | translate }}
+      </span>
+      <span *ngIf="applicationInfo?.status">
+        Status:
+        <span class="active-application">{{
+          'APPLICATIONS_LIST.CARD.ACTIVE' | translate
+        }}</span></span
+      >
+    </div>
+
+    <div class="update-card">
+      <app-action-button
+        [ngClass]="['blue', 'association']"
+        (action)="routeToApplicationDetails(applicationInfo.id)"
+      >
+        {{ 'APPLICATIONS_LIST.CARD.EDIT_BTN' | translate }}
+      </app-action-button>
+    </div>
+  </section>
+</div>

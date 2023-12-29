@@ -1,0 +1,205 @@
+@import '../../../scss/styles.scss';
+
+.breadCrumbs {
+  margin: 0px;
+  padding-top: 10px;
+  padding-left: 59px;
+  font-family: $font-body1;
+  font-size: 12px;
+  color: #909193;
+}
+
+.breadCrumbs > span {
+  color: #252727;
+}
+
+.spinner {
+  text-align: -webkit-center;
+}
+
+.devices-groups-table {
+  padding-bottom: 15px;
+  width: 1200px;
+}
+
+table {
+  margin-top: 5px;
+  display: block;
+  width: -webkit-fill-available;
+  box-shadow: none;
+  margin-left: 3%;
+}
+
+::ng-deep.mat-paginator .mat-paginator-container {
+  justify-content: center;
+}
+
+:host ::ng-deep .mat-sort-header-content {
+  text-align: initial;
+}
+
+tr > th {
+  border-bottom: 1px solid black;
+}
+
+:host ::ng-deep .mat-cell {
+  font-size: 12px;
+}
+
+:host ::ng-deep .mat-paginator-container {
+  justify-content: center;
+  min-height: 45px !important;
+  max-height: 48px !important;
+}
+
+.groupName {
+  width: 380px;
+}
+
+.groupNameCell {
+  width: 380px;
+}
+
+.createAt {
+  width: 140px;
+}
+
+.manager {
+  width: 260px;
+}
+
+.margin_span {
+  margin-left: 10px;
+}
+
+.edition {
+  width: 100px;
+}
+
+.devices-groups-container {
+  max-width: 1235px;
+  margin: 40px auto;
+  margin-top: 64px;
+  font-family: $font-body1;
+  font-style: normal;
+
+  .devices-groups-body {
+    background: $white;
+    box-shadow: -1px 1px 2px rgba(67, 70, 74, 0.0001),
+      -2px 2px 5px rgba(67, 86, 100, 0.123689);
+    border-radius: 8px;
+    min-height: 450px;
+
+    .devices-groups-filter {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      padding: 5px 20px 0;
+
+      .filter-fields {
+        display: flex;
+        align-items: end;
+
+        .input-search {
+          position: relative;
+        }
+
+        input,
+        select {
+          background-color: $white;
+          border: 1px solid #e3e4e4;
+          border-radius: 2px;
+          height: 36px;
+          letter-spacing: 0.5px;
+          line-height: 24px;
+          padding-left: 8px;
+          padding-right: 8px;
+          color: #909193;
+          margin-right: 16px;
+          font-size: 14px;
+        }
+
+        .filter-by-manager {
+          .manager-option {
+            display: flex;
+            align-items: end;
+
+            .manager-filter-options {
+              display: flex;
+              flex-direction: column;
+
+              label {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 22px;
+                color: #959dac;
+                margin-bottom: 0;
+              }
+            }
+
+            .filter-options {
+              width: 165px;
+            }
+          }
+        }
+      }
+
+      .filter-buttons {
+        margin-right: 40px;
+
+        .clear-filters {
+          color: $violetVale;
+          background-color: $white;
+          border: 1.5px solid $violetVale;
+          border-radius: 2px;
+          padding: 3px 10px;
+          cursor: pointer;
+          font-family: $font-body1;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 22px;
+
+          .img-clear-filters {
+            margin-bottom: 5px;
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.edit-group {
+  cursor: pointer;
+}
+
+.search-button {
+  border: none;
+  background: #3d7edb;
+  border-radius: 2px;
+  height: 36px;
+  width: 36px;
+}
+
+.disabled-input {
+  opacity: 0.3;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3d7edb;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3d7edb;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}

@@ -1,0 +1,47 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+  - job: ThingsManagementPortal
+    displayName: 'Build - Things Management - Portal - Dev'
+    steps:
+      - task: AzureKeyVault@1
+        displayName: 'Azure Key Vault: $(keyVaultName)'
+        inputs:
+          azureSubscription: '$(azureSubscription)'
+          KeyVaultName: $(keyVaultName)
+          SecretsFilter: 'thingsManagementApiUsernameDev, thingsManagementApiPasswordDev ,iamClientSecretDev ,iamClientIdDev'
+
+      - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+        displayName: 'Replace tokens in **/environment.dev.ts '
+        inputs:
+          targetFiles: '**/environment.dev.ts'
+
+      - task: NodeTool@0
+        displayName: 'Use Node 16.14.x'
+        inputs:
+          versionSpec: 16.14.x
+
+      - task: Npm@1
+        displayName: 'npm install'
+        inputs:
+          verbose: false
+
+      - task: Npm@1
+        displayName: 'npm run build'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run build-dev'
+
+      - task: ArchiveFiles@2
+        displayName: 'Archive dist'
+        inputs:
+          rootFolderOrFile: dist
+          includeRootFolder: false
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: drop'

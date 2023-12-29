@@ -1,0 +1,33 @@
+<input
+  matInput
+  #focusList
+  (keyup.enter)="resetFields()"
+  (click)="filterData()"
+  (input)="filterData()"
+  (change)="onFocusLostList()"
+  type="text"
+  [(ngModel)]="elementName"
+  (change)="resetFields()"
+  placeholder="{{ placeHolder | translate }}"
+  [matAutocomplete]="ELEMENT"
+  class="input"
+/>
+<mat-autocomplete
+  [panelWidth]="'auto'"
+  autoActiveFirstOption
+  #ELEMENT="matAutocomplete"
+>
+  <mat-option
+    *ngFor="let item of filteredData"
+    (click)="valueElementName(item); focusList.blur()"
+  >
+    <span *ngIf="item.code"> {{ item.code }} - </span>{{ item.name }}
+  </mat-option>
+
+  <mat-option
+    (click)="elementName = ''"
+    *ngIf="!filteredData.length && elementName"
+  >
+    {{ 'DASHBOARD.FILTER.RESULT_NOT_FOUND' | translate }}
+  </mat-option>
+</mat-autocomplete>

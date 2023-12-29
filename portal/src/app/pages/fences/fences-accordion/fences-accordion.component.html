@@ -1,0 +1,212 @@
+<mat-accordion>
+  <div *ngIf="loading; else loaded">
+    <div
+      class="skeleton"
+      style="height: 36px; margin-bottom: 16px; border-radius: 2px"
+      *ngFor="let skeleton of skeletonArray"
+    ></div>
+  </div>
+  <ng-template #loaded>
+    <div *ngFor="let geofence of geofenceListWithCategory">
+      <mat-expansion-panel
+        (afterExpand)="getDetectorsList(geofence.id)"
+        (opened)="geofence.panelOpenState = true; clearDetectorList(geofence)"
+        (closed)="geofence.panelOpenState = false; clearDetectorList(geofence)"
+        [ngStyle]="{ 'border-left': '5px solid ' + geofence.color }"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <app-checkbox
+              [checked]="geofence.checked"
+              (onSelect)="onCheckboxClick($event, geofence)"
+            ></app-checkbox>
+            <label class="fences-accordion-title-name">
+              {{ geofence.name }}
+            </label>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="fences-accordion-info-field">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'FENCES.NAME' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'FENCES.NAME' | translate"
+              [(ngModel)]="geofence.name"
+              disabled
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="fences-accordion-info-field">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'FENCES.DESCRIPTION' | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'FENCES.DESCRIPTION' | translate"
+              [(ngModel)]="geofence.description"
+              disabled
+            />
+          </mat-form-field>
+        </div>
+
+        <div class="fences-accordion-info-field category-name-setup">
+          <div class="fence-setup">
+            <mat-form-field appearance="outline">
+              <mat-label>
+                {{ 'FENCES.CATEGORY' | translate }}
+              </mat-label>
+              <input matInput [(ngModel)]="geofence.category" disabled />
+            </mat-form-field>
+          </div>
+
+          <div class="fences-accordion-info-field fence-setup">
+            <mat-form-field appearance="outline">
+              <mat-label>{{ 'FENCES.COLOR' | translate }}</mat-label>
+              <mat-select
+                disableOptionCentering
+                disabled
+                [(ngModel)]="geofence.color"
+              >
+                <mat-select-trigger>
+                  <div class="fences-accordion-color-select">
+                    <div
+                      class="fence-color"
+                      style="margin-right: 8px"
+                      [ngStyle]="{ 'background-color': geofence.color }"
+                    ></div>
+                    {{ getColorName(geofence.color) | translate }}
+                  </div>
+                </mat-select-trigger>
+                <mat-option *ngFor="let color of colors" [value]="color.color">
+                  <div class="fences-accordion-color-select">
+                    <div
+                      class="fence-color"
+                      style="margin-right: 8px"
+                      [ngStyle]="{ 'background-color': color.color }"
+                    ></div>
+                    {{ color.name }}
+                  </div>
+                </mat-option>
+                <mat-option [value]="geofence.color">
+                  <div class="fences-accordion-color-select">
+                    <div
+                      class="fence-color"
+                      style="margin-right: 8px"
+                      [ngStyle]="{ 'background-color': geofence.color }"
+                    ></div>
+                    {{ geofence.name }}
+                  </div>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="fences-accordion-info-field">
+          <mat-form-field appearance="outline">
+            <mat-label>
+              {{ 'FENCES.CREATED_BY' | translate }}
+            </mat-label>
+            <input matInput [(ngModel)]="geofence.createdBy" disabled />
+          </mat-form-field>
+        </div>
+
+        <div class="fences-accordion-info-field text-color-grey">
+          <section class="line">
+            <hr />
+            <span>{{ 'FENCES.ACCESS_BY_BADGE' | translate }}</span>
+          </section>
+          <div style="margin-bottom: 20px">
+            <div *ngIf="detectorIsLoading">
+              <div
+                class="skeleton"
+                style="height: 20px; margin-bottom: 12px; border-radius: 2px"
+                *ngFor="let skeleton of skeletonArray.slice(0, 3)"
+              ></div>
+            </div>
+            <div *ngIf="!detectorIsLoading">
+              <div *ngIf="!geofence.isEditMode; else edit">
+                <table>
+                  <tbody>
+                    <tr *ngFor="let detector of detectorsList">
+                      <td>{{ detector.name }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div *ngIf="!detectorsList?.length > 0">
+                  {{ 'FENCES.DOES_NOT_EXIST' | translate }}
+                </div>
+              </div>
+              <ng-template #edit>
+                <div *ngIf="geofence.isEditMode">
+                  <div
+                    *ngIf="detectors$ | async as detectors"
+                    [style.height]="detectors.length ? '200px' : '0px'"
+                  >
+                    <app-multi-select-autocomplete
+                      *ngIf="detectors.length; else empty"
+                      [warning]="showEmptyDetectorsWarning"
+                      [options]="detectors"
+                      (selectChange)="onDetectorsSelectChange($event)"
+                      [isFormField]="false"
+                      [isFenceEdit]="true"
+                    ></app-multi-select-autocomplete>
+
+                    <ng-template #empty>
+                      {{ 'FENCES.DOES_NOT_ON_FENCE_EXIST' | translate }}
+                    </ng-template>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+
+        <div
+          *ngIf="
+            isThisCreatedBy(geofence.createdBy) || isBusinessSecurityAnalyst
+          "
+          class="fences-accordion-trash-icon-wrapper"
+        >
+          <img
+            *ngIf="!geofence.isEditMode"
+            src="assets/icons/trash.svg"
+            (click)="onDeleteButtonClick(geofence)"
+            alt="trash"
+          />
+
+          <app-button
+            *ngIf="geofence.isEditMode"
+            (click)="onCancelButtonClick(geofence)"
+            [primary]="false"
+            [customClass]="cancel - button"
+          >
+            {{ 'FENCES.CANCEL' | translate }}
+          </app-button>
+
+          <div *ngIf="detectors$ | async as detectors">
+            <app-button
+              *ngIf="geofence.isEditMode && detectors.length"
+              (click)="onSaveButtonClick(geofence)"
+              style="margin: 0 0 4px 8px"
+            >
+              {{ 'FENCES.SAVE_EDIT' | translate }}
+            </app-button>
+          </div>
+
+          <app-button
+            *ngIf="
+              !geofence.isEditMode &&
+              (isBusinessSecurityAnalyst || isThisCreatedBy(geofence.createdBy))
+            "
+            (click)="onEditButtonClick(geofence)"
+            style="margin: 0 0 4px 8px"
+          >
+            {{ 'FENCES.ACCESS_EDIT' | translate }}
+          </app-button>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </ng-template>
+</mat-accordion>

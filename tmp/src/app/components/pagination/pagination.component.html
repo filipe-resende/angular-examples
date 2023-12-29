@@ -1,0 +1,43 @@
+<div class="row bottom-pagination">
+  <i class="fas arrow fa-arrow-left blue" (click)="clickPrevious()"></i>
+
+  <div class="pagination-content" *ngIf="count">
+    <div
+      class="page"
+      [ngClass]="{ 'page-active': currentPage === 0 }"
+      (click)="setPageTo(count[0])"
+    >
+      {{ count[0] + 1 }}
+    </div>
+
+    <div class="elipsis" *ngIf="currentPage >= 4">...</div>
+
+    <div *ngFor="let item of count">
+      <div
+        *ngIf="item > bottom && item < top"
+        (click)="setPageTo(item)"
+        class="page"
+        [ngClass]="{ 'page-active': currentPage === item }"
+      >
+        {{ item }}
+      </div>
+    </div>
+
+    <div
+      class="elipsis"
+      *ngIf="currentPage !== count[count.length - 1] && top < count.length - 2"
+    >
+      ...
+    </div>
+
+    <div
+      class="page"
+      [ngClass]="{ 'page-active': currentPage === count[count.length - 1] }"
+      (click)="setPageTo(count[count.length - 1])"
+    >
+      {{ count.length }}
+    </div>
+  </div>
+
+  <i class="fas arrow fa-arrow-right blue" (click)="clickForward()"> </i>
+</div>

@@ -1,0 +1,50 @@
+<header class="header">
+  <mat-icon class="header__warning-icon">warning</mat-icon>
+  <div>
+    <h3 class="header__title">
+      {{ 'USER_AGREEMENT.SENSITIVE_DATA_VISUALIZATION' | translate }}
+    </h3>
+    <h6 class="header__subtitle">Global Access Portal</h6>
+  </div>
+  <button
+    mat-icon-button
+    class="header__close-icon"
+    (click)="onClose()"
+    *ngIf="userAgreement"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+<hr class="user-agreement-container__line" />
+<p
+  class="user-agreement-container__content"
+  [innerHTML]="userAgreementDocument?.text"
+></p>
+<hr class="user-agreement-container__line" />
+
+<footer class="footer" *ngIf="userAgreement; else actions">
+  <mat-icon>check_circle_outline</mat-icon>
+  <div class="footer__info">
+    {{ 'USER_AGREEMENT.ACCEPTED_AT' | translate }}
+    <strong>{{
+      userAgreement?.createdAt
+        | date: ('USER_AGREEMENT.AGREED_TIME_FORMAT' | translate)
+    }}</strong>
+  </div>
+</footer>
+
+<ng-template #actions>
+  <section class="actions">
+    <mat-checkbox class="actions__checkbox" [(ngModel)]="readAndAgreeCheck">
+      {{ 'USER_AGREEMENT.READ_AND_AGREE_WITH_TERMS' | translate }}
+    </mat-checkbox>
+    <button
+      mat-flat-button
+      class="actions__button"
+      (click)="handleAcceptAgreementClick()"
+      [disabled]="!readAndAgreeCheck"
+    >
+      {{ 'USER_AGREEMENT.ACCEPT' | translate }}
+    </button>
+  </section>
+</ng-template>

@@ -1,0 +1,145 @@
+@import '../../../../scss/variables';
+
+.header {
+  background-color: #f8f8f8;
+  width: 100%;
+  height: 56px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 1px solid #c7c8c9;
+}
+
+.header-logo-app-name-container {
+  align-items: center;
+  display: flex;
+}
+
+.header-vale-logo {
+  height: 39px;
+  margin-left: 24px;
+}
+
+.header-app-name-label,
+.header-app-full-name-label {
+  color: #242727;
+  font-size: 24px;
+  font-family: Caecilia, Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin: 0px 20px;
+  white-space: nowrap;
+}
+
+.header-content {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.header-routes {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+
+  & > div > label {
+    padding: 0px 10px;
+    cursor: pointer;
+    height: 100%;
+    line-height: 22px;
+    font-size: 14px;
+    color: #909193;
+
+    display: flex;
+    align-items: center;
+  }
+
+  & > div > label.selected {
+    color: #252727;
+    font-weight: bold;
+  }
+
+  & > div > label:hover {
+    text-decoration: underline;
+  }
+
+  & > div > label.selected:hover {
+    text-decoration: none;
+  }
+}
+
+.header-searchbar-container {
+  height: 100%;
+  border-left: 1px solid #c7c8c9;
+  display: flex;
+  align-items: center;
+  padding: 0px 20px;
+}
+
+.header-searchbar-container-hidden > * {
+  display: none;
+}
+
+.header-user-container {
+  height: 100%;
+  border-left: 1px solid #c7c8c9;
+}
+
+@media (max-width: 1650px) {
+  .header-app-full-name-label {
+    display: none;
+  }
+
+  .header-app-name-label {
+    display: block;
+  }
+}
+
+@media (min-width: 1650px) {
+  .header-app-full-name-label {
+    display: block;
+  }
+
+  .header-app-name-label {
+    display: none;
+  }
+}
+
+.header-notification {
+  width: 58px;
+  height: 58px;
+  border-left: 1px solid #c7c8c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.app-header-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #c7c8c9;
+
+  &__gap {
+    border-radius: 5px;
+    background-color: $indigo;
+    border-color: 1px solid $indigo;
+    height: 26px;
+    margin-left: 8px;
+    margin-right: 16px;
+    align-items: center;
+    display: inline-flex;
+  }
+
+  &__link {
+    color: #f8f8f8;
+    border-color: 1px solid $indigo;
+    padding: 2px 4px;
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,116 @@
+.fences-instructions-overlay {
+  height: 400px;
+  width: 520px;
+  left: 500px;
+  top: 168px;
+  background-color: #fbfbfb;
+  box-shadow: -40px 60px 80px rgba(67, 70, 74, 0.16);
+  border-radius: 4px;
+
+  &-container {
+    position: relative;
+    padding-top: 28px;
+  }
+}
+
+.close-btn {
+  position: absolute;
+  right: 8px;
+  top: 0;
+  height: auto !important;
+  width: auto !important;
+  color: #959dac;
+
+  mat-icon {
+    font-size: 20px;
+  }
+}
+
+.fences-instructions-overlay-header {
+  margin-left: 28px;
+
+  &-content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &-title {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #697489;
+    margin-left: 16px;
+
+    width: 396px;
+  }
+
+  &-alert {
+    display: flex;
+    align-items: center;
+    background-color: #e9ab13;
+    border-radius: 100%;
+    height: 40px;
+
+    & > img {
+      width: 40px;
+      height: 24px;
+    }
+  }
+}
+
+.fences-instructions-overlay-instruction-element-title {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  font-weight: 200;
+  margin-left: 28px;
+  padding-right: 28px;
+
+  color: #909193;
+
+  .bolder {
+    font-weight: bold;
+  }
+}
+
+.fences-instructions-overlay-instruction-element-content {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 44px;
+  margin-right: 64px;
+}
+
+.correct-instruction,
+.incorrect-instruction {
+  background-color: #69be28;
+  height: 32px;
+  width: 32px;
+  color: #fff;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-left: 16px;
+}
+
+.incorrect-instruction {
+  background-color: #bb133e;
+}
+
+.fences-instructions-overlay-instruction-block {
+  display: flex;
+  align-items: center;
+
+  img {
+    display: block;
+  }
+}

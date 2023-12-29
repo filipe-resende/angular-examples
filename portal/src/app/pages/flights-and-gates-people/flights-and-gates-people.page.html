@@ -1,0 +1,170 @@
+<div class="flights-and-gates-people-page-container">
+  <div class="flights-and-gates-people-page-header">
+    <h1
+      class="flights-page-selector-name"
+      *ngIf="selectedFlight$ | async as selectedFlight"
+    >
+      <ng-container *ngIf="selectedFlight.currentFlight.type === 'FLIGHT'">
+        <span *ngIf="selectedFlight.currentFlight.direction === 'Arrival'">
+          {{ 'FLIGHTS.TYPES.FLIGHT' | translate }} {{ selectedFlight.flight }} -
+          {{ 'FLIGHTS.ARRIVAL' | translate }}
+        </span>
+        <span *ngIf="selectedFlight.currentFlight.direction === 'Departure'">
+          {{ 'FLIGHTS.TYPES.FLIGHT' | translate }} {{
+          selectedFlight.currentFlight.flight }} - {{ 'FLIGHTS.DEPARTURE' |
+          translate}}
+        </span>
+      </ng-container>
+      <ng-container *ngIf="selectedFlight.currentFlight.type === 'GATE'">
+        <span *ngIf="selectedFlight.currentFlight.direction === 'Entering'">
+          {{'FLIGHTS.TYPES.GATE' | translate}} - {{'FLIGHTS.ENTERING' |
+          translate}}</span
+        >
+        <span *ngIf="selectedFlight.currentFlight.direction === 'Leaving'"
+          >{{'FLIGHTS.TYPES.GATE' | translate}} - {{'FLIGHTS.LEAVING' |
+          translate}}</span
+        >
+      </ng-container>
+    </h1>
+  </div>
+
+  <section class="flights-and-gates-people-page-card-container">
+    <app-card>
+      <div class="flights-and-gates-people-page-card-header">
+        <form class="flights-and-gates-people-page-search-form">
+          <app-datepicker-from-to
+            [max]="maxCalendarDate"
+            (dateChange)="onSelectDate($event, 'startDate')"
+            [dateInputValue]="formatDateAsUTC(startDate)"
+            [max2]="currentDate"
+            (dateChange2)="onSelectDate($event, 'endDate')"
+            [dateInput2Value]="formatDateAsUTC(endDate)"
+            #searchDatepicker
+          ></app-datepicker-from-to>
+
+          <div style="margin: 0px 16px">
+            <app-hourpicker-from-to
+              [input1Value]="ngForm.value.startHour"
+              [input2Value]="ngForm.value.endHour"
+              (input1Change)="onSelectHour($event, 'startHour')"
+              (input2Change)="onSelectHour($event, 'endHour')"
+            ></app-hourpicker-from-to>
+          </div>
+
+          <div style="margin-left: 16px">
+            <app-button
+              [iconOnly]="true"
+              (onClick)="onApplyFilterButtonClick()"
+            >
+              <img
+                src="assets/icons/search.svg"
+                [alt]="'DISPLACEMENT.APPLY_SEARCH' | translate"
+                [title]="'DISPLACEMENT.APPLY_SEARCH' | translate"
+              />
+            </app-button>
+          </div>
+          <div style="margin-left: 16px"></div>
+        </form>
+        <app-button
+          (onClick)="onExportExcelButtonClick($event)"
+          [upperCased]="true"
+        >
+          <!-- [disabled]="!startDate || !endDate || !ngForm.valid" -->
+          {{ "DISPLACEMENT.EXPORT" | translate }}
+        </app-button>
+      </div>
+
+      <div class="flights-and-gates-people-page-table-container">
+        <table
+          mat-table
+          [dataSource]="(isFetchingPassengers$ | async) ? skeletonArray :  dataSource"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "FLIGHTS.PEOPLE.TABLE.ID" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let peopleData">
+              <div class="skeleton table" *ngIf="!peopleData"></div>
+              {{ !peopleData ? '' : peopleData?.deviceSourceIdentificator || '-'
+              }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "FLIGHTS.PEOPLE.TABLE.NAME" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let peopleData">
+              <div class="skeleton table" *ngIf="!peopleData"></div>
+              {{ !peopleData ? '' : peopleData?.thingName || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "FLIGHTS.PEOPLE.TABLE.ROLE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let peopleData">
+              <div class="skeleton table" *ngIf="!peopleData"></div>
+              {{ !peopleData ? '' : peopleData?.thingPosition || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="roleType">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "FLIGHTS.PEOPLE.TABLE.ROLE_TYPE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let peopleData">
+              <div class="skeleton table" *ngIf="!peopleData"></div>
+              {{ !peopleData ? '' : peopleData?.thingEmployer || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "FLIGHTS.PEOPLE.TABLE.DEPARTMENT" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let peopleData">
+              <div class="skeleton table" *ngIf="!peopleData"></div>
+              {{ !peopleData ? '' : peopleData?.thingDepartment || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "FLIGHTS.PEOPLE.TABLE.PHONE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let peopleData">
+              <div class="skeleton table" *ngIf="!peopleData"></div>
+              {{ !peopleData ? '' : peopleData?.thingPhone || '-' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ "FLIGHTS.PEOPLE.TABLE.EMAIL" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let peopleData">
+              <div class="skeleton table" *ngIf="!peopleData"></div>
+              {{ !peopleData ? '' : peopleData?.thingEmail || '-' }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+      <div style="display: flex; justify-content: center">
+        <ng-container *ngIf="passengers$ | async as passengers">
+          <app-paginator
+            *ngIf="passengers.totalCount > paginator.perPage"
+            [total]="passengers.totalCount"
+            (onChangePage)="onChangePage($event)"
+          >
+          </app-paginator>
+        </ng-container>
+      </div>
+    </app-card>
+  </section>
+</div>

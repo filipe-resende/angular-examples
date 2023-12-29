@@ -1,0 +1,129 @@
+$white: #ffffff;
+
+$greenVale: #007e7a;
+
+$greyVale: #747678;
+$greyVale80: #909193;
+$greyVale60: #acadae;
+$greyVale40: #c7c8c9;
+$greyVale20: #e3e4e4;
+$greyVale10: #fbfbfb;
+
+$yellowVale: #ecb11f;
+$yellowVale80: #f0c14c;
+$yellowVale60: #f4d079;
+$yellowVale40: #f7e0a5;
+$yellowVale20: #fbefd2;
+
+$orangeVale: #e37222;
+$orangeVale80: #e98e4e;
+$orangeVale60: #eeaa7a;
+$orangeVale40: #f4c7a7;
+$orangeVale20: #f9e3d3;
+
+$redVale: #bb133e;
+$redVale80: #c94265;
+$redVale60: #d6718b;
+$redVale40: #e4a1b2;
+$redVale20: #f1d0d8;
+
+$violetVale: #3d7edb;
+$violetVale80: #6498e2;
+$violetVale60: #8bb2e9;
+$violetVale40: #b1cbf1;
+$violetVale20: #d8e5f8;
+
+$blueVale: #00b0ca;
+$blueVale80: #33c0d5;
+$blueVale60: #66d0df;
+$blueVale40: #99dfea;
+$blueVale20: #cceff4;
+
+$lightGreenVale: #69be28;
+$lightGreenVale80: #87cb53;
+$lightGreenVale60: #a5d87e;
+$lightGreenVale40: #c3e5a9;
+$lightGreenVale20: #e1f2d4;
+
+$limeGreenVale: #dfdf00;
+$limeGreenVale80: #e5e533;
+$limeGreenVale60: #ecec66;
+$limeGreenVale40: #f2f299;
+$limeGreenVale20: #f9f9cc;
+
+$stable: $greyVale20 !default;
+$positive: $violetVale !default;
+$calm: $blueVale !default;
+$balanced: $lightGreenVale !default;
+$energized: $yellowVale !default;
+$assertive: $redVale !default;
+$royal: $violetVale !default;
+$dark: #252727 !default;
+
+@font-face {
+  font-family: CaeciliaLTStd-Bold;
+  font-weight: bold;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-Bold.ttf') format('opentype');
+}
+@font-face {
+  font-family: CaeciliaLTStd-BoldItalic;
+  font-weight: bold;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-BoldItalic.ttf')
+    format('opentype');
+}
+@font-face {
+  font-family: CaeciliaLTStd-Heavy;
+  font-weight: 400;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-Heavy.ttf') format('opentype');
+}
+@font-face {
+  font-family: CaeciliaLTStd-HeavyItalic;
+  font-weight: 400;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-HeavyItalic.ttf')
+    format('opentype');
+}
+@font-face {
+  font-family: CaeciliaLTStd-Italic;
+  font-weight: 400;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-Italic.ttf') format('opentype');
+}
+@font-face {
+  font-family: CaeciliaLTStd-Light;
+  font-weight: 200;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-Light.ttf') format('opentype');
+}
+@font-face {
+  font-family: CaeciliaLTStd-LightItalic;
+  font-weight: 200;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-LightItalic.ttf')
+    format('opentype');
+}
+@font-face {
+  font-family: CaeciliaLTStd-Roman;
+  font-weight: 400;
+  src: url('~src/assets/Caecilia/CaeciliaLTStd-Roman.ttf') format('opentype');
+}
+@font-face {
+  font-family: Roboto-Regular;
+  font-weight: 400;
+  src: url('~src/assets/Roboto/Roboto-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: Roboto-Medium;
+  font-weight: 500;
+  src: url('~src/assets/Roboto/Roboto-Medium.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: Roboto-Bold;
+  font-weight: 700;
+  src: url('~src/assets/Roboto/Roboto-Bold.ttf') format('opentype');
+}
+
+$font-family-regular: CaeciliaLTStd-Roman;
+$font-family-bold: CaeciliaLTStd-Bold;
+$font-body1: Roboto-Regular, Arial, Helvetica, sans-serif;
+$font-body1-medium: Roboto-Medium;
+$font-body1-bold: Roboto-Bold;
+$font-body-article: Georgia;

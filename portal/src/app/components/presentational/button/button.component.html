@@ -1,0 +1,44 @@
+<button
+  mat-raised-button
+  (click)="onClickEmitter(clickRef)"
+  [disabled]="disabled || loading"
+  [type]="type"
+  [ngClass]="
+    !!customClass
+      ? classes
+      : {
+          primary: primary && !stroked,
+          secondary: !primary && !stroked,
+          stroked: stroked,
+          flat: flat,
+          line: !flat,
+          large: large,
+          strech: strech,
+          borderedPrimary: bordered && primary,
+          borderedSecondary: bordered && !primary,
+          disabled: disabled || loading,
+          'icon-only': iconOnly,
+          loading: loading
+        }
+  "
+  [ngStyle]="{
+    'text-transform': upperCased ? 'uppercase' : 'none'
+  }"
+>
+  <div
+    [ngClass]="{
+      button__spinner: true,
+      'button__spinner--primary': primary && !stroked
+    }"
+    *ngIf="loading"
+  >
+    <mat-spinner [diameter]="large ? '24' : '16'"></mat-spinner>
+  </div>
+  <div
+    [ngClass]="{ button__content: true, 'button__content--loading': loading }"
+  >
+    <ng-content></ng-content>
+  </div>
+</button>
+
+<span #clickRef></span>

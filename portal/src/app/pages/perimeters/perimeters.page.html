@@ -1,0 +1,77 @@
+<div class="perimeters-page-container">
+  <div
+    class="perimeters-page-left-column-container"
+    [ngStyle]="{
+      width: isLeftMenuOpened ? '450px' : '0px'
+    }"
+  >
+    <mat-icon (click)="onCloseLeftMenuButtonClick()" class="close-icon">close</mat-icon>
+    <mat-tab-group #tabRef [selectedIndex]="tabSelected" (selectedTabChange)="onTabClick($event)">
+      <mat-tab label="SitePerimeters" [disabled]="isEditing">
+        <ng-template mat-tab-label> {{ "PERIMETERS.PERIMETERS" | translate }} </ng-template>
+
+        <section class="perimeters-page-virtual-perimeters-tab-container">
+          <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0">
+            <app-site-selector [displayAsInput]="true" [disabled]="isEditing"></app-site-selector>
+          </div>
+
+          <div style="padding: 16px 0">
+            <app-checkbox
+              [tooltip]="
+                (perimetersList.length === 0
+                  ? 'PERIMETERS.CHOOSE_A_SITE_WITH_PERIMETERS'
+                  : ''
+                ) | translate
+              "
+              [label]="'PERIMETERS.DISPLAY_ALL_PERIMETERS'"
+              [checked]="isFetchingPerimeters ? false : showAllPerimetersToggle"
+              [disabled]="isFetchingPerimeters || perimetersList.length === 0"
+              (onSelect)="toggleAllPerimeters($event)"
+            >
+            </app-checkbox>
+          </div>
+
+          <div style="padding: 16px 0">
+            <app-perimeters-accordion
+              [googleMap]="googleMap"
+              [perimetersList]="perimetersList"
+              [loading]="isFetchingPerimeters || (isFetchingPerimetersInPerimeterPageModel$ | async)"
+              (setTabAsEditing)="setTabAsEditing()"
+              (selectSecondTab)="selectSecondTab()"
+              (setPerimeters)="setPerimeters($event)"
+              (updateOfficialPerimetersVisibility)="updateOfficialPerimetersVisibility()"
+            ></app-perimeters-accordion>
+          </div>
+        </section>
+      </mat-tab>
+
+      <mat-tab label="NewPerimeter">
+        <ng-template mat-tab-label>
+          {{ (isEditing ? "PERIMETERS.EDIT_PERIMETERS" : "PERIMETERS.NEW_PERIMETERS") | translate }}
+        </ng-template>
+        <app-perimeters-edit-create
+          [isEditing]="isEditing"
+          [googleMap]="googleMap"
+          (setTabAsCreating)="setTabAsCreating()"
+          [selectedTabChange]="tabRef.selectedTabChange"
+          (selectFirstTab)="selectFirstTab()"
+        ></app-perimeters-edit-create>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="perimeters-page-right-column-container">
+    <app-button
+      (onClick)="onOpenLeftMenuButtonClick()"
+      [upperCased]="true"
+      [bordered]="true"
+      style="position: absolute; left: 16px; top: 16px; z-index: 10"
+      [ngStyle]="{
+        display: isLeftMenuOpened ? 'none' : 'block'
+      }"
+    >
+      {{ "PERIMETERS.PERIMETERS" | translate }}
+    </app-button>
+    <app-map #googleMap id="mapPerimeters"></app-map>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div
+  class="site-selector-name"
+  [ngStyle]="{ 'width.px': _selectedSite ? width : 210 }"
+>
+  <mat-select
+    class="site-selector"
+    disableOptionCentering
+    placeholder="{{ placeholder | translate }}"
+    [(ngModel)]="_selectedSite"
+  >
+    <mat-option
+      *ngFor="let site of sitesList"
+      [value]="site.name"
+      (click)="onOptionSelectedEmitter(site)"
+    >
+      {{ site.name }}
+    </mat-option>
+  </mat-select>
+</div>
+<span
+  #hiddenText
+  style="
+    visibility: hidden;
+    white-space: pre;
+    font-size: 32px;
+    font-weight: 900;
+    position: absolute;
+  "
+>
+  {{ _selectedSite }}
+</span>

@@ -1,0 +1,635 @@
+<div class="focal-page-container ">
+
+    <div class="focal-page-left-column-container">
+        <section fxFlex="100">
+            <mat-tab-group [selectedIndex]="selectedGeneralIndex" (selectedTabChange)="tabGeneralClick($event)">
+                <mat-tab label="Focal Point" >
+                    <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="tabClick($event)">
+                        <mat-tab label="Focal Point" >
+        
+                            <ng-template mat-tab-label>
+                                Pontos Focais
+                            </ng-template>
+        
+                            <div class="main-margin">
+                                <mat-form-field class="form-field-size">
+                                    <mat-label>Area Abrangência</mat-label>
+                                    <mat-select [disabled]="showLoading" [(ngModel)]="lastAreaIdSelected">
+                                        <mat-option *ngFor="let site of sitesList" [value]="site.id"
+                                            (click)="setSiteOnMap(site); listAllFocalPointBySite(site)">
+                                            {{site.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="main-margin">
+                                <span>
+                                    Mostrar todos os Pontos de Encontro
+                                    <mat-slide-toggle
+                                        matTooltip="Escolha um site com pontos de encontro disponíveis para habilitar a opção"
+                                        [disabled]="focalPoiList.length === 0" (change)="toggleAllPois($event, focalPoiList)"
+                                        [checked]="showAllPoisToggle">
+                                    </mat-slide-toggle>
+                                </span>
+                            </div>
+        
+                            <div *ngIf="focalPoiList.length > 0"  class="main-margin">                   
+                                <mat-checkbox [(ngModel)]="selectedAll" (change)="selectedAllList()">Selecionar todos</mat-checkbox> 
+                                <button mat-button class="action-button-color action-buttons"                        
+                                    (click)="listAllFocalPointBySite(lastAreaSelected)">
+                                    <mat-icon>cached</mat-icon> </button>
+                                <button *ngIf="showButtonAlert && notificationMessage" mat-button 
+                                        class="action-button-color action-buttons" [disabled]="showLoading"
+                                        (click)="sendNotificationToDevice()">Enviar Alerta
+                                        <div *ngIf="showLoading" class="button-loader-spinner">
+                                            <mat-spinner [diameter]="large ? '24' : '16'"></mat-spinner>
+                                        </div> 
+                                </button>           
+                            </div>
+
+                            <div *ngIf="showButtonAlert" class="main-margin">
+                                <mat-form-field class="form-field-size">
+                                    <mat-label>Escolha uma mensagem</mat-label>
+                                    <mat-select [disabled]="showLoading" [(ngModel)]="messageId">
+                                        <mat-option *ngFor="let message of messagesList" [value]="message.id"
+                                            (click)="showStandardMessage(message)">
+                                            {{message.title ? message.title : "Mensagem sem Título"}} 
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+        
+                            <div *ngIf="showButtonAlert" class="main-margin"> 
+                                <mat-form-field class="full-width">
+                                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows = "1" cdkAutosizeMaxRows = "5"
+                                     [(ngModel)]="notificationMessage" placeholder="Descreva uma mensagem" required> 
+                                    </textarea>                    
+                                   <mat-error >Descreva uma mensagem</mat-error>
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="main-margin">
+                                <mat-accordion *ngIf="focalList.length > 0">
+                                    <div *ngFor="let focal of focalList">                            
+                                        <mat-checkbox (change)="selectedFocalPoint(focal)" 
+                                        class="mat-checkbox-selected" [(ngModel)]="focal.selected"></mat-checkbox> 
+                                        <mat-expansion-panel (click)='setPoi(focal.pointOfInterest)' (opened)="poi.panelOpenState = true"
+                                        (closed)="poi.panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <mat-icon *ngIf="focal.answered" class="mat-icon-check">check</mat-icon>
+                                                    {{focal.name}}
+                                                </mat-panel-title>
+        
+                                            </mat-expansion-panel-header>                          
+        
+                                            <mat-form-field>
+                                                <input matInput placeholder="Matricula"
+                                                    [(ngModel)]="focal.matricula" disabled>
+                                            </mat-form-field>
+        
+                                            <mat-form-field>
+                                                <input matInput placeholder="Telefone(s)"
+                                                    [(ngModel)]="focal.phoneNumber" disabled>
+                                            </mat-form-field>   
+                                            <mat-form-field>
+                                                <input matInput placeholder="Ponto de Encontro"
+                                                    [(ngModel)]="focal.pointOfInterest.name" disabled>
+                                            </mat-form-field>                               
+        
+                                            <mat-action-row>
+                                                <button mat-button *ngIf="notificationMessage"
+                                                    class="action-button-color" [disabled]="showLoading"
+                                                    (click)="sendNotificationByMatricula(focal, true)">Enviar Alerta
+                                                        <div *ngIf="showLoading" class="button-loader-spinner">
+                                                            <mat-spinner [diameter]="large ? '24' : '16'"></mat-spinner>
+                                                        </div> 
+                                                    </button>  
+                                                <button mat-button *ngIf="notificationMessage"
+                                                    class="action-button-color"
+                                                     (click)="editFocalPoi(focal)">Editar</button>         
+                                                <button mat-button color="warn"
+                                                    (click)="deleteFocalPoint(focal)">Apagar</button>
+                                            </mat-action-row>
+                                        </mat-expansion-panel>                                    
+                                
+                                    </div>
+                                </mat-accordion>
+                            </div>
+                        </mat-tab>
+        
+                        <mat-tab label="NewFocalPoi" *ngIf="showSecondTab && !showEditTab" >
+        
+                            <ng-template mat-tab-label>
+                                Novo Ponto Focal
+                            </ng-template>
+                            <form fxLayout="column" [formGroup]="ngForm">
+                                <div class="main-margin">
+                                    <div class="header-size">Descrição</div>
+                                </div>
+        
+                                <div class="main-margin">
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Site</mat-label>
+                                        <mat-select formControlName="site" disabled 
+                                            [(ngModel)]="lastAreaIdSelected">
+                                            <mat-option *ngFor="let site of sitesList" [value]="site.id">
+                                                {{site.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Site
+                                        </mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Categoria</mat-label>
+                                        <mat-select formControlName="category">
+                                            <mat-option *ngFor="let category of poiCategorys" name="category"
+                                                [value]="category.id" 
+                                                (click)="listAllPointOfInterestBySite(site.id, category.id)">
+                                                {{category.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione uma categoria
+                                        </mat-error>
+                                    </mat-form-field>    
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Matricula do ponto focal" formControlName="matricula" (blur) = "thingNameByMatricula()"
+                                            required>
+                                        <mat-error>Informe a matricula do Ponto Focal</mat-error>
+                                    </mat-form-field>                        
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Nome do ponto focal" formControlName="name" [(ngModel)]="ngForm.value.name"
+                                        readonly required>
+                                        <mat-error>Informe o nome do Ponto Focal</mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size"> 
+                                        <mat-label>Telefone do ponto focal</mat-label>   
+                                            <button mat-button 
+                                            class="action-button-color action-buttons button-phone"                        
+                                            (click)="addPhoneFocalPoi()">
+                                            <mat-icon class>add</mat-icon></button>              
+                                            <input matInput type="text" 
+                                                class="input-phone"
+                                                maxlength="15"
+                                                mask="(00)00000-0000"                                 
+                                                formControlName="phone">   
+                                    <div *ngFor="let phone of listPhone" class="list-phone"> 
+                                        <mat-label >{{phone| mask: '(00)00000-0000'}}</mat-label>                                              
+                                        <button mat-button  class="action-buttons button-phone"                        
+                                        (click)="removePhoneFocalPoi(phone)">
+                                        <mat-icon>clear</mat-icon></button>
+                                    </div>                            
+                                    </mat-form-field>                 
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Ponto de Encontro</mat-label>
+                                        <mat-select formControlName="pointOfInterest">
+                                            <mat-option *ngFor="let pointOfInterest of poiList" name="pointOfInterest"
+                                                [value]="pointOfInterest.id"  >
+                                                {{pointOfInterest.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Ponto de Encontro
+                                        </mat-error>
+                                    </mat-form-field> 
+                                </div>
+                                <mat-list>
+                                    <div class="submit-buttons">
+                                        <button mat-button class="action-button-color" (click)="submitFocalPoi()">Salvar
+                                            Ponto Focal</button>
+                                    </div>                           
+                                </mat-list>
+                            </form>
+                        </mat-tab>
+        
+                        <mat-tab label="EditFocalPoi" *ngIf="showEditTab">
+        
+                            <ng-template mat-tab-label>
+                                Editar Ponto Focal
+                            </ng-template>
+                            <form fxLayout="column" [formGroup]="ngForm">
+                                <div class="main-margin">
+                                    <div class="header-size">Descrição</div>
+                                </div>
+        
+                                <div class="main-margin">
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Site</mat-label>
+                                        <mat-select formControlName="site" disabled [(ngModel)]="focal.localityId">
+                                            <mat-option *ngFor="let site of sitesList" [value]="site.id">
+                                                {{site.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Site
+                                        </mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Categoria</mat-label>
+                                        <mat-select formControlName="category" 
+                                           [(ngModel)]="categoryPoi">
+                                           <mat-option *ngFor="let category of poiCategorys" 
+                                                name="category"
+                                                [value]="category.id"
+                                                (click)="listAllPointOfInterestBySite(site.id, category.id)">
+                                                {{category.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione uma categoria
+                                        </mat-error>
+                                    </mat-form-field>    
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Matricula do ponto focal" 
+                                            [(ngModel)]="focal.matricula" 
+                                            formControlName="matricula" 
+                                            (blur) = "thingNameByMatricula()"
+                                            required>
+                                        <mat-error>Informe a matricula do Ponto Focal</mat-error>
+                                    </mat-form-field>                        
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Nome do ponto focal" formControlName="name" 
+                                        [(ngModel)]="focal.name"
+                                        readonly required>
+                                        <mat-error>Informe o nome do Ponto Focal</mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size"> 
+                                        <mat-label>Telefone do ponto focal</mat-label>   
+                                            <button mat-button 
+                                            class="action-button-color action-buttons button-phone"                        
+                                            (click)="addPhoneFocalPoi()">
+                                            <mat-icon class>add</mat-icon></button>              
+                                            <input matInput type="text" 
+                                                class="input-phone"
+                                                maxlength="15"
+                                                mask="(00)00000-0000"                                 
+                                                formControlName="phone">   
+                                    <div *ngFor="let phone of listPhone" class="list-phone"> 
+                                        <mat-label >{{phone | mask: '(00)00000-0000'}}</mat-label>                                              
+                                        <button mat-button class="action-buttons button-phone"                        
+                                        (click)="removePhoneFocalPoi(phone)">
+                                        <mat-icon>clear</mat-icon></button>
+                                    </div>                            
+                                    </mat-form-field>                    
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Ponto de Encontro</mat-label>
+                                        <mat-select formControlName="pointOfInterest"
+                                            [(ngModel)]="focal.pointOfInterestId">
+                                            <mat-option *ngFor="let pointOfInterest of poiList"
+                                                name="pointOfInterest"
+                                                [value]="pointOfInterest.id"  >
+                                                {{pointOfInterest.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Ponto de Encontro
+                                        </mat-error>
+                                    </mat-form-field> 
+                                </div>
+        
+                                <mat-list>
+                                    <div class="submit-buttons">
+                                        <button mat-button color="warn"
+                                        (click)="cancelEditFocalPoi(focal)">Cancelar</button>
+                                        <button mat-button class="action-button-color"  (click)="submitFocalPoi()">Salvar
+                                            Ponto Focal</button>                     
+                                    </div>                           
+                                </mat-list>
+                            </form>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-tab>
+                <mat-tab label="Driver" >
+                    <mat-tab-group [selectedIndex]="selectedDriverIndex" (selectedTabChange)="tabDriverClick($event)">
+                        <mat-tab label="Driver" >
+        
+                            <ng-template mat-tab-label>
+                                Motoristas
+                            </ng-template>
+        
+                            <div class="main-margin">
+                                <mat-form-field class="form-field-size">
+                                    <mat-label>Area Abrangência</mat-label>
+                                    <mat-select [disabled]="showDriverLoading" [(ngModel)]="lastAreaIdSelected">
+                                        <mat-option *ngFor="let site of sitesList" [value]="site.id"
+                                            (click)="setSiteOnMap(site); listAllDriversBySite(site)">
+                                            {{site.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="main-margin">
+                                <span>
+                                    Mostrar todos os Pontos de Encontro
+                                    <mat-slide-toggle
+                                        matTooltip="Escolha um site com pontos de encontro disponíveis para habilitar a opção"
+                                        [disabled]="driverPoiList.length === 0" (change)="toggleAllPois($event, driverPoiList)"
+                                        [checked]="showAllPoisToggle">
+                                    </mat-slide-toggle>
+                                </span>
+                            </div>
+        
+                            <div *ngIf="driverPoiList.length > 0"  class="main-margin">                   
+                                <mat-checkbox [(ngModel)]="selectedDriverAll" (change)="selectedDriverAllList()">Selecionar todos</mat-checkbox> 
+                                <button mat-button class="action-button-color action-buttons"                        
+                                    (click)="listAllDriversBySite(lastAreaSelected)">
+                                    <mat-icon>cached</mat-icon> </button>
+                                <button *ngIf="showButtonDriverAlert && notificationDriverMessage" mat-button 
+                                        class="action-button-color action-buttons" [disabled]="showDriverLoading"
+                                        (click)="sendNotificationToDriverDevice()">Enviar Alerta
+                                        <div *ngIf="showDriverLoading" class="button-loader-spinner">
+                                            <mat-spinner [diameter]="large ? '24' : '16'"></mat-spinner>
+                                        </div> 
+                                </button>           
+                            </div>
+
+                            <div *ngIf="showButtonDriverAlert" class="main-margin">
+                                <mat-form-field class="form-field-size">
+                                    <mat-label>Escolha uma mensagem</mat-label>
+                                    <mat-select [disabled]="showDriverLoading" [(ngModel)]="messageDriverId">
+                                        <mat-option *ngFor="let message of messagesDriverList" [value]="message.id"
+                                            (click)="showStandardDriverMessage(message)">
+                                            {{message.title ? message.title : "Mensagem sem Título"}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+        
+                            <div *ngIf="showButtonDriverAlert" class="main-margin"> 
+                                <mat-form-field class="full-width">
+                                    <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows = "1" cdkAutosizeMaxRows = "5"
+                                     [(ngModel)]="notificationDriverMessage" placeholder="Descreva uma mensagem" required> 
+                                    </textarea>                    
+                                   <mat-error >Descreva uma mensagem</mat-error>
+                                </mat-form-field>
+                            </div>
+        
+                            <div class="main-margin">
+                                <mat-accordion *ngIf="driverList.length > 0">
+                                    <div *ngFor="let driver of driverList">                            
+                                        <mat-checkbox (change)="selectedDriver(driver)" 
+                                        class="mat-checkbox-selected" [(ngModel)]="driver.selected"></mat-checkbox> 
+                                        <mat-expansion-panel (click)='setPoi(driver.pointOfInterest)' (opened)="poi.panelOpenState = true"
+                                        (closed)="poi.panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                                <mat-panel-title>
+                                                    <mat-icon *ngIf="driver.answered" class="mat-icon-check">check</mat-icon>
+                                                    {{driver.name}}
+                                                </mat-panel-title>
+        
+                                            </mat-expansion-panel-header>                          
+        
+                                            <mat-form-field>
+                                                <input matInput placeholder="Matricula"
+                                                    [(ngModel)]="driver.matricula" disabled>
+                                            </mat-form-field>
+        
+                                            <mat-form-field>
+                                                <input matInput placeholder="Telefone(s)"
+                                                    [(ngModel)]="driver.phoneNumber" disabled>
+                                            </mat-form-field>   
+                                            <mat-form-field>
+                                                <input matInput placeholder="Ponto de Encontro"
+                                                    [(ngModel)]="driver.pointOfInterest.name" disabled>
+                                            </mat-form-field>                               
+        
+                                            <mat-action-row>
+                                                <button mat-button *ngIf="notificationDriverMessage"
+                                                    class="action-button-color" [disabled]="showDriverLoading"
+                                                    (click)="sendDriverNotificationByMatricula(driver, true)">Enviar Alerta
+                                                        <div *ngIf="showDriverLoading" class="button-loader-spinner">
+                                                            <mat-spinner [diameter]="large ? '24' : '16'"></mat-spinner>
+                                                        </div> 
+                                                    </button>  
+                                                <button mat-button *ngIf="notificationDriverMessage"
+                                                    class="action-button-color"
+                                                     (click)="editDriverPoi(driver)">Editar</button>         
+                                                <button mat-button color="warn"
+                                                    (click)="deleteDriver(driver)">Apagar</button>
+                                            </mat-action-row>
+                                        </mat-expansion-panel>                                    
+                                
+                                    </div>
+                                </mat-accordion>
+                            </div>
+                        </mat-tab>
+        
+                        <mat-tab label="NewDriverPoi" *ngIf="showSecondTab && !showEditTabDriver" >
+        
+                            <ng-template mat-tab-label>
+                                Novo Motorista
+                            </ng-template>
+                            <form fxLayout="column" [formGroup]="ngForm">
+                                <div class="main-margin">
+                                    <div class="header-size">Descrição</div>
+                                </div>
+        
+                                <div class="main-margin">
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Site</mat-label>
+                                        <mat-select formControlName="site" disabled 
+                                            [(ngModel)]="lastAreaIdSelected">
+                                            <mat-option *ngFor="let site of sitesList" [value]="site.id">
+                                                {{site.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Site
+                                        </mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Categoria</mat-label>
+                                        <mat-select formControlName="category">
+                                            <mat-option *ngFor="let category of poiCategorys" name="category"
+                                                [value]="category.id" 
+                                                (click)="listAllPointOfInterestBySite(site.id, category.id)">
+                                                {{category.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione uma categoria
+                                        </mat-error>
+                                    </mat-form-field>    
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Matricula do Motorista" formControlName="matricula" (blur) = "thingNameByMatricula()"
+                                            required>
+                                        <mat-error>Informe a matricula do Motorista</mat-error>
+                                    </mat-form-field>                        
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Nome do Motorista" formControlName="name" [(ngModel)]="ngForm.value.name"
+                                        readonly required>
+                                        <mat-error>Informe o nome do Motorista</mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size"> 
+                                        <mat-label>Telefone do Motorista</mat-label>   
+                                            <button mat-button 
+                                            class="action-button-color action-buttons button-phone"                        
+                                            (click)="addPhoneDriverPoi()">
+                                            <mat-icon class>add</mat-icon></button>              
+                                            <input matInput type="text" 
+                                                class="input-phone"
+                                                maxlength="15"
+                                                mask="(00)00000-0000"                                 
+                                                formControlName="phone">   
+                                    <div *ngFor="let phone of listPhone" class="list-phone"> 
+                                        <mat-label >{{phone| mask: '(00)00000-0000'}}</mat-label>                                              
+                                        <button mat-button  class="action-buttons button-phone"                        
+                                        (click)="removePhoneDriverPoi(phone)">
+                                        <mat-icon>clear</mat-icon></button>
+                                    </div>                            
+                                    </mat-form-field>                 
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Ponto de Encontro</mat-label>
+                                        <mat-select formControlName="pointOfInterest">
+                                            <mat-option *ngFor="let pointOfInterest of poiList" name="pointOfInterest"
+                                                [value]="pointOfInterest.id"  >
+                                                {{pointOfInterest.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Ponto de Encontro
+                                        </mat-error>
+                                    </mat-form-field> 
+                                </div>
+                                <mat-list>
+                                    <div class="submit-buttons">
+                                        <button mat-button class="action-button-color" (click)="submitDriverPoi()">Salvar
+                                            Motorista</button>
+                                    </div>                           
+                                </mat-list>
+                            </form>
+                        </mat-tab>
+        
+                        <mat-tab label="EditDriverPoi" *ngIf="showEditTabDriver">        
+                            <ng-template mat-tab-label>
+                                Editar Motorista
+                            </ng-template>
+                            <form fxLayout="column" [formGroup]="ngForm">
+                                <div class="main-margin">
+                                    <div class="header-size">Descrição</div>
+                                </div>
+        
+                                <div class="main-margin">
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Site</mat-label>
+                                        <mat-select formControlName="site" disabled [(ngModel)]="driver.localityId">
+                                            <mat-option *ngFor="let site of sitesList" [value]="site.id">
+                                                {{site.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Site
+                                        </mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Categoria</mat-label>
+                                        <mat-select formControlName="category" 
+                                           [(ngModel)]="categoryPoi">
+                                           <mat-option *ngFor="let category of poiCategorys" 
+                                                name="category"
+                                                [value]="category.id"
+                                                (click)="listAllPointOfInterestBySite(site.id, category.id)">
+                                                {{category.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione uma categoria
+                                        </mat-error>
+                                    </mat-form-field>    
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Matricula do motorista" 
+                                            [(ngModel)]="driver.matricula" 
+                                            formControlName="matricula" 
+                                            (blur) = "thingNameByMatricula()"
+                                            required>
+                                        <mat-error>Informe a matricula do Motorista</mat-error>
+                                    </mat-form-field>                        
+        
+                                    <mat-form-field class="form-field-size">
+                                        <input matInput placeholder="Nome do motorista" formControlName="name" 
+                                        [(ngModel)]="driver.name"
+                                        readonly required>
+                                        <mat-error>Informe o nome do Motorista</mat-error>
+                                    </mat-form-field>                            
+        
+                                    <mat-form-field class="form-field-size"> 
+                                        <mat-label>Telefone do Motorista</mat-label>   
+                                            <button mat-button 
+                                            class="action-button-color action-buttons button-phone"                        
+                                            (click)="addPhoneDriverPoi()">
+                                            <mat-icon class>add</mat-icon></button>              
+                                            <input matInput type="text" 
+                                                class="input-phone"
+                                                maxlength="15"
+                                                mask="(00)00000-0000"                                 
+                                                formControlName="phone">   
+                                    <div *ngFor="let phone of listPhone" class="list-phone"> 
+                                        <mat-label >{{phone | mask: '(00)00000-0000'}}</mat-label>                                              
+                                        <button mat-button class="action-buttons button-phone"                        
+                                        (click)="removePhoneDriverPoi(phone)">
+                                        <mat-icon>clear</mat-icon></button>
+                                    </div>                            
+                                    </mat-form-field>                    
+                                    
+                                    <mat-form-field class="form-field-size">
+                                        <mat-label>Ponto de Encontro</mat-label>
+                                        <mat-select formControlName="pointOfInterest"
+                                            [(ngModel)]="driver.pointOfInterestId">
+                                            <mat-option *ngFor="let pointOfInterest of poiList"
+                                                name="pointOfInterest"
+                                                [value]="pointOfInterest.id"  >
+                                                {{pointOfInterest.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error>
+                                            Selecione um Ponto de Encontro
+                                        </mat-error>
+                                    </mat-form-field> 
+                                </div>
+        
+                                <mat-list>
+                                    <div class="submit-buttons">
+                                        <button mat-button color="warn"
+                                        (click)="cancelEditDriverPoi(driver)">Cancelar</button>
+                                        <button mat-button class="action-button-color"  (click)="submitDriverPoi()">Salvar
+                                            Motorista</button>                     
+                                    </div>                           
+                                </mat-list>
+                            </form>
+                        </mat-tab>        
+                    </mat-tab-group>
+                </mat-tab>
+            </mat-tab-group>
+        </section>
+    </div>
+
+    <div  class="focal-page-right-column-container">
+        <app-map #googleMap ></app-map>
+    </div>
+
+</div>

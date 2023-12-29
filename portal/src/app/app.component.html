@@ -1,0 +1,6 @@
+<app-fixed-notification
+  [visible]="(isSignalRConnected$ | async) === false"
+  [message]="'MAIN.SIGNAL_R_FAILURE_MESSAGE' | translate"
+></app-fixed-notification>
+<app-panic-alert></app-panic-alert>
+<router-outlet></router-outlet>

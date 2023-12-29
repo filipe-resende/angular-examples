@@ -1,0 +1,229 @@
+<div class="tm-container" (click)="toggleDropDown()">
+  <div class="modal-header">
+    <h5 class="modal-title" d="exampleModalLabel">
+      {{ 'DEVICE_LIST.MODAL.ASSOCIATE.TITLE' | translate }}
+      {{ singleExternalData.applicationName }}
+      {{ singleExternalData.device.sourceInfos[0].value }}
+    </h5>
+
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="onClose()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-wrapper thing-modal-wrapper">
+    <div class="search-container">
+      <div class="th-search">
+        <div>
+          <select
+            [(ngModel)]="selectedType"
+            class="dh-select-input"
+            (ngModelChange)="getByThingType($event)"
+          >
+            <option value="" disabled selected hidden>Tipo de busca</option>
+            <option *ngFor="let type of typeOptions" [value]="type.name">
+              {{ type.value }}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="selectedType === 'Name'">
+          <form [formGroup]="thingsFormGroup">
+            <div class="search-input-container">
+              <input
+                formControlName="byName"
+                class="search-input modal-input"
+                placeholder="{{
+                  'DEVICE_LIST.MODAL.ASSOCIATE.SEARCH_BOX' | translate
+                }}"
+                [placeholder]="placeholder"
+                [disabled]="isEdit"
+                (keydown.enter)="searchByName(searchInput)"
+                [(ngModel)]="searchInput"
+              />
+
+              <i
+                class="mdi mdi-magnify"
+                id="search-btn"
+                (click)="searchByName(searchInput)"
+              ></i>
+            </div>
+          </form>
+        </div>
+
+        <div *ngIf="selectedType === 'CPF'">
+          <div class="search-input-container">
+            <input
+              class="search-input modal-input"
+              mask="000.000.000-00"
+              [(ngModel)]="sourceValue"
+              [placeholder]="placeholder"
+              [disabled]="isEdit"
+              (keydown.enter)="onChangeDocument(sourceValue)"
+            />
+            <i
+              class="mdi mdi-magnify"
+              id="search-btn"
+              (click)="onChangeDocument(sourceValue)"
+            ></i>
+          </div>
+        </div>
+
+        <div
+          class="search-input-container"
+          [hidden]="selectedType === 'Name' || selectedType === 'CPF'"
+          *ngIf="selectedType === 'IAMID' || 'PASSPORT'"
+        >
+          <input
+            class="search-input modal-input"
+            [(ngModel)]="sourceValue"
+            [placeholder]="placeholder"
+            [disabled]="isEdit"
+            (keydown.enter)="onChangeDocument(sourceValue)"
+          />
+          <i
+            class="mdi mdi-magnify"
+            id="search-btn"
+            (click)="onChangeDocument(sourceValue)"
+          ></i>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!isLoading; else loading">
+      <div class="table">
+        <mat-table
+          aria-label="source info table"
+          mat-table
+          [dataSource]="thingsForTable"
+          *ngIf="thingsForTable.length > 0"
+          (scroll)="onTableScroll($event)"
+        >
+          <ng-container matColumnDef="name">
+            <th id="name" mat-header-cell *matHeaderCellDef>
+              {{ 'DEVICE_LIST.MODAL.ASSOCIATE.COLUMNS.NAME' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let thing">
+              <input
+                class="radio-button"
+                type="radio"
+                id="radio"
+                name="thing"
+                [value]="thing.id"
+                (click)="onSelect(thing)"
+              />
+              <span class="thing-name">{{ thing.name }}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="cpf" *ngIf="isAllowedToSeeCpf">
+            <th id="cpf" mat-header-cell *matHeaderCellDef>
+              {{ 'DEVICE_LIST.MODAL.ASSOCIATE.COLUMNS.CPF' | translate }}
+            </th>
+            <td class="no-line-break" mat-cell *matCellDef="let thing">
+              {{ thing.cpf | cpf }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="passport" *ngIf="isAllowedToSeeCpf">
+            <th id="passport" mat-header-cell *matHeaderCellDef>
+              {{ 'DEVICE_LIST.MODAL.ASSOCIATE.COLUMNS.PASSPORT' | translate }}
+            </th>
+            <td class="no-line-break" mat-cell *matCellDef="let thing">
+              {{ thing.passport }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="iam">
+            <th id="iam" mat-header-cell *matHeaderCellDef>
+              {{ 'DEVICE_LIST.MODAL.ASSOCIATE.COLUMNS.IAM' | translate }}
+            </th>
+            <td class="no-line-break" mat-cell *matCellDef="let thing">
+              {{ thing.iam }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th
+              class="center-justify-content"
+              id="status"
+              mat-header-cell
+              *matHeaderCellDef
+            >
+              {{ 'DEVICE_LIST.MODAL.ASSOCIATE.COLUMNS.STATUS' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let thing">
+              <div
+                class="tu-block-relation-type-when-active"
+                *ngIf="thing.status"
+              >
+                <label
+                  [innerHtml]="
+                    'DEVICE_LIST.MODAL.ASSOCIATE.STATUS.ACTIVE' | translate
+                  "
+                ></label>
+              </div>
+              <div
+                class="tu-block-relation-type-when-inactive"
+                *ngIf="!thing.status"
+              >
+                <label
+                  [innerHtml]="
+                    'DEVICE_LIST.MODAL.ASSOCIATE.STATUS.INACTIVE' | translate
+                  "
+                ></label>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th id="email" mat-header-cell *matHeaderCellDef>
+              {{ 'DEVICE_LIST.MODAL.ASSOCIATE.COLUMNS.EMAIL' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let thing">{{ thing.email }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </mat-table>
+      </div>
+
+      <div class="container-pagination">
+        <div *ngIf="getStatusById(thingId)">
+          <app-action-button
+            *ngIf="singleExternalData && thingsForTable.length && thingId"
+            [ngClass]="['blue', 'large']"
+            [labelClass]="'blue-label'"
+            (action)="singleAssociationPeriod()"
+            [disabled]="disabled"
+          >
+            {{ 'DEVICE_LIST.ASSOCIATE_BUTTON' | translate }}
+
+            <div *ngIf="!getStatusById(thingId)">
+              {{ 'DEVICE_LIST.REACTIVATE_ASSOCIATE_BUTTON' | translate }}
+            </div>
+          </app-action-button>
+        </div>
+        <div *ngIf="!getStatusById(thingId)">
+          <app-action-button
+            *ngIf="singleExternalData && thingsForTable.length && thingId"
+            [ngClass]="['blue', 'large']"
+            [labelClass]="'blue-label'"
+            (action)="openReactivationSubscriptionDialog()"
+            [disabled]="disabled"
+          >
+            {{ 'DEVICE_LIST.REACTIVATE_ASSOCIATE_BUTTON' | translate }}
+          </app-action-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="modal-spinner-content">
+    <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+  </div>
+</ng-template>

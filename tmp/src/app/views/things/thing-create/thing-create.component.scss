@@ -1,0 +1,18 @@
+@import '../../../scss/styles.scss';
+
+.tc-container {
+  background-color: #f8f8f6;
+  padding-top: 57px;
+  padding-right: 59px;
+  padding-left: 59px;
+  padding-bottom: 120px;
+}
+
+.tc-margin-top-medium {
+  margin-top: 16px;
+}
+
+.view-wrapper,
+.view-wrapper header {
+  font-family: $font-body1;
+}

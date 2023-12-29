@@ -1,0 +1,40 @@
+.container {
+  height: 20vh;
+  width: 40vh;
+}
+
+.col {
+  display: flex;
+  justify-content: space-between;
+}
+
+.div {
+  padding: 20px;
+}
+
+.header-container {
+  display: flex;
+  .title {
+    font-size: large;
+    padding-left: 3vh;
+    font-weight: bold;
+  }
+
+  .content-div {
+    align-items: flex-start;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.sub-title {
+  padding-left: 3vh;
+}
+
+.icon {
+  font-size: 72px;
+  color: #959dac;
+  height: auto;
+  width: auto;
+}

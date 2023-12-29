@@ -1,0 +1,242 @@
+// $default_primary:#3F51B5;
+// $default_accent:#ffd740;
+// $default_warn:#f44336;
+// $default_green:#007E7A;
+// $default_grey:#FAFAFA;
+// $default_black:#000000;
+
+// Variables
+//
+// Variables should follow the `$component-state-property-size` formula for
+// consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+
+:root {
+  //
+  // Color system
+  //
+  --color-v-gray: #747678;
+  --color-v-gray-100: #f8f9fa;
+  --color-v-gray-200: #e9ecef;
+  --color-v-gray-300: #dee2e6;
+  --color-v-gray-400: #ced4da;
+  --color-v-gray-500: #adb5bd;
+  --color-v-gray-600: #6c757d;
+  --color-v-gray-700: #495057;
+  --color-v-gray-800: #343a40;
+  --color-v-gray-900: #212529;
+
+  --color-v-white: #ffffff;
+  --color-v-green: #007e7a;
+  --color-v-yellow: #ecb11f;
+  --color-v-red: #bb133e;
+  --color-v-orange: #e37222;
+  --color-v-blue: #3d7edb;
+  --color-v-cyan: #00b0ca;
+  --color-v-light-green: #69be28;
+  --color-v-lemon-green: #ecb11f;
+  --color-v-pink: #bb133e;
+  --color-v-black: #000;
+}
+
+//
+// Color system
+//
+
+$fonte-color: #58595b !default;
+
+// stylelint-disable
+$white: #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black: #000 !default;
+
+$grays: () !default;
+$grays: map-merge(
+  (
+    "100": $gray-100,
+    "200": $gray-200,
+    "300": $gray-300,
+    "400": $gray-400,
+    "500": $gray-500,
+    "600": $gray-600,
+    "700": $gray-700,
+    "800": $gray-800,
+    "900": $gray-900,
+  ),
+  $grays
+);
+
+$blue: #007e7a !default;
+$indigo: #3d7edb !default;
+$purple: #3d7edb !default;
+$pink: #bb133e !default;
+$red: #b92d00 !default;
+$orange: #e37222 !default;
+$yellow: #ecb11f !default;
+$green: #007e7a !default;
+$teal: #69be28 !default;
+$cyan: #00b0ca !default;
+
+$colors: () !default;
+$colors: map-merge(
+  (
+    "blue": $blue,
+    "indigo": $indigo,
+    "purple": $purple,
+    "pink": $pink,
+    "red": $red,
+    "orange": $orange,
+    "yellow": $yellow,
+    "green": $green,
+    "teal": $teal,
+    "cyan": $cyan,
+    "white": $white,
+    "gray": $gray-600,
+    "gray-dark": $gray-800,
+  ),
+  $colors
+);
+
+$primary: $indigo !default;
+$secondary: $orange !default;
+$success: $green !default;
+$actionCall: $green !default;
+$info: $cyan !default;
+$warning: $red !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+$dark: $gray-800 !default;
+$green: $green !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge(
+  (
+    "primary": $primary,
+    "secondary": $secondary,
+    "actionCall": $actionCall,
+    "success": $success,
+    "info": $info,
+    "warning": $warning,
+    "danger": $danger,
+    "light": $light,
+    "dark": $dark,
+  ),
+  $theme-colors
+);
+
+// stylelint-enable
+
+// Set a specific jump point for requesting color jumps
+$theme-color-interval: 8% !default;
+
+// The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
+$yiq-contrasted-threshold: 150 !default;
+
+// Customize the light and dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark: $gray-900 !default;
+$yiq-text-light: $white !default;
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-caret: true !default;
+$enable-rounded: true !default;
+$enable-shadows: false !default;
+$enable-gradients: false !default;
+$enable-transitions: true !default;
+$enable-hover-media-query: false !default; // Deprecated, no longer affects any compiled CSS
+$enable-grid-classes: true !default;
+$enable-print-styles: true !default;
+
+// // Spacing
+// //
+// // Control the default styling of most Bootstrap elements by modifying these
+// // variables. Mostly focused on spacing.
+// // You can add more entries to the $spacers map, should you need more variation.
+
+$body-bg: $white !default;
+$body-bg2: #ecf0f5 !default;
+$body-color: $fonte-color !default;
+
+$font-family-arial: Arial !default;
+
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+  monospace !default;
+
+$headings-font-family: Caecilia !default;
+
+$font-size-base: 0.8rem !default;
+
+$light-primary: (
+  50: #e6f2f2,
+  100: #cce5e4,
+  200: #b3d8d7,
+  300: #99cbca,
+  400: #80bfbd,
+  500: #66b2af,
+  600: #4da5a2,
+  700: #339895,
+  800: #1a8b87,
+  900: #007e7a,
+  A100: #cce5e4,
+  A200: #b3d8d7,
+  A400: #80bfbd,
+  A700: #007e7a,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: #fff,
+    900: #fff,
+    A100: rgba(0, 0, 0, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
+$light-accent: (
+  50: #fdf7e9,
+  100: #fbefd2,
+  200: #f9e8bc,
+  300: #f7e0a5,
+  400: #f6d88f,
+  500: #f4d079,
+  600: #f2c862,
+  700: #f0c14c,
+  800: #eeb935,
+  900: #ecb11f,
+  A100: #fbefd2,
+  A200: #f9e8bc,
+  A400: #f6d88f,
+  A700: #ecb11f,
+  contrast: (
+    50: rgba(0, 0, 0, 0.87),
+    100: rgba(0, 0, 0, 0.87),
+    200: rgba(0, 0, 0, 0.87),
+    300: rgba(0, 0, 0, 0.87),
+    400: rgba(0, 0, 0, 0.87),
+    500: rgba(0, 0, 0, 0.87),
+    600: rgba(0, 0, 0, 0.87),
+    700: rgba(0, 0, 0, 0.87),
+    800: rgba(0, 0, 0, 0.87),
+    900: rgba(0, 0, 0, 0.87),
+    A100: rgba(0, 0, 0, 0.87),
+    A200: rgba(0, 0, 0, 0.87),
+    A400: rgba(0, 0, 0, 0.87),
+    A700: rgba(0, 0, 0, 0.87),
+  ),
+);

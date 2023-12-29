@@ -1,0 +1,313 @@
+@import '../../scss/vale.variables';
+
+// TODO: Limpar os estilos até o novo estilo
+
+.header {
+  display: flex;
+  width: 100%;
+  background-color: #f8f8f8;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #c7c8c9;
+
+  .menu,
+  .menu-user {
+    align-items: center;
+    display: flex;
+    border-left: 1px solid #c7c8c9;
+  }
+
+  .menu {
+    cursor: pointer;
+  }
+
+  .header-logo {
+    height: 39px;
+    margin-left: 24px;
+  }
+
+  .header-title {
+    color: #242727;
+    font-size: 24px;
+    font-family: $font-family-regular;
+    margin: 0px 20px;
+    white-space: nowrap;
+  }
+
+  .container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .menu-options {
+    height: 100%;
+  }
+}
+
+.global-access-url {
+  border-radius: 5px;
+  background-color: $violetVale;
+  border-color: 1px solid $violetVale;
+  height: 26px;
+  margin: 0px 8px 8px 8px;
+  align-self: center;
+  text-decoration: none;
+}
+
+.link-gap {
+  color: #f8f8f8;
+  border-color: 1px solid $violetVale;
+  margin: 0px 4px;
+}
+
+.link-gap ~ .info-link {
+  display: block;
+}
+
+.info-link {
+  display: none;
+  color: #fff;
+  background-color: red;
+  font-size: 10px;
+  border-radius: 4px;
+  position: relative;
+  top: -100px;
+  left: 60%;
+}
+
+.noBlackBorder {
+  outline: none;
+  border: 0;
+  background-color: #f8f8f8;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.flag {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-left: 1px solid #c7c8c9;
+}
+
+.flag-buttons {
+  margin-left: 24px;
+  display: flex;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.language {
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.user-menu {
+  margin-left: 20%;
+  width: 70%;
+  height: 100%;
+  position: relative;
+
+  .logged {
+    color: #252727;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.toolbar-user-btn {
+  height: 100%;
+  height: 100%;
+  min-width: 160px;
+  padding: 0px 20px;
+}
+
+.last-login {
+  font-size: 10px;
+}
+
+.icon-container {
+  height: 24px;
+}
+
+.container-profile {
+  cursor: pointer;
+  display: flex;
+  padding: 8px 38px 8px 8px;
+  color: #909193;
+  line-height: 22px;
+  border: 1px solid #c7c8c9;
+  font-family: Roboto-Regular;
+  font-size: 16px;
+  flex-direction: column;
+  width: 13%;
+  background-color: #f8f8f8;
+  position: absolute;
+  right: 0px;
+}
+
+.profile {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  height: 40%;
+  width: 30%;
+  left: 35%;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  border: 1px solid #c7c8c9;
+}
+
+.close {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.profile-title {
+  font-size: 24px;
+  color: #c7c8c9;
+}
+
+.profile-user,
+.profile-email {
+  font-size: 16px;
+  color: #c7c8c9;
+}
+
+.user-data {
+  display: flex;
+  flex-direction: column;
+  line-height: 28px;
+  margin-bottom: 10px;
+}
+
+.profile-user-data {
+  font-size: 14px;
+}
+
+@media (max-width: 1422px) {
+  .header {
+    height: 72px;
+  }
+}
+
+@media (max-width: 1227px) {
+  .header {
+    height: 84px;
+  }
+}
+
+// ------ NEW SCSS
+
+@media (max-width: 1227px) {
+  .app-header {
+    height: 80px;
+  }
+}
+
+.app-header {
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #c7c8c9;
+  background-color: #f8f8f8;
+  height: 64px;
+  padding: 0 16px;
+}
+
+.app-header-logo-section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  img {
+    height: 40px;
+  }
+
+  &__title {
+    color: #242727;
+    font-size: 24px;
+    font-family: $font-family-bold;
+    margin: 0px 20px;
+  }
+}
+
+.app-header-content {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.app-header-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  &__gap {
+    border-radius: 5px;
+    background-color: $violetVale;
+    border-color: 1px solid $violetVale;
+    height: 26px;
+    margin-left: 8px;
+    margin-right: 16px;
+    align-self: center;
+  }
+
+  &__link {
+    color: #f8f8f8;
+    border-color: 1px solid $violetVale;
+    padding: 2px 4px;
+    text-decoration: none;
+  }
+
+  .app-header-nav__link {
+    font-family: $font-body1;
+  }
+}
+
+.app-header-menu {
+  border-left: 1px solid #c7c8c9;
+  display: flex;
+  height: 100%;
+
+  &__user-info {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__name {
+      color: #252727;
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 16px;
+    }
+
+    &__last-login {
+      font-size: 10px;
+      margin-left: 16px;
+    }
+  }
+
+  &__dropdown {
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+}

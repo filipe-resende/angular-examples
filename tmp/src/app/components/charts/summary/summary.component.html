@@ -1,0 +1,18 @@
+<div class="summary-container">
+  <app-summary-section
+    [isOverallChart]="true"
+    [dataSection]="summaryData.overall"
+  ></app-summary-section>
+
+  <app-summary-section [dataSection]="summaryData.active"></app-summary-section>
+
+  <app-summary-section
+    [dataSection]="summaryData.associates"
+  ></app-summary-section>
+
+  <app-summary-section
+    [dataSection]="summaryData.transmitting"
+  ></app-summary-section>
+
+  <app-summary-section [dataSection]="summaryData.inUse"></app-summary-section>
+</div>

@@ -1,0 +1,218 @@
+.displacement-old-page-container {
+  display: flex;
+  flex-direction: column;
+  padding: 42px 56px;
+}
+
+.displacement-old-page-header {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin-bottom: 30px;
+}
+
+.displacement-old-page-header-counters {
+  height: 80px;
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.displacement-old-page-counters-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 8px;
+
+  & > label {
+    color: #909193;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+}
+
+.displacement-old-page-counters {
+  display: flex;
+
+  & > div:first-child {
+    & > p:first-child {
+      color: #69be28;
+    }
+  }
+}
+
+.displacement-old-page-counters-item {
+  border-left: 1px solid #c7c8c9;
+  color: #252727;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+  text-align: center;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0px 20px;
+
+  & > p:first-child {
+    margin: 0px;
+    font-size: 32px;
+    line-height: 16px;
+  }
+
+  & > p:last-child {
+    margin: 0px;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 10px;
+  }
+
+  &:last-child {
+    border-right: 1px solid #c7c8c9;
+  }
+}
+
+.displacement-old-page-card-container {
+  margin-bottom: 42px;
+}
+
+.displacement-old-page-card-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.displacement-old-page-table-container {
+  height: calc(100% - 60px);
+  width: 100%;
+  z-index: 10;
+  background-color: #ffffff;
+}
+
+.displacement-old-page-search-form {
+  width: 100%;
+  display: flex;
+}
+
+.inactive {
+  border-left-color: red;
+  border-left-style: solid;
+  border-left-width: 3px;
+  padding-left: 5px;
+}
+
+.site-info {
+  padding-top: 1.5rem;
+  padding-bottom: 1em;
+}
+
+.site-name {
+  padding: 5px;
+  text-align: center;
+  color: black;
+  padding-right: 2rem;
+  min-width: 17rem;
+}
+
+.site-qtt {
+  text-align: left;
+  color: black;
+  padding: 0.5rem;
+  padding-left: 2rem;
+  font-size: 1.1rem;
+}
+
+th.mat-header-cell {
+  background-color: #fff;
+}
+
+.text {
+  font-size: 1.5rem !important;
+}
+
+.site-mat-divider {
+  height: 3rem;
+  color: #d6d7d7;
+}
+
+.mat-card-size {
+  margin: 20px;
+}
+
+.search-field {
+  width: 100%;
+}
+
+.search-form-field .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.search-container {
+  padding: 0px 10px 10px 0px;
+}
+
+.search-bar .mat-form-field-wrapper {
+  margin: 0 !important;
+}
+
+.search-bar .mat-form-field-outline {
+  color: #d6d7d7;
+}
+
+.search-bar
+  .mat-form-field-appearance-outline
+  .mat-form-field-outline-thick
+  .mat-form-field-outline-gap {
+  color: #77787b !important;
+}
+
+.margin-expansion {
+  margin-bottom: 10px !important;
+}
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.example-container > * {
+  width: 100%;
+}
+
+.row {
+  width: 100%;
+}
+
+.w-30 {
+  width: 30%;
+}
+
+.w-33 {
+  width: 33%;
+}
+
+.form-field {
+  margin-left: 5px;
+}
+
+.elipsis {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

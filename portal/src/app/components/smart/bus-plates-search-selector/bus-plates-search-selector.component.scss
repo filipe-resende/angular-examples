@@ -1,0 +1,56 @@
+.bus-plates-search-selector-container {
+  padding-top: 0.75rem;
+
+  .mat-button-toggle-disabled {
+    pointer-events: none;
+    opacity: 0.6;
+    background-color: #ffffff;
+  }
+
+  .button-toggle {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-right: 0;
+
+    display: inline-flex;
+
+    .search__disclaimer {
+      line-height: 0.77;
+      padding-left: 9px;
+      font-size: 14px;
+      height: 12px;
+      width: 12px;
+    }
+  }
+
+  .mat-button-toggle-group,
+  .mat-button-toggle-standalone {
+    border-radius: 0px;
+  }
+
+  ::ng-deep {
+    .mat-button-toggle-label-content {
+      font-size: 14px;
+      line-height: 30px;
+    }
+  }
+
+  .mat-button-toggle {
+    color: var(--color-v-blue);
+    width: 145px;
+    height: 30px;
+    border: 2px solid;
+    border-color: var(--color-v-blue);
+    font-family: 'Roboto';
+  }
+
+  .mat-button-toggle-checked {
+    background-color: var(--color-v-blue);
+    color: #ffffff;
+  }
+
+  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    line-height: 32px;
+    padding: 0 16px;
+  }
+}

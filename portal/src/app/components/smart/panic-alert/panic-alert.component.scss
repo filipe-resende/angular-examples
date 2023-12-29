@@ -1,0 +1,22 @@
+.not-applicable-all-panic-alert {
+  width: 564px;
+  margin: 25px auto 0;
+}
+
+.button-not-applicable-all-panic-alert {
+  width: 100%;
+  font-size: 18px !important;
+  background-color: #3d7edb;
+  border: none;
+  color: #ffffff;
+  border-radius: 12px;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  img {
+    padding-right: 10px;
+  }
+}

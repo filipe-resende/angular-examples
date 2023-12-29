@@ -1,0 +1,486 @@
+<div class="displacement-page-container">
+  <div class="displacement-page-header" *ngIf="isTripSearch">
+    <app-site-selector></app-site-selector>
+  </div>
+
+  <app-bus-plates-search-selector
+    (displayTripSearch)="searchSwitch($event)"
+  ></app-bus-plates-search-selector>
+
+  <section class="displacement-page-card-container">
+    <app-card>
+      <div class="card-header">
+        <section class="header-filters">
+          <div class="filters">
+            <div class="filters" *ngIf="!isTripSearch">
+              <app-datepicker
+                placeholder="DISPLACEMENT.START_DATE"
+                class="form__date"
+                [value]="getThreeMonthsAgo()"
+                disabled="true"
+              ></app-datepicker>
+              <app-hourpicker
+                placeholder="DISPLACEMENT.START_DATE"
+                [value]="getCurrentTime()"
+                disabled="true"
+              ></app-hourpicker>
+              <span class="filters__date-dash">-</span>
+              <app-datepicker
+                placeholder="DISPLACEMENT.END_DATE"
+                class="form__date"
+                [value]="currentDate"
+                disabled="true"
+              ></app-datepicker>
+
+              <app-hourpicker
+                [value]="getCurrentTime()"
+                disabled="true"
+              ></app-hourpicker>
+            </div>
+            <div class="filters" *ngIf="isTripSearch">
+              <app-datepicker
+                placeholder="DISPLACEMENT.START_DATE"
+                class="form__date"
+                [value]="ngForm.controls.startDate.value"
+                (dateChange)="onStartDateChange($event)"
+                [max]="endDateUTCForDatePicker || currentDate"
+              ></app-datepicker>
+              <app-hourpicker
+                placeholder="DISPLACEMENT.START_DATE"
+                [value]="ngForm.value.startHour"
+                (hourChange)="onSelectStartHour($event)"
+              ></app-hourpicker>
+              <span class="filters__date-dash">-</span>
+              <app-datepicker
+                placeholder="DISPLACEMENT.END_DATE"
+                class="form__date"
+                [value]="ngForm.controls.endDate.value"
+                (dateChange)="onEndDateChange($event)"
+                [min]="startDateUTCForDatePicker"
+                [max]="currentDate"
+              ></app-datepicker>
+              <app-hourpicker
+                [value]="ngForm.value.endHour"
+                (hourChange)="onSelectEndHour($event)"
+              ></app-hourpicker>
+            </div>
+          </div>
+          <div class="header-actions">
+            <app-button
+              *ngIf="isTripSearch"
+              class="actions__button"
+              (onClick)="onSearchButtonClick(true)"
+              [disabled]="this.ngForm.invalid"
+              [loading]="isFetching"
+            >
+              <mat-icon class="button__icon">search</mat-icon>
+              {{ "DISPLACEMENT.VIEW" | translate }}
+            </app-button>
+
+            <app-button
+              *ngIf="!isTripSearch"
+              class="actions__button"
+              (onClick)="onSearchButtonClick(false)"
+              [disabled]="this.ngFormPlateSearch.invalid"
+              [loading]="isFetching"
+            >
+              <mat-icon class="button__icon">search</mat-icon>
+              {{ "DISPLACEMENT.VIEW" | translate }}
+            </app-button>
+
+            <app-button
+              *ngIf="isTripSearch"
+              class="actions__button"
+              (onClick)="onExportExcelButtonClick($event)"
+              [disabled]="this.ngForm.invalid"
+            >
+              <mat-icon class="button__icon">open_in_new</mat-icon>
+              {{ "DISPLACEMENT.EXPORT" | translate }}
+            </app-button>
+            <app-button
+              *ngIf="isTripSearch"
+              class="actions__button"
+              (onClick)="onClearSearchButtonClick()"
+              [stroked]="true"
+            >
+              <mat-icon
+                class="button__icon button__icon--stroked"
+                svgIcon="clear_filter_blue"
+              ></mat-icon>
+              {{ "DISPLACEMENT.CLEAR_FILTERS" | translate }}
+            </app-button>
+            <mat-icon
+              *ngIf="isTripSearch"
+              class="buttons__info"
+              [matTooltip]="'DISPLACEMENT.EXPORT_DISCLAIMER' | translate"
+              [matTooltipShowDelay]="300"
+              [matTooltipHideDelay]="500"
+            >
+              info_outline
+            </mat-icon>
+          </div>
+          <div class="filters">
+            <span class="filters" *ngIf="isTripSearch">
+              <input
+                class="filters__line"
+                [placeholder]="'DISPLACEMENT.LINE' | translate"
+                (change)="onChangeLine($event.target.value)"
+                [value]="ngForm.value.line"
+              />
+              <app-select
+                class="filters__direction"
+                bindLabel="label"
+                bindValue="value"
+                placeholder="DISPLACEMENT.DIRECTION"
+                [items]="transportsDirectionsOptions"
+                [selected]="ngForm.value.direction"
+                (onSelect)="onSelectDirection($event)"
+              ></app-select>
+
+              <app-select
+                class="filters__direction"
+                bindLabel="label"
+                bindValue="value"
+                placeholder="DISPLACEMENT.TELEMETRY"
+                [items]="telemetryCompanyNames$ | async"
+                [selected]="ngForm.controls.telemetry.value"
+                (onSelect)="onSelectTelemetryCompany($event)"
+              ></app-select>
+            </span>
+            <div>
+              <input
+                type="text"
+                class="filters__plate"
+                [placeholder]="'DISPLACEMENT.BUS_PLATE' | translate"
+                (input)="onChangePlate($event.target.value)"
+                [value]="ngForm.value.plate"
+              />
+            </div>
+            <mat-icon
+              class="license_plate__info"
+              [matTooltip]="'DISPLACEMENT.LICENSE_PLATE_FILTER_DISCLAIMER' | translate"
+              [matTooltipShowDelay]="300"
+              [matTooltipHideDelay]="500"
+            >
+              info_outline
+            </mat-icon>
+          </div>
+        </section>
+      </div>
+
+      <div class="displacement-page-table-container">
+        <table
+          mat-table
+          matSort
+          [dataSource]="isFetching ? skeletonArray : dataSource"
+          class="table-displacements"
+        >
+          <ng-container matColumnDef="locationIcon" *ngIf="false">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let transport">
+              <div *ngIf="!transport; else displayLocationIcon"></div>
+              <ng-template #displayLocationIcon>
+                <div
+                  class="displacement-page-table-icons"
+                  *ngIf="!!transport?.code"
+                >
+                  <img
+                    src="assets/icons/location.svg"
+                    alt="PEOPLE"
+                    [title]="'Localização'"
+                    (click)="onOpenTripMapDetails()"
+                  />
+                </div>
+              </ng-template>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="passagerIcon">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let transport">
+              <div *ngIf="!transport; else displayPassengerIcon"></div>
+              <ng-template #displayPassengerIcon>
+                <div
+                  class="displacement-page-table-icons"
+                  *ngIf="!!transport?.code"
+                >
+                  <img
+                    src="assets/icons/passenger.svg"
+                    alt="PEOPLE"
+                    [title]="'DISPLACEMENT.PASSENGERS' | translate"
+                    (click)="onOpenTripThingsListIconClick(transport)"
+                  />
+                </div>
+              </ng-template>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="line">
+            <th mat-header-cell mat-sort-header="line" *matHeaderCellDef>
+              {{ "DISPLACEMENT.LINE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ !transport ? null : transport?.line || '-' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="telemetry">
+            <th mat-header-cell mat-sort-header="telemetry" *matHeaderCellDef>
+              {{ "DISPLACEMENT.COMPANY_NAME" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ !transport ? null : transport?.telemetry || '-' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="code">
+            <th mat-header-cell mat-sort-header="code" *matHeaderCellDef>
+              {{ "DISPLACEMENT.TRIP_CODE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              <div
+                class="displacement-table-trip-code"
+                [title]="transport?.code || ''"
+              >
+                {{ !transport ? null : transport?.code || '-' }}
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="busPlate">
+            <th mat-header-cell mat-sort-header="busPlate" *matHeaderCellDef>
+              {{ "DISPLACEMENT.BUS_PLATE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ !transport ? null : transport?.busPlate || '-' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="busCompany">
+            <th
+              mat-header-cell
+              mat-sort-header="busCompany"
+              *matHeaderCellDef
+              scope="col"
+            >
+              {{ "DISPLACEMENT.BUS_COMPANY_NAME" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              <div
+                class="displacement-table-trip-code"
+                [title]="transport?.companyName || ''"
+              >
+                {{ !transport ? null : transport?.companyName || '-' }}
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="direction">
+            <th mat-header-cell mat-sort-header="direction" *matHeaderCellDef>
+              {{ "DISPLACEMENT.DIRECTION" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <ng-container *ngIf="transport; else transportSkeleton">
+                <ng-container [ngSwitch]="transport?.direction | uppercase">
+                  <ng-container *ngSwitchCase="'TOVALE'">
+                    {{"DISPLACEMENT.TO_VALE" | translate}}
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="'FROMVALE'">
+                    {{"DISPLACEMENT.FROM_VALE" | translate}}
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="'CIRCULAR'">
+                    {{"DISPLACEMENT.CIRCULAR" | translate}}
+                  </ng-container>
+
+                  <ng-container *ngSwitchDefault>-</ng-container>
+                </ng-container>
+              </ng-container>
+
+              <ng-template #transportSkeleton>
+                <div class="skeleton table"></div>
+              </ng-template>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="peopleInLineCount">
+            <th
+              mat-header-cell
+              mat-sort-header="peopleInLineCount"
+              *matHeaderCellDef
+            >
+              {{ "DISPLACEMENT.PEOPLE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ !transport ? null : transport?.peopleInLineCount !== null ?
+              transport.peopleInLineCount : '-' }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="lastLocation">
+            <th
+              mat-header-cell
+              mat-sort-header="lastLocation && lastLocation.lat"
+              *matHeaderCellDef
+            >
+              {{ "DISPLACEMENT.LAST_BUS_LOCATION" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport" class="map-column">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              <div *ngIf="transport && !transport?.lastLocation">-</div>
+
+              <app-mini-map
+                [latitude]="transport?.lastLocation?.lat"
+                [longitude]="transport?.lastLocation?.lng"
+                [middleware]="'DEVICES_SELECTOR.BUS' | translate"
+              ></app-mini-map>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="eventDateTime">
+            <th
+              mat-header-cell
+              mat-sort-header="eventDateTime"
+              *matHeaderCellDef
+            >
+              {{ "DISPLACEMENT.LAST_BUS_REPORT" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport && !transport?.eventDateTime? "-" : transport &&
+              transport?.eventDateTime ? (transport?.eventDateTime | date:
+              "dd/MM/yyyy HH:mm" ) : "" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="startTripTime">
+            <th
+              mat-header-cell
+              mat-sort-header="startTripTime"
+              *matHeaderCellDef
+            >
+              {{ "DISPLACEMENT.START_TRIP_TIME" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport?.startDateTrip ? (transport.startDateTrip | date:
+              ("DISPLACEMENT.START_TRIP_TIME_FORMAT" | translate )) : "-" }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="initialPointLocation">
+            <th
+              mat-header-cell
+              mat-sort-header="initialPointLocation && initialPointLocation.lat"
+              *matHeaderCellDef
+            >
+              {{ "DISPLACEMENT.START_POINT" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              <div *ngIf="transport && !transport?.initialPointLocation">-</div>
+              <div
+                *ngIf="transport && transport?.initialPointLocation && transport?.initialPointLocation.lng && transport?.initialPointLocation.lat"
+                style="display: flex"
+                [title]="transport.initialPointLocation.lat + ', ' + transport.initialPointLocation.lng"
+              >
+                <div
+                  style="
+                    max-width: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ transport.initialPointLocation.lat }}
+                </div>
+                ,
+                <div
+                  style="
+                    margin-left: 4px;
+                    max-width: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ transport.initialPointLocation.lng }}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="finalPointLocation">
+            <th
+              mat-header-cell
+              mat-sort-header="finalPointLocation && finalPointLocation.lat"
+              *matHeaderCellDef
+              scope="col"
+            >
+              {{ "DISPLACEMENT.END_POINT" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              <div *ngIf="transport && !transport?.finalPointLocation">-</div>
+              <div
+                *ngIf="transport && transport?.finalPointLocation && transport?.finalPointLocation.lng && transport?.finalPointLocation.lat"
+                style="display: flex"
+                [title]="transport.finalPointLocation.lat + ', ' + transport.finalPointLocation.lng"
+              >
+                <div
+                  style="
+                    max-width: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ transport.finalPointLocation.lat }}
+                </div>
+                ,
+                <div
+                  style="
+                    margin-left: 4px;
+                    max-width: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ transport.finalPointLocation.lng }}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="finalDateTrip">
+            <th
+              mat-header-cell
+              mat-sort-header="finalDateTrip"
+              *matHeaderCellDef
+              scope="col"
+            >
+              {{ "DISPLACEMENT.FINAL_TRIP_TIME" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport?.finalDateTrip ? (transport.finalDateTrip | date:
+              ("DISPLACEMENT.FINAL_TRIP_TIME_FORMAT" | translate )) : "-" }}
+            </td>
+          </ng-container>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+            class="table-header"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let transport; columns: displayedColumns"
+          ></tr>
+        </table>
+      </div>
+      <div style="display: flex; justify-content: center">
+        <app-paginator
+          [total]="paginator.total|| 0"
+          [pageSize]="paginator.perPage|| 10"
+          [currentPage]="paginator.page|| 0"
+          (onChangePage)="onChangePage($event)"
+        ></app-paginator>
+      </div>
+    </app-card>
+  </section>
+</div>

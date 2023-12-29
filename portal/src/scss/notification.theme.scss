@@ -1,0 +1,35 @@
+@import './variables';
+
+@mixin notification-theme($theme) {
+    // $primary: map-get($theme, primary);
+    // $accent: map-get($theme, accent);
+    // $warn: map-get($theme, warn);
+    // $success: map-get($theme, success);
+    // $background: map-get($theme, background);
+    // $foreground: map-get($theme, foreground);
+
+    .notification {
+        // background-color: mat-color($primary);
+        pointer-events: auto;
+    }
+
+    .notification-success {
+        background-color: $success; // mat-color($success);
+    }
+
+    .notification-error {
+        background-color: $danger; //mat-color($accent);
+    }
+
+    .notification-info {
+        background-color: $info; //mat-color($primary);
+    }
+
+    .notification-warning {
+        background-color: $warning; // mat-color($warn);
+    }
+
+    .notification-disclaim {
+        background-color: $gray-500;
+    }
+}

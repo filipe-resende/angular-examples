@@ -1,0 +1,38 @@
+<div class="item-list">
+  <div class="init-item">
+    <div class="thing-info">
+      <span class="name">{{ data.name }}</span>
+
+      <span *ngIf="data.sourceInfos.length > 0">
+        {{ data.sourceInfos[0].type }}: {{ data.sourceInfos[0].value }}
+      </span>
+    </div>
+  </div>
+
+  <div class="association-info" *ngIf="data?.associatedDevices?.length">
+    <div class="associated-devices">
+      <ng-container *ngFor="let item of data?.associatedDevices; let i = index">
+        <div *ngIf="i < 3 && applicationList">
+          <span>Associação: {{ item.device?.sourceInfos[0]?.value }}, </span>
+          <ng-container *ngFor="let application of applicationList">
+            <span *ngIf="application?.id === item?.device?.applicationId">{{
+              application.name
+            }}</span>
+          </ng-container>
+        </div>
+      </ng-container>
+      <div *ngIf="data.associatedDevices?.length > 3" class="grey-info">
+        Associado a outros {{ data.associatedDevices?.length }} dispositivos.
+      </div>
+    </div>
+  </div>
+
+  <div class="end-item">
+    <app-action-button
+      [ngClass]="['blue', 'association']"
+      (action)="routeToThingDetails(thingInfo.id)"
+    >
+      {{ 'THING_LIST.EDIT_BUTTON' | translate }}
+    </app-action-button>
+  </div>
+</div>

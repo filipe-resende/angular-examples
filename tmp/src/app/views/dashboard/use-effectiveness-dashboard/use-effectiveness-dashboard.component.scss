@@ -1,0 +1,42 @@
+@import '../../../scss/vale.variables';
+
+@mixin blueButtonFormatting($color, $background) {
+  background: $background;
+  border: 1.5px solid #3d7edb;
+  color: $color;
+}
+
+div,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.dashboardUse-main {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  padding-left: 59px;
+  padding-right: 59px;
+  padding-bottom: 50px;
+
+  .box {
+    background-color: $white;
+    box-shadow: -4px 5px 8px 0px rgba(67, 86, 100, 0.12),
+      -1px 2px 4px 0px rgba(67, 86, 100, 0.1);
+
+    .boxOne-title {
+      font-family: $font-body1-bold;
+      color: #252727;
+      font-size: 24px;
+      line-height: 28px;
+      padding: 30px;
+    }
+  }
+}
+
+.graph-no-result-spinner {
+  mat-spinner {
+    margin: 90px auto;
+  }
+}

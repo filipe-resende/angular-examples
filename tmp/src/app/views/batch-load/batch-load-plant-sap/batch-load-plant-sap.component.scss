@@ -1,0 +1,118 @@
+@import '../../../scss/vale.variables';
+
+div,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.plant-sap-container {
+  display: grid;
+  height: 222px;
+  width: 597px;
+  gap: 20px;
+  grid-template-rows: auto 1fr auto;
+  background-color: #fbfbfb;
+  font-family: $font-body1;
+}
+
+.plant-title {
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 30px;
+  padding-top: 24px;
+}
+
+.plant-title p {
+  font-weight: 700;
+  font-size: 20px;
+  color: #697489;
+}
+
+.plant-title img {
+  cursor: pointer;
+}
+
+.plant-content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  padding: 0px 30px;
+  margin-bottom: 20px;
+}
+.plant-content p {
+  font-size: 14px;
+  color: #959dac;
+}
+.plant-content input {
+  background: #ffffff;
+  border: 1px solid #e3e4e4;
+  border-radius: 2px;
+  margin-right: 20px;
+  height: 36px;
+}
+.plant-content .inputcode {
+  width: 97px;
+}
+
+.plant-content .inputDescription {
+  width: 400px;
+}
+
+.sap-button {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: stretch;
+  height: 48px;
+  font-size: 14px;
+}
+
+.buttonCancel {
+  color: #3d7edb;
+  background: #fbfbfb;
+  border: 1px solid #edeef0;
+  border-radius: 4px;
+  font-family: $font-body1;
+}
+
+.buttonAdd {
+  color: #fbfbfb;
+  background-color: #3d7edb;
+  border: none;
+  border-radius: 4px;
+  font-family: $font-body1;
+}
+
+.buttonAdd:disabled {
+  background-color: #c7c8c9;
+  color: #909193;
+}
+
+.plant-relative {
+  position: relative;
+}
+
+.info {
+  position: absolute;
+  display: block;
+  font-size: 10px;
+  line-height: 22px;
+  color: #c84264;
+  font-family: $font-body1;
+}
+
+.plant-relative p.infoCode {
+  color: #bb133e;
+}
+.plant-relative p.infoDescription {
+  color: #bb133e;
+}
+
+.plant-content input.inputcodecolor {
+  border: 1px solid #bb133e;
+  color: #bb133e;
+}
+.plant-content input.inputDescriptioncolor {
+  border: 1px solid #bb133e;
+  color: #bb133e;
+}

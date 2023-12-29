@@ -1,0 +1,25 @@
+<section class="modal-confirmation-container">
+  <div class="modal-confirmation-header">
+    <div class="modal-confirmation-title">
+      <span class="title"> {{ title | translate }} </span>
+    </div>
+    <div class="modal-confirmation-close-button" (click)="onClose()">
+      <mat-icon class="icon">close</mat-icon>
+    </div>
+  </div>
+
+  <div class="modal-confirmation-subtitle">
+    <p class="confirmation-message">
+      {{message | translate }}
+      <span class="thing-to-removal">{{memberName}}</span> ?
+    </p>
+  </div>
+</section>
+<div class="modal-confirmation-buttons-container">
+  <button class="cancel-button" (click)="onClose()">
+    {{ 'THING_UPDATE.REACTIVATE_BUTTON_MODAL_CANCEL' | translate }}
+  </button>
+  <button class="confirm-button" (click)="onConfirm()">
+    {{ 'THING_UPDATE.REACTIVATE_BUTTON_MODAL_CONFIRM' | translate }}
+  </button>
+</div>

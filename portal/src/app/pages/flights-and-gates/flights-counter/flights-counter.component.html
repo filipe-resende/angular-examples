@@ -1,0 +1,29 @@
+<section class="flights-page-header-counters">
+  <div class="flights-page-counters-container">
+    <label>{{ 'DISPLACEMENT.PEOPLE' | translate }}</label>
+    <div class="flights-page-counters">
+      <div class="flights-page-counters-item">
+        <p *ngIf="!isFetching">
+          {{ peopleCounter.insideVale }}
+        </p>
+        <div
+          *ngIf="isFetching"
+          class="skeleton"
+          style="height: 25px; width: 55px; border-radius: 4px"
+        ></div>
+        <p>{{ 'FLIGHTS.COUNTERS.INSIDE_VALE' | translate }}</p>
+      </div>
+      <div class="flights-page-counters-item">
+        <p *ngIf="!isFetching">
+          {{ peopleCounter.outsideVale }}
+        </p>
+        <div
+          *ngIf="isFetching"
+          class="skeleton"
+          style="height: 25px; width: 55px; border-radius: 4px"
+        ></div>
+        <p>{{ 'FLIGHTS.COUNTERS.OUTSIDE_VALE' | translate }}</p>
+      </div>
+    </div>
+  </div>
+</section>

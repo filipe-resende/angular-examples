@@ -1,0 +1,78 @@
+@import '../../scss/vale.variables';
+
+::ng-deep .mat-tooltip {
+  min-width: 25vw;
+  font-size: 18px;
+}
+
+.breadCrumbs {
+  margin: 0px;
+  padding-top: 10px;
+  padding-left: 59px;
+  font-family: $font-body1;
+  font-size: 12px;
+  color: #909193;
+}
+.breadCrumbs > span {
+  color: #252727;
+}
+
+.dt-container {
+  font-family: $font-body1;
+  background-color: #f8f8f6;
+  padding-top: 38px;
+  padding-right: 59px;
+  padding-left: 59px;
+  margin-bottom: 78px;
+}
+
+.dt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dt-search-menu {
+  margin-top: 24px;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.dt-content-list {
+  padding: 0;
+}
+
+// Classe application-selected temporária enquanto só temos apenas uma aplicação com esses dados
+
+.application-selected {
+  margin-right: 15px;
+  width: 247px;
+  height: 41.25px;
+  border: 1px solid #e3e4e4;
+  color: $greyVale80;
+  background-color: #fff;
+  padding: 4px 8px;
+  font-size: 15px;
+  font-weight: 100;
+  font-family: $font-body1;
+  letter-spacing: 1px;
+  border-radius: 0px;
+}
+
+.dt-action-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dt-action-buttons {
+  margin: 24px 0 32px 0;
+  display: flex;
+  align-items: center;
+}
+
+.dh-spinner-content {
+  position: absolute;
+  left: 50%;
+  top: 50vh;
+}

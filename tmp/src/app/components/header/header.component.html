@@ -1,0 +1,18 @@
+<section class="app-header" #header>
+  <section class="app-header-logo-section">
+    <img [src]="valeLogo" alt="Vale Logo" />
+    <div class="app-header-logo-section__title" translate="">HOME.TITLE</div>
+  </section>
+
+  <section class="app-header-content">
+    <section class="app-header-nav">
+      <app-sidebar style="margin-bottom: 0"></app-sidebar>
+      <span class="app-header-nav__gap">
+        <a class="app-header-nav__link" [href]="gapPortalUrl" target="_blank">
+          GAP
+        </a>
+      </span>
+    </section>
+    <app-header-user></app-header-user>
+  </section>
+</section>

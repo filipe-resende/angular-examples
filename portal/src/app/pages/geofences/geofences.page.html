@@ -1,0 +1,75 @@
+<mat-tab-group>
+  <!-- <mat-tab label="Cercas Virtuais">
+  </mat-tab> -->
+  <mat-tab label="Nova Cerca Virtual">
+    <section class="tab-content">
+      <div class="tab-content__overflow">
+        <form class="form" [formGroup]="geofenceForm">
+          <app-site-selector [displayAsInput]="true"></app-site-selector>
+
+          <hr />
+
+          <mat-form-field class="form__field" appearance="outline">
+            <mat-label>{{ 'FENCES.NAME' | translate }}</mat-label>
+            <input
+              matInput
+              formControlName="name"
+              [placeholder]="'FENCES.NAME' | translate"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="form__field" appearance="outline">
+            <mat-label>{{ 'FENCES.DESCRIPTION' | translate }}</mat-label>
+            <input
+              matInput
+              formControlName="description"
+              [placeholder]="'FENCES.DESCRIPTION' | translate"
+            />
+          </mat-form-field>
+
+          <app-vale-color-selector
+            class="form__field"
+            label="Cor da cerca virtual"
+            (modelChange)="onSelectColorChange($event)"
+          ></app-vale-color-selector>
+
+          <mat-form-field appearance="outline">
+            <mat-label> {{ 'FENCES.CATEGORY' | translate }} </mat-label>
+            <mat-select formControlName="category" disableOptionCentering>
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category.id"
+              >
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <hr />
+
+          <app-map-polygon-coordinates></app-map-polygon-coordinates>
+        </form>
+      </div>
+
+      <hr />
+
+      <section class="buttons">
+        <div>
+          <app-button
+            [primary]="false"
+            [large]="true"
+            [strech]="true"
+            type="reset"
+          >
+            {{ 'FENCES.CANCEL' | translate }}
+          </app-button>
+          <app-button type="submit" [large]="true" [strech]="true">
+            {{ 'FENCES.CREATE' | translate }}
+          </app-button>
+        </div>
+      </section>
+    </section>
+  </mat-tab>
+</mat-tab-group>
+
+<app-map-two name="geofences"></app-map-two>

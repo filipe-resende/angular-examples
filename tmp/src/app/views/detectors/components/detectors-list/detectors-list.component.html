@@ -1,0 +1,25 @@
+<app-item-detector
+  *ngFor="
+    let detector of detectors
+      | paginate
+        : {
+            id: 'detectors_pagination',
+            itemsPerPage: 10,
+            currentPage: currentPage,
+            totalItems: count
+          }
+  "
+  [externalData]="detector"
+  [detectorList]="detectors"
+>
+  ></app-item-detector
+>
+
+<app-custom-pagination
+  [id]="'detectors_pagination'"
+  [hidden]="totalCount <= 10"
+  [currentPage]="currentPage"
+  [maxSize]="10"
+  (pageChange)="paginate($event)"
+>
+</app-custom-pagination>

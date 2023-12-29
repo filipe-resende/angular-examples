@@ -1,0 +1,25 @@
+<div class="container-not-authorized" *ngIf="emails">
+  <div class="h-100 row align-items-center justify-content-center">
+    <div class="col-md-6 col-sm-6 col-lg-6">
+      <div class="logo">
+        <img
+          alt="Vale Logo"
+          src="../../assets/Logotipo_Vale.svg"
+          height="40px"
+        />
+      </div>
+      <h4>
+        Você não possui permissão para acessar o Things Management Portal.
+      </h4>
+      Por favor, clique
+      <a [href]="mailText" style="text-decoration: underline; font-weight: bold"
+        >aqui</a
+      >
+      para abrir o email de solicitação de acesso ou envie e-mail para
+      {{ emails }} .
+      <div class="logout">
+        <i class="mdi mdi-logout logout-btn large" (click)="logout()"></i>
+      </div>
+    </div>
+  </div>
+</div>

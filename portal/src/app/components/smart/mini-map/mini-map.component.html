@@ -1,0 +1,28 @@
+<div *ngIf="latitude && longitude" class="table-coordinates">
+  <div class="coordinates-link" *ngIf="!panicButtonSite">
+    <div class="lat-lng-label">
+      {{ latitude }}
+    </div>
+    ,
+    <div class="lat-lng-label" style="padding-left: 4px">
+      {{ longitude }}
+    </div>
+  </div>
+  <button class="location-map-button" (click)="openMap()">
+    <mat-icon class="location-map-icon"> map </mat-icon>
+  </button>
+</div>
+<div class="map" [ngClass]="{ 'expanded-map': expandMap }" *ngIf="showMap">
+  <div class="icons">
+    <mat-icon (click)="closeMap()"> close </mat-icon>
+    <mat-icon *ngIf="!expandMap" (click)="changeMapSize()"
+      >fullscreen
+    </mat-icon>
+    <mat-icon *ngIf="expandMap && showDecreaseButton" (click)="changeMapSize()"
+      >fullscreen_exit
+    </mat-icon>
+  </div>
+  <div class="map-container">
+    <app-azure-map name="smallMap" [showControls]="false"> </app-azure-map>
+  </div>
+</div>

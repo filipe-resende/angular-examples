@@ -1,0 +1,46 @@
+<section>
+  <h1 mat-dialog-title class="settings-modal__title">
+    {{ 'MAIN.PROFILE' | translate }}
+    <button
+      mat-icon-button
+      (click)="close()"
+      class="settings-modal__title__close-btn"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </h1>
+  <section mat-dialog-content>
+    <mat-form-field class="settings-modal__info-field">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.USER' | translate }}"
+        disabled
+        [value]="userInfo.UserFullName"
+      />
+    </mat-form-field>
+    <mat-form-field class="settings-modal__info-field">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.EMAIL' | translate }}"
+        disabled
+        [value]="userInfo.mail"
+      />
+    </mat-form-field>
+    <mat-form-field class="settings-modal__info-field">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.PROFILE' | translate }}"
+        disabled
+        [value]="userInfo.roleDescription | titlecase"
+      />
+    </mat-form-field>
+    <mat-form-field class="settings-modal__info-field">
+      <input
+        matInput
+        placeholder="{{ 'MAIN.LANGUAGE' | translate }}"
+        disabled
+        [value]="'LANGUAGE.PT' | translate"
+      />
+    </mat-form-field>
+  </section>
+</section>

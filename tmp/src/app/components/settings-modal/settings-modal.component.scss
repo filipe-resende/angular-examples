@@ -1,0 +1,15 @@
+@import 'src/app/scss/vale.variables.scss';
+
+.settings-modal {
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $greyVale60;
+    font-family: $font-body1;
+  }
+
+  &__info-field {
+    width: 100%;
+  }
+}

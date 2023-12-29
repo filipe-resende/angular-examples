@@ -1,0 +1,23 @@
+<app-modal id="panic">
+  <div class="not-applicable-all-panic-alert" *ngIf="alerts.length > 1">
+    <button
+      class="button-not-applicable-all-panic-alert"
+      (click)="setNotApplicableToAllPanicAlerts()"
+    >
+      <img src="assets/icons/filterAllPanicAlerts.svg" alt="" />
+      <span>{{ 'PANIC_BUTTON.NOT_APPLICABLE_TO_ALL_EVENTS' | translate }}</span>
+    </button>
+  </div>
+  <div *ngFor="let alert of alerts; let i = index">
+    <app-panic-alert-overlay
+      *ngIf="i == 0; else isSubitem"
+      [alert]="alert"
+    ></app-panic-alert-overlay>
+    <ng-template #isSubitem>
+      <app-panic-alert-subitem
+        [alert]="alert"
+        [index]="i"
+      ></app-panic-alert-subitem>
+    </ng-template>
+  </div>
+</app-modal>

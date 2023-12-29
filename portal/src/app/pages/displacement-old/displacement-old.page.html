@@ -1,0 +1,206 @@
+<div class="displacement-old-page-container">
+  <div class="displacement-old-page-header">
+    <app-site-selector-deprecated
+      [selectedSite]="selectedSite && selectedSite.name"
+      [sitesList]="sitesList"
+      [placeholder]="'MESSAGES.SELECT_A_SITE'"
+      (onSiteSelected)="onSiteSelect($event)"
+    ></app-site-selector-deprecated>
+
+    <mat-divider
+      vertical
+      *ngIf="transportsList.length > 0 && !isFetching"
+      class="site-mat-divider"
+    ></mat-divider>
+    <div
+      *ngIf="transportsList.length > 0 && !isFetching"
+      fxFlex="15"
+      fxLayout="column"
+      class="site-qtt"
+    >
+      {{ transportsTotal }} registros de crachás
+    </div>
+  </div>
+
+  <section class="displacement-old-page-card-container">
+    <app-card>
+      <div class="displacement-old-page-card-header">
+        <form [formGroup]="ngForm" class="displacement-old-page-search-form">
+          <app-datepicker-from-to
+            (dateChange)="onSelectDate($event, 'startDate')"
+            [max]="maxCalendarDate"
+            [dateInputValue]="formatDateAsUTC(startDate)"
+            (dateChange2)="onSelectDate($event, 'endDate')"
+            [max2]="currentDate"
+            [dateInput2Value]="formatDateAsUTC(endDate)"
+            #searchDatepicker
+          >
+          </app-datepicker-from-to>
+
+          <div style="margin: 0px 16px">
+            <app-hourpicker-from-to
+              [input1Value]="ngForm.value.startHour"
+              [input2Value]="ngForm.value.endHour"
+              (input1Change)="onSelectHour($event, 'startHour')"
+              (input2Change)="onSelectHour($event, 'endHour')"
+            >
+            </app-hourpicker-from-to>
+          </div>
+
+          <app-button (onClick)="onClearSearchButtonClick()" [iconOnly]="true">
+            <img
+              src="assets/icons/clearfilter.svg"
+              [alt]="'DISPLACEMENT.CLEAR_SEARCH' | translate"
+              [title]="'DISPLACEMENT.CLEAR_SEARCH' | translate"
+            />
+          </app-button>
+          <div style="margin-left: 16px">
+            <app-button
+              (onClick)="onApplyFilterButtonClick()"
+              [iconOnly]="true"
+              [disabled]="!startDate || !endDate || !ngForm.valid"
+            >
+              <img
+                src="assets/icons/search.svg"
+                [alt]="'DISPLACEMENT.APPLY_SEARCH' | translate"
+                [title]="'DISPLACEMENT.APPLY_SEARCH' | translate"
+              />
+            </app-button>
+          </div>
+        </form>
+        <app-button
+          (onClick)="onExportExcelButtonClick($event)"
+          [upperCased]="true"
+          [disabled]="!startDate || !endDate || !ngForm.valid"
+        >
+          {{ "DISPLACEMENT.EXPORT" | translate }}
+        </app-button>
+      </div>
+
+      <div class="displacement-old-page-table-container">
+        <table
+          mat-table
+          matSort
+          [dataSource]="isFetching ? skeletonArray : dataSource"
+        >
+          <ng-container matColumnDef="company">
+            <th mat-header-cell mat-sort-header="deviceType" *matHeaderCellDef>
+              {{ "DISPLACEMENT.TELEMETRY" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport?.companyName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="line">
+            <th mat-header-cell mat-sort-header="name" *matHeaderCellDef>
+              {{ "DISPLACEMENT.LINE" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              <div class="elipsis">{{ transport?.name }}</div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="networkKey">
+            <th mat-header-cell mat-sort-header="networkKey" *matHeaderCellDef>
+              IAM Id
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport?.networkKey }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="nameEmployee">
+            <th
+              mat-header-cell
+              mat-sort-header="nameEmployee"
+              *matHeaderCellDef
+            >
+              {{ "DISPLACEMENT.NAME" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport?.nameEmployee }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="badge">
+            <th mat-header-cell mat-sort-header="document" *matHeaderCellDef>
+              {{ "DISPLACEMENT.BADGE_ID" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport?.document }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="lastLocation">
+            <th mat-header-cell mat-sort-header="latitude" *matHeaderCellDef>
+              {{ "DISPLACEMENT.LAST_LOCATION" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              <div *ngIf="transport?.latitude === '-'">-</div>
+              <div
+                *ngIf="transport?.latitude && transport?.longitude && transport?.latitude !== '-'"
+                style="display: flex"
+                [title]="transport.latitude + ', ' + transport.longitude"
+              >
+                <div
+                  style="
+                    max-width: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ transport.latitude }}
+                </div>
+                ,
+                <div
+                  style="
+                    margin-left: 4px;
+                    max-width: 120px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                  "
+                >
+                  {{ transport.longitude }}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="lastReport">
+            <th
+              mat-header-cell
+              mat-sort-header="eventDateTime"
+              *matHeaderCellDef
+            >
+              {{ "DISPLACEMENT.LAST_REPORT" | translate }}
+            </th>
+            <td mat-cell *matCellDef="let transport">
+              <div class="skeleton table" *ngIf="!transport"></div>
+              {{ transport?.eventDateTime === "-" ? "-" :
+              transport?.eventDateTime ? (transport?.eventDateTime | date:
+              "dd/MM/yyyy HH:mm" ) : "" }}
+            </td>
+          </ng-container>
+          <tr
+            mat-header-row
+            *matHeaderRowDef="displayedColumns; sticky: true"
+            class="table-header"
+          ></tr>
+          <tr
+            mat-row
+            *matRowDef="let transport; columns: displayedColumns"
+          ></tr>
+        </table>
+      </div>
+      <div style="display: flex; justify-content: center">
+        <app-paginator
+          [total]="paginator.total"
+          (onChangePage)="onChangePage($event)"
+        ></app-paginator>
+      </div>
+    </app-card>
+  </section>
+</div>

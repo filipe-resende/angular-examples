@@ -1,0 +1,26 @@
+.header-user-menu-overlay-container {
+  border: 1px solid #c7c8c9;
+  max-width: 286px;
+}
+
+.header-user-menu-overlay-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  padding-right: 38px;
+  color: #909193;
+  width: 100%;
+  font-family: Roboto;
+  font-size: 14px;
+  line-height: 22px;
+  cursor: pointer;
+  background-color: #f8f8f8;
+
+  & > mat-icon {
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background-color: #efefef;
+  }
+}

@@ -1,0 +1,1255 @@
+{
+    "items": [
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9118,
+            "iamId": "rkq3674",
+            "name": "Prettyabc, xBrandon",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Brandon.Pretty@sample.com",
+            "phone": "+19993301080",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9119,
+            "iamId": "dbm0887",
+            "name": "Powerabc, xJeremy",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "jeremy.power1@sample.com",
+            "phone": "+19997432798",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9120,
+            "iamId": "IU964909",
+            "name": "Powerabc, xMatthew",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Matthew.Power2@sample.com",
+            "phone": "+19996314590",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9121,
+            "iamId": "cje3379",
+            "name": "Pierceyabc, xBrittany",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "brittany.piercey@sample.com",
+            "phone": "+19996931503",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9122,
+            "iamId": "uen8997",
+            "name": "Penneyabc, xGlen",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "WILFRED.PENNEY@sample.com",
+            "phone": "+19996823858",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9123,
+            "iamId": "cyj4227",
+            "name": "Peddleabc, xJames",
+            "jobRole": "Technician",
+            "isActive": false,
+            "email": "JAMES.PEDDLE@sample.com",
+            "phone": "+19997646903",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9124,
+            "iamId": "zcv1787",
+            "name": "Paulabc, xChad",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "CHAD.PAUL@sample.com",
+            "phone": "+19997430231",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9125,
+            "iamId": "eps6251",
+            "name": "Parsonsabc, xBrent",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "brent.parsons@sample.com",
+            "phone": "+19997288818",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9126,
+            "iamId": "iqp9813",
+            "name": "Rocheabc, xStephen",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "STEPHEN.ROCHE@sample.com",
+            "phone": "+19996894800",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9127,
+            "iamId": "iiv3215",
+            "name": "Normanabc, xJoshua",
+            "jobRole": "Supervisor",
+            "isActive": true,
+            "email": "joshua.norman@sample.com",
+            "phone": "+19996995854",
+            "pictureLink": "Production Area Coach"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9130,
+            "iamId": "uxg3817",
+            "name": "Mercerabc, xTravis",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "travis.mercer@sample.com",
+            "phone": "+19996998862",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 52,
+                    "name": "LHO_REFINERY_PH",
+                    "description": "Product Handling",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9131,
+            "iamId": "piw9844",
+            "name": "Mercerabc, xCody",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "cody__eeecer@hotmail.com",
+            "phone": "+19995898199",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9132,
+            "iamId": "udr2620",
+            "name": "Mercerabc, xJeremy",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "je232143mrcer22@gmail.com",
+            "phone": "+19997437194",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9133,
+            "iamId": "nwy4324",
+            "name": "Matthewsabc, xPaul",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Paul.Matthews@sample.com",
+            "phone": "+19996801417",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9134,
+            "iamId": "plz8163",
+            "name": "Loderabc, xMatthew",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "MATTHEW.LODER@sample.com",
+            "phone": "+19996800439",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9135,
+            "iamId": "bwv7582",
+            "name": "Linthorneabc, xBenjamin",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Ross.Linthorne@sample.com",
+            "phone": "+19997863617",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9136,
+            "iamId": "IU965452",
+            "name": "Normanabc, xLuke",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Luke.Norman@sample.com",
+            "phone": "+19996800088",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9137,
+            "iamId": "fxr2576",
+            "name": "Laneabc, xAlan",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Alan.Lane@sample.com",
+            "phone": "+19998340854",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9138,
+            "iamId": "IU965010",
+            "name": "Rossiterabc, xRichard",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Richard.Rossiter@sample.com",
+            "phone": "+19995970432",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9139,
+            "iamId": "IU964925",
+            "name": "Sheaabc, xChristopher",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Christopher.Shea@sample.com",
+            "phone": "+19993301430",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 44,
+                    "name": "LHO_LEACH_LAB",
+                    "description": "Leach Laboratory",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9140,
+            "iamId": "rwe7684",
+            "name": "Oatesabc, xMatthew",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Matthew.Oates@sample.com",
+            "phone": "+19997657182",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 44,
+                    "name": "LHO_LEACH_LAB",
+                    "description": "Leach Laboratory",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9141,
+            "iamId": "IU965453",
+            "name": "Davisabc, xAndrea",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "andrea.davis@sample.com",
+            "phone": "+19995895358",
+            "pictureLink": "Chemist"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 44,
+                    "name": "LHO_LEACH_LAB",
+                    "description": "Leach Laboratory",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9142,
+            "iamId": "IO951168",
+            "name": "Daltonabc, xMelissa",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "mdalt22226@yahoo.ca",
+            "phone": "+19996874694",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 44,
+                    "name": "LHO_LEACH_LAB",
+                    "description": "Leach Laboratory",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9143,
+            "iamId": "IU965219",
+            "name": "Collinsabc, xConrad",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Conrad.Collins@sample.com",
+            "phone": "+19996993231",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 44,
+                    "name": "LHO_LEACH_LAB",
+                    "description": "Leach Laboratory",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9144,
+            "iamId": "kob7258",
+            "name": "Careyabc, xAdam",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "ADAM.CAREY@sample.com",
+            "phone": "+19997303554",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9145,
+            "iamId": "wyo0695",
+            "name": "Williamsabc, xRyan",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Ryan.Williams@sample.com",
+            "phone": "+19996914156",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9146,
+            "iamId": "kwu4375",
+            "name": "Walshabc, xJustin",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "justin.walsh2@sample.com",
+            "phone": "+19995555555",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9147,
+            "iamId": "vvv3688",
+            "name": "Vatersabc, xColin",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Colin.Vaters@sample.com",
+            "phone": "+19997400086",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9148,
+            "iamId": "crh5268",
+            "name": "Scottabc, xJustin",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Justin.Scott@sample.com",
+            "phone": "+19996976702",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9149,
+            "iamId": "ids8861",
+            "name": "Bennettabc, xBrittany",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "brittany.bennett@sample.com",
+            "phone": "+19997652351",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9150,
+            "iamId": "IO952091",
+            "name": "Taylorabc, xPaul",
+            "jobRole": "Supervisor",
+            "isActive": true,
+            "email": "Paul.Taylor@sample.com",
+            "phone": "+19992226749",
+            "pictureLink": "Production Area Coach"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9151,
+            "iamId": "iaq1814",
+            "name": "Taylorabc, xAlexander",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Alexander.Taylor@sample.com",
+            "phone": "+19996893168",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 281,
+                    "name": "7LH4X10F_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9152,
+            "iamId": "qfj8273",
+            "name": "Staggabc, xDarren",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "darren.stagg@sample.com",
+            "phone": "+19997281758",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9153,
+            "iamId": "IU965460",
+            "name": "Spurrellabc, xJonathan",
+            "jobRole": "Technician",
+            "isActive": false,
+            "email": "Jonathan.Spurrell@sample.com",
+            "phone": "+19998340375",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9154,
+            "iamId": "jkm4262",
+            "name": "Snowabc, xJustin",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "JUSTIN.SNOW@sample.com",
+            "phone": "+19996838862",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9155,
+            "iamId": "ynf2386",
+            "name": "Snowabc, xNathan",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Nathan.Snow@sample.com",
+            "phone": "+13067409940",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9156,
+            "iamId": "nrb5369",
+            "name": "Simmsabc, xErin",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "erinsi33312@hotmail.com",
+            "phone": "+15872156337",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9157,
+            "iamId": "epu6508",
+            "name": "Shelleyabc, xJonathan",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "JONATHAN.SHELLEY@sample.com",
+            "phone": "+19994253581",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 282,
+                    "name": "7LH4X10M_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9158,
+            "iamId": "pib4886",
+            "name": "Thompsonabc, xTyler",
+            "jobRole": "Supervisor",
+            "isActive": true,
+            "email": "Tyler.Thompson@sample.com",
+            "phone": "+19995897835",
+            "pictureLink": "Production Area Coach"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9159,
+            "iamId": "IU965110",
+            "name": "Lambertabc, xJohn",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "John.Lambert@sample.com",
+            "phone": "+19994332419",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9160,
+            "iamId": "IO951177",
+            "name": "Kellyabc, xRoxanne",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Roxanne.Kelly@sample.com",
+            "phone": "+19992260008",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9161,
+            "iamId": "pvf6854",
+            "name": "Howellabc, xAndrew",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "ANDREW.HOWELL@sample.com",
+            "phone": "+19995732367",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9162,
+            "iamId": "fux7272",
+            "name": "Coombsabc, xAndrew",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "ANDREW.COOMBS@sample.com",
+            "phone": "+19996916480",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9163,
+            "iamId": "IU965431",
+            "name": "Collinsabc, xKenneth",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Kenneth.Collins@sample.com",
+            "phone": "+19999870446",
+            "pictureLink": "Technician - Ops Planning"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9164,
+            "iamId": "fqu5585",
+            "name": "Chafeabc, xAlexander",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "ALEX.CHAFE@sample.com",
+            "phone": "+19996822243",
+            "pictureLink": "Technician - Process"
+        },
+        {
+            "crews": [
+                {
+                    "id": 285,
+                    "name": "7LHPPTSTEADY12_2"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9165,
+            "iamId": "rnl6144",
+            "name": "Carewabc, xSteven",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Steven.Carew@sample.com",
+            "phone": "+19996834155",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 284,
+                    "name": "7LHPPTSTEADY12_1"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9166,
+            "iamId": "IU964880",
+            "name": "Carewabc, xTrevor",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Trevor.Carew@sample.com",
+            "phone": "+19997469654",
+            "pictureLink": "Technician - Asset Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 287,
+                    "name": "7LHPPTSTEADY12_4"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9167,
+            "iamId": "IU965427",
+            "name": "Bruceabc, xSusan",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Susan.Bruce@sample.com",
+            "phone": "+19997497472",
+            "pictureLink": "Technician - Personnel"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9169,
+            "iamId": "axm2485",
+            "name": "Booneabc, xBrent",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "Brent.Boone@sample.com",
+            "phone": "+19996835400",
+            "pictureLink": "Technician - Responsible Care"
+        },
+        {
+            "crews": [
+                {
+                    "id": 286,
+                    "name": "7LHPPTSTEADY12_3"
+                }
+            ],
+            "departments": [
+                {
+                    "id": 50,
+                    "name": "LHO_REFINERY_EW",
+                    "description": "Electrowinning",
+                    "isActive": false
+                }
+            ],
+            "programmedUnavailabilities": [],
+            "id": 9170,
+            "iamId": "rit2380",
+            "name": "Cossarabc, xBarry",
+            "jobRole": "Technician",
+            "isActive": true,
+            "email": "BARRY.COSSAR@sample.com",
+            "phone": "+19997701125",
+            "pictureLink": "Technician - Asset Care"
+        }
+    ],
+    "totalCount": 50
+}

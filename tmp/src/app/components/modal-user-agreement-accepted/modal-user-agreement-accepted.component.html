@@ -1,0 +1,17 @@
+<header class="header">
+  <mat-icon class="header__icon-check">check_circle_outline</mat-icon>
+  <div class="header__texts">
+    <h3 class="header__title">
+      {{ 'USER_AGREEMENT.PERSONAL_DATA' | translate }}
+    </h3>
+    <h6 class="header__subtitle">Things Management Portal</h6>
+  </div>
+  <button mat-icon-button mat-dialog-close class="header__button">
+    <mat-icon>close</mat-icon>
+  </button>
+</header>
+<hr class="user-agreement-container__line" />
+<p class="user-agreement-container__content">
+  {{ 'USER_AGREEMENT.CONCLUDED' | translate }} <br />
+  {{ 'USER_AGREEMENT.READ_TERMS_AGAIN' | translate }}
+</p>

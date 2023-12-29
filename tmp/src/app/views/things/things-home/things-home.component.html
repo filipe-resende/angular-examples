@@ -1,0 +1,157 @@
+<p class="breadCrumbs">
+  {{ 'BREADCRUMB.HOME' | translate }} >
+  <span>{{ 'BREADCRUMB.THINGS' | translate }}</span>
+</p>
+<section
+  class="th-container"
+  *ngIf="allThings$ | async as allThings; else loading"
+>
+  <app-alert
+    *ngIf="this.showDeviceGroupRestrictionDisclaimer"
+    [text]="'DISCLAIMERS.FEATURE_MANAGEMENT' | translate"
+  ></app-alert>
+  <div class="th-view-wrapper">
+    <div class="th-header"></div>
+
+    <div class="th-content">
+      <div class="th-search">
+        <div class="th-search-header">
+          <select
+            [(ngModel)]="selectedType"
+            class="dh-select-input"
+            (ngModelChange)="getByThingType($event)"
+          >
+            <option value="" disabled selected hidden>Tipo de busca</option>
+            <option *ngFor="let type of typeOptions" [value]="type.name">
+              {{ type.value }}
+            </option>
+          </select>
+        </div>
+
+        <div *ngIf="selectedType === 'Name'" class="th-autocomplete-container">
+          <form class="th-input-container" [formGroup]="thingsFormGroup">
+            <input
+              #name
+              class="search-input"
+              type="text"
+              [placeholder]="placeholder"
+              formControlName="byName"
+              (clickOutside)="toggleDropDown()"
+              (click)="toggleDropDown(true)"
+            />
+            <i
+              class="mdi mdi-magnify"
+              style="margin-right: 4px"
+              id="search-btn"
+              (click)="searchByName(name.value)"
+            >
+            </i>
+            <i id="clear-btn" (click)="onClearFilter()">
+              <img src="../../../../assets/icons/clearFilter.svg" />
+            </i>
+          </form>
+        </div>
+
+        <form
+          class="th-input-container"
+          *ngIf="selectedType === 'CPF'"
+          [formGroup]="thingsFormGroup.controls.byDocument"
+        >
+          <input
+            class="search-input"
+            mask="000.000.000-00"
+            formControlName="document"
+            [placeholder]="placeholder"
+          />
+          <i
+            style="margin-right: 4px"
+            class="mdi mdi-magnify"
+            id="search-btn"
+            (click)="
+              onChangeDocument(
+                thingsFormGroup.controls.byDocument.get('document').value
+              )
+            "
+          ></i>
+          <i id="clear-btn" (click)="onClearFilter()">
+            <img src="../../../../assets/icons/clearFilter.svg" />
+          </i>
+        </form>
+
+        <form
+          [formGroup]="thingsFormGroup.controls.byDocument"
+          class="th-input-container"
+          *ngIf="
+            selectedType === 'IAMID' ||
+            selectedType === 'MDMID_Contractor' ||
+            selectedType === 'MDMID_Employee' ||
+            selectedType === 'PASSPORT'
+          "
+        >
+          <input
+            class="search-input"
+            [placeholder]="placeholder"
+            [disabled]="isEdit"
+            formControlName="document"
+          />
+
+          <i
+            style="margin-right: 4px"
+            class="mdi mdi-magnify"
+            id="search-btn"
+            (click)="
+              onChangeDocument(
+                thingsFormGroup.controls.byDocument.get('document').value
+              )
+            "
+          ></i>
+          <i id="clear-btn" (click)="onClearFilter()">
+            <img src="../../../../assets/icons/clearFilter.svg" />
+          </i>
+        </form>
+
+        <div class="create-button">
+          <app-action-button
+            [ngClass]="['blue', 'large']"
+            [labelClass]="'blue-label'"
+            [routerLink]="['./create']"
+            >{{ 'THING_LIST.CREATE_BUTTON' | translate }}</app-action-button
+          >
+        </div>
+      </div>
+
+      <ng-container>
+        <div *ngIf="allThings && !error">
+          <div class="things-home-content-list" [hidden]="showSpinner">
+            <app-thing-list
+              [currentPage]="(paginator$ | async)?.currentPage"
+              [things]="things$ | async"
+              [totalCount]="totalCount$ | async"
+              (paginate)="onPaginate($event)"
+              [filterOn]="filterOn"
+            >
+            </app-thing-list>
+          </div>
+
+          <div class="things-home-spinner-content" [hidden]="!showSpinner">
+            <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>
+
+<ng-template #loading>
+  <div class="things-home-spinner-content">
+    <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="home-content">
+    <div class="blank-state title-details">
+      <span>Teste</span>
+    </div>
+  </div>
+</ng-template>

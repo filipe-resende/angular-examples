@@ -1,0 +1,46 @@
+<div class="container-pagination">
+  <pagination-template [id]="id" #p="paginationApi" maxSize="15">
+    <ul class="pagination">
+      <li class="page-item first-item">
+        <a
+          *ngIf="currentPage > 1"
+          (click)="setPage(currentPage - 1)"
+          translate
+          class="page-link"
+          id="pagination"
+        >
+          HOME.PREVIOUS_PAGE
+        </a>
+      </li>
+
+      <li
+        *ngFor="let page of p.pages"
+        [ngClass]="{ active: currentPage === page.value }"
+        class="page-item number-item"
+      >
+        <a (click)="setPage(page.value)" class="page-link" *ngIf="page">{{
+          page.label
+        }}</a>
+        <!-- <a
+            (click)="p.setCurrent(page.value)"
+            *ngIf="p.getCurrent() !== page.value">
+            <span class="page-link">{{ page.label }}</span>
+          </a>
+          <div *ngIf="p.getCurrent() === page.value">
+            <span class="page-link">{{ page.label }}</span>
+          </div> -->
+      </li>
+
+      <li class="page-item last-item">
+        <a
+          *ngIf="!p.isLastPage()"
+          (click)="setPage(currentPage + 1)"
+          translate
+          class="page-link"
+          id="pagination"
+          >HOME.NEXT_PAGE
+        </a>
+      </li>
+    </ul>
+  </pagination-template>
+</div>

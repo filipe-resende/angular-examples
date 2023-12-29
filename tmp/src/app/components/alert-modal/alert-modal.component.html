@@ -1,0 +1,31 @@
+<div class="modal-container">
+  <div class="modal-dialog" [ngClass]="ngClass">
+    <div class="modal-content modal-wrapper">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button
+          type="button"
+          class="close"
+          aria-label="Close"
+          (click)="onClose()"
+        >
+          <i aria-hidden="true" class="mdi mdi-close-circle-outline"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="result">
+          <i
+            *ngIf="!success"
+            class="icon-error mdi mdi-close-circle-outline"
+          ></i>
+          <i
+            *ngIf="success"
+            class="icon-sucess mdi mdi-checkbox-marked-circle-outline"
+          ></i>
+          <p class="message-sucess">{{ title }}</p>
+          <p class="message-sucess">{{ subtitle }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

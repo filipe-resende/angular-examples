@@ -1,0 +1,103 @@
+<div class="input-container">
+  <label
+    class="app-input-label"
+    *ngIf="!!label"
+    [ngClass]="{ error: error, flat: flat }"
+  >
+    {{ label | translate }} {{ error ? '*' : '' }}
+  </label>
+
+  <ng-template [ngIf]="matDatepicker && form">
+    <div [formGroup]="form">
+      <input
+        class="app-input"
+        [type]="type"
+        [disabled]="disabled"
+        [autofocus]="autoFocus"
+        [(ngModel)]="inputModel"
+        [formControlName]="controlName"
+        [matDatepicker]="matDatepicker"
+        [placeholder]="placeholder | translate"
+        (ngModelChange)="inputModelChange.emit(inputModel)"
+        [ngClass]="{ error: error, flat: flat, disabled: disabled }"
+        [ngStyle]="{
+          'padding-left': !!icon && iconOnLeft ? '36px' : '12px',
+          'padding-right': !!icon && !iconOnLeft ? '36px' : '12px'
+        }"
+      />
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="matDatepicker && !form">
+    <input
+      class="app-input"
+      [type]="type"
+      [autofocus]="autoFocus"
+      [(ngModel)]="inputModel"
+      [disabled]="disabled"
+      [matDatepicker]="matDatepicker"
+      [placeholder]="placeholder | translate"
+      (ngModelChange)="inputModelChange.emit(inputModel)"
+      [ngClass]="{ error: error, flat: flat, disabled: disabled }"
+      [ngStyle]="{
+        'padding-left': !!icon && iconOnLeft ? '36px' : '12px',
+        'padding-right': !!icon && !iconOnLeft ? '36px' : '12px'
+      }"
+    />
+  </ng-template>
+
+  <ng-template [ngIf]="!matDatepicker && form">
+    <div [formGroup]="form" class="input-wrapper">
+      <input
+        class="app-input"
+        [type]="type"
+        [autofocus]="autoFocus"
+        [(ngModel)]="inputModel"
+        [disabled]="disabled"
+        [formControlName]="controlName"
+        [placeholder]="placeholder | translate"
+        (ngModelChange)="inputModelChange.emit(inputModel)"
+        [ngClass]="{ error: error, flat: flat, disabled: disabled }"
+        [ngStyle]="{
+          'padding-left': !!icon && iconOnLeft ? '36px' : '12px',
+          'padding-right': !!icon && !iconOnLeft ? '36px' : '12px'
+        }"
+        [mask]="customMask"
+      />
+      <p *ngIf="error" class="error-message">{{ errorMessage }}</p>
+    </div>
+  </ng-template>
+
+  <ng-template [ngIf]="!matDatepicker && !form">
+    <input
+      class="app-input"
+      [type]="type"
+      [autofocus]="autoFocus"
+      [disabled]="disabled"
+      [(ngModel)]="inputModel"
+      [placeholder]="placeholder | translate"
+      (ngModelChange)="inputModelChange.emit(inputModel)"
+      [ngClass]="{ error: error, flat: flat, disabled: disabled }"
+      [ngStyle]="{
+        'padding-left': !!icon && iconOnLeft ? '36px' : '12px',
+        'padding-right': !!icon && !iconOnLeft ? '36px' : '12px'
+      }"
+      [maxlength]="maxlength"
+      [mask]="customMask"
+    />
+  </ng-template>
+
+  <mat-icon
+    class="input-icon"
+    *ngIf="!!icon"
+    [ngStyle]="{
+      left: !!icon && iconOnLeft ? (flat ? '15px' : '8px') : null,
+      right: !!icon && !iconOnLeft ? (flat ? '21px' : '15px') : null,
+      cursor: iconCursorPointer ? 'pointer' : 'default'
+    }"
+    [ngClass]="{ error: error, flat: flat }"
+    (click)="onIconClickEmitter()"
+  >
+    {{ icon }}
+  </mat-icon>
+</div>

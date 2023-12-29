@@ -1,0 +1,46 @@
+@import '../../scss/vale.variables';
+
+.list-unstyled {
+  display: flex;
+}
+
+.menu {
+  padding: 0px 10px;
+  cursor: pointer;
+  height: 100%;
+  line-height: 22px;
+  font-size: 14px;
+  color: #909193;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+
+  a.options {
+    color: #909193;
+  }
+
+  li {
+    .tabs {
+      padding: 0 10px;
+      cursor: pointer;
+      line-height: 22px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      margin-top: 12px;
+      font-family: Roboto-Regular;
+      user-select: none;
+    }
+
+    a {
+      &.selected {
+        color: #252727 !important;
+        font-weight: bold;
+      }
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+}

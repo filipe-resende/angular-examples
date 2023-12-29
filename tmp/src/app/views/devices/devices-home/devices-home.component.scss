@@ -1,0 +1,139 @@
+@import '../../../scss/vale.variables';
+
+.breadCrumbs {
+  margin: 0px;
+  padding-top: 10px;
+  padding-left: 59px;
+  font-family: $font-body1;
+  font-size: 12px;
+  color: #909193;
+}
+
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.breadCrumbs > span {
+  color: #252727;
+}
+
+.dh-container {
+  font-family: $font-body1;
+  background-color: #f8f8f6;
+  padding-top: 38px;
+  padding-right: 59px;
+  padding-left: 59px;
+  min-height: 100%;
+}
+
+.dh-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dh-search-menu {
+  margin-top: 24px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dh-search-menu > .dh-search-menu-select {
+  display: flex;
+  gap: 8px;
+}
+
+.dh-action-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dh-action-buttons {
+  margin: 24px 0 32px 0;
+  display: flex;
+  align-items: center;
+}
+
+.dh-action-search-field {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-button {
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  right: 3px;
+  top: 5px;
+}
+
+.total-devices {
+  color: #909193;
+  font-size: 18px;
+  position: fixed;
+  display: flex;
+  margin-left: 28rem;
+  align-self: center;
+}
+
+.dh-content-list {
+  padding: 0;
+}
+
+.dh-search-input-device {
+  width: 165px;
+  height: 41.5px;
+  padding: 10px;
+  padding-right: 0px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 24px;
+  font-family: $font-body1;
+  color: $dark;
+  border: 1px solid $greyVale20;
+  border-radius: 2px;
+
+  &:focus {
+    outline: 1px solid $greyVale20;
+  }
+}
+
+.dh-spinner-content {
+  position: absolute;
+  left: 50%;
+  top: 50vh;
+}
+
+.button-icon {
+  width: 11px;
+}
+
+.header-buttons-container *:not(:last-child) {
+  margin-right: 16px;
+}
+
+.header-buttons-container {
+  display: flex;
+}
+
+.dh-box {
+  background-color: #fff;
+  border: 1px solid #e3e4e4;
+  padding: 16px;
+
+  &-divider {
+    border-top: 3px solid #bbb;
+  }
+}
+
+.device-history {
+  margin-top: 30px;
+  mat-tab-group {
+    border: 1px solid #e3e4e4;
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,22 @@
+<app-application-item
+  *ngFor="
+    let application of applications
+      | paginate
+        : {
+            id: 'application_pagination',
+            itemsPerPage: 10,
+            currentPage: currentPage,
+            totalItems: totalCount
+          }
+  "
+  [applicationInfo]="application"
+>
+</app-application-item>
+
+<app-custom-pagination
+  *ngIf="totalCount && applications.length > 1"
+  [id]="'application_pagination'"
+  [maxSize]="10"
+  [currentPage]="currentPage"
+  (pageChange)="changePage($event)"
+></app-custom-pagination>

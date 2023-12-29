@@ -1,0 +1,52 @@
+<div class="history-content">
+  <div class="history-label-row">
+    <div class="history-content-row">
+      <span class="history-content-label">{{
+        'DEVICE_UPDATE.DEVICE_HISTORY.NAME' | translate
+      }}</span>
+    </div>
+    <div class="history-content-row">
+      <span class="history-content-label">{{
+        'DEVICE_UPDATE.DEVICE_HISTORY.ASSOCIATION' | translate
+      }}</span>
+    </div>
+    <div class="history-content-row">
+      <span class="history-content-label">{{
+        'DEVICE_UPDATE.DEVICE_HISTORY.DESASSOCIATION' | translate
+      }}</span>
+    </div>
+  </div>
+
+  <div>
+    <div
+      class="history-data"
+      *ngFor="let item of historyData"
+      [ngClass]="
+        item.disassociationDate === null ? 'noDisasociate' : 'hasAssociation'
+      "
+    >
+      <div class="history-content-row">
+        <div class="history-content-value">
+          {{ item?.thing?.name }}
+        </div>
+      </div>
+      <div class="history-content-row">
+        <div class="history-content-value">
+          {{ item?.associationDate | dateFormat }}
+        </div>
+      </div>
+      <div class="history-content-row">
+        <app-disassociate-button
+          *ngIf="!item.disassociationDate; else disassociated"
+          [isAllAssociated]="disassociationData"
+          (emitDisassociation)="refreshEventHandler($event)"
+          [isDisabled]="!doesApplicationAllowAssociation"
+        ></app-disassociate-button>
+
+        <ng-template class="history-content-value" #disassociated>
+          {{ item.disassociationDate | dateFormat }}
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

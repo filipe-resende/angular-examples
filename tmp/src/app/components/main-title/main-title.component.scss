@@ -1,0 +1,13 @@
+@import '../../scss/vale.variables';
+
+.list-title {
+  font-family: $font-body1;
+  font-size: 24px;
+  color: $dark;
+  padding: 24px 0px 22px 0px;
+  display: inline-block;
+}
+
+.no-padding {
+  padding: 0 !important;
+}

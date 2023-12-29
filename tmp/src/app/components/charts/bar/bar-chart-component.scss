@@ -1,0 +1,60 @@
+@import '../../../scss/vale.variables';
+.chart-legend {
+  display: flex;
+  justify-content: right;
+
+  .item-legend {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+
+    .circle-item {
+      margin-right: 7px;
+
+      .circle {
+        height: 14px;
+        width: 14px;
+        border-radius: 50%;
+        display: inline-block;
+      }
+    }
+
+    .item-label {
+      font-family: $font-body1;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 14px;
+      color: #acadae;
+    }
+  }
+}
+
+.label-date {
+  padding-left: 15.5px;
+
+  .label-text {
+    font-family: $font-body1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #acadae;
+  }
+}
+
+.canvas {
+  margin-top: 10px;
+  height: 190px !important;
+}
+
+.no-content {
+  text-align: center;
+  padding: 90px 0;
+
+  span {
+    font-family: $font-body1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,74 @@
+@import '../../../../../scss/vale.variables';
+.form-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.device-form {
+  &-container {
+    padding: 0px 24px;
+  }
+
+  &-group {
+    & label,
+    & input,
+    & select {
+      font-family: $font-body1;
+      font-size: 16px;
+      letter-spacing: 0.25px;
+      line-height: 24px;
+    }
+
+    & label {
+      line-height: 24px;
+      letter-spacing: 0.25px;
+
+      display: block;
+      margin: 16px 0 8px 0;
+    }
+
+    & input {
+      height: 40px;
+      width: 360px;
+      border-radius: 3px;
+      border: 1px solid $greyVale20;
+      padding: 0px 8px;
+    }
+
+    & span {
+      display: inline-block;
+      height: 40px;
+      width: 542px;
+      border-radius: 3px;
+      border: 1px solid $greyVale20;
+      padding: 8px 8px;
+      color: $greyVale80;
+      background-color: $greyVale10;
+    }
+
+    & select {
+      height: 36px;
+      width: 360px;
+      border: 1px solid $greyVale20;
+      padding: 0px 8px;
+      background-color: $white;
+    }
+    & select option {
+      display: flex;
+      align-items: center;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      line-height: 24px;
+      font-size: 16px;
+    }
+
+    & input:disabled,
+    & select:disabled {
+      color: $greyVale80;
+      background-color: $greyVale10;
+    }
+  }
+
+  &-submit-button {
+    margin-top: 24px;
+  }
+}

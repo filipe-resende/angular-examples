@@ -1,0 +1,143 @@
+<div class="grid-export">
+  <div class="export-title">
+    <p class="export-description">
+      {{ 'DASHBOARD.EXPORT_MODAL.EXPORT_LIST' | translate }} |
+      <span>{{ typeDeviceName }}</span>
+    </p>
+    <img
+      class="export-close"
+      src="../../../assets/Close.svg"
+      alt=""
+      (click)="closeModal()"
+    />
+  </div>
+  <div class="export-checkbox">
+    <mat-checkbox
+      class="checkbox"
+      [disabled]="disableAllSelectButton"
+      [(ngModel)]="allSelected"
+      [indeterminate]="indeterminate"
+      (ngModelChange)="selectAll()"
+    >
+      {{ 'DASHBOARD.EXPORT_MODAL.SELECT_ALL' | translate }}
+    </mat-checkbox>
+
+    <mat-checkbox
+      class="checkbox"
+      *ngFor="let checkbox of checkboxes"
+      [(ngModel)]="checkbox.checked"
+      (ngModelChange)="updateAllSelected()"
+      [disabled]="!checkbox.canExport"
+    >
+      {{ checkbox.label }}
+    </mat-checkbox>
+  </div>
+
+  <div class="export-warning">
+    <img
+      src="../../../../../assets/alert_outline.svg"
+      alt=""
+      style="width: 20px; margin-right: 10px"
+    />
+    <div class="warning-text">
+      <span class="text-bold">
+        {{
+          'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.EXPORT_WITH_FILTERS' | translate
+        }}
+      </span>
+      <span>
+        {{ 'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.MAKE_A_NEW_QUERY' | translate }}
+      </span>
+    </div>
+  </div>
+
+  <div class="export-filter">
+    <div class="field-info" *ngIf="chartsFilterExportation.sapPlantName">
+      <hr class="line" />
+      <div class="selected-text-info">
+        <span class="label">
+          {{ 'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.SITE_SAP' | translate }}:
+        </span>
+        <span class="field">{{ chartsFilterExportation.sapPlantName }}</span>
+      </div>
+    </div>
+
+    <div class="field-info" *ngIf="chartsFilterExportation.managerDeviceName">
+      <hr class="line" />
+      <div class="selected-text-info">
+        <span class="label">
+          {{
+            'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.DEVICE_MANAGER' | translate
+          }}:
+        </span>
+        <span class="field">{{
+          chartsFilterExportation.managerDeviceName
+        }}</span>
+      </div>
+    </div>
+
+    <div class="field-info" *ngIf="chartsFilterExportation.periodSelectedName">
+      <hr class="line" />
+      <div class="selected-text-info">
+        <span class="label">
+          {{ 'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.PERIOD' | translate }}:
+        </span>
+        <span class="field">{{
+          chartsFilterExportation.periodSelectedName
+        }}</span>
+      </div>
+    </div>
+
+    <div
+      class="field-info"
+      *ngIf="chartsFilterExportation.associationStatusName"
+    >
+      <hr class="line" />
+      <div class="selected-text-info">
+        <span class="label">
+          {{
+            'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.ASSOCIATION_STATUS'
+              | translate
+          }}:
+        </span>
+        <span class="field">{{
+          chartsFilterExportation.associationStatusName
+        }}</span>
+      </div>
+    </div>
+
+    <div class="field-info" *ngIf="chartsFilterExportation.deviceStatusName">
+      <hr class="line" />
+      <div class="selected-text-info">
+        <span class="label">
+          {{ 'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.DEVICE_STATUS' | translate }}:
+        </span>
+        <span class="field">{{
+          chartsFilterExportation.deviceStatusName
+        }}</span>
+      </div>
+    </div>
+
+    <div class="field-info" *ngIf="chartsFilterExportation.companyName">
+      <hr class="line" />
+      <div class="selected-text-info">
+        <span class="label">
+          {{
+            'DASHBOARD.EXPORT_MODAL.WARNING_TEXT.EMPLOYEE_COMPANY' | translate
+          }}:
+        </span>
+        <span class="field">{{ chartsFilterExportation.companyName }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-export">
+    <button
+      class="button-start"
+      (click)="ExportList()"
+      [disabled]="disableButton"
+    >
+      {{ 'DASHBOARD.EXPORT_MODAL.BUTTON' | translate }}
+    </button>
+  </div>
+</div>

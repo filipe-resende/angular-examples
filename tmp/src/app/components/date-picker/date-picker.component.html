@@ -1,0 +1,31 @@
+<div class="date-picker-container">
+  <div class="date-picker">
+    <input
+      type="text"
+      bsDatepicker
+      (bsValueChange)="onSelectDay($event)"
+      [value]="model"
+      [bsConfig]="datePickerConfig"
+    />
+    <div class="time-dropdown" (clickOutside)="showDropDown = false">
+      <span class="default-hour" (click)="showDropDown = !showDropDown">{{
+        dayHours[hourCounter] + 'h'
+      }}</span>
+
+      <div class="hour-button-controller">
+        <i class="mdi mdi-chevron-up" (click)="increaseHour()"></i>
+        <i class="mdi mdi-chevron-down" (click)="decreaseHour()"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="dropdown-container">
+    <div *ngIf="showDropDown" [ngClass]="{ 'dropdown-content': showDropDown }">
+      <div *ngFor="let hour of dayHours; let i = index" class="dropdown-option">
+        <span class="dropdown-option--hour" (click)="onSelectHour(hour, i)">{{
+          hour + 'h'
+        }}</span>
+      </div>
+    </div>
+  </div>
+</div>

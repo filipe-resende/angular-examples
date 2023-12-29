@@ -1,0 +1,147 @@
+@import 'src/scss/_mixins.scss';
+
+.displacement-page-container {
+  display: flex;
+  flex-direction: column;
+  padding: 42px 56px;
+}
+
+.displacement-page-header {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.displacement-page-card-header-filters {
+  display: flex;
+  align-items: flex-end;
+  margin-left: 32px;
+}
+
+.displacement-page-card-header-exporter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.displacement-page-card-container {
+  padding-top: 0.95rem;
+  margin-bottom: 42px;
+}
+
+.card-header {
+  align-items: flex-start;
+  margin-bottom: 24px;
+
+  .header-filters {
+    display: grid;
+    align-items: center;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(2, 1fr);
+    margin: -16px 32px 0 -16px;
+
+    > * {
+      margin: 16px 0 0 16px;
+    }
+
+    .filters__date-dash {
+      color: #acadae;
+      font-size: 24px;
+      line-height: 26px;
+    }
+
+    .filters__line {
+      @include default-input;
+      flex: 1 0 160px;
+    }
+
+    .filters__direction {
+      width: 12em;
+    }
+
+    .filters__plate {
+      @include default-input;
+      flex: 1 0 200px;
+    }
+
+    .license_plate__info {
+      font-size: 20px;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+    }
+  }
+
+  .filters {
+    display: flex;
+    grid-gap: 10px;
+    align-items: center;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    > .actions__button {
+      margin-right: 8px;
+
+      .button__icon {
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+    }
+
+    .buttons__info {
+      cursor: default;
+      width: 16px;
+      height: 16px;
+      font-size: 20px;
+    }
+  }
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.displacement-page-table-container {
+  height: calc(100% - 60px);
+  width: 100%;
+  z-index: 10;
+  background-color: #ffffff;
+  overflow-x: scroll;
+}
+
+.table-displacements {
+  width: 140%;
+}
+
+.displacement-page-table-icons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 28px;
+  margin-right: 16px;
+  cursor: pointer;
+}
+
+.displacement-table-trip-code {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (min-width: 1500px) {
+  .displacement-table-trip-code {
+    max-width: 100%;
+  }
+}
+
+.map-column {
+  position: relative;
+}

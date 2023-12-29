@@ -1,0 +1,29 @@
+<div class="replace-file-container">
+  <div class="replace-title">
+    <img
+      src="../../../../../assets/alert_outline.svg"
+      alt=""
+      width="43"
+      height="43"
+    />
+    <div>
+      <p class="replace-title-question">
+        {{ 'BATCH_LOAD_REPLACE.QUESTION' | translate }}
+      </p>
+      <p>{{ 'BATCH_LOAD_REPLACE.PORTAL_NAME' | translate }}</p>
+    </div>
+  </div>
+
+  <div class="replace-description">
+    {{ 'BATCH_LOAD_REPLACE.DESCRIPTION' | translate }}
+  </div>
+
+  <div class="replace-button">
+    <button class="button-cancel" (click)="closeModal()">
+      {{ 'BATCH_LOAD_REPLACE.BUTTON_CANCEL' | translate }}
+    </button>
+    <button class="button-replace" (click)="addFile()">
+      {{ 'BATCH_LOAD_REPLACE.BUTTON_REPLACE' | translate }}
+    </button>
+  </div>
+</div>

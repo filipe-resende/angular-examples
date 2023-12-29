@@ -1,0 +1,46 @@
+@import '../../scss/vale.variables.scss';
+
+.alert {
+  background-color: $greyVale;
+  color: $white;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  min-width: 300px;
+  cursor: default;
+
+  &-container {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    display: inline-block;
+  }
+
+  &-icon {
+    // font-size: 16px;
+    // height: 16px;
+    // width: 16px;
+    margin-right: 8px;
+    float: left;
+  }
+
+  &-text {
+    word-wrap: break-word;
+    font-size: 14px;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    float: left;
+  }
+
+  &-close {
+    // right: -0.3em;
+    // top: -0.3em;
+    float: right;
+    // font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    -webkit-text-shadow: 0 1px 0 #ffffff;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 0.8;
+    float: right;
+  }
+}

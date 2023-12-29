@@ -1,0 +1,17 @@
+@import '../../../../../scss/vale.variables';
+
+.da-container {
+  display: flex;
+
+  & label {
+    color: $greyVale;
+    font-size: 0.8rem;
+  }
+
+  & span {
+    color: $greyVale;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding-right: 1rem;
+  }
+}

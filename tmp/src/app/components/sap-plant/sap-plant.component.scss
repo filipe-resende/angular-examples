@@ -1,0 +1,72 @@
+@import '../../scss/styles.scss';
+
+div,
+p {
+  margin: 0px;
+  padding: 0px;
+}
+
+.input-title {
+  font-family: $font-body1;
+  font-size: 14px;
+  color: #252727;
+  letter-spacing: 0.25px;
+  margin-bottom: 8px;
+}
+
+.input-title-invalid {
+  font-family: $font-body1-medium;
+  font-size: 14px;
+  color: #bb133e;
+  letter-spacing: 0.25px;
+  margin-bottom: 8px;
+}
+
+.input {
+  font-size: 1rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #919195;
+  background: #fbfbfb;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+
+  &:focus,
+  &:active {
+    border-color: #e3e4e4;
+    outline: none;
+    background-color: #fff;
+    color: #000000;
+  }
+}
+
+.input-invalid {
+  font-size: 1rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #919195;
+  background: #fbfbfb;
+  border: 1px solid #bb133e;
+  border-radius: 4px;
+}
+
+.input-size-small {
+  width: 150px;
+  height: 36px;
+}
+
+.mat-option .mat-icon {
+  color: #69be28;
+}
+
+.mat-autocomplete-panel {
+  min-width: 430px;
+}
+
+.mat-option {
+  padding: 0 10px;
+  font-size: 14px;
+  line-height: 29px;
+  color: #909193;
+  user-select: none;
+}

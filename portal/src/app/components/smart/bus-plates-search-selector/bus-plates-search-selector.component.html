@@ -1,0 +1,40 @@
+<div class="bus-plates-search-selector-container">
+  <mat-button-toggle-group
+    class="button-group"
+    [value]="DefaultSearch"
+    name="fontStyle"
+    aria-label="Font Style"
+    #group="matButtonToggleGroup"
+  >
+    <mat-button-toggle
+      class="button-toggle"
+      value="trips"
+      (change)="searchTypeSelector(true)"
+    >
+      <span>
+        {{ 'DISPLACEMENT.TRIP_SEARCH_BUTTON' | translate }}
+      </span>
+      <mat-icon
+        class="search__disclaimer"
+        [matTooltip]="'DISPLACEMENTS.TRIP_SEARCH_TOOLTIP' | translate"
+      >
+        info_outline
+      </mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle
+      class="button-toggle"
+      value="plates"
+      (change)="searchTypeSelector(false)"
+    >
+      <span>
+        {{ 'DISPLACEMENT.PLATES_SEARCH_BUTTON' | translate }}
+      </span>
+      <mat-icon
+        class="search__disclaimer"
+        [matTooltip]="'DISPLACEMENTS.PLATE_SEARCH_TOOLTIP' | translate"
+      >
+        info_outline
+      </mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>

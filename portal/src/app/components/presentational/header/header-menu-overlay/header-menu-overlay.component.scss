@@ -1,0 +1,18 @@
+.header-popup-menu-container {
+  border: 1px solid #c7c8c9;
+}
+
+.header-popup-menu-item {
+  padding: 8px;
+  padding-right: 38px;
+  color: #909193;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  cursor: pointer;
+  background-color: #f8f8f8;
+
+  &:hover {
+    background-color: #efefef;
+  }
+}

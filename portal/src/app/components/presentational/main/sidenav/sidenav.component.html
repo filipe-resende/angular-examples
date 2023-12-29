@@ -1,0 +1,21 @@
+<div class="sidenav-container default-default" fxLayout="column">
+  <perfect-scrollbar>
+    <div
+      class="sidenav-scrollbar-container"
+      [ngClass]="[theme.aside]"
+      fxLayout="column"
+    >
+      <mat-nav-list fxLayout="column">
+        <!-- <sidenav-item *ngFor="let item of profiles" [item]="item"></sidenav-item>
+                <mat-divider [inset]="false"></mat-divider> -->
+        <sidenav-item *ngFor="let item of items" [item]="item"></sidenav-item>
+      </mat-nav-list>
+    </div>
+  </perfect-scrollbar>
+  <!-- <div class="sidenav-footer" [ngClass]="[theme.aside]" fxLayout="row" fxFlexAligin="center center">
+        <a fxFlex="100" mat-raised-button routerLink="/help">
+            <mat-icon style="font-size: 20px;">help</mat-icon>
+            {{'SIDEBAR.HELP_PAGE_TEXT' | translate}}
+        </a>
+    </div> -->
+</div>

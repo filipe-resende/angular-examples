@@ -1,0 +1,11 @@
+<button
+  class="action-button-outline"
+  [ngClass]="isDisabled ? ngClassDisabled : ngClass"
+  (click)="clickAction()"
+  [type]="type"
+  [disabled]="isDisabled"
+>
+  <span [ngClass]="isDisabled ? labelClassDisabled : labelClass">
+    <ng-content></ng-content>
+  </span>
+</button>

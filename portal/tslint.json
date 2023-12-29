@@ -1,0 +1,104 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "align": {
+      "options": [
+        "parameters",
+        "statements"
+      ]
+    },
+    "arrow-return-shorthand": true,
+    "no-duplicate-variable": true,
+    "deprecation": {
+      "severity": "warning"
+    },
+    "eofline": true,
+    "import-spacing": true,
+    "indent": {
+      "options": [
+        "spaces"
+      ]
+    },
+    "max-line-length": {
+      "options": [200]
+    },
+    "variable-name": {
+      "options": [
+        "ban-keywords",
+        "check-format",
+        "allow-leading-underscore",
+        "allow-pascal-case"
+      ]
+    },
+    "new-parens": true,
+    "no-arg": true,
+    "no-reference-import": true,
+    "trailing-comma": [
+      false,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ],
+    "one-line": false,
+    "no-trailing-whitespace": [true, "ignore-template-strings"],
+    "ordered-imports": false,
+    "max-classes-per-file": false,
+    "interface-name": false,
+    "no-string-literal": false,
+    "object-literal-key-quotes": false,
+    "space-before-function-paren": false,
+    "no-bitwise": true,
+    "member-ordering": false,
+    "semicolon": [true, "always", "ignore-bound-class-methods"],
+    "object-literal-shorthand": false,
+    "object-literal-sort-keys": false,
+    "no-string-throw": false,
+    "no-conditional-assignment": true,
+    "no-console": {
+      "options": ["debug", "info", "time", "timeEnd", "trace"]
+    },
+    "curly": [true, "ignore-same-line"],
+    "no-consecutive-blank-lines": false,
+    "typedef-whitespace": {
+      "options": [
+        {
+          "call-signature": "nospace",
+          "index-signature": "nospace",
+          "parameter": "nospace",
+          "property-declaration": "nospace",
+          "variable-declaration": "nospace"
+        },
+        {
+          "call-signature": "onespace",
+          "index-signature": "onespace",
+          "parameter": "onespace",
+          "property-declaration": "onespace",
+          "variable-declaration": "onespace"
+        }
+      ]
+    },
+    "no-import-side-effect": [
+      true,
+      {
+        "ignore-module": "(core-js/.*|zone\\.js/.*|@angular/localize/init)$"
+      }
+    ],
+    "whitespace": {
+      "options": [
+        "check-branch",
+        "check-decl",
+        "check-operator",
+        "check-separator",
+        "check-type",
+        "check-typecast"
+      ]
+    }
+  },
+  "globals": ["window", "angular", "google"],
+  "jsRules": {
+    "max-line-length": {
+      "options": [200]
+    }
+  }
+}

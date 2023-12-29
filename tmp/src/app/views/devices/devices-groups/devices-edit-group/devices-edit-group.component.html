@@ -1,0 +1,313 @@
+<p class="breadCrumbs">
+  {{ 'BREADCRUMB.HOME' | translate }} > {{ 'BREADCRUMB.DEVICES' | translate }} >
+  {{ 'BREADCRUMB.GROUPS' | translate }} >
+  <span>{{ 'BREADCRUMB.EDIT_GROUP' | translate }}</span>
+</p>
+
+<div class="return-action">
+  <span>
+    <img
+      src="../../../../../assets/chevron_left.svg"
+      class="go-back-icon"
+      alt=""
+      (click)="returnAction()"
+    />
+  </span>
+  <span class="go-back" (click)="returnAction()">
+    {{ 'EDIT_DEVICE_GROUP.BACK' | translate }}
+  </span>
+</div>
+
+<div class="main-device-edit">
+  <div class="editGroup-info">
+    <div class="info-name-count">
+      <h1 class="name-group">
+        <span>{{ groupName }}</span>
+      </h1>
+      <div class="count-info">
+        <p class="count member-count">
+          {{ 'EDIT_DEVICE_GROUP.TOTAL_MEBERS' | translate }}:
+          <span>{{ memberCount }}</span>
+        </p>
+        <p class="count">
+          {{ 'EDIT_DEVICE_GROUP.TOTAL_DEVICES' | translate }}:
+          <span>{{ deviceCount }}</span>
+        </p>
+      </div>
+    </div>
+    <div class="info-devices-export">
+      <button
+        class="button"
+        [disabled]="hasEucOrAdministratorProfile"
+        (click)="editNameButton()"
+      >
+        <mat-icon>edit</mat-icon>
+        <p>{{ 'EDIT_DEVICE_GROUP.EDIT_GROUP_NAME_BUTTON' | translate }}</p>
+      </button>
+      <button
+        class="button"
+        [disabled]="disableExport"
+        (click)="exportButton()"
+      >
+        <img src="../../../../../assets/export1.svg" alt="" />
+        <p>{{ 'EDIT_DEVICE_GROUP.EXPORT' | translate }}</p>
+      </button>
+    </div>
+  </div>
+  <div class="container-edit">
+    <div class="container-add-members">
+      <h3>{{ 'EDIT_DEVICE_GROUP.ADD_MEMBERS' | translate }}</h3>
+      <button
+        class="button"
+        (click)="addMember()"
+        *ngIf="!hasThingSelected"
+        [disabled]="userInfo.role == roles.Euc"
+      >
+        <img src="../../../../../assets/add_24px.svg" alt="" />
+        {{ 'EDIT_DEVICE_GROUP.BUTTON_NEW' | translate }}
+      </button>
+      <div class="member-group-form" *ngIf="hasThingSelected">
+        <form
+          [formGroup]="formMember"
+          class="member-form"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="member-name">
+            <label for="name">
+              {{ 'EDIT_DEVICE_GROUP.NAME' | translate }}</label
+            >
+            <input
+              type="text"
+              class="input-disabled"
+              formControlName="memberName"
+            />
+          </div>
+          <div class="member-email">
+            <label for="name">
+              {{ 'EDIT_DEVICE_GROUP.EMAIL' | translate }}</label
+            >
+            <div class="member-email-field">
+              <input type="text" formControlName="memberEmail" />
+              <span class="email-complement">@vale.com</span>
+            </div>
+          </div>
+          <div class="member-type">
+            <mat-radio-group name="type" formControlName="memberType">
+              <mat-radio-button value="1" clas="radio-button">
+                {{ 'EDIT_DEVICE_GROUP.MEMBER' | translate }}
+              </mat-radio-button>
+              <mat-radio-button value="2" clas="radio-button">
+                {{ 'EDIT_DEVICE_GROUP.FOCAL_POINT' | translate }}
+              </mat-radio-button>
+              <mat-radio-button value="3" clas="radio-button">
+                {{ 'EDIT_DEVICE_GROUP.MANAGER' | translate }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="action-buttons">
+            <button class="clear" type="button" (click)="clearFormFields()">
+              {{ 'EDIT_DEVICE_GROUP.CLEAR' | translate }}
+            </button>
+            <button
+              type="submit"
+              [ngClass]="
+                !formMember.valid || isSaving ? 'disabled-save' : 'save'
+              "
+              [disabled]="!formMember.valid || isSaving"
+            >
+              {{ 'EDIT_DEVICE_GROUP.SAVE' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container-device-search">
+      <h3 class="search-title">
+        {{ 'EDIT_DEVICE_GROUP.SEARCH_DEVICES' | translate }}
+      </h3>
+      <div>
+        <div class="type-device">
+          <p class="type-device-title">
+            {{ 'EDIT_DEVICE_GROUP.TYPE' | translate }}
+          </p>
+          <select
+            class="type-device-select"
+            [(ngModel)]="selectedTypeDevice"
+            (ngModelChange)="clearDeviceNumberField()"
+          >
+            <option
+              *ngFor="let application of applications$ | async"
+              [value]="application.id"
+            >
+              {{ application.name }}
+            </option>
+          </select>
+        </div>
+        <div class="search-number-device">
+          <input
+            class="number-device-input"
+            type="text"
+            [(ngModel)]="inputNumberDevice"
+            placeholder="Pesquisar"
+          />
+          <i
+            style="width: 36px; height: 36px"
+            aria-hidden="true"
+            class="mdi mdi-magnify"
+            id="search-btn"
+            (click)="searchDevice()"
+          ></i>
+        </div>
+        <div class="device-result" *ngIf="hasResultValue">
+          <div class="device-result-title">
+            <span>{{
+              'DEVICES_GROUP.DEVICES_EDIT_GROUP.ASSOCIATED_WITH' | translate
+            }}</span>
+            <hr class="title-line" />
+          </div>
+          <div class="device-association-result">
+            <span
+              *ngIf="!thing && !notFoundDevice"
+              class="device-association-notFound"
+            >
+              {{
+                'DEVICES_GROUP.DEVICES_EDIT_GROUP.NOT_FOUND_THING' | translate
+              }}</span
+            >
+            <span
+              *ngIf="!thing && notFoundDevice"
+              class="device-association-notFound"
+            >
+              {{ notFoundDevice | translate }}</span
+            >
+            <div class="device-associated-thing" *ngIf="thing">
+              <div class="associated-thing-data">
+                <span class="associated-thing-name">{{ thing.name }}</span>
+                <div
+                  class="associated-thing-source-infos"
+                  *ngFor="let document of thing.sourceInfos"
+                >
+                  <div
+                    *ngIf="
+                      document.type !== mdmDocument.Contractor &&
+                      document.type !== mdmDocument.Employee
+                    "
+                  >
+                    <span class="source-info-type">{{ document.type }}:</span>
+                    <span
+                      class="source-info-value"
+                      *ngIf="document.type === documentType.CPF"
+                      >{{ document.value | cpf }}</span
+                    >
+                    <span
+                      class="source-info-value"
+                      *ngIf="document.type !== documentType.CPF"
+                      >{{ document.value }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isLoading" class="device-no-result-spinner">
+          <mat-spinner diameter="40"></mat-spinner>
+        </div>
+      </div>
+    </div>
+    <div class="container-info-members">
+      <h3 class="container-info-members-title">
+        {{ 'EDIT_DEVICE_GROUP.MEMBERS' | translate }}
+      </h3>
+      <div class="devices-groups-table">
+        <table
+          aria-hidden="true"
+          mat-table
+          [dataSource]="dataMembers"
+          matSort
+          (matSortChange)="announceSortChange($event)"
+          class="mat-elevation-z8"
+        >
+          <ng-container matColumnDef="Delete">
+            <th mat-header-cell *matHeaderCellDef id="Delete"></th>
+            <td mat-cell *matCellDef="let element">
+              <button
+                class="remove-member-button"
+                (click)="removeMember(element)"
+                *ngIf="userInfo.role != roles.Euc"
+              >
+                <img src="../../../../../assets/fa-trash-o.svg" alt="" />
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="memberType">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by memberType"
+              id="memberType"
+            >
+              <span class="MemberType">{{
+                'EDIT_DEVICE_GROUP.TYPE' | translate
+              }}</span>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <span>
+                {{ determineMemberType(element.memberType) }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by name"
+              id="name"
+            >
+              <span class="Name">{{
+                'EDIT_DEVICE_GROUP.NAME' | translate
+              }}</span>
+            </th>
+            <td mat-cell *matCellDef="let element" class="td-thing-name">
+              <span>
+                {{ element.name }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="email">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              mat-sort-header
+              sortActionDescription="Sort by email"
+              id="email"
+            >
+              <span class="Email">{{
+                'EDIT_DEVICE_GROUP.EMAIL' | translate
+              }}</span>
+            </th>
+            <td mat-cell *matCellDef="let element">
+              <span>
+                {{ element.email }}
+              </span>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="isSaving" class="spinner-container"></div>
+<div *ngIf="isSaving" class="card">
+  <div class="spinner">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</div>

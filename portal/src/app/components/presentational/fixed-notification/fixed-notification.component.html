@@ -1,0 +1,4 @@
+<!-- <section *ngIf="visible" class="fixed-notification-container">{{ message }}</section> -->
+<div class="fixed-notification-container" *ngIf="visible" [matTooltip]="message">
+  <img src="assets/icons/priority.svg" />
+</div>

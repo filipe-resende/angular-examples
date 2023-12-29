@@ -1,0 +1,28 @@
+<section class="panic-alert-confirm-truthy-update-overlay-container">
+  <div class="panic-alert-confirm-truthy-update-overlay-close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </div>
+  <div class="panic-alert-confirm-truthy-update-overlay-subtitle">
+    {{ "PANIC_BUTTON.ARE_YOU_SURE_TO_SET_AS_TRUE" | translate }}?
+  </div>
+</section>
+<div class="panic-alert-confirm-truthy-update-overlay-buttons-container">
+  <app-button
+    [large]="true"
+    [strech]="true"
+    [primary]="false"
+    [customClass]="'panic-alert-confirm-truthy-update-overlay-cancel-button'"
+    (onClick)="close()"
+  >
+    {{ "MAIN.CANCEL" | translate }}
+  </app-button>
+  <app-button
+    [large]="true"
+    [strech]="true"
+    [loading]="isSettingAlertAsFalsy"
+    [customClass]="'panic-alert-confirm-truthy-update-overlay-confirm-button'"
+    (onClick)="confirm()"
+  >
+    {{ "MAIN.YES_TEXT" | translate }}
+  </app-button>
+</div>

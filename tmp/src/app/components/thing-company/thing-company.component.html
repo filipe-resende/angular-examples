@@ -1,0 +1,32 @@
+<input
+  matInput
+  #focusCompany
+  (keyup.enter)="resetCompanyField()"
+  (click)="filterCompanies()"
+  (input)="filterCompanies()"
+  (change)="onFocusLostCompany()"
+  type="text"
+  [(ngModel)]="company"
+  (change)="resetCompanyField()"
+  placeholder="{{ 'DASHBOARD.FILTER.EMPLOYEE_COMPANY' | translate }}"
+  [matAutocomplete]="COMPANY"
+/>
+<mat-autocomplete autoActiveFirstOption #COMPANY="matAutocomplete">
+  <mat-option
+    *ngFor="let item of filteredCompanyInfoData"
+    (click)="valueCompanyName(item); focusCompany.blur()"
+  >
+    {{ item }}
+  </mat-option>
+
+  <mat-option
+    (click)="company = ''"
+    *ngIf="!filteredCompanyInfoData.length && company"
+  >
+    {{ 'DASHBOARD.FILTER.RESULT_NOT_FOUND' | translate }}
+  </mat-option>
+
+  <mat-option *ngIf="loading">
+    <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
+  </mat-option>
+</mat-autocomplete>

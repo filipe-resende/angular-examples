@@ -1,0 +1,57 @@
+<mat-accordion>
+  <div *ngIf="loading; else loaded">
+    <div
+      class="skeleton"
+      style="height: 36px; margin-bottom: 16px; border-radius: 2px"
+      *ngFor="let skeleton of skeletonArray"
+    ></div>
+  </div>
+  <ng-template #loaded>
+    <div *ngFor="let perimeter of perimetersList">
+      <mat-expansion-panel
+        (click)="onAccordionListItemClick(perimeter)"
+        [expanded]="perimetersList.length == 1"
+        (opened)="perimeter.panelOpenState = true"
+        (closed)="perimeter.panelOpenState = false"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <app-checkbox
+              [checked]="perimeter.checked"
+              (onSelect)="onCheckboxClick($event, perimeter)"
+            ></app-checkbox>
+            <label class="perimeters-accordion-title-name">
+              {{ perimeter.perimeterName }}
+            </label>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div style="padding: 8px 0px">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ "PERIMETERS.NAME" | translate }}</mat-label>
+            <input
+              matInput
+              [placeholder]="'PERIMETERS.NAME' | translate"
+              [(ngModel)]="perimeter.perimeterName"
+              disabled
+            />
+          </mat-form-field>
+        </div>
+        <div class="perimeters-accordion-buttons-wrapper">
+          <app-button (onClick)="onEditButtonClick(perimeter)">
+            {{ "MAIN.EDIT" | translate }}
+          </app-button>
+          <div class="perimeters-accordion-trash-icon-wrapper">
+            <img
+              *ngIf="!perimeter.isFetching"
+              src="assets/icons/trash.svg"
+              (click)="onDeleteButtonClick(perimeter)"
+              alt="trash"
+            />
+            <mat-spinner *ngIf="perimeter.isFetching" diameter="20"></mat-spinner>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </div>
+  </ng-template>
+</mat-accordion>

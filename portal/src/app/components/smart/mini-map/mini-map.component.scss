@@ -1,0 +1,69 @@
+.table-coordinates {
+  display: grid;
+  grid-template-areas: 'link map-icon';
+  grid-template-columns: 50% 10%;
+
+  .coordinates-link {
+    grid-area: link;
+    display: flex;
+    color: #909193;
+    text-decoration: none;
+
+    .lat-lng-label {
+      max-width: 80px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .location-map-button {
+    grid-area: map-icon;
+    padding: 0px;
+    border: none;
+    background-color: white;
+
+    .location-map-icon {
+      position: relative;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      color: var(--color-v-blue);
+    }
+  }
+}
+
+.map {
+  width: 400px;
+  height: 280px;
+  position: absolute;
+  margin-left: 50px;
+  z-index: 100;
+  display: grid;
+  grid-template-areas: 'close map';
+  column-gap: 8px;
+  grid-template-columns: 5% 95%;
+  background-color: white;
+  box-shadow: 8px 5px 5px 5px gray;
+  border-radius: 8px;
+
+  .icons {
+    grid-area: close;
+    font-size: 12px;
+    width: 12px;
+    height: 12px;
+    margin-top: 5px;
+  }
+
+  .map-container {
+    grid-area: map;
+  }
+}
+
+.expanded-map {
+  position: fixed;
+  top: 0px;
+  left: -50px;
+  width: 100%;
+  height: 100%;
+}

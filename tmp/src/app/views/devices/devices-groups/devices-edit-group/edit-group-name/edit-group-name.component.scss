@@ -1,0 +1,189 @@
+@import 'src/app/scss/vale.variables';
+
+.container {
+  width: 491px;
+  height: 280px;
+  padding: 0;
+  font-family: $font-body1;
+}
+
+.title {
+  height: 69px;
+  color: #697489;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  font-family: $font-body1-bold;
+  position: relative;
+}
+
+.name-group {
+  color: #252727;
+  font-family: $font-body1;
+  font-size: 18px;
+}
+
+.body {
+  width: 491px;
+  height: 152px;
+  margin-bottom: 35px;
+}
+
+.body-management {
+  margin-bottom: 20px;
+}
+
+.body-sap-manager {
+  display: grid;
+  grid-template-columns: 150px 260px;
+  gap: 15px;
+}
+
+.input {
+  width: 215px;
+  height: 36px;
+  font-size: 1rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #919195;
+  background: #fbfbfb;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+
+  &:focus,
+  &:active {
+    border-color: #e3e4e4;
+    outline: none;
+    background-color: #fff;
+    color: #000000;
+  }
+}
+
+.input-invalid {
+  font-size: 1rem;
+  line-height: 24px;
+  letter-spacing: 0.5px;
+  color: #919195;
+  background: #fbfbfb;
+  border: 1px solid #bb133e;
+  border-radius: 4px;
+}
+
+.input-title-invalid {
+  font-family: $font-body1-medium;
+  font-size: 14px;
+  color: #bb133e;
+  letter-spacing: 0.25px;
+  margin-bottom: 8px;
+}
+
+.input-title {
+  font-family: $font-body1;
+  font-size: 14px;
+  color: #252727;
+  letter-spacing: 0.25px;
+  margin-bottom: 8px;
+}
+
+.input-title-flex {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.input-size-med-small {
+  width: 150px;
+  height: 36px;
+}
+
+.input-title-flex-email {
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  color: #919195;
+  font-family: $font-body1;
+}
+
+.button {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: stretch;
+  height: 48px;
+  font-size: 14px;
+  width: 539px;
+  margin-left: -24px;
+}
+
+.button-cancel {
+  color: #3d7edb;
+  background: #fbfbfb;
+  border: 1px solid #edeef0;
+  border-radius: 4px;
+  font-family: $font-body1;
+}
+
+.button-execution {
+  color: #fff;
+  background: #3d7edb;
+  border: none;
+  border-radius: 4px;
+  font-family: $font-body1;
+}
+
+.button-execution:disabled {
+  background-color: #c7c8c9;
+  color: #909193;
+}
+
+.close {
+  float: right;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  position: absolute;
+  opacity: 0.5;
+  bottom: 50px;
+  right: -1px;
+}
+
+.spinner {
+  position: relative;
+  top: 40%;
+  text-align: -webkit-center;
+}
+
+.manager-email {
+  position: relative;
+}
+
+.Manager-email-regex {
+  position: absolute;
+  font-family: $font-body1;
+  font-size: 11px;
+  color: #bb133e;
+}
+
+.spinner-container {
+  margin: 0px;
+  padding: 0px;
+  background-color: #252727;
+  opacity: 0.7;
+  position: relative;
+  bottom: 328px;
+  right: 24px;
+  height: 328px;
+  width: 539px;
+}
+.card {
+  background-color: white;
+  width: 100px;
+  opacity: 1;
+  height: 100px;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+.spinner-loading {
+  padding: 0px;
+  margin: 30px auto;
+}

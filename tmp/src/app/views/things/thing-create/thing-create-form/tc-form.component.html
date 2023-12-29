@@ -1,0 +1,118 @@
+<form
+  class="form"
+  #createThings="ngForm"
+  (ngSubmit)="onSubmit($event.stopPropagation())"
+>
+  <div class="tc-form-group">
+    <label class="tc-label tc-block">{{
+      'THING_CREATE.NAME' | translate
+    }}</label>
+    <input
+      class="tc-input"
+      name="name"
+      [(ngModel)]="name"
+      required
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="tc-form-group-relationType">
+    <mat-icon
+      class="info-icon"
+      [matTooltip]="'THING_CREATE.TOOLTIP_TEXT' | translate"
+    >
+      info
+    </mat-icon>
+    <label class="tc-label-relationType tc-block-relationType"
+      >{{ 'THING_CREATE.RELATION_TYPE' | translate }}
+    </label>
+    <input
+      name="type"
+      [(ngModel)]="selectedRelationType"
+      class="tc-input dropdown"
+      [disabled]="true"
+      required
+    />
+  </div>
+
+  <div class="tc-form-group">
+    <label class="tc-label tc-block">{{
+      'THING_CREATE.COMPANY_NAME' | translate
+    }}</label>
+    <input
+      class="tc-input"
+      name="companyName"
+      [(ngModel)]="companyName"
+      autocomplete="off"
+    />
+  </div>
+
+  <div class="tc-form-group">
+    <label class="tc-label tc-block">{{
+      'THING_CREATE.DESCRIPTION' | translate
+    }}</label>
+    <textarea
+      class="tu-textArea"
+      name="description"
+      [(ngModel)]="description"
+      autocomplete="off"
+      [rows]="3"
+    ></textarea>
+  </div>
+
+  <div class="tc-documents-group tc-margin-top-medium">
+    <div class="tc-documents-title">{{ 'THING_CREATE.TYPE' | translate }}</div>
+
+    <mat-radio-group name="this.primaryKey" [(ngModel)]="this.primaryKey">
+      <mat-radio-button value="{{ document.CPF }}">
+        {{ 'THING_CREATE.SOURCE_TYPE_CPF' | translate }}
+        <div class="tc-documents-subInfo">
+          {{ 'THING_CREATE.COMPLEMENTARY_SOURCE_TYPE_CPF' | translate }}
+        </div>
+      </mat-radio-button>
+      <mat-radio-button value="{{ document.PASSPORT }}">
+        {{ 'THING_CREATE.SOURCE_TYPE_PASSPORT' | translate }}
+        <div class="tc-documents-subInfo">
+          {{ 'THING_CREATE.COMPLEMENTARY_SOURCE_TYPE_PASSPORT' | translate }}
+        </div>
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div
+      class="tc-form-group tc-inline-group"
+      *ngIf="this.primaryKey == document.CPF"
+    >
+      <input
+        mask="000.000.000-00"
+        name="sourceValueCPF"
+        [(ngModel)]="sourceValueCPF"
+        class="tc-input"
+        autocomplete="off"
+        required
+      />
+    </div>
+    <div
+      class="tc-form-group tc-inline-group"
+      *ngIf="this.primaryKey == document.PASSPORT"
+    >
+      <input
+        class="tc-input"
+        name="PASSPORT"
+        [(ngModel)]="sourceValuePASSPORT"
+        maxlength="40"
+        autocomplete="off"
+        required
+      />
+    </div>
+  </div>
+
+  <div class="tc-button-group">
+    <app-action-button
+      [ngClass]="['blue', 'small']"
+      [labelClass]="'blue-label'"
+      [disabled]="disabled"
+    >
+      {{ 'THING_CREATE.SAVE_BUTTON' | translate }}
+    </app-action-button>
+  </div>
+</form>

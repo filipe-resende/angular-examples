@@ -1,0 +1,127 @@
+@import '../../../app/scss/vale.variables';
+.myExportListDash .mat-dialog-container {
+  padding: 24px;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-ripple .mat-ripple-element,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: $violetVale !important;
+}
+
+p,
+div {
+  margin: 0px;
+  padding: 0px;
+}
+
+.grid-export {
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr auto;
+}
+
+.export-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  .export-description {
+    font-family: $font-body1-medium;
+    color: #000000;
+    font-size: 24px;
+    line-height: 22px;
+    margin-top: 15px;
+  }
+
+  .export-close {
+    cursor: pointer;
+    padding: 15px;
+  }
+}
+
+.export-checkbox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0px 60px;
+  height: fit-content;
+  padding: 0px 30px;
+
+  .checkbox {
+    font-family: $font-body1;
+    font-size: 14px;
+    line-height: 22px;
+    color: $greyVale80;
+  }
+}
+
+.button-export {
+  place-self: end;
+
+  .button-start {
+    font-family: $font-body1-bold;
+    font-size: 14px;
+    line-height: 22px;
+    text-transform: uppercase;
+    color: $white;
+    text-align: center;
+    padding: 9px 39px;
+    background-color: $violetVale;
+    border: none;
+    border-radius: 2px;
+
+    &:disabled {
+      background-color: $greyVale20;
+      color: $greyVale80;
+    }
+  }
+}
+
+.export-warning {
+  width: 503px;
+  padding: 10px 30px;
+  display: -webkit-inline-box;
+
+  .warning-text {
+    font-family: $font-body1;
+    font-size: 14px;
+    line-height: 22px;
+    color: #909193;
+  }
+
+  .text-bold {
+    font-family: $font-body1-bold;
+  }
+}
+
+.export-filter {
+  margin-bottom: 25px;
+  padding: 0px 30px;
+}
+
+.field-info {
+  font-family: $font-body1;
+  font-size: 14px;
+  line-height: 22px;
+  color: $greyVale80;
+
+  .line {
+    margin: 3px auto;
+  }
+
+  .selected-text-info {
+    display: flex;
+    justify-content: space-between;
+    font-family: $font-body1;
+    padding: 4px;
+
+    .label {
+      width: 40%;
+    }
+
+    .field {
+      font-family: $font-body1-bold;
+      width: 60%;
+    }
+  }
+}

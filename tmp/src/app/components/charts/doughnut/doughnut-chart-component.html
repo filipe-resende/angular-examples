@@ -1,0 +1,37 @@
+<div class="label-date">
+  <span class="label-text">{{yesterday}} - {{selectedApplication}}</span>
+</div>
+
+<div class="charts">
+  <div
+    class="chart"
+    [ngStyle]="{'display': sapPlantData.length ? 'flex' : 'none'}"
+  >
+    <div class="graph">
+      <div class="chart-container">
+        <canvas width="220" height="175" id="MyChart"> {{ chart }} </canvas>
+      </div>
+    </div>
+    <div class="chart-custom-legend">
+      <div class="chart-menu">
+        <div class="chart-menu-items">
+          <div class="chart-menu-item" *ngFor="let item of chartLegend">
+            <div class="circle-item">
+              <span
+                class="circle"
+                [ngStyle]="{'background-color': item.color}"
+              ></span>
+            </div>
+            <div class="label item">
+              <span>{{item.label}}</span>
+              <div class="label total-count"><span>{{item.count}}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="no-content" *ngIf="!sapPlantData.length">
+    <span>{{ 'DASHBOARD.CHARTS.MESSAGES.NOT_FOUND' | translate }}</span>
+  </div>
+</div>

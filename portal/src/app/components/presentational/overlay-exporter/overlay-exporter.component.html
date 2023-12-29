@@ -1,0 +1,59 @@
+<app-animated-overlay *ngIf="hasExported; else hasExportedTemplate">
+  <app-overlay-info [buttonLabel]="'MAIN.CLOSE'" (buttonClick)="close()">
+    <button
+      (click)="close()"
+      class="overlay__close-button"
+      mat-icon-button
+      aria-label="Close modal"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <section class="overlay-exported">
+      <mat-icon class="overlay-exported__icon"> check_circle_outline </mat-icon>
+      <div>
+        <h3 class="overlay-exported__title">
+          {{ textPrefix + '.SOLICITATION_DONE' | translate }}
+        </h3>
+        <p class="overlay-exported__text">
+          {{ textPrefix + '.EXPORT_DONE_MESSAGE' | translate }}
+        </p>
+      </div>
+    </section>
+  </app-overlay-info>
+</app-animated-overlay>
+
+<ng-template #hasExportedTemplate>
+  <app-animated-overlay>
+    <app-overlay-info
+      [buttonLabel]="hasExported ? 'MAIN.CLOSE' : 'MAIN.SEND'"
+      [buttonLoading]="isLoadingExport"
+      (buttonClick)="export()"
+    >
+      <h3 class="overlay-exporter-header">
+        {{ textPrefix + '.RECIPIENTS' | translate }}
+      </h3>
+      <p class="overlay-exporter-subheader">
+        {{ textPrefix + '.AFTER_EXPORT_PROCESS' | translate }}
+      </p>
+      <app-input
+        class="input-export"
+        [icon]="'mail_outline'"
+        [iconOnLeft]="true"
+        [(inputModel)]="userEmail"
+        [disabled]="true"
+      ></app-input>
+      <span class="overlay-exporter-subheader message-confidential">
+        <mat-icon class="overlay-exporter__icon">info</mat-icon>
+        {{ textPrefix + '.CONFIDENTIAL_DATA' | translate }}
+      </span>
+    </app-overlay-info>
+    <button
+      (click)="close()"
+      class="overlay__close-button"
+      mat-icon-button
+      aria-label="Close modal"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </app-animated-overlay>
+</ng-template>

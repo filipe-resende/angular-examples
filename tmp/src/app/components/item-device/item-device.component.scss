@@ -1,0 +1,146 @@
+@import '../../scss/vale.variables';
+
+.card-info {
+  padding-bottom: 20px;
+}
+
+.init-card-item {
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  margin-top: 20px;
+}
+
+.battery-status {
+  margin-bottom: 13px;
+}
+
+.item-list-device {
+  display: flex;
+  margin-bottom: 7px;
+  background-color: #fff;
+  height: 109px;
+  padding: 15px;
+  justify-content: space-between;
+  border: 1px solid #e3e4e4;
+  margin-top: 8px;
+
+  .init-device-item,
+  .end-itemDevice {
+    align-items: center;
+  }
+
+  .init-device-item {
+    width: 41%;
+    margin-top: 8px;
+  }
+
+  .associate-thing {
+    display: flex;
+    flex-direction: column;
+    height: 16px;
+    font-family: $font-body1;
+    color: $greyVale80;
+    font-size: 14px;
+    letter-spacing: 0.53px;
+    line-height: 16px;
+  }
+
+  .end-itemDevice {
+    display: flex;
+    align-self: center;
+    margin-right: 15px;
+    justify-content: flex-end;
+    margin-right: 0px;
+  }
+
+  .image-application {
+    width: 60px;
+    height: 60px;
+    border: 1px solid gray;
+  }
+
+  .application-info {
+    display: flex;
+    padding-top: 0px;
+
+    .application-details {
+      height: 16px;
+      font-family: $font-body1;
+      color: $greyVale80;
+      font-size: 14px;
+      letter-spacing: 0.53px;
+      line-height: 16px;
+
+      .name {
+        height: 16px;
+        color: $dark;
+        font-family: $font-family-regular;
+        font-size: 14px;
+        letter-spacing: 0.6px;
+        line-height: 19px;
+        padding-bottom: 28px;
+      }
+    }
+  }
+
+  .application-name {
+    display: flex;
+    align-self: center;
+    color: #252727;
+    font-family: $font-family-regular;
+    font-size: 14px;
+    letter-spacing: 0.53px;
+    line-height: 17px;
+    justify-content: center;
+  }
+}
+
+.data-device {
+  width: 10rem;
+}
+
+.application-status {
+  color: #909193;
+  font-size: 14px;
+  letter-spacing: 0.53px;
+  line-height: 16px;
+  padding-right: 15px;
+  text-align: right;
+}
+
+.device-status {
+  margin-right: 15px;
+  color: #909193;
+  font-family: $font-body1;
+  font-size: 13px;
+  letter-spacing: 0.53px;
+}
+
+.checkbox {
+  margin-top: 50%;
+  margin-right: 24px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+.update-application {
+  margin-right: 16px;
+}
+
+.centralizado {
+  height: 100%;
+  width: 4% !important;
+}
+
+.information-association {
+  width: 217px;
+  color: $dark;
+  font-family: $font-family-regular;
+  font-size: 12px;
+  letter-spacing: 0.53px;
+}
+
+.document-value {
+  margin-left: 5px;
+}

@@ -1,0 +1,20 @@
+<div class="load-execution-error-container">
+  <div class="error-title">
+    <img
+      class="load-error-icon"
+      src="../../../../../assets/redclose.svg"
+      alt=""
+    />
+  </div>
+
+  <div class="error-description">
+    {{ 'BATCH_LOAD_EXECUTION_ERROR.DESCRIPTION_ONE' | translate }}
+    <p>{{ 'BATCH_LOAD_EXECUTION_ERROR.DESCRIPTION_TWO' | translate }}</p>
+  </div>
+
+  <div class="error-button">
+    <button class="button-close" (click)="closeModal()">
+      {{ 'BATCH_LOAD_EXECUTION_ERROR.BUTTON_CLOSE' | translate }}
+    </button>
+  </div>
+</div>

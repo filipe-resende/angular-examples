@@ -1,0 +1,25 @@
+<div class="close">
+  <img *ngIf="minimized" (click)="minimize()" src="assets/icons/share.svg" />
+  <img
+    *ngIf="!minimized"
+    (click)="minimize()"
+    src="assets/icons/minimizar.svg"
+  />
+</div>
+<div *ngIf="!minimized">
+  <div>
+    <img src="assets/icons/Spot.svg" />
+    <label class="ico">SPOT SLB I+II</label>
+  </div>
+  <div>
+    <img src="assets/icons/SpotSLBIII.svg" />
+    <label class="ico">SPOT SLB III</label>
+  </div>
+  <div>
+    <img src="assets/icons/SpotFloating.svg" />
+    <label class="ico">SPOT Temporário</label>
+  </div>
+</div>
+<div *ngIf="minimized">
+  <label>SPOT</label>
+</div>

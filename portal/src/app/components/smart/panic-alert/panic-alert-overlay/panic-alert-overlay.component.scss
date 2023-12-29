@@ -1,0 +1,205 @@
+.section-with-margin {
+  margin-bottom: 40px;
+}
+.section-without-margin {
+  margin-bottom: 0;
+}
+.panic-alert-background-with-hole {
+  position: relative;
+  margin: auto;
+  margin-top: 0px;
+  width: 564px;
+  height: 450px;
+  background: transparent;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  z-index: -1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    left: 188px;
+    top: -95px;
+    border-radius: 100%;
+    width: 188px;
+    height: 188px;
+    box-shadow: 0px 0px 0px 2000px #ffffff;
+    z-index: -1;
+  }
+}
+
+.panic-alert-overlay-outter-container {
+  position: relative;
+  margin: auto;
+  margin-top: 100px;
+  width: 564px;
+  height: 400px;
+  background: transparent;
+  border-radius: 10px;
+}
+
+.panic-alert-red-circle {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -80px;
+  left: 203px;
+  width: 158px;
+  height: 158px;
+  border-radius: 50%;
+  background: #cc003a;
+}
+
+.panic-alert-overlay-inner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: -346px;
+  // height: 346px;
+  background: white;
+  border-radius: 12px;
+
+  & > section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.panic-alert-overlay-title {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 36px;
+  line-height: 22px;
+  margin: 14px 0 22px 0;
+  color: #cc003a;
+}
+
+.panic-alert-overlay-subtitle {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  width: 424px;
+  margin-bottom: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #000000;
+}
+
+.panic-alert-overlay-counter {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: #cc003a;
+}
+
+.panic-alert-info-item {
+  margin: 4px 0;
+  width: 424px;
+  height: 38px;
+  background: #ffffff;
+  border: 1px solid #e3e4e4;
+  box-sizing: border-box;
+  border-radius: 2px;
+
+  display: flex;
+  align-items: center;
+
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #909193;
+
+  & > mat-icon {
+    margin: 0 12px;
+  }
+
+  & > a {
+    margin-left: auto;
+    margin-right: 8px;
+    color: #909193;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+  }
+
+  & > .line-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &:last-of-type {
+    margin-bottom: 16px;
+  }
+
+  & > .column-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &.bigger-info-item {
+    height: 42;
+  }
+
+  &-company {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    touch-action: none;
+  }
+}
+
+.panic-alert-overlay-buttons-container {
+  display: flex;
+  width: 564px;
+}
+
+.panic-alert-overlay-answer-call-button {
+  font-size: 24px !important;
+  height: 66px !important;
+  width: 282px !important;
+  border-bottom-left-radius: 10px !important;
+  border-bottom-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  background-color: #cc003a !important;
+
+  &:hover {
+    background-color: #b10032 !important;
+  }
+}
+
+.panic-alert-overlay-aware-button {
+  font-size: 24px !important;
+  height: 66px !important;
+  width: 282px !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 10px !important;
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.coordinates {
+  display: grid;
+  grid-template-areas: 'icon-location link map';
+  grid-template-columns: 5% 85% 10%;
+
+  .icon {
+    grid-area: icon-location;
+  }
+
+  .link {
+    grid-area: link;
+    display: flex;
+    margin: 0px 22px;
+  }
+  .map-icon {
+    grid-area: map;
+  }
+}

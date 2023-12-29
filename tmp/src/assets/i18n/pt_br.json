@@ -1,0 +1,954 @@
+{
+  "THINGS_MANAGEMENT": "Things Management Portal",
+  "PROFILE": {
+    "TITLE": "Perfil:",
+    "USER": "Usuário:",
+    "EMAIL": "Email:"
+  },
+  "HOME": {
+    "TITLE": "Things Management Portal",
+    "LOGGED_USER_EMAIL": "Usuário",
+    "LAST_LOGIN_TIME": "Último acesso*:",
+    "STANDARD_TIME_BRASILIA": "*Data e hora de Brasília (BR)",
+    "APPLICATION_BUTTON": "Aplicações",
+    "DEVICE_BUTTON": "Dispositivos",
+    "THINGS_BUTTON": "Pessoas",
+    "ADMIN_BUTTON": "Administrador",
+    "DETECTORS_BUTTON": "Equipamentos",
+    "DASHBOARD_BUTTON": "Dashboards",
+    "PREVIOUS_PAGE": "Anterior",
+    "NEXT_PAGE": "Próxima",
+    "SUB_MENUS": {
+      "SEARCH": "Busca",
+      "GROUPS": "Grupos",
+      "BATCH_LOAD": "Carga em Lote",
+      "RUN_LOAD": "Executar Carga",
+      "HISTORY_LOAD": "Histórico de Carga",
+      "APPLICATION_LIST": "Lista de Aplicações",
+      "MONTHLY_METRICS": "Métricas Mensais"
+    }
+  },
+  "APPLICATIONS_LIST": {
+    "TITLE": "Lista de aplicações",
+    "NO_APPLICATION_INFO": "Ainda não existem aplicações cadastradas.",
+    "ADD_BTN": "Adicionar",
+    "FILTERED_DROPDOWN": "Selecione uma Aplicação",
+    "ACTIVATE_BTN": "Ativar",
+    "INACTIVATE_BTN": "Desativar",
+    "CARD": {
+      "ID": "Id",
+      "DESCRIPTION": "Descrição",
+      "ACTIVE": "Ativo",
+      "INACTIVE": "Inativo",
+      "STATUS": "Status",
+      "EDIT_BTN": "Editar"
+    },
+    "MODAL": {
+      "DEACTIVATE": {
+        "TITLE": "Desativar aplicação",
+        "DESCRIPTION": "Tem certeza que deseja desativar? Você não poderá mais receber dados de localização dos dispositivos dessa aplicação",
+        "CANCEL_BUTTON": "Cancelar",
+        "CLOSE_LABEL": "Fechar",
+        "DEACTIVATE_BUTTON": "Desativar",
+        "ACTION_RESPONSE": {
+          "200": "Aplicação desativada com sucesso!",
+          "500": "Houve um problema ao tentar desativar a aplicação, por favor tente novamente."
+        }
+      }
+    }
+  },
+  "APPLICATION_CREATE": {
+    "TITLE": "Adicionar aplicação",
+    "NAME": "Nome",
+    "DESCRIPTION": "Descrição",
+    "SAVE": "Salvar",
+    "SAVE_RESPONSE": {
+      "SUCCESS": "Aplicação criada com sucesso!",
+      "SERVER_ERR0R": "Houve um problema ao tentar criar a aplicação, por favor tente novamente.",
+      "NAME_ALREADY_EXISTS": "Já existe uma aplicação cadastrada com esse nome",
+      "NAME_EMPTY": "Por favor, o nome da aplicação é um campo obrigatório.",
+      "DESCRIPTION_EMPTY": "Por favor, a descrição da aplicação é um campo obrigatório."
+    },
+    "SHOW_IN_DEVICE_TYPES_LIST": "Mostrar aplicação na lista de tipos de dispositivos",
+    "ALLOW_INCLUSION_IN_DEVICE_GROUP": "Permitir inclusão em grupo de dispositivos",
+    "ALLOW_DEVICE_ASSOCIATION": "Permitir associação/desassociação e exportação de dispositivos "
+  },
+  "APPLICATION_UPDATE": {
+    "TITLE": "Editar aplicação",
+    "ID": "Id:",
+    "NAME": "Nome",
+    "DESCRIPTION": "Descrição",
+    "DEVICES_BTN": "Dispositivos",
+    "SAVE_BTN": "Salvar",
+    "SAVE_RESPONSE": {
+      "SUCCESS": "Aplicação atualizada com sucesso!",
+      "BAD_SERVER": "Houve um problema ao tentar atualizar a aplicação, por favor tente novamente.",
+      "NAME_ALREADY_EXIST": "Já existe uma aplicação cadastrada com esse nome",
+      "NAME_EMPTY": "Por favor, o nome da aplicação é um campo obrigatório.",
+      "DESCRIPTION_EMPTY": "Por favor, a descrição da aplicação é um campo obrigatório."
+    },
+    "MODAL": {
+      "DEACTIVATE": {
+        "TITLE": "Desativar aplicação",
+        "DESCRIPTION": "Tem certeza que deseja desativar? Você não poderá mais receber dados de localização dos dispositivos dessa aplicação",
+        "CANCEL_BUTTON": "Cancelar",
+        "DEACTIVATE_BUTTON": "Desativar",
+        "DEACTIVATE_RESPONSE": {
+          "200": "Aplicação desativada com sucesso!",
+          "500": "Houve um problema ao tentar desativar a aplicação, por favor tente novamente."
+        }
+      },
+      "ACTIVATE": {
+        "200": "Aplicação ativada com sucesso!",
+        "500": "Houve um problema ao tentar ativar a aplicação, por favor tente novamente."
+      }
+    },
+    "SHOW_IN_DEVICE_TYPES_LIST": "Mostrar aplicação na lista de tipos de dispositivos",
+    "SHOW_IN_DEVICE_TYPES_LIST_TOOLTIP": "Esse filtro tem impacto tanto na visualização de dispositivos do Global Access Portal quanto no Things Management Portal. Sendo que não se aplica aos perfis de Administrador e Analista de Segurança Empresarial, que poderão selecionar todos os tipos de dispositivos.",
+    "ALLOW_INCLUSION_IN_DEVICE_GROUP": "Permitir inclusão em grupo de dispositivos",
+    "ALLOW_DEVICE_ASSOCIATION": "Permitir associação/desassociação e exportação de dispositivos "
+  },
+  "APPLICATION_METRICS": {
+    "TITLE": "Métricas de aplicações",
+    "MONTH_YEAR": "Mês e Ano",
+    "TOTAL_EVENTS": "Total de localizações recebidas:",
+    "LOCATION_TYPE": "Tipo de localização",
+    "LOCATION_COUNT": "Quantidade de localizações",
+    "TOOLTIP_TEXT": "Considera passagens de crachá e eventos de entrada e saída do site via ônibus",
+    "MODAL": {
+      "RESPONSE": {
+        "ERROR": "Houve um problema ao carregar os dados, por favor tente novamente."
+      }
+    }
+  },
+  "DEVICES_GROUP": {
+    "MANAGER": "Gestor",
+    "TITLE": "Grupos de Dispositivos",
+    "SEARCH_BY_EXACTLY_NAME": "Pesquisar por nome exato",
+    "CLEAN_FILTERS": "Limpar Filtros",
+    "PLACEHOLDER": {
+      "GROUPS": "Grupos",
+      "CPF": "Inserir cpf",
+      "IAMID": "Inserir documento",
+      "PASSPORT": "Inserir documento",
+      "NAME": "Inserir nome",
+      "EMAIL": "Inserir email"
+    },
+    "DEVICES_EDIT_GROUP": {
+      "ASSOCIATED_WITH": "Associado a:",
+      "NOT_FOUND_THING": "Não existe pessoa associada a esse dispositivo",
+      "NOT_FOUND_DEVICE": "Esse dispositivo não faz parte desse grupo de dispositivos"
+    },
+    "TABLE": {
+      "GROUP_NAME": "Nome do Grupo",
+      "CREATION_AT": "Data da Criação",
+      "GROUP_MANAGER": "Gestor",
+      "ALL_MEMBERS": "Integrantes",
+      "ALL_DEVICES": "Dispositivo"
+    }
+  },
+  "DEVICE_LIST": {
+    "LOADING_INFO": "Buscando informação ...",
+    "TITLE": "Dispositivos",
+    "CREATE_BUTTON": "Adicionar",
+    "EXPORT": "Exportar",
+    "NO_APPLICATION_INFO": "É necessária a criação de uma aplicação para habilitar o cadastro de dispositivos.",
+    "FILTER_DROPDOWN": "Selecione uma aplicação",
+    "FILTER_TYPE_DROPDOWN": "Tipo de dispositivo",
+    "FILTER_ASSOCIATION": "Associados/desassociados",
+    "SEARCH_DEVICE_VALUE": "Buscar dispositivo pelo identificador",
+    "SELECT_ALL_DEVICES": "Selecionar todos os dispositivos",
+    "NO_DEVICES_INFO": "O dispositivo informado não foi encontrado para essa aplicação.",
+    "NO_DEVICES_INFO_WHEN_IN_DEVICE_GROUP": "O dispositivo informado não foi encontrado para essa aplicação, ou não faz parte do seu grupo de dispositivos para visualização.",
+    "ASSOCIATE_BUTTON": "Associar",
+    "REACTIVATE_ASSOCIATE_BUTTON": "Reativar e Associar",
+    "DEVICE_NOT_FOUND": "Dispositivo não encontrado",
+    "DISASSOCIATE_BUTTON": "Desassociar",
+    "NOT_POSSIBLE_ASSOCIATE_INFO": "Este dispositivo não pode ser associado porque não está ativo",
+    "NO_ASSOCIATED_DEVICES": "Não existe histórico para a pessoa ou dispositivo que faça parte do seu grupo de dispositivos para visualização",
+    "REACTIVATION_MESSAGE": "A pessoa selecionada será reativada como visitante e associada ao dispositivo. Confirmar ação?",
+    "REACTIVATION_ERROR_MESSAGE": "Erro na reativação da pessoa",
+    "DEVICE_BOX": {
+      "TYPE": "Tipo",
+      "VALUE": "Identificador",
+      "STATUS_NAME": "Status",
+      "ASSOCIATION": {
+        "NAME": "Associação",
+        "0": "Desassociado",
+        "1": "Associado"
+      },
+      "EDIT_BUTTON": "Editar"
+    },
+    "MODAL": {
+      "ASSOCIATE": {
+        "TITLE": "Associar uma pessoa ao dispositivo",
+        "SEARCH_BOX": "Buscar",
+        "THING_INFO": {
+          "ID": "Identificador"
+        },
+        "PAGE_INFO": {
+          "PAGE": "Página",
+          "OF": "de"
+        },
+        "COLUMNS": {
+          "CPF": "CPF",
+          "PASSPORT": "Passaporte",
+          "STATUS": "Status",
+          "NAME": "Nome",
+          "IAM": "IAM",
+          "EMAIL": "Email"
+        },
+        "STATUS": {
+          "ACTIVE": "Ativo",
+          "INACTIVE": "Inativo"
+        },
+        "ASSOCIATION_RESPONSE": {
+          "200": "Associação realizada com sucesso!",
+          "SELECT_THING": "Por favor selecione uma Thing.",
+          "500": "Houve um problema ao tentar associar a Thing a um dispositivo, por favor tente novamente.",
+          "422": "Houve um problema ao tentar associar a Thing a um dispositivo, por favor modifique as informações para tentar novamente."
+        }
+      },
+      "DISASSOCIATE": {
+        "TITLE": "Desassociar pessoa do dispositivo",
+        "DESCRIPTION": "Tem certeza que deseja desassociar? Os dados de localização desse dispositvo não serão mais vinculados a essa pessoa.",
+        "CANCEL_BUTTON": "Cancelar",
+        "DISASSOCIATE_BUTTON": "Desassociar",
+        "DISASSOCIATE_RESPONSE": {
+          "200": "Desassociação realizada com sucesso!",
+          "500": "Houve um problema tentar desassociar a Pessoa ao dispositivo, por favor tente novamente."
+        }
+      },
+      "DEACTIVATE": {
+        "TITLE": "Desativar dispositivo",
+        "DESCRIPTION": "Tem certeza que deseja desativar? Você não poderá mais receber dados de localização desse dispositivo",
+        "CANCEL_BUTTON": "Cancelar",
+        "DEACTIVATE_BUTTON": "Desativar",
+        "DEACTIVATE_RESPONSE": {
+          "200": "Aplicação desativada com sucesso!",
+          "500": "Houve um problema ao tentar desativar um dispositivo, por favor tente novamente."
+        }
+      },
+      "ACTIVATE": {
+        "200": "Dispositivo ativado com sucesso!",
+        "500": "Houve um problema ao tentar ativar um dispositivo, por favor tente novamente."
+      }
+    }
+  },
+  "DEVICE_CREATE": {
+    "LOADING_INFO": "Buscando informação ...",
+    "TITLE": "Adicionar dispositivo",
+    "APPLICATION_DROPDOWN": "Escolha uma aplicação",
+    "NAME": "Nome",
+    "DESCRIPTION": "Descrição",
+    "TYPE": "Tipo",
+    "VALUE": "Identificador",
+    "SAVE_BUTTON": "Salvar",
+    "SAVE_RESPONSE": {
+      "200": "Dispositivo criado com sucesso!",
+      "500": "Houve um problema ao tentar criar o dispositivo, por favor tente novamente.",
+      "DEVICE_EXIST": "Dispositivo já existente. Verificar nome ou identificador.",
+      "NAME_EMPTY": "Por favor, o nome do dispositivo é um campo obrigatório.",
+      "DESCRIPTION_EMPTY": "Por favor, a descrição do dispositivo é um campo obrigatório.",
+      "TYPE_EMPTY": "Por favor, o tipo de identificador do dispositivo é um campo obrigatório.",
+      "NUMBER_EMPTY": "Por favor, o identificador do dispositivo é um campo obrigatório.",
+      "INVALID_STATUS": "Por favor, o Status é um campo obrigatório."
+    }
+  },
+  "DEVICE_UPDATE": {
+    "LOADING_INFO": "Buscando informação ...",
+    "TITLE": "Editar dispostivo",
+    "ASSOCIATE_BUTTON": "Associar",
+    "DISASSOCIATE_BUTTON": "Desassociar",
+    "SUCCESS": "Dispositivo editado com sucesso",
+    "NAME": "Nome",
+    "DESCRIPTION": "Descrição",
+    "APPLICATION": "Aplicação",
+    "TYPE": "Tipo",
+    "VALUE": "Identificador",
+    "INVOICE": "Nota Fiscal Vale",
+    "INVOICE_PROVIDER": "Nota Fiscal Fornecedor",
+    "MANAGEMENT_NAME": "Nome da Gerência do Dispositivo",
+    "MANAGER_DEVICE": "Gestor do Dispositivo",
+    "GROUP": "Grupo ao qual o Dispositivo Pertence",
+    "SAP_PLANT": "Planta SAP do Dispositivo",
+    "RFID": "RFID",
+    "NO_LAST_THING_INFO": "Não foi possível encontrar informações para esta thing",
+    "NO_LAST_DEVICE_INFO": "Não foi possível encontrar informações para este dispositivo",
+    "INFO_FAIL": "Não foi encontrada informação de localização para esse dispositivo",
+    "DEVICE_STATUS": {
+      "NAME": "Status"
+    },
+    "CALLED_VSC": "Chamado VSC",
+    "LAST_DEVICE_INFO": {
+      "NAME": "Última conexão",
+      "STATUS": {
+        "1": "Ativo",
+        "0": "Inativo"
+      },
+      "NO_ASSOCIATION": "Não associado",
+      "BATERY_LEVEL": "Nível da Bateria",
+      "THING_NAME": "Associação",
+      "COORDINATES": {
+        "NAME": "Coordenadas",
+        "LATITUDE": "Latitude:",
+        "LONGITUDE": "Longitude:"
+      }
+    },
+    "SAVE_BUTTON": "Salvar",
+    "SAVE_RESPONSE": {
+      "200": "Dispositivo atualizado com sucesso!",
+      "500": "Houve um problema ao tentar atualizar as informações do dispositivo, por favor tente novamente.",
+      "DEVICE_EXIST": "Dispositivo já existente. Verificar nome ou identificador."
+    },
+    "DEVICE_HISTORY": {
+      "TITLE": "Histórico de Associações",
+      "TYPE": "Tipo",
+      "TYPES": {
+        "TYPE_PERSON": "Pessoa",
+        "TYPE_ASSET": "Asset",
+        "TYPE_VEHICLE": "Vehicle"
+      },
+      "NAME": "Nome",
+      "IDENTIFIER": "Identificador",
+      "ASSOCIATION": "Associação",
+      "DESASSOCIATION": "Desassociação"
+    },
+    "DEVICE_HISTORY_MOVEMENT": {
+      "TITLE": "Histórico de Movimentações",
+      "CALLED_CODE": "Número do Chamado",
+      "MOVE_DATE": "Data do Movimento",
+      "STATUS_LOAD": "Tipo de Carga",
+      "NO_CONTENT": "Sem histórico de movimentações para este dispositivo",
+      "STATUS_TYPE": {
+        "ACQUISITION": "Aquisição",
+        "LICENSE_ACTIVATION": "Ativação De Licença",
+        "DISPOSAL": "Descarte",
+        "LOSS": "Perda",
+        "SENDING_TECHNICAL_ASSISTANCE": "Envio à Assistência Técnica",
+        "RETURN": "Devolução",
+        "RETUNR_TECHNICAL_ASSISTANCE": "Retorno Assistência Técnica",
+        "LOCATION_TRANSFER": "Transferência de Local",
+        "OWNERSHIP_TRANSFER": "Transferência de Propriedade",
+        "RETUNR_TECHNICAL_ASSISTANCE_REPLACED": "Retorno Assistência Técnica Substituído",
+        "RETURN_TECHNICAL_ASSISTANCE_NEW": "Retorno Assistência Técnica - Novo"
+      }
+    },
+    "MODAL": {
+      "ASSOCIATE": {
+        "TITLE": "Associar uma pessoa ao dispositivo",
+        "SEARCH_BOX": "Buscar",
+        "THING_INFO": {
+          "ID": "Identificador"
+        },
+        "PAGE_INFO": {
+          "PAGE": "Página",
+          "OF": "de"
+        },
+        "ASSOCIATION_RESPONSE": {
+          "200": "Associação realizada com sucesso!",
+          "500": "Houve um problema ao tentar associar as informações do dispositivo, por favor tente novamente."
+        }
+      },
+      "DISASSOCIATE": {
+        "TITLE": "Desassociar pessoa do dispositivo",
+        "DESCRIPTION": "Tem certeza que deseja desassociar? Os dados de localização desse dispositvo não serão mais vinculados a essa pessoa.",
+        "CANCEL_BUTTON": "Cancelar",
+        "DISASSOCIATE_BUTTON": "Desassociar",
+        "DISASSOCIATE_RESPONSE": {
+          "200": "Desassociação realizada com sucesso!",
+          "500": "Houve um problema ao tentar desassociar as informações do dispositivo, por favor tente novamente."
+        }
+      },
+      "DEACTIVATE": {
+        "TITLE": "Desativar dispositivo",
+        "DESCRIPTION": "Tem certeza que deseja desativar? Você não poderá mais receber dados de localização desse dispositivo",
+        "CANCEL_BUTTON": "Cancelar",
+        "DEACTIVATE_BUTTON": "Desativar",
+        "ACTION_RESPONSE": {
+          "200": "Dispositivo desativado com sucesso!",
+          "500": "Houve um problema ao tentar desativar o dispositivo, por favor tente novamente."
+        }
+      }
+    }
+  },
+  "THING_LIST": {
+    "LOADING_INFO": "Buscando informação ...",
+    "NO_THING_INFO": "Ainda não existem thing cadastradas.",
+    "NO_THINGS_INFO": "Ainda não existem things cadastradas.",
+    "TITLE": "Lista de Pessoas",
+    "CREATE_BUTTON": "Adicionar",
+    "EDIT_BUTTON": "Editar",
+    "FILTER_BOX": "Buscar por thing",
+    "THING_BOX": {
+      "TYPE": "Tipo",
+      "ID": "Id",
+      "ASSOCIATION": "Associação"
+    }
+  },
+  "THING_CREATE": {
+    "LOADING_INFO": "Buscando Informação ...",
+    "TITLE": "Adicionar pessoa",
+    "THING_TYPE": "Tipo",
+    "TYPE_INFO": "Pessoa",
+    "NAME": "Nome",
+    "DESCRIPTION": "Descrição",
+    "COMPANY_NAME": "Empresa",
+    "RELATION_TYPE": "Tipo de Colaborador",
+    "RELATION_TYPE_INFO": "Visitante",
+    "TOOLTIP_TEXT": "Somente visitante pode ser adicionado via Portal. Colaboradores Vale ou terceiros são capturados diretamente do Security Center",
+    "TYPE": "Identificador da Pessoa",
+    "COMPLEMENTARY_TYPE": "Informações Complementares",
+    "SOURCE_TYPE_CPF": "CPF",
+    "SOURCE_TYPE_PASSPORT": "Passaporte",
+    "SOURCE_TYPE_IAM": "IAM",
+    "SOURCE_TYPE_MDM": "MDM :",
+    "COMPLEMENTARY_SOURCE_TYPE_CPF": "(Brasileiro)",
+    "COMPLEMENTARY_SOURCE_TYPE_PASSPORT": "(Estrangeiro)",
+    "VALUE": "Número de documento",
+    "NO_ASSOCIATION": "Esta thing não está associada a nenhum dispositivo.",
+    "LOCALIZATION_NOT_FOUND": "Não foi possível achar os dados de localização deste dispositivo.",
+    "SAVE_BUTTON": "Salvar",
+    "SAVE_RESPONSE": {
+      "200": "Thing criada com sucesso!",
+      "500": "Houve um problema na criação da Thing, por favor tente novamente."
+    }
+  },
+  "THING_UPDATE": {
+    "LOADING_INFO": "Buscando...",
+    "TITLE": "Editar pessoa",
+    "THING_TYPE": "Tipo",
+    "TYPE_INFO": "Pessoa",
+    "NAME": "Nome",
+    "DESCRIPTION": "Descrição",
+    "COMPANY_NAME": "Empresa",
+    "RELATION_TYPE": "Tipo de Colaborador",
+    "RELATION_TYPE_INFO": "Visitante",
+    "TOOLTIP_TEXT": "Informações originadas do Security Center não podem ser alteradas no Portal",
+    "THINGS_MANAGEMENT_ORIGIN": "<b>Origem dos dados:</b> Things Management Portal",
+    "SECURITY_CENTER_ORIGIN": "<b>Origem dos dados:</b> Security Center",
+    "DOM_ORIGIN": "<b>Origem dos dados:</b> Segurança em Rede / Sharing Safety",
+    "NOT_IDENTIFIED_ORIGIN": "<b>Origem dos dados:</b> Não identificada",
+    "ACTIVE_STATUS": "<b>Status do cadastro:</b> Ativo",
+    "DISABLED_STATUS": "<b>Status do cadastro:</b> Inativo",
+    "VALUE": "Número de documento",
+    "TYPE": "Identificador da Pessoa",
+    "COMPLEMENTARY_TYPE": "Informações Complementares",
+    "SOURCE_TYPE_CPF": "CPF",
+    "SOURCE_TYPE_PASSPORT": "Passaporte",
+    "COMPLEMENTARY_SOURCE_TYPE_CPF": "(Brasileiro)",
+    "COMPLEMENTARY_SOURCE_TYPE_PASSPORT": "(Estrangeiro)",
+    "SOURCE_TYPE_IAM": "IAM",
+    "SOURCE_TYPE_MDM": "MDM :",
+    "NO_ASSOCIATION": "Não há dados associados a essa thing.",
+    "LOCALIZATION_NOT_FOUND": "Não foi encontrado dados de localização.",
+    "LAST_DEVICE_INFO": {
+      "NAME": "Última localização do dispositivo",
+      "STATUS": {
+        "DEVICE_STATUS": "Dispositivo",
+        "1": "Ativo",
+        "0": "Inativo"
+      },
+      "DEVICE_NAME": "Associação",
+      "COORDINATES": {
+        "NAME": "Coordenadas",
+        "LATITUDE": "Latitude:",
+        "LONGITUDE": "Longitude:"
+      },
+      "DEVICE_NAME_INFO": {
+        "INFO": "Última localização do dispositivo associado à pessoa"
+      }
+    },
+    "REACTIVATE_SUBSCRIPTION": "Reativar Cadastro",
+    "REACTIVATION_MESSAGE": "Esse cadastro somente poderá ser reativado como um visitante. Confirmar ação?",
+    "REACTIVATION_BUTTON_TOOLTIP": "Esta ação reativa o cadastro como visitante.",
+    "REACTIVATE_BUTTON_MODAL_CANCEL": "Cancelar",
+    "REACTIVATE_BUTTON_MODAL_CONFIRM": "Confirmar",
+    "SUCCESSFULLY_REACTIVATED": "Pessoa reativada com sucesso!",
+    "SAVE_BUTTON": "Salvar",
+    "SAVE_RESPONSE": {
+      "200": "Thing atualizada com sucesso!",
+      "500": "Houve um problema na atualização da Thing, por favor tente novamente."
+    },
+    "HISTORIC_DEVICES_ASSOCIATED": {
+      "TITLE": "Histórico de associações a dispositivos",
+      "APPLICATION": "Aplicação",
+      "NAME": "Nome",
+      "IDENTIFICATOR": "Identificador",
+      "ASSOCIATION": "Associação",
+      "DESASSOCIATION": "Desassociação"
+    }
+  },
+  "DETECTORS": {
+    "TITLE": "Lista de equipamentos",
+    "MARK_AREA": "Marcar perímetro",
+    "DESMARK_AREA": "Desmarcar perímetro",
+    "DETECTORS_BOX": {
+      "TYPE_DEVICE": "Tipo do equipamento",
+      "AREA_NAME": "Nome da área",
+      "COORDINATES": "Coordenada geográfica",
+      "STATUS_ACTIVATE": "Ativo",
+      "STATUS_DEACTIVATE": "Inativo",
+      "STATUS_NAME": "Status",
+      "PERIMETER": "Perímetro"
+    }
+  },
+  "MAIN": {
+    "USER": "Usuário:",
+    "EMAIL": "E-mail:",
+    "LANGUAGE": "Idioma",
+    "BACK": "Voltar",
+    "SAVE_CLOSE": "Salvar & Fechar",
+    "SAVE": "Salvar",
+    "CANCEL": "Cancelar",
+    "PROFILE": "Perfil",
+    "CONFIRM": "Confirmar"
+  },
+  "SITE_SELECTOR": {
+    "COUNTRY": "País",
+    "STATE": "Estado",
+    "SITE": "Site"
+  },
+  "MESSAGES": {
+    "SELECT_A_SITE": "Selecione um site",
+    "NO_RECORDS_FOUND": "Não encontramos, nenhum registro"
+  },
+  "HEADER": {
+    "SIDEBAR": {
+      "PROFILE_SETTINGS_TEXT": "Perfil",
+      "PERSONAL_DATA": "Aviso de Dados Pessoais",
+      "LOGOUT_TEXT": "Sair"
+    }
+  },
+  "USER_AGREEMENT": {
+    "PERSONAL_DATA": "Visualização de Dados Pessoais",
+    "DISCLAIMER_TEXT": "Você está acessando o Things Management Portal. Ao navegar pelo portal, você terá acesso a dados para identificação e monitoramento de empregados, fornecedores e visitantes nas dependências da Vale, em locais definidos em conjunto com áreas operacionais. <br /><br />É obrigação do Empregado/Contratado manter total sigilo de qualquer dado que seja visualizado ou extraído nesse Portal.",
+    "READ_AND_AGREE": "Li e concordo com o Aviso de Dados Pessoais.",
+    "ACCEPT": "Aceitar",
+    "ACCEPTED_AT": "Aviso de dados Pessoais aceitos em:",
+    "AGREED_TIME_FORMAT": "dd/MM/yy HH:mm",
+    "CONCLUDED": "Concluído!",
+    "READ_TERMS_AGAIN": "Para reler o Aviso de Dados Pessoais acesse o menu Perfil."
+  },
+  "LANGUAGE": {
+    "PT": "Português",
+    "EN": "Inglês"
+  },
+  "DISCLAIMERS": {
+    "FEATURE_MANAGEMENT": "A visualização de alguns dados foi alterada no portal para adequação aos requisitos de segurança de informação. Em caso de dúvidas, por favor contatem Luiz Brandt (luiz.brandt@vale.com)."
+  },
+  "BATCH_LOAD_HOME": {
+    "BREADCRUMB_STYLE": "Dispositivos > Carga em Lote >",
+    "BREADCRUMB": "Executar Carga",
+    "TITLE": "Executar Carga",
+    "BATCH_LOAD_SELECT": {
+      "DEVICE_TYPE": {
+        "TITLE": "Tipo de Dispositivo",
+        "SPOT": "SPOT",
+        "SMARTBADGE": "Smartbadge"
+      },
+      "LOAD_TYPE": {
+        "TITLE": "Tipo de Carga",
+        "ACQUISITION": "Aquisição",
+        "LICENSE_ACTIVATION": "Ativação De Licença",
+        "DISCARD": "Descarte",
+        "DEVOLUTION": "Devolução",
+        "SHIPPING_TECHNICAL_ASSISTANCE": "Envio Assistência Técnica",
+        "LOSS": "Perda",
+        "RETUNR_TECHNICAL_ASSISTANCE": "Retorno Assistência Técnica",
+        "RETUNR_TECHNICAL_ASSISTANCE_NEW": "Retorno Assistência Técnica Novo",
+        "RETUNR_TECHNICAL_ASSISTANCE_REPLACED": "Retorno Assistência Técnica Substituído",
+        "LOCATION_TRANSFER": "Transferência de Local",
+        "PROPERTY_TRANSFER": "Transferência de Propriedade"
+      },
+      "MOVE_DATE": {
+        "TITLE": "Data do Movimento"
+      },
+      "FALLING": {
+        "TITLE": "Chamado VSC",
+        "TOOLTIP_DESCRIPTION": "Informar o número do chamado aberto no VSC ('RITM' + '8 digitos numéricos')"
+      },
+      "SAP_PLANT": {
+        "TITLE": "Planta SAP",
+        "ADD": "Adicionar Nova Planta SAP"
+      },
+      "MANAGEMENT_NAME": {
+        "TITLE": "Gerência",
+        "RESULT_NOT_FOUND": "Nenhum resultado encontrado"
+      },
+      "GROUP_NAME": {
+        "TITLE": "Nome do Grupo",
+        "DESCRIPTION_ALERT": "Preencha os campos de Gerência, Planta SAP e Gestor do Grupo para formar o Nome do Grupo."
+      },
+      "GROUP_MANAGER": {
+        "TITLE": "Gestor do Grupo",
+        "MANAGER_EMAIL": "@vale.com",
+        "MANAGER_EMAIL_DESCRIPTION": "Primeiro caractere do e-mail deve ser uma letra."
+      },
+      "INVOICE": {
+        "TITLE": "Nota Fiscal Saída"
+      },
+      "INVOICE_PROVIDER": {
+        "TITLE": "Nota Fiscal Fornecedor"
+      }
+    },
+    "BUTTON": {
+      "ADD_FILE": "+ Adicionar Arquivo Excel",
+      "RUN_LOAD": "Executar Carga",
+      "EXPORT_LOAD_LOG": "Exportar arquivo log"
+    },
+    "INSTRUCTIONS": {
+      "TITLE": "Instruções",
+      "DESCRIPTION_ONE": "Favor carregar número de dispositivos em um arquivo Excel.",
+      "DESCRIPTION_TWO": "Também não se esqueça de alterar o nome da aba da planilha para 'Devices'."
+    },
+    "LOAD_SUCCESS": {
+      "ONE": "Carga de",
+      "TWO": "executada com sucesso."
+    },
+    "LOAD_FAILED": "Sua carga foi executada com erros. Verifique o arquivo log."
+  },
+  "BATCH_LOAD_REPLACE": {
+    "QUESTION": "Substituir o arquivo carregado anteriormente?",
+    "PORTAL_NAME": "Things Management Portal",
+    "DESCRIPTION": "Somente um arquivo pode ser carregado em cada carga.",
+    "BUTTON_CANCEL": "Cancelar",
+    "BUTTON_REPLACE": "Substituir arquivo"
+  },
+  "BATCH_LOAD_PLANT_SAP": {
+    "TITLE": "Adicionar Nova Planta SAP",
+    "CODE": "Código",
+    "DESCRIPTION": "Descrição",
+    "BUTTON_CANCEL": "Cancelar",
+    "BUTTON_ADD": "Adicionar",
+    "EXISTING_CODE": "Código já existente",
+    "EXISTING_DESCRIPTION": "Nome já existente",
+    "PLANT_SAP_ADD": "Planta SAP adicionada",
+    "PLANT_SAP_ERRO": "Falha ao inserir os dados no sistema. Por favor, tente novamente."
+  },
+  "BATCH_LOAD_EXECUTION": {
+    "QUESTION": "Confirmar a Execução da Carga?",
+    "PORTAL_NAME": "Things Management Portal",
+    "ATTENTION": "Atenção:",
+    "DESCRIPTION_ONE": "Após a execução a carga",
+    "DESCRIPTION_TWO": "não poderá ser revertida",
+    "DESCRIPTION_THREE": "e qualquer incorreção deverá ser acertada através de outra carga.",
+    "DESCRIPTION_FOUR": "As cargas podem alterar associações a dispositivos e grupo de dispositivos.",
+    "DESCRIPTION_FIVE": "Revise as informações antes de confirmar:",
+    "BUTTON_CANCEL": "Cancelar",
+    "BUTTON_CONFIRM": "Confirmar"
+  },
+  "BATCH_LOAD_EXECUTION_ERROR": {
+    "DESCRIPTION_ONE": "Sua carga foi executada com erros.",
+    "DESCRIPTION_TWO": "Verifique o arquivo log.",
+    "BUTTON_CLOSE": "Entendi e Fechar"
+  },
+  "BATCH_LOAD_EXPORT_LOAD_LOG": {
+    "TITLE": "Carga de Dispositivos",
+    "PORTAL_NAME": "Things Management Portal",
+    "ERROR_LOAD": "Sua carga foi executada com erros.",
+    "PLEASE": "Por favor,",
+    "FOLLOW_RECOMMENDATIONS": "siga as recomendações abaixo:",
+    "REVIEW_INFO": "• Revise as informações pendentes no arquivo log;",
+    "UPDATE_EXCEL": "• Atualize e recarregue seu arquivo Excel;",
+    "EXECUTE_LOAD": "• Execute a carga novamente.",
+    "LOG_FILE_LOST": "O arquivo log será perdido após fechar.",
+    "BUTTON_EMAIL": "Enviar Arquivo Log por E-mail",
+    "BUTTON_DOWNLOAD": "Baixar Arquivo Log"
+  },
+  "BATCH_LOAD_CREATE_GROUP": {
+    "TITLE": "O Grupo informado não existe. Deseja criá-lo agora?",
+    "NEW_GROUP": "Grupo criado",
+    "ERROR": "Não foi possível criar o Grupo, tente novamente."
+  },
+  "HISTORY_LOAD": {
+    "TITLE": "Histórico de Cargas",
+    "DEVICE": "Dispositivos",
+    "BATCH_LOAD": "Carga em Lote",
+    "DEVICE_TYPE": "Tipo de Dispositivo",
+    "LOAD_TYPE": "Tipo de Carga",
+    "MOVE_DATE": "Data do Movimento",
+    "GROUP_NAME": "Nome do Grupo",
+    "GROUP_MANAGER": "Gestor do Grupo",
+    "SAP_PLANT": "Planta Sap",
+    "VSC_CALL": "Chamado VSC",
+    "INVOICE_VALE": "Nota Fiscal Vale",
+    "INVOICE_PROVIDER": "Nota Fiscal Fornecedor",
+    "TOOLTIP": "Caso não seja selecionado um filtro, serão apresentados na busca os últimos 3 meses. Após 1 mês, o log de inconsistência será removido.",
+    "EXPORT": "Exportar",
+    "DEVICE_STATUS": {
+      "ACQUISITION": "Aquisição",
+      "RETURN": "Devolução",
+      "LOSS": "Perda",
+      "LICENSE_ACTIVATION": "Ativação de licença",
+      "LOCAL_TRANSFER": "Transferência de Local",
+      "OWNERSHIP_TRANSFER": "Transferência de propriedade",
+      "SHIPPING_TECHNICAL_ASSISTANCE": "Envio Assistência Técnica",
+      "TECHNICAL_ASSISTANCE_RETURN": "Retorno Assistência Técnica",
+      "RETURN_TECHNICAL_ASSISTANCE_REPLACED": "Retorno Assistência Técnica - Substituído",
+      "RETURN_TECHNICAL_ASSISTANCE_NEW": "Retorno Assistência Técnica - Novo",
+      "DISCARD": "Descarte"
+    },
+    "TABLE": {
+      "LOAD_TYPE": "Tipo de Carga",
+      "DEVICE_TYPE": "Tipo Dispositivo",
+      "GROUP_NAME": "Nome do Grupo",
+      "MANAGEMENT": "Gerência",
+      "GROUP_MANAGER": "Gestor",
+      "SAP_PLANT": "Planta Sap",
+      "VSC_CALL": "Cód. Chamado",
+      "MOVE_DATE": "Data do Movimento",
+      "AMOUT_DEVICE": "Qtde. Dispositivos",
+      "STATUS": "Status da Carga",
+      "ARCHIVE": "Arquivo Carregado",
+      "UPLOAD_DATE": "Data da Carga",
+      "LOG": "Arquivo de Log",
+      "TOOLTIP": "Download indisponível. Arquivo Expirado.",
+      "NOT_FOUND": "Não existem eventos para o filtro especificado",
+      "INVOICE_VALE": "NF Vale",
+      "INVOICE_PROVIDER": "NF Fornecedor"
+    },
+    "FIRST_DATE": "Data Inicial",
+    "END_DATE": "Data Final"
+  },
+  "EXPORTATION_DONE_MODAL": {
+    "TITLE": "Solicitação concluída!",
+    "SUBTITLE": "Você receberá um e-mail contendo a informação solicitada",
+    "CLOSE": "Fechar"
+  },
+  "EXPORTATION_MODAL": {
+    "TITLE": "Destinatário",
+    "SUBTITLE": "Após processado, sua exportação será automaticamente enviada para o seu e-mail.",
+    "ATTENTION": "Atenção! Esses dados são protegidos e confidenciais",
+    "SEND": "Enviar"
+  },
+  "BREADCRUMB": {
+    "HOME": "Home",
+    "APPLICATIONS": "Aplicações",
+    "DEVICES": "Dispositivos",
+    "SEARCH": "Busca",
+    "THINGS": "Lista de Pessoas",
+    "EQUIPMENT": "Lista de Equipamentos",
+    "BATCH_LOAD": "Carga em Lote",
+    "RUN_LOAD": "Executar Carga",
+    "HISTORY_LOAD": "Histórico de Cargas",
+    "MONTHLY_METRICS": "Métricas Mensais",
+    "GROUPS": "Grupo de Dispositivos",
+    "EDIT_GROUP": "Editar Grupo"
+  },
+  "DASHBOARD": {
+    "HOME": "Home",
+    "BREADCRUMB": "Dashboards",
+    "UPDATED": "Atualizado em",
+    "MANAGEMENT_DASHBOARD": "Dashboard Gerencial",
+    "USE_EFFECTIVENESS_DASHBOARD": "Dashboard de Efetividade do Uso",
+    "SUMMARY": "Resumo",
+    "DEVICE_STATUS": "Status do Dispositivo",
+    "TOTAL_IN_USE": "Total x Em Uso",
+    "LOCATION_TRANSMISSION": "Transmissão de Localização",
+    "ASSOCIATION": "Associações",
+    "SAP_PLANT_DISTRIBUTION": "Distribuição por Planta SAP",
+    "EMPLOYEE_COMPANY": "Empresa do Colaborador",
+    "DEVICE_MANAGER": "Gestor do Dispositivo",
+    "DEVICE_RELATION": "Relação de dispositivos",
+    "INFO_CHARTS_TOOLTIP": "Dados disponíveis a partir de 03/07/23",
+    "EVOLUTION_PERIOD": "Evolução no Período",
+    "SEARCH": "Visualizar",
+    "CLEAN_FILTERS": "Limpar Filtros",
+    "FILTER": {
+      "DEVICE_SPOT": "SPOT",
+      "DEVICE_SMART": "Smart Badge",
+      "GLOSSARY": "Glossário",
+      "EXPORT": "Exportar Listas",
+      "MANAGER": "Gestor do Dispositivo",
+      "LAST_MONTH": "Último mês",
+      "LAST_TWO_MONTH": "Últimos 2 meses",
+      "CURRENT_MONTH": "Mês atual",
+      "ASSOCIATION_STATUS": "Status de Associação",
+      "ASSOCIATED": "Associado",
+      "DISASSOCIATED": "Desassociado",
+      "DEVICESTATUS": "Status do Dispositivo",
+      "EMPLOYEE_COMPANY": "Empresa do Colaborador",
+      "SAVE_SELECTION": "Salvar Seleção",
+      "RESULT_NOT_FOUND": "Nenhum resultado encontrado"
+    },
+    "EFFECTIVENESS": {
+      "FILTER": {
+        "MANAGEMENT": "Gerência",
+        "SAP_PLANT_PLACE": "Local SAP",
+        "DEVICE_MANAGER": "Gestor do Dispositivo"
+      }
+    },
+    "EXPORT_MODAL": {
+      "EXPORT_LIST": "Exportar Lista",
+      "SELECT_ALL": "Selecionar Todos",
+      "CHECKBOX_LABELS": {
+        "ASSOCIATIONS": "Associações",
+        "DEVICE_STATUS": "Status do Dispositivo",
+        "SAP_PLANT_DISTRIBUTION": "Distribuição por Planta SAP",
+        "TOTAL_VS_IN_USE": "Total x Em Uso",
+        "EMPLOYEE_COMPANY": "Empresa do Colaborador",
+        "LOCATION_TRANSMISSION": "Transmissão de Localização",
+        "DEVICE_MANAGER": "Gestor do Dispositivo"
+      },
+      "WARNING_TEXT": {
+        "EXPORT_WITH_FILTERS": "A exportação será realizada com os filtros abaixo. ",
+        "MAKE_A_NEW_QUERY": "Caso deseje outra informação, realizar nova busca antes da exportação.",
+        "SITE_SAP": "Local SAP",
+        "DEVICE_MANAGER": "Gestor do Dispositivo",
+        "PERIOD": "Período",
+        "ASSOCIATION_STATUS": "Status da Associação",
+        "DEVICE_STATUS": "Status do Dispositivo",
+        "EMPLOYEE_COMPANY": "Empresa do Colaborador"
+      },
+      "BUTTON": "Exportar"
+    },
+    "GRAPH_BUTTONS": {
+      "GRAPH": "Gráfico",
+      "LIST": "Lista"
+    },
+    "CHARTS": {
+      "PERIOD": {
+        "TODAY": "Hoje",
+        "TWO_MONTHS_AGO": "Últimos dois meses",
+        "ONE_MONTH_AGO": "Último mês",
+        "ACTUAL_MONTH": "Mês atual",
+        "TOOLTIP_MESSAGE": "Indicadores atuais comparados aos registrados no último dia do período selecionado."
+      },
+      "MESSAGES": {
+        "NOT_FOUND": "Não existe resultado para o filtro selecionado!",
+        "ACTIVE_DEVICES": " | Apenas dispositivos ativos"
+      }
+    },
+    "ASSOCIATED": {
+      "ASSOCIATION": "Associados",
+      "NOT_ASSOCIATION": "Desassociados"
+    },
+    "TOTAL_IN_USE_CHARTS": {
+      "TOTAL": "Total",
+      "IN_USE": "Em Uso",
+      "DESCRIPTION_TOOLTIP": "Total de dispositivos ativos do parque que estejam transmitindo e associados a pessoas"
+    },
+    "SUMMARY_CHART": {
+      "ALL_SITES": "Todos os Sites"
+    },
+    "BROADCAST": {
+      "ACTIVE": "Com Transmissão",
+      "DISABLED": "Sem Transmissão",
+      "DESCRIPTION_TOOLTIP": "Total de dispositivos transmitindo localização do parque associados a pessoas ou não"
+    }
+  },
+  "DASHBOARD_EFFECTIVENESS": {
+    "SPOT": "SPOT",
+    "SMART_BADGE": "SmartBadge",
+    "AVAILABILITY_LOCATION": "Dispositivos Ativos Não Transmitindo",
+    "TOTAL_ACTIVE": "Total Ativos",
+    "NOT_TRANSMISSION": "Não Transmitindo"
+  },
+  "PAGINATOR": {
+    "ITEM_PER_PAGE": "Itens por página",
+    "NEXT_PAGE": "Proxima página",
+    "PREVIOUS_PAGE": "Página anterior",
+    "FIRST_PAGE": "Primeira página",
+    "LAST_PAGE": "Última página"
+  },
+  "EDIT_DEVICE_GROUP": {
+    "EDIT_GROUP": "Editar Grupo",
+    "EDIT_GROUP_NAME_BUTTON": "Editar Nome",
+    "TOTAL_MEBERS": "Total de Integrantes",
+    "TOTAL_DEVICES": "Total de Dispositivos",
+    "EXPORT": "Exportar",
+    "ADD_MEMBERS": "Adicionar integrantes",
+    "BUTTON_NEW": "Novo",
+    "SEARCH_DEVICES": "Pesquisar Dispositivos",
+    "TYPE": "Tipo",
+    "NAME": "Nome",
+    "EMAIL": "E-mail",
+    "MEMBERS": "Integrantes",
+    "MEMBER": "Membro",
+    "FOCAL_POINT": "Ponto Focal",
+    "MANAGER": "Gestor",
+    "SAVE": "Salvar",
+    "CLEAR": "Limpar",
+    "BACK": "Voltar",
+    "VALIDATIONS": {
+      "ALREADY_MEMBER_IN_GROUP": "Esta pessoa já é membro do grupo!",
+      "ALREADY_HAS_MANAGER_IN_GROUP": "Já existe um gestor para esse grupo!",
+      "SAVE_SUCCESS": "Membro adicionado com sucesso!",
+      "REMOVE_SUCCESS": "Membro removido com sucesso!",
+      "REMOVE_ERROR": "Erro ao remover o membro!",
+      "REQUEST_ERROR": "Erro ao adicionar membro ao grupo!"
+    },
+    "MODAL_SELECT_THING": {
+      "TITLE": "Adicionar Integrante ao grupo",
+      "SELECT_BUTTON": "Selecionar",
+      "SEARCH_BOX": "Buscar",
+      "COLUMNS": {
+        "NAME": "Nome",
+        "CPF": "CPF",
+        "IAM": "IAM",
+        "PASSPORT": "Passaporte",
+        "EMAIL": "Email"
+      },
+      "WARNING": {
+        "ONLY_ACTIVE_THINGS": "Lista contém somente pessoas ativas"
+      },
+      "ERROR": {
+        "NOT_FOUND_THING": "A pessoa buscada não foi encontrada. Por favor, verifique os dados e tente novamente.",
+        "TITLE": "Algo de errado aconteceu",
+        "SUBTITLE": "Por favor entre em contato com o administrador."
+      }
+    },
+    "MODAL_REMOVE_THING": {
+      "TITLE": "Remover integrante do Grupo",
+      "MESSAGE": "Tem certeza que deseja remover o membro"
+    },
+    "EDIT_GROUP_NAME": {
+      "EDIT_GROUP": "Editar Grupo:",
+      "FIRST_CHARACTER": "Primeiro caractere do e-mail deve ser uma letra.",
+      "BUTTON_CANCEL": "Cancelar",
+      "BUTTON_SAVE": "Salvar",
+      "MODAL_CONFIRM": {
+        "TITLE": "Editar Nome do Grupo"
+      },
+      "MODAL_ALERT": {
+        "SUCCESS": "O Grupo foi atualizado com sucesso!",
+        "ERROR": "Não foi possível atualizar o Grupo, tente novamente."
+      },
+      "GROUP_MANAGER": {
+        "TITLE": "Gestor do Grupo",
+        "MANAGER_EMAIL": "@vale.com"
+      }
+    }
+  },
+  "LOG_MESSAGES": {
+    "EDIT_THING_ERROR": "Tentou editar uma thing sem informar um nome",
+    "SUCCESSFULLY_REACTIVATED": "Pessoa reativada com sucesso!",
+    "INCOMPLETE_NAME": "Por favor, o campo Nome deve estar completo.",
+    "INCOMPLETE_DOCUMENT": "Tentou editar uma thing sem informar um número de documento.",
+    "INCOMPLETE_DOCUMENT_NUMBER": "Por favor, insira o número de documento.",
+    "INVALID_DOCUMENT_NUMBER": "O número do documento não é válido.",
+    "LARGE_DOCUMENT_NUMBER": "Tentou criar uma thing com um número de documento com mais caractéres do que o permitido.",
+    "INVALID_CPF_NUMBER": "Digitou um número de CPF Inválido."
+  },
+  "WANT_CREATE_MODAL": {
+    "CANCEL_BUTTON": "Cancelar",
+    "CREATE_BUTTON": "Criar"
+  },
+  "MANAGEMENT_COMPONENT": {
+    "TITLE": "Gerência",
+    "RESULT_NOT_FOUND": "Nenhum resultado encontrado"
+  },
+  "SAP_PLANT_COMPONENT": {
+    "TITLE": "Planta SAP",
+    "ADD": "Adicionar Nova Planta SAP"
+  },
+  "MSAL": {
+    "MISSING_REQUIRED_ROLES": "Você não tem acesso porque a role esperada não foi encontrada. Certifique-se de que sua conta esteja atribuída a uma role de aplicativo e, em seguida, saia e entre novamente.",
+    "MISSING_TOKEN_CLAIMS": "O token não possui reivindicação de roles. Certifique-se de que sua conta esteja atribuída a uma função de aplicativo e, em seguida, saia e entre novamente."
+  },
+  "TABLE_EFFECTIVENESS_COMPONENT": {
+    "OTHERS": "Outros",
+    "TOTAL": "Total"
+  }
+}

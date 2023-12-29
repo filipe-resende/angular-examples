@@ -1,0 +1,37 @@
+//Material
+@import '~@ng-select/ng-select/themes/default.theme.css';
+
+// components
+@import '../components/action-button-outline/action-button-outline.component.scss';
+@import '../components/action-button/action-button.component.scss';
+@import '../components/header/header.component.scss';
+@import '../components/main-title/main-title.component.scss';
+@import '../components/things-modal/things-modal.component.scss';
+
+// global variables
+@import '../scss/modals';
+@import './vale.variables';
+@import './global';
+
+@font-face {
+  font-family: Caecilia;
+  src: url('/assets/fonts/caecilia/CaeciliaLTStd-Roman.woff');
+}
+
+@font-face {
+  font-family: Caecilia;
+  src: url('/assets/fonts/caecilia/caecilialtstd-bold-webfont.woff');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: Caecilia;
+  src: url('/assets/fonts/caecilia/caecilialtstd-light-webfont.woff');
+  font-weight: lighter;
+}
+
+@font-face {
+  font-family: Caecilia;
+  src: url('/assets/fonts/caecilia/caecilialtstd-light-webfont.woff');
+  font-weight: lighter;
+}

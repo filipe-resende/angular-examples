@@ -1,0 +1,98 @@
+<div class="poi-page-container">
+  <div
+    class="poi-page-left-column-container"
+    [ngStyle]="{
+      width: isLeftMenuOpened ? '450px' : '0px'
+    }"
+  >
+    <mat-icon (click)="onCloseLeftMenuButtonClick()" class="close-icon">close</mat-icon>
+    <mat-tab-group [selectedIndex]="selectedIndex" (selectedTabChange)="onTabClick($event)">
+      <mat-tab label="Point of Interest" (click)="enablePoiCreation((enablePoiMarker = false))">
+        <ng-template mat-tab-label>
+          {{ "POIS.POINTS_OF_INTEREST" | translate }}
+        </ng-template>
+
+        <section class="poi-page-pois-tab-container">
+          <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0">
+            <app-site-selector [displayAsInput]="true"></app-site-selector>
+          </div>
+
+          <div style="border-bottom: 1px solid #c7c8c9; padding: 16px 0">
+            <app-select
+              label="POIS.CATEGORIES"
+              [items]="poiCategorys"
+              bindLabel="name"
+              bindValue="name"
+              [clearable]="true"
+              [loading]="isFetchingPoisCategories"
+              [selected]="selectedCategory && selectedCategory.name"
+              (onSelect)="onSelectCategory($event)"
+            >
+            </app-select>
+          </div>
+
+          <div style="padding: 16px 0">
+            <span class="mat-slide-toggle-content">
+              <app-toggle
+                [tooltip]="(poiList.length === 0 ? 'CHOOSE_A_SITE_WITH_POI' : '') | translate"
+                [label]="'FENCES.POI_TOGGLE'"
+                [checked]="isFetchingPoi ? false : showAllPoisToggle"
+                [disabled]="isFetchingPoi || poiList.length === 0"
+                (onSelect)="onToggleClick($event)"
+              ></app-toggle>
+            </span>
+          </div>
+
+          <div style="padding: 16px 0">
+            <div *ngIf="isFetchingPoi; else loaded">
+              <div
+                class="skeleton"
+                style="height: 36px; margin-bottom: 16px; border-radius: 2px"
+                *ngFor="let skeleton of skeletonArray"
+              ></div>
+            </div>
+            <ng-template #loaded>
+              <mat-accordion *ngIf="filteredPoiList.length > 0">
+                <div *ngFor="let poi of filteredPoiList">
+                  <app-poi-accordion
+                    [poi]="poi"
+                    (setPoi)="setPoi($event)"
+                    (deletePointOfInterest)="deletePointOfInterest($event)"
+                  ></app-poi-accordion>
+                </div>
+              </mat-accordion>
+            </ng-template>
+          </div>
+        </section>
+      </mat-tab>
+
+      <mat-tab label="NewPoi" *ngIf="showSecondTab" (click)="enablePoiCreation((enablePoiMarker = true))">
+        <ng-template mat-tab-label>
+          {{ "POIS.NEW_POINT_OF_INTEREST" | translate }}
+        </ng-template>
+        <app-poi-create
+          [googleMapRef]="googleMapRef"
+          [poiCategorys]="poiCategorys"
+          (enablePoiCreation)="enablePoiCreation($event)"
+          (enablePoiCreationPassingCustomIcon)="enablePoiCreationPassingCustomIcon($event)"
+          (selectFirstTab)="onTabClick({ index: 0 })"
+        ></app-poi-create>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="poi-page-right-column-container">
+    <app-button
+      (onClick)="onOpenLeftMenuButtonClick()"
+      style="position: absolute; left: 16px; top: 16px; z-index: 10"
+      [upperCased]="true"
+      [bordered]="true"
+      [ngStyle]="{
+        display: isLeftMenuOpened ? 'none' : 'block'
+      }"
+    >
+      {{ "POIS.POINTS_OF_INTEREST" | translate }}
+    </app-button>
+    <app-map #googleMap></app-map>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div
+  class="device-create-container application application-container"
+  *ngIf="!isLoadingApplications; else loading"
+>
+  <div class="view-wrapper">
+    <div class="application-header">
+      <app-main-title>
+        <app-arrow-button
+          [routerLink]="['../']"
+          label="voltar"
+        ></app-arrow-button>
+        <header>{{ 'DEVICE_CREATE.TITLE' | translate }}</header>
+      </app-main-title>
+    </div>
+
+    <div class="application-form">
+      <div class="col-4 form-application d-flex">
+        <app-dc-form
+          [applicationList]="applicationList"
+          (onSubmit)="addDevice($event)"
+        ></app-dc-form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="dc-spinner-content">
+    <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+  </div>
+</ng-template>

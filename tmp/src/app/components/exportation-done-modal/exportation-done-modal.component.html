@@ -1,0 +1,15 @@
+<div class="header-container">
+  <span class="mdi mdi-check-circle icon"></span>
+  <div class="content-div">
+    <h3 class="title">{{ 'EXPORTATION_DONE_MODAL.TITLE' | translate }}</h3>
+    {{ 'EXPORTATION_DONE_MODAL.SUBTITLE' | translate }} <br />
+  </div>
+</div>
+<hr class="line_separation" />
+<app-action-button
+  [ngClass]="['blue', 'full-width']"
+  [labelClass]="'blue-label'"
+  (action)="onClickHandle()"
+>
+  <span>{{ 'EXPORTATION_DONE_MODAL.CLOSE' | translate }}</span>
+</app-action-button>

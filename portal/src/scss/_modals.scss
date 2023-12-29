@@ -1,0 +1,28 @@
+.modal-user-agreement {
+  mat-dialog-container {
+    overflow: visible;
+    width: 480px;
+    max-height: 80vh;
+  }
+}
+
+.modal-user-agreement-backdrop {
+  background: rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(8px);
+}
+
+.modal-user-agreement-accepted {
+  mat-dialog-container {
+    width: 480px;
+  }
+}
+
+.modal-fences-delete-confirmation {
+  mat-dialog-container {
+    height: 233px;
+    width: 433px;
+    left: 504px;
+    top: 322px;
+    border-radius: 4px;
+  }
+}

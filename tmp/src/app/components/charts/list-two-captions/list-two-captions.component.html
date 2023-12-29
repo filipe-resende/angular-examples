@@ -1,0 +1,38 @@
+<div class="label-date">
+  <span class="label-text">{{ selectedApplication }}</span>
+</div>
+<div class="container" *ngIf="data.length; else dataDoesntExist">
+  <div class="row" *ngFor="let item of data">
+    <span class="title">
+      {{ item.identify }}
+    </span>
+
+    <span class="denied">
+      <span>
+        <img [src]="firstIconPath" alt="" />
+      </span>
+      <span *ngIf="item.charts[0].percentage">
+        {{ item.charts[0].count }} | {{ item.charts[0].percentage }}
+      </span>
+
+      <span *ngIf="!item.charts[0].percentage"> - </span>
+    </span>
+
+    <span>
+      <span>
+        <img [src]="secondIconPath" alt="" />
+      </span>
+      <span *ngIf="item.charts[1].percentage">
+        {{ item.charts[1].count }} | {{ item.charts[1].percentage }}
+      </span>
+
+      <span *ngIf="!item.charts[1].percentage"> - </span>
+    </span>
+  </div>
+</div>
+
+<ng-template #dataDoesntExist>
+  <div class="no-content">
+    <span>{{ 'DASHBOARD.CHARTS.MESSAGES.NOT_FOUND' | translate }}</span>
+  </div>
+</ng-template>

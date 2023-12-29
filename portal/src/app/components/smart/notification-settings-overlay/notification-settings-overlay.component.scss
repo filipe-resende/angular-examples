@@ -1,0 +1,219 @@
+.notification-settings-overlay {
+  &-container {
+    position: relative;
+    min-height: 460px;
+    min-width: 614px;
+    border-radius: 4px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #fbfbfb;
+    overflow-x: hidden;
+  }
+
+  &-form {
+    width: 100%;
+    height: 100%;
+  }
+
+  &-spinner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 24px;
+    margin-top: 28px;
+  }
+
+  &-title {
+    color: #697489;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+
+  &-content {
+    overflow: visible !important;
+    margin: 0 24px;
+    margin-bottom: 24px;
+  }
+
+  &-toggler {
+    display: flex;
+    margin-top: 32px;
+    width: 100%;
+  }
+
+  &-toggler-email,
+  &-toggler-label,
+  &-checkbox-label {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+    color: #909193;
+    margin-left: 16px;
+    cursor: default;
+  }
+
+  &-toggler-email {
+    margin-left: 4px;
+  }
+
+  &-phone {
+    margin-top: 28px;
+  }
+
+  &-checkbox {
+    display: flex;
+    margin-top: 16px;
+
+    &:first-of-type {
+      margin-top: 24px;
+    }
+  }
+
+  &-close-btn {
+    position: absolute !important;
+    top: 4px;
+    right: 4px;
+    color: #959dac;
+  }
+
+  &-error-message {
+    padding: 0;
+    margin: 0;
+    margin-top: 4px;
+    color: #bb133e;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 12px;
+  }
+}
+
+.notification-settings-overlay-type-menu {
+  margin-top: 8px;
+
+  &-header {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #697489;
+    margin-top: 8px;
+  }
+}
+
+.notification-settings-overlay-buttons-container {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  app-button {
+    width: 100% !important;
+  }
+
+  .notification-settings-overlay-cancel-button,
+  .notification-settings-overlay-send-button {
+    font-size: 20px !important;
+    line-height: 22px !important;
+    width: 100% !important;
+    border-radius: 4px;
+  }
+
+  .notification-settings-overlay-cancel-button {
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+
+    color: #3d7edb !important;
+    background: #fbfbfb !important;
+    box-shadow: -40px 60px 80px 0px #43464a 16% !important;
+    border-top: 1px solid #edeef0;
+  }
+}
+
+.notification-settings-overlay-input {
+  width: 100%;
+  height: 36px;
+  border: 1px solid #e3e4e4;
+  fill: #ffffff;
+  border-radius: 2px;
+  box-sizing: border-box;
+  outline: none;
+  color: #909193;
+  font-size: 14px;
+  line-height: 22px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  padding: 7px 12px;
+  margin-right: 24px;
+
+  &.error {
+    border: 1px solid #bb133e;
+  }
+
+  &::placeholder {
+    color: #909193;
+    opacity: 1;
+  }
+
+  &:-ms-input-placeholder {
+    color: #909193;
+  }
+
+  &::-ms-input-placeholder {
+    color: #909193;
+  }
+
+  &:focus {
+    border: 1px solid #cccccc;
+    outline: none;
+  }
+}
+
+::ng-deep .app-input {
+  &::placeholder {
+    color: #909193 !important;
+    opacity: 0;
+  }
+
+  &:-ms-input-placeholder {
+    color: #909193;
+  }
+
+  &::-ms-input-placeholder {
+    color: #909193;
+  }
+}
+
+::ng-deep mat-checkbox {
+  .mat-checkbox-label {
+    font-size: 16px !important;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+}
+
+.visibility {
+  visibility: hidden;
+}

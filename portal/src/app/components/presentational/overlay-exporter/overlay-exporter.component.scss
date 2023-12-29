@@ -1,0 +1,96 @@
+.overlay-exporter-header {
+  margin-top: 8px;
+  color: #252727;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  letter-spacing: 0;
+  line-height: 26px;
+  margin-bottom: 4px;
+}
+
+.overlay-exporter-subheader {
+  color: #909193;
+  display: flex;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.input-export {
+  margin-top: 4px;
+}
+
+.close-overlay {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.message-confidential {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.container-export-done {
+  display: flex;
+  align-items: center;
+}
+
+.info-icon {
+  color: #909193;
+  font-size: 18px;
+}
+
+.overlay__close-button {
+  position: absolute;
+  right: 4px;
+  top: 4px;
+
+  * {
+    color: #959dac;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+}
+
+.overlay-exported {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+
+  .overlay-exported__icon {
+    width: 92px;
+    height: 92px;
+    font-size: 92px;
+    line-height: 94px;
+    color: #909193;
+    margin-right: 40px;
+  }
+
+  div {
+    .overlay-exported__title {
+      margin: 0 0 4px 0;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      color: #252727;
+    }
+
+    .overlay-exported__text {
+      margin: 0;
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 22px;
+      color: #909193;
+    }
+  }
+}

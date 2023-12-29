@@ -1,0 +1,22 @@
+<nav class="menu">
+  <ul class="list-unstyled components">
+    <li *ngFor="let tab of tabs; let i = index">
+      <a
+        class="options"
+        [ngClass]="{ selected: isActiveRoute(tab.route) }"
+        (click)="onMenuItemClick(itemRef, tab.route, tab.menus, tab.submenu)"
+        #itemRef
+      >
+        <span class="tabs"
+          >{{ tab.name }}
+          <img
+            src="assets/icons/Seta.svg"
+            alt=">"
+            *ngIf="tab.menus && tab.menus.length > 0"
+            style="margin-left: 4px"
+          />
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>

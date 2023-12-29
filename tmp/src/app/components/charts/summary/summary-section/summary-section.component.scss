@@ -1,0 +1,74 @@
+@import '../../../../scss/vale.variables';
+
+.section-component {
+  font-family: $font-body1;
+
+  .section {
+    margin: 0 12px;
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .label {
+        font-size: 19px;
+        width: 145px;
+        color: $dark;
+      }
+
+      .overall-variation {
+        margin-bottom: 15px;
+      }
+
+      .overall-overage {
+        margin-top: 15px !important;
+      }
+
+      .variation {
+        text-align: right;
+
+        .positive-variation-text {
+          font-size: 12px;
+          font-weight: 200;
+          color: $lightGreenVale;
+        }
+
+        .negative-variation-text {
+          font-size: 12px;
+          font-weight: 200;
+          color: #ff4b55;
+        }
+
+        .variation-icon {
+          width: 22px;
+        }
+      }
+
+      .overage {
+        margin-top: 5px;
+
+        .percentage-field {
+          display: flex;
+          align-items: baseline;
+          line-height: 35px;
+          font-size: 24px;
+          color: $dark;
+
+          .values-divisor {
+            border-left: 1px solid $greyVale40;
+            height: 45px;
+            margin: 0 8px;
+            position: relative;
+            top: 5px;
+          }
+
+          .overage-text {
+            font-size: 40px;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}

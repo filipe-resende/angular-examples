@@ -1,0 +1,29 @@
+@import '../../scss/vale.variables';
+
+.arrow {
+  bottom: 0;
+  right: 0;
+  height: 16px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 1px;
+}
+
+span {
+  font-size: 14px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: #3d7edb;
+  margin-bottom: 16px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    outline-color: none;
+  }
+}

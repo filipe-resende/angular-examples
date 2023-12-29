@@ -1,0 +1,65 @@
+.modal-confirmation-container {
+  position: relative;
+  padding: 24px;
+  width: 539px;
+}
+
+.modal-confirmation-close-button {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  cursor: pointer;
+}
+
+.modal-confirmation-subtitle {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #697489;
+  width: 285px;
+  margin: 32px auto 15px;
+  text-align: center;
+}
+
+.custom-message {
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.confirmation-message {
+  font-weight: 600;
+}
+
+.modal-confirmation-buttons-container {
+  display: flex;
+}
+
+.modal-confirmation-buttons-container {
+  font-size: 14px;
+
+  button {
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    height: 48px !important;
+    width: 294px !important;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cancel-button {
+    color: #3d7edb !important;
+  }
+
+  .confirm-button {
+    background-color: #3d7edb !important;
+    color: #fff;
+
+    &:hover {
+      background-color: #3272cc !important;
+    }
+  }
+}

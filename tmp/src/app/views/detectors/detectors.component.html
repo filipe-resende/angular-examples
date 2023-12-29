@@ -1,0 +1,62 @@
+<p class="breadCrumbs">
+  {{ 'BREADCRUMB.HOME' | translate }} >
+  <span>{{ 'BREADCRUMB.EQUIPMENT' | translate }}</span>
+</p>
+<div class="dt-container" *ngIf="applications$ | async; else loadingOrError">
+  <div class="dt-search-menu">
+    <select class="application-selected" disabled>
+      <option selected>Security Center</option>
+    </select>
+
+    <app-type-equipments
+      *ngIf="selectedApplication"
+      (emitEquipmentsList)="getByType($event)"
+      [selectedApplication]="selectedApplication"
+    ></app-type-equipments>
+
+    <app-dropdown-perimeter
+      *ngIf="selectedApplication"
+      [selectedApplication]="selectedApplication"
+      (emitPerimeterList)="getByStatusPerimeter($event)"
+    ></app-dropdown-perimeter>
+  </div>
+  <div class="dt-content-list">
+    <div *ngIf="applications$ | async; else loadingOrError">
+      <app-detectors-list
+        [detectors]="detectors"
+        [currentPage]="currentPage"
+        [totalCount]="count"
+        (onPaginate)="paginate($event)"
+      ></app-detectors-list>
+
+      <div
+        class="dh-content-list"
+        *ngIf="!detectors.length && !typeFilter.length"
+      >
+        <span class="search-device" translate
+          >Não há equipamentos para a aplicação selecionada.</span
+        >
+      </div>
+
+      <div
+        class="dh-content-list"
+        *ngIf="!detectors.length && typeFilter.length > 1"
+      >
+        <span class="search-device" translate
+          >Não há equipamentos para a aplicação selecionada.</span
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingOrError>
+  <ng-template #loading>
+    <div class="dh-spinner-content">
+      <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+    </div>
+  </ng-template>
+  <div *ngIf="loadingError$ | async; else loading"></div>
+</ng-template>
+
+<ng-template class="blank-state"> </ng-template>

@@ -1,0 +1,9 @@
+<select
+  [(ngModel)]="selectedValue"
+  class="dh-select-input"
+  (change)="getByStatusPerimeter(selectedValue)"
+>
+  <option *ngFor="let status of statusPerimeterOptions" [value]="status.value">
+    {{ status.name }}
+  </option>
+</select>

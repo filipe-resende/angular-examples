@@ -1,0 +1,306 @@
+@import '../../scss/vale.variables';
+
+.container-page {
+  width: auto;
+  overflow-y: scroll;
+  height: auto;
+}
+
+.path_traveled {
+  font-family: $font-body1;
+  font-size: 12px;
+  line-height: 36px;
+  color: #909193;
+
+  position: absolute;
+  height: 36px;
+  left: 57px;
+  top: 65px;
+}
+
+.path_traveled > span {
+  color: #252727;
+}
+
+.card {
+  position: fixed;
+  top: 100px;
+  left: 56px;
+  right: 56px;
+  bottom: 10px;
+
+  background: #ffffff;
+  box-shadow: -1px 1px 2px rgba(67, 70, 74, 0.0001),
+    -2px 2px 5px rgba(67, 86, 100, 0.123689);
+  border-radius: 8px;
+
+  overflow: auto;
+}
+
+table {
+  margin-top: 5px;
+  overflow-y: auto;
+  display: block;
+  width: 100%;
+  box-shadow: none;
+}
+
+::ng-deep.mat-paginator .mat-paginator-container {
+  justify-content: center;
+}
+
+:host ::ng-deep .mat-sort-header-content {
+  text-align: initial;
+}
+
+select {
+  background: #ffffff;
+  border: 1px solid #e3e4e4;
+  border-radius: 3px;
+  width: 200px;
+  height: 18px !important;
+  margin-left: 5px;
+  margin-right: 2.5px;
+  text-align: center;
+  font-size: 12px;
+}
+
+option {
+  text-align: start;
+}
+
+input {
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e3e4e4;
+  border-radius: 3px;
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+  height: 18px !important;
+  font-size: 12px;
+}
+
+.firstLineSearch {
+  margin-top: 1px;
+  margin-left: 15px;
+}
+
+.secondLineSearch {
+  margin-top: 5px;
+  margin-left: 15px;
+}
+
+button {
+  margin-left: 2.5px;
+  margin-right: 2.5px;
+  background: #3d7edb;
+  border-radius: 2px;
+  height: 18px !important;
+  color: white;
+  border: none;
+}
+
+button:disabled,
+button[disabled] {
+  background-color: lightgray;
+  color: #666666;
+}
+
+.position-button {
+  position: absolute;
+  top: 44px;
+  font-size: 12px;
+
+  .tooltip {
+    position: initial;
+    display: initial;
+    opacity: 1;
+    margin-bottom: 13.5px;
+    margin-right: 10px;
+    margin-left: 2.5px;
+  }
+}
+
+::ng-deep .mat-tooltip {
+  width: 212px;
+}
+
+mat-icon {
+  margin-top: -1px;
+  font-size: 19px;
+}
+
+label {
+  vertical-align: bottom;
+}
+
+.loadType {
+  width: 155px;
+}
+
+.applicationId {
+  width: 100px;
+}
+
+.management {
+  width: 230px;
+}
+
+.managerGroup {
+  width: 200px;
+}
+
+.groupName {
+  width: 200px;
+}
+
+.sapPlant {
+  width: 230px;
+}
+
+.calledCode {
+  width: 115px;
+}
+
+.invoiceVale {
+  width: 80px;
+}
+
+.invoiceProvider {
+  width: 80px;
+}
+
+.moveDate {
+  width: 144px;
+}
+
+.numberOfLoadedDevices {
+  width: 110px;
+}
+
+.chargeStatus {
+  width: 115px;
+}
+
+.uploadFileName {
+  width: 130px;
+}
+
+.uploadDate {
+  width: 134px;
+}
+
+.logFile {
+  width: 134px;
+}
+
+tr.mat-header-row {
+  height: 20px;
+}
+
+td > div {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.parent {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  .icon {
+    grid-area: 1 / 1 / 2 / 2;
+    width: 0px;
+  }
+  .label {
+    grid-area: 1 / 2 / 2 / 3;
+  }
+}
+
+mat-form-field {
+  padding: 0px;
+  height: 0px;
+  line-height: 16px;
+}
+
+:host ::ng-deep .mat-form-field-wrapper {
+  position: initial;
+}
+
+:host ::ng-deep .mat-datepicker-input {
+  align-items: initial;
+}
+
+:host ::ng-deep .mat-form-field-suffix {
+  position: absolute;
+  top: 11px;
+  left: 2.5px;
+}
+
+.data {
+  text-align: center;
+  width: 150px;
+  font-size: 12px;
+}
+
+:host ::ng-deep .mat-header-row {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+:host ::ng-deep .mat-cell {
+  font-size: 12px;
+}
+
+:host ::ng-deep .mat-paginator-container {
+  justify-content: center;
+  min-height: 45px !important;
+  max-height: 48px !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3d7edb;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #3d7edb;
+  border-radius: 10px;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+}
+
+.notFound {
+  background-color: goldenrod;
+  color: white;
+  width: 300px;
+  height: 25px;
+  font-size: 12px;
+  position: absolute;
+  top: 70px;
+  right: 65px;
+  mat-icon {
+    margin-top: 3px;
+    margin-left: 5px;
+  }
+}
+
+.history-export {
+  font-family: $font-body1;
+}

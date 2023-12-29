@@ -1,0 +1,61 @@
+<app-animated-overlay>
+  <div class="fences-instructions-overlay">
+    <div class="fences-instructions-overlay-container">
+      <button class="close-btn" mat-icon-button (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+      <header class="fences-instructions-overlay-header">
+        <section class="fences-instructions-overlay-header-content">
+          <div class="fences-instructions-overlay-header-alert">
+            <img src="assets/icons/priority.svg" *ngIf="!data.isError" />
+            <img src="assets/icons/priority_red.svg" *ngIf="data.isError" />
+          </div>
+
+          <div
+            class="fences-instructions-overlay-header-title"
+            *ngIf="data.isError"
+          >
+            {{ 'FENCES.INSTRUCTIONS_OVERLAY.TITLE_ERROR' | translate }}
+          </div>
+          <div
+            class="fences-instructions-overlay-header-title"
+            *ngIf="!data.isError"
+          >
+            {{ 'FENCES.INSTRUCTIONS_OVERLAY.TITLE' | translate }}
+          </div>
+        </section>
+      </header>
+      <main class="fences-instructions-overlay-content">
+        <div
+          class="fences-instructions-overlay-instruction-element"
+          *ngFor="let instruction of instructions; let i = index"
+        >
+          <h5 class="fences-instructions-overlay-instruction-element-title">
+            <span class="bolder">{{
+              (i < 9 ? '0' + (i + 1) : i + 1) + '. '
+            }}</span>
+            <span>{{ instruction.title }}</span>
+          </h5>
+          <section
+            class="fences-instructions-overlay-instruction-element-content"
+          >
+            <div
+              class="fences-instructions-overlay-instruction-block"
+              *ngIf="instruction.correctImgSrc !== ''"
+            >
+              <img [src]="instruction.correctImgSrc" />
+              <mat-icon class="correct-instruction">done</mat-icon>
+            </div>
+            <div
+              class="fences-instructions-overlay-instruction-block"
+              *ngIf="instruction.incorrectImgSrc !== ''"
+            >
+              <img [src]="instruction.incorrectImgSrc" />
+              <mat-icon class="incorrect-instruction">close</mat-icon>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</app-animated-overlay>

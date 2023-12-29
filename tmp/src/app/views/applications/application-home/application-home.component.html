@@ -1,0 +1,48 @@
+<p class="breadCrumbs">
+  {{ 'BREADCRUMB.HOME' | translate }} >
+  <span>{{ 'BREADCRUMB.APPLICATIONS' | translate }}</span>
+</p>
+<div
+  class="applications-home-container"
+  *ngIf="allApplications$ | async as allApplications; else loading"
+>
+  <div class="applications-home-view-wrapper">
+    <div *ngIf="allApplications; else empty">
+      <div class="applications-home-search">
+        <app-application-dropdown
+          [applicationList]="allApplications"
+          (select)="onFilterApplicationsById($event)"
+        >
+        </app-application-dropdown>
+      </div>
+
+      <div class="applications-home-content-list" [hidden]="showSpinner">
+        <app-application-list
+          [currentPage]="(paginator$ | async).currentPage"
+          [applications]="applications$ | async"
+          [totalCount]="totalCount$ | async"
+          (paginate)="onPaginate($event)"
+        >
+        </app-application-list>
+      </div>
+
+      <div class="applications-home-spinner-content" [hidden]="!showSpinner">
+        <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="applications-home-spinner-content">
+    <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+  </div>
+</ng-template>
+
+<ng-template #empty>
+  <div class="home-content">
+    <div class="blank-state title-details">
+      {{ 'APPLICATIONS_LIST.NO_APPLICATION_INFO' | translate }}
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,35 @@
+<div class="hourpicker-from-to-container">
+  <label class="hourpicker-from-to-label" *ngIf="!!label">
+    {{ label | translate }}
+  </label>
+
+  <div class="hourpicker-from-to-pickers-container">
+    <div class="hourpicker-from-to-picker">
+      <mat-form-field>
+        <mat-icon matPrefix style="pointer-events: none">timer</mat-icon>
+        <input
+          [disabled]="disabled"
+          matInput
+          type="time"
+          [value]="input1Value"
+          (change)="onInput1Change($event)"
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="hourpicker-from-to-to-label">-</div>
+
+    <div class="hourpicker-from-to-picker">
+      <mat-form-field>
+        <mat-icon matPrefix style="pointer-events: none">timer</mat-icon>
+        <input
+          [disabled]="disabled"
+          matInput
+          type="time"
+          [value]="input2Value"
+          (change)="onInput2Change($event)"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+</div>

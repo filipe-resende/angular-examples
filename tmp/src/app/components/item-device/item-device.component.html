@@ -1,0 +1,75 @@
+<div
+  class="item-list-device"
+  [ngClass]="{ 'status-inactive': device && !device.status }"
+>
+  <div class="init-device-item centralizado">
+    <input
+      (click)="onSelect($event)"
+      name="checkbox|{{ device.id }}"
+      type="checkbox"
+      class="checkbox"
+    />
+  </div>
+  <div class="init-device-item data-device">
+    <div class="application-info">
+      <div class="application-details">
+        <div class="name">{{ device && device.name }}</div>
+
+        <div class="id">
+          {{ 'DEVICE_LIST.DEVICE_BOX.TYPE' | translate }}:
+          {{
+            device.sourceInfos && device.sourceInfos.length
+              ? device.sourceInfos[0].type
+              : null
+          }}
+        </div>
+
+        <div class="description">
+          {{ 'DEVICE_LIST.DEVICE_BOX.VALUE' | translate }}:
+          {{
+            device.sourceInfos && device.sourceInfos.length
+              ? device.sourceInfos[0].value
+              : null
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row information-association">
+    <div *ngIf="thing">
+      <span>Associação:</span><br /><span class="name">{{
+        thing?.thing?.name
+      }}</span>
+      <div class="associate-thing" *ngIf="thing?.thing?.sourceInfos?.length">
+        <div *ngFor="let info of thing.thing.sourceInfos">
+          <span>{{ info?.type }}</span
+          >:<span class="document-value">{{ info?.value }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="end-itemDevice col-5">
+    <div class="application-status">
+      <span id="associate|{{ device.id }}">
+        Status:
+        {{
+          associatedThings && associatedThings.length > 0
+            ? 'Associado'
+            : 'Desassociado'
+        }}
+      </span>
+    </div>
+
+    <div class="update-application">
+      <app-action-button
+        [ngClass]="['blue', 'association']"
+        (action)="clickAction()"
+        [routerLink]="route"
+      >
+        {{ 'DEVICE_LIST.DEVICE_BOX.EDIT_BUTTON' | translate }}
+      </app-action-button>
+    </div>
+  </div>
+</div>

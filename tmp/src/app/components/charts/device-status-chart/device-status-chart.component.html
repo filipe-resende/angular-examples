@@ -1,0 +1,44 @@
+<div class="bar-chart-container">
+  <div class="label-date">
+    <span class="label-text">{{ selectedApplication }}</span>
+  </div>
+  <div
+    *ngIf="
+      deviceStatusData.chartsActualMonth.length ||
+      deviceStatusData.chartsMonthAgo.length ||
+      deviceStatusData.chartsTwoMonthsAgo.length
+    "
+  >
+    <div class="chart" [ngStyle]="{ display: chartName ? 'block' : 'none' }">
+      <div class="chart-container" style="margin: 0 15px">
+        <canvas class="canvas" width="800" height="270" [id]="chartName">
+          {{ chart }}
+        </canvas>
+      </div>
+    </div>
+    <div class="chart-legend">
+      <div class="item-legend" *ngFor="let item of legend">
+        <div class="circle-item">
+          <span
+            class="circle"
+            [ngStyle]="{ 'background-color': item.color }"
+          ></span>
+        </div>
+        <div class="item-label">
+          <span>{{ item.label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="no-content"
+    *ngIf="
+      !deviceStatusData.chartsActualMonth.length &&
+      !deviceStatusData.chartsMonthAgo.length &&
+      !deviceStatusData.chartsTwoMonthsAgo.length
+    "
+  >
+    <span>{{ 'DASHBOARD.CHARTS.MESSAGES.NOT_FOUND' | translate }}</span>
+  </div>
+</div>

@@ -1,0 +1,120 @@
+@import '../../scss/vale.variables';
+
+:focus {
+  outline: none;
+}
+
+.custom-modal {
+  border-bottom: none;
+}
+
+.text-modal {
+  color: #747678;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+}
+
+.desative-buttons {
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  margin-right: 15px;
+  margin-bottom: 5px;
+}
+
+.red {
+  padding: 5px;
+  width: 105px;
+}
+
+.message-sucess {
+  color: #747678;
+  font-family: $font-body1;
+  font-size: 20px;
+  letter-spacing: 0.75px;
+  text-align: center;
+}
+
+.result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .icon-error {
+    font-size: 60px;
+    color: $redVale;
+    padding-top: 20px;
+  }
+
+  .icon-sucess {
+    font-size: 60px;
+    color: #007f7b;
+    padding-top: 20px;
+  }
+}
+
+.list-things {
+  padding: 0;
+  margin-bottom: 50px;
+}
+
+.save-device {
+  height: 40px;
+  display: flex;
+  align-self: flex-end;
+  margin-bottom: 32px;
+  margin-right: 22px;
+}
+
+.modal.modal-wide .modal-dialog {
+  width: 90%;
+}
+
+.modal-dialog {
+  height: 280px;
+  margin: 0;
+  height: auto;
+}
+
+.modal-content {
+  width: 100%;
+  border: none;
+}
+
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+.search-thing {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 29px 25px;
+}
+
+.modal {
+  .modal-lg {
+    @media (min-width: 992px) {
+      max-width: 920px;
+    }
+  }
+}
+
+.modal-fix {
+  padding-right: 0 !important;
+}
+
+.not-found {
+  margin-left: 30px;
+}
+
+.modal-header,
+.modal-content {
+  border-color: #fff;
+
+  &.modal-wrapper {
+    border-color: #fff;
+  }
+}

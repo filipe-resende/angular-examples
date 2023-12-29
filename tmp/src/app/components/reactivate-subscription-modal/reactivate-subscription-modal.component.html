@@ -1,0 +1,19 @@
+<section class="modal-confirmation-container">
+  <div class="modal-confirmation-close-button" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <div class="modal-confirmation-subtitle">
+    <p class="confirmation-message">
+      {{ message | translate }}
+    </p>
+  </div>
+</section>
+<div class="modal-confirmation-buttons-container">
+  <button class="cancel-button" (click)="onClose()">
+    {{ 'THING_UPDATE.REACTIVATE_BUTTON_MODAL_CANCEL' | translate }}
+  </button>
+  <button class="confirm-button" (click)="onConfirm()">
+    {{ 'THING_UPDATE.REACTIVATE_BUTTON_MODAL_CONFIRM' | translate }}
+  </button>
+</div>

@@ -1,0 +1,17 @@
+.site-selector-overlay-selectors-container {
+  & > app-select {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+.site-selector-overlay-buttons-container {
+  display: flex;
+  justify-content: flex-end;
+
+  & > app-button {
+    width: 120px;
+    margin-left: 16px;
+    margin-top: 8px;
+  }
+}

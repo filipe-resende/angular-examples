@@ -1,0 +1,16 @@
+@import '../../scss/vale.variables';
+.input {
+  color: #909193;
+  border: 1px solid #e3e4e4;
+  border-radius: 2px;
+  height: 30px;
+  width: 100%;
+  font-family: $font-body1;
+  min-width: 8em;
+
+  &:focus,
+  &:active {
+    background-color: #fff;
+    color: #000000;
+  }
+}

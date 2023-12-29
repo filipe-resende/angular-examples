@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+@import './notification.theme';
+
+@mixin default-app-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map_get($theme, background);
+    $foreground: map_get($theme, foreground);
+    @include notification-theme($theme);
+}

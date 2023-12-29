@@ -1,0 +1,69 @@
+@import '../../scss/styles.scss';
+
+.container-pagination {
+  margin-top: 23px;
+  display: flex;
+  justify-content: center;
+  color: #909193;
+}
+
+::ng-deep .pagination {
+  height: 35px;
+  display: flex;
+  width: max-content;
+  padding: 0;
+  list-style: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 2px;
+  box-shadow: -1px 1px 2px 0 rgba(67, 70, 74, 0),
+    -2px 2px 5px 0 rgba(67, 86, 100, 0.12);
+}
+
+::ng-deep .page-link {
+  transition: 0.1s;
+  position: relative;
+  display: block;
+  padding: 10px 12px;
+  margin-left: -1px;
+  color: #909193;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  font-family: $font-family-bold;
+}
+
+#pagination {
+  font-family: $font-body1;
+}
+
+.pagination li.active {
+  &:hover > a {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background-color: #ffffff;
+  }
+}
+
+.pagination li :hover {
+  color: #76a7ec;
+  border-bottom: 3px solid #76a7ec;
+  padding-bottom: 7px;
+  background-color: #ffffff;
+}
+
+.pagination li.active > a {
+  color: #76a7ec;
+  border-bottom: 3px solid #76a7ec;
+  padding-bottom: 7px;
+  background-color: #ffffff;
+}
+
+.page-item .next-item,
+.page-item .previous-item {
+  display: none;
+}

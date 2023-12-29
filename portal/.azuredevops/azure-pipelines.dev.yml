@@ -1,0 +1,37 @@
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+  - job: PortalGAP
+    displayName: 'Build and publish GAP Portal for development environment'
+    steps:
+          
+      - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+        displayName: 'Replace tokens in **/environment.development.ts'
+        inputs:
+          targetFiles: '**/environment.development.ts'
+
+      - task: NodeTool@0
+        displayName: 'Use Node 16.14.x'
+        inputs:
+          versionSpec: 16.14.x
+
+      - task: Npm@1
+        displayName: 'npm install'
+        inputs:
+          verbose: false
+
+      - task: Npm@1
+        displayName: 'npm run build'
+        inputs:
+          command: custom
+          verbose: false
+          customCommand: 'run builddev'
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: drop'
+        inputs:
+          PathtoPublish: dist/

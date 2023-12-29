@@ -1,0 +1,108 @@
+@import '../../../scss/vale.variables';
+
+:host {
+  color: #697489;
+  height: 100%;
+  max-height: inherit;
+  display: flex;
+  flex-direction: column;
+  font-family: $font-body1;
+
+  .header {
+    padding: 24px;
+    display: flex;
+    justify-content: flex-start !important;
+    background-color: #ffffff !important;
+    border-bottom: none !important;
+
+    .header__icon {
+      font-size: 45px;
+      width: 45px;
+      height: 45px;
+      margin-right: 8px;
+    }
+
+    .header__title {
+      margin: 0 0 4px 0;
+      padding: 0;
+      font-size: 20px;
+      line-height: 22px;
+      font-weight: bold;
+      align-self: center;
+    }
+
+    .header__subtitle {
+      margin: 0;
+      padding: 0;
+      font-size: 14px;
+      line-height: 16px;
+      font-weight: 300;
+      align-self: center;
+    }
+
+    .header__close-icon {
+      font-size: 14px;
+      cursor: pointer;
+      margin-left: auto;
+      color: #697489;
+    }
+  }
+
+  .user-agreement-container__line {
+    display: block;
+    height: 1px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #edeef0;
+    opacity: 0.2;
+  }
+
+  .user-agreement-container__content {
+    flex: 1;
+    padding: 30px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: normal;
+    margin: 0;
+    overflow: auto;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+
+    .actions__checkbox {
+      margin: 30px;
+    }
+
+    ::ng-deep .actions__button {
+      padding: 16px;
+      width: 100%;
+      background: #3d7edb;
+      color: white;
+      border-radius: 0px 0px 4px 4px;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: 0.8px;
+      transition: background 0.6s;
+    }
+
+    .disabled {
+      color: #959dac;
+      background: #d1d5db;
+    }
+  }
+
+  .footer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 32px;
+    background-color: #ffffff;
+
+    .footer__info {
+      font-size: 14px;
+      margin-left: 8px;
+    }
+  }
+}

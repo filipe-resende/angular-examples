@@ -1,0 +1,86 @@
+@import '../../scss/vale.variables';
+
+.modal-confirmation-header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 32px;
+  padding-top: 24px;
+  align-items: center;
+
+  .modal-confirmation-title {
+    .title {
+      font-family: $font-body1;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 24px;
+      color: #697489;
+    }
+  }
+}
+
+.modal-confirmation-close-button {
+  cursor: pointer;
+  margin-right: 20px;
+  .icon {
+    position: relative;
+    top: 4px;
+  }
+}
+
+.modal-confirmation-subtitle {
+  font-family: $font-body1;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  color: #697489;
+  width: 285px;
+  margin: 32px auto 15px;
+  text-align: center;
+}
+
+.custom-message {
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+.confirmation-message {
+  font-weight: 400;
+
+  .thing-to-removal {
+    font-weight: 700;
+  }
+}
+
+.modal-confirmation-buttons-container {
+  display: flex;
+  font-size: 14px;
+  font-weight: bold;
+
+  button {
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+    height: 48px !important;
+    width: 50% !important;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cancel-button {
+    color: $violetVale !important;
+    text-transform: uppercase;
+  }
+
+  .confirm-button {
+    background-color: $violetVale !important;
+    color: #fff;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: $violetVale !important;
+    }
+  }
+}

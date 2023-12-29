@@ -1,0 +1,24 @@
+<div
+  class="hourpicker-container"
+  [ngClass]="{
+    error: error
+  }"
+  [ngStyle]="{
+    width: stretched ? '100%' : '140px'
+  }"
+>
+  <label class="hourpicker-label" *ngIf="!!label">{{
+    label | translate
+  }}</label>
+
+  <mat-form-field [ngStyle]="{ 'background-color': disabled ? '#D1D5DB' : 'none' }">
+    <mat-icon matPrefix style="pointer-events: none">timer</mat-icon>
+    <input
+      [disabled]="disabled"
+      matInput
+      type="time"
+      [value]="value"
+      (change)="setHour($event)"
+    />
+  </mat-form-field>
+</div>

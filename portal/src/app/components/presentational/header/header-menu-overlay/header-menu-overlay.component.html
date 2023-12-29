@@ -1,0 +1,13 @@
+<app-animated-overlay>
+  <div class="header-popup-menu-container">
+    <ng-container *ngFor="let item of items">
+      <div
+        class="header-popup-menu-item"
+        *ngIf="item?.show"
+        (click)="onItemClick(item.route)"
+      >
+        <span>{{ item?.label | translate }}</span>
+      </div>
+    </ng-container>
+  </div>
+</app-animated-overlay>

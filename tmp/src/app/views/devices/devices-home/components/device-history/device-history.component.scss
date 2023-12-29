@@ -1,0 +1,93 @@
+@import '../../../../../scss/vale.variables';
+
+.history-title {
+  margin: 40px 0px 20px 0px;
+}
+
+.history-label-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100%;
+  color: $greyVale80;
+}
+
+.history-content {
+  max-height: 400px;
+  overflow-y: scroll;
+  overflow-x: none;
+  box-sizing: border-box;
+  border: 1px solid #e3e4e4;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 20px 8px 24px 8px;
+  font-size: 13px;
+  text-align: left;
+
+  &-row {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-left: 1.5rem;
+  }
+}
+
+.column-center {
+  text-align: center;
+}
+
+.history-data {
+  font-weight: 500;
+  margin-top: 10px;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid $greyVale20;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.noDisassociation {
+    background-color: #fff;
+    color: rgb(20, 18, 18);
+  }
+
+  &.hasAssociation {
+    background-color: $greyVale20;
+    color: $greyVale80;
+  }
+}
+
+.history-coordinates {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  color: $greyVale80;
+  font-size: 16px;
+}
+
+.outline-button {
+  height: 2rem;
+  width: 7.3rem;
+  background-color: transparent;
+  text-transform: uppercase;
+  font-family: $font-body1;
+  border: 1px solid $violetVale;
+  color: $violetVale;
+  font-size: 12px;
+  letter-spacing: 1.44px;
+  line-height: 16px;
+}
+
+.history-data:hover,
+.history-data:hover .outline-button {
+  background-color: $violetVale;
+  color: #ffffff;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: 1px solid #ffffff;
+}

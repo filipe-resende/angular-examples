@@ -1,0 +1,75 @@
+.flights-page-header-counters {
+  height: 80px;
+  width: 100%;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.flights-page-counters-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 8px;
+
+  & > label {
+    color: #909193;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+}
+
+.flights-page-counters {
+  display: flex;
+
+  // & > div:first-child {
+  //   & > p:first-child {
+  //     color: #69be28;
+  //   }
+  // }
+}
+
+.flights-page-counters-item {
+  border-left: 1px solid #c7c8c9;
+  color: #252727;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+  text-align: center;
+  height: 48px;
+  width: 81px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+
+  & > p:first-child {
+    margin: 0px;
+    font-size: 32px;
+    line-height: 16px;
+  }
+
+  & > p:last-child {
+    margin: 0px;
+    font-size: 10px;
+    letter-spacing: 0;
+    line-height: 10px;
+    color: #252727;
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 10px;
+    width: 120px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &:last-child {
+    border-right: 1px solid #c7c8c9;
+  }
+}

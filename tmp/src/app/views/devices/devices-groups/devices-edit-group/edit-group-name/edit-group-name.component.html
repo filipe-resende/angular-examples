@@ -1,0 +1,95 @@
+<div class="container">
+  <div class="title">
+    {{ 'EDIT_DEVICE_GROUP.EDIT_GROUP_NAME.EDIT_GROUP' | translate }}
+    <span class="name-group">
+      {{ data.groupName }}
+    </span>
+    <button type="button" class="close" aria-label="Close" (click)="onClose()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="body">
+    <div *ngIf="!showGroupDataValidator" class="spinner">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    <div
+      [ngStyle]="
+        showGroupDataValidator ? { display: 'block' } : { display: 'none' }
+      "
+    >
+      <div class="body-management">
+        <app-management
+          [showInputFilled]="true"
+          [inputFilled]="data.managementCode"
+          (validatorShowInput)="showManagementData($event)"
+          (managementName)="saveManagementName($event)"
+          (managementId)="saveManagementId($event)"
+        ></app-management>
+      </div>
+      <div class="body-sap-manager">
+        <div>
+          <app-sap-plant
+            [createSapPlantValidator]="false"
+            [showInputFilled]="true"
+            [inputFilled]="data.sapPlantCode"
+            (validatorShowInput)="showSapPlantData($event)"
+            (sapPlantCode)="saveSapPlantCode($event)"
+            (sendSapPlantId)="saveSapPlantId($event)"
+          ></app-sap-plant>
+        </div>
+        <div>
+          <p
+            [ngClass]="
+              managerEmailValidatorView ? 'input-title-invalid' : 'input-title'
+            "
+          >
+            {{
+              'EDIT_DEVICE_GROUP.EDIT_GROUP_NAME.GROUP_MANAGER.TITLE'
+                | translate
+            }}
+          </p>
+          <div class="input-title-flex">
+            <input
+              class="input-size-med-small"
+              [ngClass]="managerEmailValidatorView ? 'input-invalid' : 'input'"
+              matInput
+              [(ngModel)]="managerEmail"
+              type="text"
+              (ngModelChange)="checkField(); validatorManagerEmail()"
+            />
+            <span class="input-title-flex-email">{{
+              'EDIT_DEVICE_GROUP.EDIT_GROUP_NAME.GROUP_MANAGER.MANAGER_EMAIL'
+                | translate
+            }}</span>
+          </div>
+          <div
+            *ngIf="checkFirsCharacterOfManagerEmail()"
+            class="Manager-email-regex"
+          >
+            {{
+              'EDIT_DEVICE_GROUP.EDIT_GROUP_NAME.FIRST_CHARACTER' | translate
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="button">
+    <button class="button-cancel" (click)="onClose()">
+      {{ 'EDIT_DEVICE_GROUP.EDIT_GROUP_NAME.BUTTON_CANCEL' | translate }}
+    </button>
+    <button
+      [disabled]="!enableButton"
+      class="button-execution"
+      (click)="editGroupName()"
+    >
+      {{ 'EDIT_DEVICE_GROUP.EDIT_GROUP_NAME.BUTTON_SAVE' | translate }}
+    </button>
+  </div>
+  <div *ngIf="isLoadingGroup" class="spinner-container"></div>
+  <div *ngIf="isLoadingGroup" class="card">
+    <div class="spinner-loading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  </div>
+</div>

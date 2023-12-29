@@ -1,0 +1,391 @@
+<section class="historic-page-container">
+  <div
+    class="historic-page-left-column-container"
+    [ngStyle]="{
+      width: isLeftMenuOpened ? '450px' : '0px'
+    }"
+  >
+    <mat-icon (click)="onCloseLeftMenuButtonClick()" class="close-icon">
+      close
+    </mat-icon>
+    <span
+      *ngIf="things.length > 0 || filteredSingleThing"
+      class="historic-list"
+    >
+      ({{filteredSingleThing ? 1 : things.length}})
+    </span>
+    <mat-tab-group
+      [selectedIndex]="tabSelected"
+      (selectedTabChange)="onTabClick($event)"
+      animationDuration="0ms"
+    >
+      <mat-tab label="Buscar">
+        <ng-template mat-tab-label>
+          {{ "HISTORIC.SEARCH" | translate }}
+        </ng-template>
+
+        <div class="historic-page-form-container">
+          <!-- TOGGLE 30 min / 2H / 2H+ -->
+          <div class="historic-page-form-toggle">
+            <mat-button-toggle-group
+              class="button-group"
+              value="tab2h"
+              name="fontStyle"
+              aria-label="Font Style"
+              #group="matButtonToggleGroup"
+            >
+              <mat-button-toggle
+                id="mat-button-toggle-0"
+                (click)="onClearFiltersClick()"
+                value="tabRealTime"
+                >{{ "HISTORIC.REAL_TIME_TEXT" | translate }}
+                <mat-icon
+                  class="header__icon"
+                  [matTooltip]="'HISTORIC.REAL_TIME_DISCLAIMER' | translate"
+                >
+                  info_outline
+                </mat-icon>
+              </mat-button-toggle>
+              <mat-button-toggle
+                id="mat-button-toggle-1"
+                (click)="onClearFiltersClick()"
+                value="tab30min"
+                >30min
+              </mat-button-toggle>
+              <mat-button-toggle
+                id="mat-button-toggle-2"
+                (click)="onClearFiltersClick()"
+                value="tab2h"
+                >2h
+              </mat-button-toggle>
+              <mat-button-toggle
+                id="mat-button-toggle-3"
+                (click)="onClearFiltersClick()"
+                value="tab2hPlus"
+              >
+                2h+
+              </mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+          <div class="info-search">
+            <div class="info-search-container">
+              <div class="info-search-text">
+                <span
+                  class="span-real-time"
+                  *ngIf="group.value === 'tabRealTime'"
+                  >{{ "HISTORIC.INFO_REAL_TIME_SEARCH" | translate }}</span
+                >
+                <span *ngIf="group.value === 'tab30min'">
+                  {{ "HISTORIC.INFO_30MIM_SEARCH" | translate }}</span
+                >
+                <span *ngIf="group.value === 'tab2h'">
+                  {{ "HISTORIC.INFO_2H_SEARCH" | translate }}</span
+                >
+                <span *ngIf="group.value === 'tab2hPlus'">
+                  {{ "HISTORIC.INFO_2H_PLUS_SEARCH" | translate }}</span
+                >
+              </div>
+            </div>
+          </div>
+          <form [formGroup]="ngForm" class="historic-page-form">
+            <div class="historic-page-form-fields-container">
+              <div
+                *ngIf="(group.value === 'tab30min' ||group.value === 'tab2h' || group.value == 'tabRealTime')"
+              >
+                <div
+                  class="historic-page-dropdown-container historic-page-dropdown-container--bottom"
+                >
+                  <app-site-selector
+                    [displayAsInput]="true"
+                    (onSiteSelected)="clearGeofences()"
+                  ></app-site-selector>
+                </div>
+
+                <div class="historic-page-dropdown-container">
+                  <label class="select-label">
+                    {{ "HISTORIC.FENCES" | translate }}
+                  </label>
+                  <app-multi-select-autocomplete
+                    [options]="geofences$ | async"
+                    (selectChange)="onGeofencesChange($event)"
+                    label="Selecione"
+                    [isLoading]="isFetchingGeofences"
+                    #geofencesSelector
+                  >
+                  </app-multi-select-autocomplete>
+                </div>
+
+                <div class="historic-page-dropdown-container">
+                  <label class="select-label">
+                    {{ "HISTORIC.DEVICE_TYPE" | translate }}
+                  </label>
+                  <app-multi-select-autocomplete
+                    [options]="applications$ | async "
+                    (selectChange)="onApplicationSelect($event)"
+                    label="HISTORIC.DEVICE_TYPE"
+                    [isLoading]="loadingApplications"
+                    #devicesSelector
+                  >
+                  </app-multi-select-autocomplete>
+                </div>
+
+                <div style="padding-bottom: 16px">
+                  <div style="padding: 16px 0"></div>
+                  <div style="padding-bottom: 16px">
+                    <app-checkbox
+                      [label]="'HISTORIC.DISPLAY_AUTO_REFRESH'"
+                      [checked]="isAutoSyncThingsUpdateEnabled"
+                      (onSelect)="alterAutoSync($event)"
+                    ></app-checkbox>
+                  </div>
+                  <div
+                    class="historic-page-devices-not-reporting-time-period-input"
+                    *ngIf="willApplyDeviceDontReportingTimeRule"
+                  >
+                    <app-input
+                      type="number"
+                      [(inputModel)]="deviceDontReportingTimePeriod"
+                      style="width: 76px"
+                    >
+                    </app-input>
+                    <label>
+                      {{
+                      "HISTORIC.APPLY_SHOW_DEVICES_NOT_REPORTING_RULE_PERIOD_INPUT_LABEL"
+                      | translate }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="group.value === 'tab2hPlus'">
+                <div class="historic-page-dropdown-container--bottom">
+                  <app-select
+                    dropdownType="translatedOptions"
+                    label="HISTORIC.SEARCH_TYPE"
+                    [items]="docTypes"
+                    [clearable]="true"
+                    (selectedChange)="onChangeSearchType($event)"
+                  ></app-select>
+                </div>
+                <div *ngIf="selectedDocType">
+                  <div class="historic-page-dropdown-container">
+                    <app-input
+                      *ngIf="selectedDocType !== docTypeName else autoCompleteNameInput"
+                      [label]="selectedDocType | translate"
+                      [(inputModel)]="registrationDocumentPersonInputValue"
+                      [error]="!is2hPlusInputValid"
+                    ></app-input>
+
+                    <ng-template #autoCompleteNameInput>
+                      <label class="autocomplete-input-label" for="autocomplete"
+                        >{{ selectedDocType | translate}}</label
+                      >
+                      <input
+                        name="autocomplete"
+                        class="autocomplete-input"
+                        type="text"
+                        matInput
+                        [matAutocomplete]="auto"
+                        [formControl]="ngForm.controls.employeeName"
+                      />
+
+                      <mat-autocomplete
+                        #auto="matAutocomplete"
+                        [displayWith]="displayFn"
+                        (optionSelected)="onThingSelect($event.option.value)"
+                      >
+                        <mat-option
+                          *ngFor="let thing of thingsPreviewList$ | async"
+                          [value]="thing"
+                        >
+                          <span class="autocomplete-option-label"
+                            >{{ thing.name }}</span
+                          >
+                          <span
+                            class="autocomplete-option-label"
+                            *ngIf="canViewSensitiveData"
+                            >({{ thing.sourceInfos[0]?.type }}: {{
+                            thing.sourceInfos[0]?.value }})</span
+                          >
+                        </mat-option>
+                      </mat-autocomplete>
+                    </ng-template>
+                  </div>
+
+                  <div class="historic-page-dropdown-container">
+                    <app-datepicker-from-to
+                      [error]="!is2hPlusDateValid"
+                      [label]="'MAIN.DATE'"
+                      (dateChange)="setDate($event, 'startDate')"
+                      [max]="maxCalendarDate"
+                      (dateChange2)="setDate($event, 'endDate')"
+                      [max2]="currentDate"
+                      #datepicker2hPlus
+                    >
+                    </app-datepicker-from-to>
+                  </div>
+
+                  <div class="historic-page-hourpicker-container">
+                    <app-hourpicker-from-to
+                      [label]="'MAIN.HOUR'"
+                      [input1Value]="ngForm.value.startHour"
+                      [input2Value]="ngForm.value.endHour"
+                      (input1Change)="onSelectHour($event, 'startHour')"
+                      (input2Change)="onSelectHour($event, 'endHour')"
+                    ></app-hourpicker-from-to>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <section class="historic-page-form-buttons-container">
+              <app-button
+                type="submit"
+                [primary]="false"
+                [large]="true"
+                [strech]="true"
+                (onClick)="onClearFiltersClick()"
+              >
+                {{ "HISTORIC.CLEAR_FILTERS" | translate }}
+              </app-button>
+
+              <app-button
+                *ngIf="selectedDocType !== docTypeName else otherDocuments"
+                [large]="true"
+                [strech]="true"
+                [loading]="isApplyingFilters"
+                [disabled]="
+                  (group.value == 'tab2hPlus' && !selectedDocType)
+                "
+                (onClick)="onApplyFiltersClick(group.value)"
+              >
+                {{ "HISTORIC.APPLY_FILTERS" | translate }}
+              </app-button>
+
+              <ng-template #otherDocuments>
+                <app-button
+                  [large]="true"
+                  [strech]="true"
+                  [loading]="isApplyingFilters"
+                  [disabled]="(group.value == 'tab2hPlus' && !thingSelectedByPreviewList)"
+                  (onClick)="onApplyFiltersClick(group.value)"
+                >
+                  {{ "HISTORIC.APPLY_FILTERS" | translate }}
+                </app-button>
+              </ng-template>
+            </section>
+          </form>
+        </div>
+      </mat-tab>
+
+      <mat-tab
+        *ngIf="things.length > 0 || filteredSingleThing"
+        [label]="'HISTORIC.LIST' | translate"
+      >
+        <div class="historic-page-list-last-update-container">
+          <div
+            class="historic-page-list-last-update-container__content"
+            style="display: flex; flex-direction: column"
+          >
+            <div style="display: flex; justify-content: space-between">
+              <div class="last-update-div">
+                <img
+                  class="last-update"
+                  alt="Last Update"
+                  [src]="'assets/icons/info.svg'"
+                  class="image-info last-update"
+                />
+                <section
+                  class="historic-page-update-container"
+                  *ngIf="(refreshTimeInfo$ | async) as refreshTimeInfo"
+                >
+                  {{ refreshTimeInfo | date: ("HISTORIC.REFRESHED" | translate)
+                  }}
+                </section>
+              </div>
+
+              <div class="search-info">
+                <div *ngIf="group.value === 'tabRealTime'">
+                  <mat-icon matPrefix>timer</mat-icon>
+                  <div class="time-list">
+                    {{ "HISTORIC.REAL_TIME_TEXT" | translate }}
+                  </div>
+                </div>
+                <div *ngIf="group.value === 'tab30min'">
+                  <mat-icon matPrefix>timer</mat-icon>
+                  <div class="time-list">30min</div>
+                </div>
+                <div *ngIf="group.value === 'tab2h'">
+                  <mat-icon matPrefix>timer</mat-icon>
+                  <div class="time-list">2h</div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="shouldDistinguishSpots">
+              SPOT SLB I+II ({{spotsCounter.fixed}}); SPOT SLB III
+              ({{spotsCounter.slbIII}}); SPOT Temporário
+              ({{spotsCounter.floating}});
+            </div>
+          </div>
+        </div>
+
+        <app-historic-list
+          [filteredSingleThing]="filteredSingleThing"
+          [googleMapTwo]="googleMapRef"
+          [selectedSite]="selectedSite"
+          [things]="things"
+          [searchbarText]="searchbarText"
+          (clearMapFilteredOverlays)="clearMapFilteredOverlays()"
+          (setFilteredSingleThing)="setFilteredSingleThing($event)"
+          (showTrackingNotFoundError)="showTrackingNotFoundError($event)"
+          [shouldDistinguishSpots]="shouldDistinguishSpots"
+          (selectedDeviceLocation)="selectedDeviceLocationEvent($event)"
+          (selectedThing)="selectedThingToPosition($event)"
+          [intervalInMinutes]="periodInMinutes"
+          [dateFrom]="dateFrom"
+          [dateTill]="dateTill"
+        ></app-historic-list>
+        <div
+          class="export-container"
+          *ngIf="canViewSensitiveData && !filteredSingleThing"
+        >
+          <app-button
+            class="actions__button"
+            (onClick)="onExportThingsLatestEvents($event)"
+            [strech]="true"
+            [large]="true"
+          >
+            <mat-icon class="button__icon" style="margin-right: 5px"
+              >open_in_new</mat-icon
+            >
+            {{ "HISTORIC.EXPORT" | translate }}
+          </app-button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="historic-page-right-column-container">
+    <app-button
+      (onClick)="onOpenLeftMenuButtonClick()"
+      [upperCased]="true"
+      [bordered]="true"
+      [ngStyle]="{
+          display: isLeftMenuOpened ? 'none' : 'block'
+        }"
+      [strech]="true"
+    >
+      {{ things.length > 0 && tabSelected == 1 ? ("HISTORIC.RETURN_LIST" |
+      translate) : ("HISTORIC.SEARCH" | translate) }}
+    </app-button>
+    <div class="historic-page-alert" *ngIf="this.showDeviceGroupDisclaimer">
+      <app-alert [text]="'DISCLAIMERS.DEVICE_GROUP' | translate"></app-alert>
+    </div>
+    <app-map-two
+      (showDeviceTrace)="onDrawThingTraceButtonFromMapInfoWindowClick($event)"
+      name="historicMap"
+      [shouldDistinguishSpots]="shouldDistinguishSpots"
+      (selectedDeviceLocation)="sendPointToList($event)"
+    ></app-map-two>
+  </div>
+</section>

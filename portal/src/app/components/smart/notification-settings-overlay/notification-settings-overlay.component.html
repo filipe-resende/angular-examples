@@ -1,0 +1,163 @@
+<section class="notification-settings-overlay-container">
+  <form
+    class="notification-settings-overlay-form"
+    [formGroup]="settingsForm"
+    *ngIf="user$ | async as user; else loading"
+  >
+    <header mat-dialog-title class="notification-settings-overlay-header">
+      <h1 class="notification-settings-overlay-title">
+        {{ 'NOTIFICATION.SETTINGS_OVERLAY.TITLE' | translate }}
+      </h1>
+
+      <button
+        class="notification-settings-overlay-close-btn"
+        mat-icon-button
+        (click)="close()"
+        [disabled]="isLoadingButton"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+    <main class="notification-settings-overlay-content">
+      <section class="message-type-menu">
+        <div class="notification-settings-overlay-toggler">
+          <app-toggle
+            [disabled]="isLoadingButton"
+            id="e-mail"
+            (onSelect)="onToggleEmailInput($event, user.email)"
+            [checked]="settingsForm.controls.sendEmail.value"
+          ></app-toggle>
+          <label
+            for="e-mail"
+            class="notification-settings-overlay-toggler-label"
+            >{{
+              'NOTIFICATION.SETTINGS_OVERLAY.RECEIVE_BY_EMAIL' | translate
+            }}</label
+          >
+          <p
+            class="notification-settings-overlay-toggler-email"
+            *ngIf="settingsForm.controls.sendEmail.value"
+          >
+            ({{ user.email }})
+          </p>
+        </div>
+        <div class="notification-settings-overlay-toggler">
+          <app-toggle
+            [disabled]="isLoadingButton"
+            id="receiveBySms"
+            (onSelect)="onToggleSmsInput($event)"
+            [checked]="settingsForm.controls.sendSms.value"
+          ></app-toggle>
+          <label
+            for="receiveBySms"
+            class="notification-settings-overlay-toggler-label"
+          >
+            {{ 'NOTIFICATION.SETTINGS_OVERLAY.RECEIVE_BY_SMS' | translate }}
+          </label>
+        </div>
+        <div class="notification-settings-overlay-phone">
+          <input
+            [disabled]="isLoadingButton"
+            class="notification-settings-overlay-input"
+            type="text"
+            [placeholder]="
+              'NOTIFICATION.SETTINGS_OVERLAY.PROVIDE_NUMBER_WITH_AREA_CODE'
+                | translate
+            "
+            mask="(00) 00000-0000"
+            [validation]="false"
+            formControlName="phoneNumber"
+            [ngClass]="{
+              error:
+                settingsForm.controls.phoneNumber.dirty &&
+                settingsForm.controls.phoneNumber.invalid,
+              visibility: !settingsForm.controls.sendSms.value
+            }"
+          />
+
+          <p
+            [ngClass]="{
+              visibility: !(
+                settingsForm.controls.phoneNumber.dirty &&
+                settingsForm.controls.phoneNumber.invalid
+              )
+            }"
+            class="notification-settings-overlay-error-message"
+          >
+            {{
+              'NOTIFICATION.SETTINGS_OVERLAY.PROVIDED_NUMBER_INVALID'
+                | translate
+            }}
+          </p>
+        </div>
+      </section>
+      <section class="notification-settings-overlay-type-menu">
+        <h2 class="notification-settings-overlay-type-menu-header">
+          {{
+            'NOTIFICATION.SETTINGS_OVERLAY.TYPES_OF_NOTIFICATIONS' | translate
+          }}
+        </h2>
+        <div class="notification-settings-overlay-checkbox">
+          <mat-checkbox
+            [disabled]="
+              (!settingsForm.controls.sendSms.value &&
+                !settingsForm.controls.sendEmail.value) ||
+              isLoadingButton
+            "
+            [checked]="settingsForm.controls.panicAlert.value"
+            [formControl]="settingsForm.controls.panicAlert"
+          >
+          </mat-checkbox>
+          <label class="notification-settings-overlay-checkbox-label">{{
+            'NOTIFICATION.SETTINGS_OVERLAY.PANIC_BUTTON' | translate
+          }}</label>
+        </div>
+        <div class="notification-settings-overlay-checkbox">
+          <mat-checkbox
+            [disabled]="
+              (!settingsForm.controls.sendSms.value &&
+                !settingsForm.controls.sendEmail.value) ||
+              isLoadingButton
+            "
+            [checked]="settingsForm.controls.lowBattery.value"
+            [formControl]="settingsForm.controls.lowBattery"
+          >
+          </mat-checkbox>
+          <label class="notification-settings-overlay-checkbox-label">
+            {{ 'NOTIFICATION.SETTINGS_OVERLAY.LOW_BATTERY' | translate }}
+          </label>
+        </div>
+      </section>
+    </main>
+
+    <footer class="notification-settings-overlay-buttons-container">
+      <app-button
+        [large]="true"
+        [strech]="true"
+        [customClass]="'notification-settings-overlay-cancel-button'"
+        (onClick)="close()"
+        [disabled]="isLoadingButton"
+      >
+        {{ 'NOTIFICATION.SETTINGS_OVERLAY.CANCEL' | translate }}
+      </app-button>
+      <app-button
+        [large]="true"
+        [strech]="true"
+        [customClass]="'notification-settings-overlay-send-button'"
+        [disabled]="settingsForm.invalid"
+        (onClick)="onSaveNotificationsPreferences()"
+        [loading]="isLoadingButton"
+      >
+        {{ 'NOTIFICATION.SETTINGS_OVERLAY.SAVE' | translate }}
+      </app-button>
+    </footer>
+  </form>
+
+  <ng-template #loading>
+    <main class="notification-settings-overlay-container">
+      <div class="notification-settings-overlay-spinner">
+        <mat-spinner [diameter]="30"></mat-spinner>
+      </div>
+    </main>
+  </ng-template>
+</section>

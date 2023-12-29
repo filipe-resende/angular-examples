@@ -1,0 +1,49 @@
+<div class="item-detector">
+  <div class="init-detector">
+    <div class="detectors-details">
+      <div class="detector-details">
+        <div class="name">{{ data.name }}</div>
+        <div class="id">
+          {{ 'DETECTORS.DETECTORS_BOX.TYPE_DEVICE' | translate }}:
+          {{ data.type }}
+        </div>
+        <div class="id">
+          {{ 'DETECTORS.DETECTORS_BOX.AREA_NAME' | translate }}:
+        </div>
+        <div class="coordinates">
+          {{ 'DETECTORS.DETECTORS_BOX.COORDINATES' | translate }}:
+          {{ data.position.geographic.coordinates }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="application-name">
+    <span>{{ applicationName }}</span>
+  </div>
+
+  <div class="">
+    <span *ngIf="!data.isAreaAccessPoint">
+      Status: {{ 'DETECTORS.DETECTORS_BOX.STATUS_DEACTIVATE' | translate }}
+    </span>
+    <span *ngIf="data.isAreaAccessPoint">
+      Status:
+      <span class="active-application">{{
+        'DETECTORS.DETECTORS_BOX.STATUS_ACTIVATE' | translate
+      }}</span></span
+    >
+  </div>
+
+  <div class="end-item">
+    <span class="perimeter"
+      >{{ 'DETECTORS.DETECTORS_BOX.PERIMETER' | translate }}:</span
+    >
+    <div class="icon">
+      <ui-switch
+        size="small"
+        disabled
+        [(ngModel)]="data.isAreaAccessPoint"
+      ></ui-switch>
+    </div>
+  </div>
+</div>

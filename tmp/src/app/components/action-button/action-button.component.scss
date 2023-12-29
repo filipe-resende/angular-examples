@@ -1,0 +1,106 @@
+@import '../../scss/vale.variables';
+
+:host {
+  outline: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:focus {
+  outline: none;
+}
+
+.action-button {
+  border: 0;
+  text-transform: uppercase;
+  font-family: $font-body1;
+  &.blue {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background-color: $violetVale;
+    color: #ffffff;
+
+    .blue-label {
+      height: 24px;
+      font-weight: 100;
+      font-size: 14px;
+      letter-spacing: 1.42px;
+      line-height: 24px;
+    }
+
+    &.full-width {
+      width: 100%;
+    }
+
+    &.medium {
+      height: 32px;
+    }
+  }
+
+  &.association {
+    height: 32px;
+    width: 118px;
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 1.44px;
+    line-height: 16px;
+  }
+
+  &.grey {
+    background-color: $greyVale20;
+    box-shadow: inset 1px 0 0 0 #ffffff;
+    color: $greyVale80;
+
+    .grey-label {
+      letter-spacing: 1.44px;
+      height: 24px;
+      font-size: 14px;
+      line-height: 24px;
+    }
+  }
+
+  &.red {
+    background-color: $redVale;
+    color: #fff;
+    font-family: $font-body1;
+    font-size: 12px;
+    letter-spacing: 1.42px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .disassociate-button {
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    background-color: $greyVale20;
+    margin-right: 8px;
+  }
+}
+
+.large {
+  width: 216px;
+  height: 40px;
+}
+
+.normal {
+  width: 116px;
+  height: 39px;
+  border-radius: 2px;
+}
+
+.label-flex {
+  font-family: $font-body1-medium;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.small {
+  width: 125px;
+  height: 32px;
+}

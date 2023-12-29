@@ -1,0 +1,55 @@
+<div
+  class="tu-container"
+  *ngIf="thingToBeUpdated; else loading"
+  (scroll)="onScroll()"
+>
+  <div class="view-wrapper">
+    <app-main-title>
+      <app-arrow-button
+        [routerLink]="['/things']"
+        label="voltar"
+      ></app-arrow-button>
+      <header>{{ 'THING_UPDATE.TITLE' | translate }} - {{ name }}</header>
+    </app-main-title>
+
+    <app-tu-form
+      (onSubmit)="update($event)"
+      (onSubmitReactivation)="refresh($event)"
+      [submited]="formSubmited"
+      [formData]="thingToBeUpdated"
+    >
+      <app-info-cards [thingData]="thingToBeUpdated"></app-info-cards>
+
+      <div class="first-picker">
+        <app-date-picker
+          [model]="defaultInitialDate"
+          (emitDay)="getFirstDate($event)"
+          (emitHour)="getFirstDateHour($event)"
+        ></app-date-picker>
+      </div>
+
+      <div class="last-picker">
+        <app-date-picker
+          [model]="defaultLastDate"
+          (emitDay)="getLastDate($event)"
+          (emitHour)="getLastDateHour($event)"
+        ></app-date-picker>
+      </div>
+
+      <app-thing-history
+        [thingId]="thingToBeUpdated.id"
+        [firstDate]="firstDate"
+        [lastDate]="lastDate"
+        [firstDateHour]="firstDateHour"
+        [lastDateHour]="lastDateHour"
+      >
+      </app-thing-history>
+    </app-tu-form>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="tu-spinner-content">
+    <i class="mdi mdi-loading mdi-36px mdi-spin"></i>
+  </div>
+</ng-template>

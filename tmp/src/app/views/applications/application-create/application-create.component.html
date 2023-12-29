@@ -1,0 +1,80 @@
+<section class="container-fluid application-create-container">
+  <header class="application-create-header">
+    <app-main-title>
+      <app-arrow-button
+        [routerLink]="['/applications']"
+        label="voltar"
+      ></app-arrow-button>
+      <header>{{ 'APPLICATION_CREATE.TITLE' | translate }}</header>
+    </app-main-title>
+  </header>
+
+  <form
+    class="application-create-form"
+    [formGroup]="applicationForm"
+    (submit)="onSubmit()"
+  >
+    <div class="application-create-form-control">
+      <label class="application-create-form-label">Nome</label>
+      <input class="application-create-form-input" formControlName="name" />
+    </div>
+
+    <div class="application-create-form-control">
+      <label class="application-create-form-label">Descrição</label>
+      <input
+        class="application-create-form-input"
+        formControlName="description"
+      />
+    </div>
+
+    <div class="application-create-form-control">
+      <input
+        type="checkbox"
+        id="showInDeviceTypesListCheckbox"
+        formControlName="showInDeviceTypesList"
+        class="application-create-form-checkbox"
+      />
+      <label for="showInDeviceTypesListCheckbox">
+        {{ 'APPLICATION_CREATE.SHOW_IN_DEVICE_TYPES_LIST' | translate }}</label
+      >
+    </div>
+
+    <div class="application-create-form-control">
+      <input
+        type="checkbox"
+        id="allowDeviceAssociationCheckbox"
+        formControlName="allowDeviceAssociation"
+        class="application-create-form-checkbox"
+      />
+      <label for="allowDeviceAssociationCheckbox">
+        {{ 'APPLICATION_CREATE.ALLOW_DEVICE_ASSOCIATION' | translate }}</label
+      >
+    </div>
+
+    <div class="application-create-form-control">
+      <input
+        type="checkbox"
+        id="allowInclusionDeviceGroupCheckbox"
+        formControlName="allowInclusionDeviceGroup"
+        class="application-create-form-checkbox"
+      />
+      <label for="allowInclusionDeviceGroupCheckbox">
+        {{
+          'APPLICATION_CREATE.ALLOW_INCLUSION_IN_DEVICE_GROUP' | translate
+        }}</label
+      >
+    </div>
+
+    <div class="application-create-form-actions">
+      <app-action-button
+        type="submit"
+        [ngClass]="['blue', 'small']"
+        [labelClass]="'blue-label'"
+        [disabled]="applicationForm.invalid"
+      >
+        {{ 'APPLICATION_CREATE.SAVE' | translate }}
+      </app-action-button>
+    </div>
+    <br />
+  </form>
+</section>

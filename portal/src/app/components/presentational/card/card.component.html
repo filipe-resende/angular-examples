@@ -1,0 +1,16 @@
+<section class="card-container">
+  <div
+    class="card-header-container"
+    *ngIf="!!title || (ref && ref.children && ref.children.length > 0)"
+  >
+    <h3 *ngIf="!!title" class="card-title">
+      {{ title | translate }}
+    </h3>
+    <div class="header-ref" #ref>
+      <ng-content select="[header]"></ng-content>
+    </div>
+  </div>
+  <div class="card-content">
+    <ng-content></ng-content>
+  </div>
+</section>

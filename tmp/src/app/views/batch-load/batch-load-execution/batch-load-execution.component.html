@@ -1,0 +1,145 @@
+<div class="load-execution-container">
+  <div class="load-title">
+    <img src="../../../../../assets/alert_outline.svg" alt="" />
+    <div>
+      <p class="load-title-question">
+        {{ 'BATCH_LOAD_EXECUTION.QUESTION' | translate }}
+      </p>
+      <p>{{ 'BATCH_LOAD_EXECUTION.PORTAL_NAME' | translate }}</p>
+    </div>
+  </div>
+
+  <div class="load-description">
+    {{ 'BATCH_LOAD_EXECUTION.DESCRIPTION_ONE' | translate }}
+    <span class="bold-text"
+      >{{ 'BATCH_LOAD_EXECUTION.DESCRIPTION_TWO' | translate }}
+    </span>
+    <span>{{ 'BATCH_LOAD_EXECUTION.DESCRIPTION_THREE' | translate }}</span>
+    <div class="data-revision bold-text">
+      <p>{{ 'BATCH_LOAD_EXECUTION.DESCRIPTION_FIVE' | translate }}</p>
+    </div>
+
+    <div class="selected-fields">
+      <div class="field-info" *ngIf="importDeviceFields.deviceType">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.DEVICE_TYPE.TITLE' | translate
+            }}:
+          </span>
+          <span class="field">{{ importDeviceFields.deviceType }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.loadType">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.LOAD_TYPE.TITLE' | translate
+            }}:
+          </span>
+          <span class="field">{{ importDeviceFields.loadType }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.movementDate">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.MOVE_DATE.TITLE' | translate
+            }}:
+          </span>
+          <span class="field"
+            >{{ importDeviceFields.movementDate | date: 'dd/MM/yyyy':'UTC' }}
+          </span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.calledCode">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.FALLING.TITLE' | translate }}:
+          </span>
+          <span class="field">{{ importDeviceFields.calledCode }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.management">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.MANAGEMENT_NAME.TITLE'
+                | translate
+            }}:
+          </span>
+          <span class="field">{{ importDeviceFields.management }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.sapPlant">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.SAP_PLANT.TITLE' | translate
+            }}:
+          </span>
+          <span class="field">{{ importDeviceFields.sapPlant }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.managerName">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.GROUP_MANAGER.TITLE'
+                | translate
+            }}:
+          </span>
+          <span class="field">{{ importDeviceFields.managerName }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.groupName">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.GROUP_NAME.TITLE' | translate
+            }}:
+          </span>
+          <span class="field">{{ importDeviceFields.groupName }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.invoiceVale">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{ 'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.INVOICE.TITLE' | translate }}:
+          </span>
+          <span class="field">{{ importDeviceFields.invoiceVale }}</span>
+        </div>
+      </div>
+      <div class="field-info" *ngIf="importDeviceFields.invoiceProvider">
+        <hr class="line" />
+        <div class="selected-text-info">
+          <span class="label">
+            {{
+              'BATCH_LOAD_HOME.BATCH_LOAD_SELECT.INVOICE_PROVIDER.TITLE'
+                | translate
+            }}:
+          </span>
+          <span class="field">{{ importDeviceFields.invoiceProvider }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="load-button">
+    <button class="button-add" (click)="closeModal()">
+      {{ 'BATCH_LOAD_EXECUTION.BUTTON_CANCEL' | translate }}
+    </button>
+    <button class="button-execution" (click)="sendLoad()">
+      {{ 'BATCH_LOAD_EXECUTION.BUTTON_CONFIRM' | translate }}
+    </button>
+  </div>
+</div>

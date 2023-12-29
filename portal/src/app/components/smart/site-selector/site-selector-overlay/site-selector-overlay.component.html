@@ -1,0 +1,70 @@
+<app-overlay-info [hideButtonSection]="true">
+  <section class="site-selector-overlay-selectors-container">
+    <app-select
+      label="SITE_SELECTOR.COUNTRY"
+      [items]="countries"
+      bindLabel="name"
+      bindValue="name"
+      [clearable]="true"
+      [disabled]="!countries"
+      [selected]="
+        selectedSiteModelToUpdate &&
+        selectedSiteModelToUpdate.country &&
+        selectedSiteModelToUpdate.country.name
+      "
+      (onSelect)="onSelectCountry($event)"
+      [loading]="loading"
+    >
+    </app-select>
+
+    <app-select
+      label="SITE_SELECTOR.STATE"
+      [items]="states"
+      bindLabel="name"
+      bindValue="name"
+      [clearable]="true"
+      [disabled]="!states"
+      [selected]="
+        selectedSiteModelToUpdate &&
+        selectedSiteModelToUpdate.state &&
+        selectedSiteModelToUpdate.state.name
+      "
+      (onSelect)="onSelectState($event)"
+      [loading]="loading"
+    >
+    </app-select>
+
+    <app-select
+      label="SITE_SELECTOR.SITE"
+      [items]="sites"
+      bindLabel="name"
+      bindValue="name"
+      [clearable]="true"
+      [disabled]="!sites"
+      [selected]="
+        selectedSiteModelToUpdate &&
+        selectedSiteModelToUpdate.site &&
+        selectedSiteModelToUpdate.site.name
+      "
+      (onSelect)="onSelectSite($event)"
+      [loading]="loading"
+    >
+    </app-select>
+  </section>
+  <section class="site-selector-overlay-buttons-container">
+    <app-button
+      [primary]="false"
+      [strech]="true"
+      (onClick)="onCancelButtonClick()"
+    >
+      {{ 'MAIN.CANCEL' | translate }}
+    </app-button>
+    <app-button
+      [strech]="true"
+      (onClick)="onSubmitButtonClick()"
+      [disabled]="!isSaveButtonEnabled()"
+    >
+      {{ 'MAIN.SAVE' | translate }}
+    </app-button>
+  </section>
+</app-overlay-info>

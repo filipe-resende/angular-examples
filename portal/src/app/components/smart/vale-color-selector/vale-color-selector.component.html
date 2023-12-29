@@ -1,0 +1,71 @@
+<mat-form-field appearance="outline" class="field">
+  <mat-label>{{ label | translate }}</mat-label>
+
+  <mat-select
+    (selectionChange)="onSelectColor($event)"
+    disableOptionCentering
+    [value]="model"
+  >
+    <mat-select-trigger>
+      <div class="option">
+        <div
+          class="option__color-square"
+          [ngStyle]="{
+            'background-color': isCustomColorSelected ? ValeColor[model] : model
+          }"
+        ></div>
+
+        <ng-container *ngIf="isCustomColorSelected; else customColorView">
+          {{ model }}
+        </ng-container>
+
+        <ng-template #customColorView>
+          {{ model | translate }}
+        </ng-template>
+      </div>
+    </mat-select-trigger>
+    <mat-option *ngIf="isCustomColorSelected" [value]="model">
+      <div class="option">
+        <div
+          class="option__color-square"
+          [ngStyle]="{ 'background-color': model }"
+        ></div>
+
+        {{ ValeColorNames[ValeColor[model]] }}
+      </div>
+    </mat-option>
+    <mat-option
+      *ngFor="let color of ValeColorNames | enumKeysToArray"
+      [value]="ValeColor[color]"
+    >
+      <div class="option">
+        <div
+          class="option__color-square"
+          [ngStyle]="{ 'background-color': ValeColor[color] }"
+        ></div>
+
+        {{ ValeColorNames[color] | translate }}
+      </div>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div>
+  <app-button (onClick)="onAddCustomColorClick()">
+    {{ 'FENCES.CUSTOM_COLOR' | translate }}
+  </app-button>
+
+  <input
+    class="color-picker__input"
+    #colorPicker
+    matInput
+    [(colorPicker)]="model"
+    cpOutputFormat="hex"
+    [style.background]="model"
+    [cpOKButton]="true"
+    [cpPosition]="'bottom'"
+    (colorPickerSelect)="onCustomColorSelected($event)"
+    [(ngModel)]="model"
+    [ngModelOptions]="{ standalone: true }"
+  />
+</div>

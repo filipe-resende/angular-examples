@@ -1,0 +1,194 @@
+<div class="container">
+  <div class="modal-header">
+    <h5 class="modal-title" d="exampleModalLabel">
+      {{ 'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.TITLE' | translate }}
+    </h5>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="onClose()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-wrapper thing-modal-wrapper">
+    <div class="search-container">
+      <div class="thing-search">
+        <div>
+          <select
+            [(ngModel)]="selectedType"
+            class="document-select-input"
+            (ngModelChange)="getThingByType($event)"
+          >
+            <option value="" disabled selected hidden>Tipo de busca</option>
+            <option
+              *ngFor="let documentType of typeOptions"
+              [value]="documentType.name"
+            >
+              {{ documentType.value }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="selectedType === 'Name'">
+          <form [formGroup]="thingsFormGroup">
+            <div class="search-input-container">
+              <input
+                formControlName="byThingName"
+                class="search-input modal-input"
+                placeholder="{{
+                  'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.SEARCH_BOX' | translate
+                }}"
+                [placeholder]="placeholder"
+                [disabled]="isEdit"
+                (keydown.enter)="searchByName(searchInput)"
+                [(ngModel)]="searchInput"
+              />
+              <em
+                class="mdi mdi-magnify"
+                id="search-btn"
+                (click)="searchByName(searchInput)"
+              ></em>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="selectedType === 'CPF'">
+          <div class="search-input-container">
+            <input
+              class="search-input modal-input"
+              mask="000.000.000-00"
+              [(ngModel)]="sourceValue"
+              [placeholder]="placeholder"
+              [disabled]="isEdit"
+              (keydown.enter)="onChangeDocument(sourceValue)"
+            />
+            <em
+              class="mdi mdi-magnify"
+              id="search-btn"
+              (click)="onChangeDocument(sourceValue)"
+            ></em>
+          </div>
+        </div>
+        <div
+          class="search-input-container"
+          *ngIf="selectedType === 'IAMID' || selectedType === 'PASSPORT'"
+        >
+          <input
+            class="search-input modal-input"
+            [(ngModel)]="sourceValue"
+            [placeholder]="placeholder"
+            [disabled]="isEdit"
+            (keydown.enter)="onChangeDocument(sourceValue)"
+          />
+          <em
+            class="mdi mdi-magnify"
+            id="search-btn"
+            (click)="onChangeDocument(sourceValue)"
+          ></em>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!isLoading; else loading">
+      <div class="list-thing-table">
+        <mat-table
+          aria-label="source info table"
+          mat-table
+          [dataSource]="thingsForTable"
+          *ngIf="thingsForTable.length > 0"
+          (scroll)="onTableScroll($event)"
+        >
+          <ng-container matColumnDef="name">
+            <th id="name" mat-header-cell *matHeaderCellDef>
+              {{
+                'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.COLUMNS.NAME' | translate
+              }}
+            </th>
+            <td mat-cell *matCellDef="let thing">
+              <input
+                class="radio-button"
+                type="radio"
+                id="radio"
+                name="thing"
+                [value]="thing.id"
+                (click)="onSelectThing(thing)"
+              />
+              <span class="thing-name">{{ thing.name }}</span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="cpf">
+            <th id="cpf" mat-header-cell *matHeaderCellDef>
+              {{
+                'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.COLUMNS.CPF' | translate
+              }}
+            </th>
+            <td mat-cell *matCellDef="let thing">{{ thing.cpf | cpf }}</td>
+          </ng-container>
+          <ng-container matColumnDef="passport">
+            <th id="passport" mat-header-cell *matHeaderCellDef>
+              {{
+                'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.COLUMNS.PASSPORT'
+                  | translate
+              }}
+            </th>
+            <td mat-cell *matCellDef="let thing">{{ thing.passport }}</td>
+          </ng-container>
+          <ng-container matColumnDef="iam">
+            <th id="iam" mat-header-cell *matHeaderCellDef>
+              {{
+                'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.COLUMNS.IAM' | translate
+              }}
+            </th>
+            <td mat-cell *matCellDef="let thing">{{ thing.iam }}</td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th id="status" mat-header-cell *matHeaderCellDef>
+              {{ 'DEVICE_LIST.MODAL.ASSOCIATE.COLUMNS.STATUS' | translate }}
+            </th>
+            <td mat-cell *matCellDef="let thing">
+              <div
+                class="tu-block-relation-type-when-active"
+                *ngIf="thing.status; else associationStatus"
+              >
+                {{ 'DEVICE_LIST.MODAL.ASSOCIATE.STATUS.ACTIVE' | translate }}
+              </div>
+              <ng-template #associationStatus>
+                <div class="tu-block-relation-type-when-inactive">
+                  {{
+                    'DEVICE_LIST.MODAL.ASSOCIATE.STATUS.INACTIVE' | translate
+                  }}
+                </div>
+              </ng-template>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th id="email" mat-header-cell *matHeaderCellDef>
+              {{
+                'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.COLUMNS.EMAIL' | translate
+              }}
+            </th>
+            <td mat-cell *matCellDef="let thing">{{ thing.email }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+        </mat-table>
+      </div>
+      <div class="container-pagination">
+        <app-action-button
+          *ngIf="thingsForTable.length"
+          [ngClass]="['blue', 'large']"
+          [ngClassDisabled]="['grey', 'large']"
+          [labelClass]="'blue-label'"
+          [disabled]="disabled"
+          (action)="selectThing()"
+        >
+          {{ 'EDIT_DEVICE_GROUP.MODAL_SELECT_THING.SELECT_BUTTON' | translate }}
+        </app-action-button>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="modal-spinner-content">
+    <em class="mdi mdi-loading mdi-36px mdi-spin"></em>
+  </div>
+</ng-template>

@@ -1,0 +1,176 @@
+<section class="panic-alert-attendance-details-overlay-container">
+  <div class="panic-alert-attendance-details-overlay-close-button" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </div>
+
+  <h1 class="panic-alert-attendance-details-overlay-title">
+    {{ "PANIC_BUTTON.ATTENDANCE_DETAILS" | translate }}
+  </h1>
+
+  <app-label iconName="watch_later" *ngIf="alert.eventDate" [text]="alert.eventDate | date: 'dd/MM/yyyy HH:mm'">
+  </app-label>
+
+  <app-label
+    iconName="location_on"
+    *ngIf="alert.areaName"
+    [tooltip]="alert.areaName"
+    [maxWidthLength]="300"
+    [text]="alert.areaName"
+  >
+  </app-label>
+  <app-label
+    iconName="person"
+    *ngIf="alert.thing?.name || alert.thing?.company"
+    [maxWidthLength]="300"
+    [tooltip]="
+      (alert.thing?.name || '') +
+      (alert.thing?.name && alert.thing?.company ? ' / ' : '') +
+      (alert.thing?.company || '')
+    "
+    [text]="
+      (alert.thing?.name || '') +
+      (alert.thing?.name && alert.thing?.company ? ' / ' : '') +
+      (alert.thing?.company || '')
+    "
+  >
+  </app-label>
+
+  <app-label
+    iconName="credit_card"
+    *ngIf="alert.thing?.document || alert.thing?.iamId || alert.thing?.passport"
+    [text]="
+      (alert.thing?.document || '') +
+      ((alert.thing?.document && alert.thing?.iamId ? ' / ' : '') + (alert.thing?.iamId || '')) +
+      (((alert.thing?.document || alert.thing?.iamId) && alert.thing?.passport ? ' / ' : '') +
+        (alert.thing?.passport || ''))
+    "
+  >
+  </app-label>
+
+  <app-label
+    iconName="stay_current_portrait"
+    *ngIf="alert.sourceApplicationName || alert.device"
+    [text]="
+      (alert.sourceApplicationName || '') +
+      ((alert.sourceApplicationName && alert.device ? ' / ' : '') + (alert.device || ''))
+    "
+  >
+  </app-label>
+
+  <div style="margin-top: 16px"></div>
+
+  <h1 class="panic-alert-attendance-details-overlay-title">
+    {{ "PANIC_BUTTON.ATTENDANCE_INFO" | translate }}
+  </h1>
+
+  <div class="panic-alert-attendance-details-overlay-label">{{ "PANIC_BUTTON.ALARM_TYPE" | translate }}</div>
+  <div style="margin-top: 4px">
+    <mat-radio-group
+      class="panic-alert-attendance-details-overlay-toggle"
+      [(ngModel)]="alarmType"
+      [disabled]="isAttendanceCompleted"
+    >
+      <mat-radio-button [value]="true">
+        {{ "MAIN.TRUE" | translate }}
+      </mat-radio-button>
+      <mat-radio-button [value]="false">
+        {{ "MAIN.FALSE" | translate }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div class="panic-alert-attendance-details-overlay-label">{{ "PANIC_BUTTON.IN_ATTENDANCE_BY" | translate }}</div>
+  <div style="margin-top: 4px">
+    <app-label iconName="assignment_ind" [stretched]="true" [text]="attendedBy"> </app-label>
+  </div>
+
+  <div class="panic-alert-attendance-details-overlay-label">
+    {{ "PANIC_BUTTON.COMMENTS" | translate }}
+  </div>
+  <div class="panic-alert-attendance-details-comments-section" #commentsSection>
+    <div *ngIf="!comments || comments.length === 0; else showComments">
+      <label class="panic-alert-attendance-no-comment-done-label" *ngIf="isAttendanceCompleted; else noCommentMadeYet">
+        {{ "PANIC_BUTTON.NO_COMMENT" | translate }}
+      </label>
+      <ng-template #noCommentMadeYet>
+        <label class="panic-alert-attendance-no-comment-done-label">
+          {{ "PANIC_BUTTON.NO_COMMENT" | translate }}
+        </label>
+      </ng-template>
+    </div>
+    <ng-template #showComments>
+      <app-comments-section
+        [comments]="comments"
+        [iconName]="'content_copy'"
+        (onGetElementReference)="copyToClipboard($event)"
+        [iconTolltipDescription]="'MAIN.COPY_TO_CLIPBOARD' | translate"
+      ></app-comments-section>
+    </ng-template>
+  </div>
+  <div #inputRef>
+    <app-input
+      *ngIf="!isAttendanceCompleted"
+      [icon]="'send'"
+      [placeholder]="'MAIN.TYPE_YOUR_MESSAGE_HERE' | translate"
+      [iconCursorPointer]="true"
+      (onIconClick)="addComment($event)"
+      (keyup)="commentLength = $event.target.value.length"
+      [maxlength]="500"
+    ></app-input>
+    <div class="panic-alert-attendance-comment-info">
+      <div class="panic-alert-attendance-comment-exceded-error" *ngIf="commentLength >= commentMaxLength">
+        {{ commentLength > commentMaxLength ? ("PANIC_BUTTON.COMMENT_EXCEEDED_MAX_LENGHT" | translate) : "" }}
+      </div>
+      <div class="panic-alert-attendance-comment-counter">
+        {{ commentLength + "/" + commentMaxLength }}
+      </div>
+    </div>
+  </div>
+
+  <div class="panic-alert-attendance-details-overlay-label">
+    {{ "PANIC_BUTTON.DATETIME_CLOSING_ATTENDANCE" | translate }}
+  </div>
+  <div class="panic-alert-attendance-date-hour-container">
+    <app-datepicker
+      [stretched]="true"
+      [disabled]="isAttendanceCompleted"
+      [value]="date"
+      (dateChange)="onSelectClosureDate($event)"
+    ></app-datepicker>
+    <app-hourpicker
+      [stretched]="true"
+      [disabled]="isAttendanceCompleted"
+      [value]="hour"
+      (hourChange)="onSelectClosureHour($event)"
+    ></app-hourpicker>
+  </div>
+</section>
+
+<div class="panic-alert-attendance-details-overlay-buttons-container" *ngIf="!isAttendanceCompleted">
+  <app-button
+    [large]="true"
+    [strech]="true"
+    [primary]="false"
+    [customClass]="'panic-alert-attendance-details-overlay-cancel-button'"
+    (onClick)="close()"
+  >
+    {{ "MAIN.CANCEL" | translate }}
+  </app-button>
+  <app-button
+    [large]="true"
+    [strech]="true"
+    [disabled]="getSaveButtonStatus() != 'enabled'"
+    [matTooltip]="getSaveButtonStatus() != 'enabled' ? (getSaveButtonStatus() | translate) : null"
+    [customClass]="
+      shouldDisplaySaveButtonAsFinishAttendanceButton()
+        ? 'panic-alert-attendance-details-overlay-finish-attendance-button'
+        : 'panic-alert-attendance-details-overlay-save-button'
+    "
+    [loading]="isLoadingSaveButton"
+    (onClick)="confirm()"
+  >
+    {{
+      (shouldDisplaySaveButtonAsFinishAttendanceButton() ? "PANIC_BUTTON.FINISH_ATTENDANCE" : "MAIN.SAVE") | translate
+    }}
+  </app-button>
+</div>

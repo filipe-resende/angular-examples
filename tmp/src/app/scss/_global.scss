@@ -1,0 +1,85 @@
+@import '../scss/vale.variables';
+
+#checkbox {
+  height: 12px;
+  width: 12px;
+  margin-right: 25px;
+  border-radius: 2px;
+  border: 1px solid $greyVale;
+  background-color: $greyVale40;
+  border-color: $greyVale;
+}
+
+.application {
+  &-container {
+    height: 100vh;
+    padding: 24px 56px;
+    padding-bottom: 0;
+    background: $white;
+  }
+}
+
+.search {
+  &-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-top: 20px;
+    margin-bottom: 32px;
+  }
+
+  &-field {
+    width: 237px;
+  }
+}
+
+.search-input {
+  width: 237px;
+  height: 35px;
+  padding: 10px;
+  padding-right: 0px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  line-height: 24px;
+  font-family: $font-body1;
+  color: $dark;
+  border: 1px solid $greyVale20;
+  border-radius: 2px;
+
+  &:focus {
+    outline: 1px solid $greyVale20;
+  }
+}
+
+#search-btn,
+#clear-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  cursor: pointer;
+  color: #fff;
+  background-color: $violetVale;
+  text-align: center;
+}
+
+#clear-btn {
+  img {
+    height: 24px;
+  }
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+button {
+  outline: none !important;
+}
+
+.mdi {
+  vertical-align: middle;
+}

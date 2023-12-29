@@ -1,0 +1,21 @@
+@import '../../../scss/vale.variables';
+
+.dc-spinner-content {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    margin-bottom: 24px;
+  }
+}
+
+.view-wrapper,
+.application-header header {
+  font-family: $font-body1;
+}
+
+.device-create-container {
+  background-color: #f8f8f6;
+}

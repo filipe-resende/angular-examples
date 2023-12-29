@@ -1,0 +1,197 @@
+.historic-page-users-list-viewport {
+  height: Calc(100vh - 250px);
+  border-bottom: 1px solid #c7c8c9;
+}
+
+.historic-page-users-list-viewport-noAcess {
+  height: Calc(100vh - 180px);
+}
+
+.historic-page-users-list-container {
+  //height: 80%;
+}
+.multiline-tooltip {
+  white-space: pre-line;
+}
+
+.historic-page-users-list-item-title {
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  color: #252727;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 260px;
+}
+
+.historic-page-users-list-item-location {
+  position: absolute;
+  right: 24px;
+  top: 16px;
+  color: #909193;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50px;
+
+  & > p {
+    margin: 4px 0px;
+  }
+}
+
+.icon-tooltip {
+  vertical-align: middle;
+  color: #b1b2b3 !important;
+  padding-left: 2px;
+}
+
+.battery-percent {
+  margin-right: 4px;
+}
+
+.icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.image-battery {
+  height: 20px;
+}
+
+.battery-low {
+  margin-right: 4px;
+}
+
+.good-battery {
+  color: #69be28;
+}
+
+.historic-page-users-list-item-info {
+  font-size: 14px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  color: #909193;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  display: flex;
+
+  & > mat-icon {
+    font-size: 18px;
+    // margin: -2px 0 0 4px;
+    height: 16px;
+    color: #bb133e;
+  }
+}
+
+.historic-page-users-list-item-container {
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  transition: 0.2s;
+  background-color: #f8f8f8;
+
+  &:hover {
+    background-color: #e3e4e4;
+  }
+}
+
+.historic-page-users-list-item-texts-container {
+  flex: 1;
+  padding: 16px 24px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &.selected {
+    border-left: solid #3d7edb 8px;
+  }
+}
+
+.historic-page-users-list-item-border-bottom {
+  border-bottom: 1px solid #e3e4e4;
+  margin: 0px 24px;
+}
+
+.historic-page-list-last-update-container {
+  border-bottom: 1px solid #e3e4e4;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  color: #909193;
+
+  & .historic-page-list-last-update-container__content {
+    display: flex;
+    column-gap: 6px;
+    padding: 16px 24px;
+    justify-content: space-between;
+  }
+}
+
+.last-update-div {
+  display: -webkit-inline-box;
+}
+
+.historic-page-update-container {
+  margin-left: 5px;
+}
+
+.historic-page-users-list-item-trace-button-row {
+  align-items: flex-end;
+  display: flex;
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+.trace-icon {
+  color: #3d7edb;
+  font-size: 1.9rem !important;
+  width: 100% !important;
+}
+
+.main-margin {
+  margin: 20px;
+}
+
+.moving-row {
+  margin-top: 12px;
+}
+
+.historic-page-users-list-item-info-container {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+
+  .event-direction-container {
+    padding-top: 3px;
+    img {
+      height: 20px;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin: 24px;
+}
+
+.historic-page-fences {
+  align-items: baseline;
+
+  .fences {
+    align-items: center;
+    display: flex;
+    margin-left: 5px;
+
+    .icon-tooltip {
+      margin-left: 5px;
+    }
+  }
+}

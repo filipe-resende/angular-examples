@@ -1,0 +1,86 @@
+<form
+  class="form"
+  #deviceForm="ngForm"
+  (ngSubmit)="submit($event, deviceForm.form.value)"
+>
+  <div class="select-application">
+    <app-application-dropdown
+      [wider]="true"
+      [applicationList]="applicationList"
+      (select)="applicationId = $event"
+      (click)="checkIsDeviceId($event)"
+    ></app-application-dropdown>
+  </div>
+  <div>
+    <div class="d-flex container-device">
+      <div class="save-device">
+        <div class="application-form-group">
+          <label class="create-form-label">{{
+            'DEVICE_CREATE.NAME' | translate
+          }}</label>
+          <input
+            name="name"
+            class="search-input input"
+            [(ngModel)]="name"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="application-form-group">
+          <label class="create-form-label">{{
+            'DEVICE_CREATE.TYPE' | translate
+          }}</label>
+          <input
+            [disabled]="deviceType"
+            name="type"
+            class="search-input input"
+            [(ngModel)]="sourceTypeDevice"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="application-form-group">
+          <label class="create-form-label">{{
+            'DEVICE_CREATE.VALUE' | translate
+          }}</label>
+          <input
+            name="value"
+            class="search-input input"
+            [(ngModel)]="sourceValueDevice"
+            required
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="application-form-group" [hidden]="isShowRfId">
+          <label class="create-form-label">RFID</label>
+          <div class="rfid-input-group">
+            <input
+              (keydown)="($event.keyCode != 13)"
+              [(ngModel)]="sourceValueRfId"
+              class="search-input input"
+              name="sourceValueRfId"
+              required
+              autocomplete="off"
+              [ngModel]="rfId"
+            />
+            <i class="mdi mdi-information-outline"> </i>
+          </div>
+        </div>
+
+        <div class="add-button-group">
+          <app-action-button
+            [ngClass]="['blue', 'small']"
+            [labelClass]="['blue-label']"
+            [disabled]="disabled"
+          >
+            {{ 'DEVICE_CREATE.SAVE_BUTTON' | translate }}
+          </app-action-button>
+        </div>
+      </div>
+      <div id="arrow-rigth"></div>
+    </div>
+  </div>
+</form>

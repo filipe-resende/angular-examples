@@ -1,0 +1,66 @@
+@import '../../scss/vale.variables';
+
+.details-table {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #e3e4e4;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 20px 8px 24px 40px;
+  font-size: 14px;
+  margin-top: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .detail-label {
+    color: $greyVale80;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .green {
+    color: $lightGreenVale;
+  }
+
+  .link {
+    color: $violetVale;
+    cursor: pointer;
+    border-bottom: 1px solid $violetVale;
+  }
+}
+
+.spinner-content {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.devices-info {
+  display: flex;
+}
+
+.device-details-battery {
+  display: flex;
+  align-items: flex-start;
+
+  & > .mdi {
+    font-size: 21px;
+    margin-top: -3px;
+    margin-left: 6px;
+  }
+
+  & > .battery-good {
+    color: $lightGreenVale;
+  }
+
+  & > .battery-medium {
+    color: $yellowVale;
+  }
+
+  & > .battery-low {
+    color: $redVale;
+  }
+}

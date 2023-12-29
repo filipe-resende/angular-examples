@@ -1,0 +1,21 @@
+<section class="modal-status">
+  <header class="modal-status__header">
+    <button mat-icon-button mat-dialog-close class="modal-status__header__icon">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  <div class="modal-status__content">
+    <mat-icon
+      class="modal-status__icon--success"
+      *ngIf="data?.isSuccess; else error"
+      >check_circle</mat-icon
+    >
+
+    <ng-template #error>
+      <mat-icon class="modal-status__icon--error">error</mat-icon>
+    </ng-template>
+
+    <p class="modal-status__title">{{ data?.content | translate }}</p>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+@import '../../../scss/vale.variables';
+
+.container {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 23px;
+  height: 170px;
+
+  font-family: $font-body1;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #252727;
+
+  .row {
+    border-bottom: 1px solid #d8d8d8;
+    margin-right: 0px;
+    margin-top: 30px;
+
+    .denied {
+      margin-right: 5px;
+      margin-left: 30px;
+      width: 145px;
+    }
+  }
+
+  .title {
+    color: #909193;
+    width: 75px;
+    font-size: 13px;
+  }
+}
+
+img {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 3px;
+}
+
+.label-date {
+  padding-left: 15.5px;
+
+  .label-text {
+    font-family: $font-body1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 11px;
+    color: #acadae;
+  }
+}
+
+.no-content {
+  text-align: center;
+  padding: 90px 0;
+
+  span {
+    font-family: $font-body1;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+  }
+}

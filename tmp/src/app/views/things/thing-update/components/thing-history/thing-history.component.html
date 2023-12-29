@@ -1,0 +1,80 @@
+<div class="history-title">
+  <span class="detail-label"></span>
+</div>
+
+<div class="history-content">
+  <div *ngIf="hasHistoryData; else elseBlock">
+    <div class="history-label-row">
+      <div class="history-content-row">
+        <span class="history-content-label">{{
+          'THING_UPDATE.HISTORIC_DEVICES_ASSOCIATED.APPLICATION' | translate
+        }}</span>
+      </div>
+      <div class="history-content-row">
+        <span class="history-content-label">{{
+          'THING_UPDATE.HISTORIC_DEVICES_ASSOCIATED.IDENTIFICATOR' | translate
+        }}</span>
+      </div>
+      <div class="history-content-row">
+        <span class="history-content-label">{{
+          'THING_UPDATE.HISTORIC_DEVICES_ASSOCIATED.ASSOCIATION' | translate
+        }}</span>
+      </div>
+      <div class="history-content-row">
+        <span class="history-content-label">{{
+          'THING_UPDATE.HISTORIC_DEVICES_ASSOCIATED.DESASSOCIATION' | translate
+        }}</span>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="historyData">
+    <div
+      class="history-data"
+      *ngFor="let associatedDevice of historyData.associatedDevices"
+      [ngClass]="
+        associatedDevice.disassociationDate === null
+          ? 'noDisasociate'
+          : 'hasAssociation'
+      "
+    >
+      <div class="history-content-row">
+        <div
+          class="history-content-value"
+          *ngFor="let element of applications$ | async"
+        >
+          <span *ngIf="element?.id === associatedDevice.device.applicationId">{{
+            element.name
+          }}</span>
+        </div>
+      </div>
+      <div class="history-content-row">
+        <div class="history-content-value">
+          {{ associatedDevice.device.sourceInfos[0].value }}
+        </div>
+      </div>
+      <div class="history-content-row">
+        <div class="history-content-value">
+          {{ associatedDevice.associationDate | dateFormat }}
+        </div>
+      </div>
+      <div class="history-content-row">
+        <app-disassociate-button
+          *ngIf="!associatedDevice.disassociationDate; else disassociated"
+          [isAllAssociated]="this.modalPayloadMapper(associatedDevice)"
+          [isDisabled]="!associatedDevice.isApplicationAssociable"
+          (emitDisassociation)="this.ngOnChanges(associatedDevice)"
+        ></app-disassociate-button>
+        <ng-template
+          class="history-content-row history-content-value"
+          #disassociated
+        >
+          {{ associatedDevice.disassociationDate | dateFormat }}
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+</div>
+<ng-template #elseBlock>
+  {{ 'DEVICE_LIST.NO_ASSOCIATED_DEVICES' | translate }}
+</ng-template>

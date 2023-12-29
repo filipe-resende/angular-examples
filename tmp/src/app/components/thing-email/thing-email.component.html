@@ -1,0 +1,32 @@
+<input
+  matInput
+  #focusEmail
+  (keyup.enter)="resetEmailField()"
+  (click)="filterThings()"
+  (input)="filterThings()"
+  (change)="onFocusLostEmail()"
+  type="text"
+  [(ngModel)]="thingEmail"
+  (change)="resetEmailField()"
+  placeholder="{{ 'DASHBOARD.FILTER.MANAGER' | translate }}"
+  [matAutocomplete]="EMAIL"
+/>
+<mat-autocomplete autoActiveFirstOption #EMAIL="matAutocomplete">
+  <mat-option
+    *ngFor="let item of filteredThingEmailData"
+    (click)="valueThingEmail(item); focusEmail.blur()"
+  >
+    {{ item.email }}
+  </mat-option>
+
+  <mat-option
+    (click)="thingEmail = ''"
+    *ngIf="!filteredThingEmailData.length && thingEmail"
+  >
+    {{ 'DASHBOARD.FILTER.RESULT_NOT_FOUND' | translate }}
+  </mat-option>
+
+  <mat-option *ngIf="loading">
+    <i aria-hidden="true" class="fas fa-spinner fa-spin"></i>
+  </mat-option>
+</mat-autocomplete>

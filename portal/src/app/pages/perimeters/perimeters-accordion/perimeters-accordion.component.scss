@@ -1,0 +1,46 @@
+.mat-content {
+  height: 36px;
+}
+
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  align-items: center;
+}
+
+.perimeters-accordion-title-name {
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+.mat-expansion-panel-body {
+  padding: 16px !important;
+}
+
+.mat-expansion-panel-header {
+  height: 36px !important;
+  padding: 0px 16px !important;
+}
+
+.mat-expansion-indicator::after {
+  margin-top: -4px;
+}
+
+.perimeters-accordion-trash-icon-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+
+  & > img {
+    cursor: pointer;
+  }
+}
+
+.perimeters-accordion-color-select {
+  display: flex;
+  align-items: center;
+}
+
+.perimeters-accordion-buttons-wrapper {
+  display: flex;
+}
